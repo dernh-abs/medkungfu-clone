@@ -1,5 +1,9 @@
+"use client";
+
 // "Payment Methods" — 3 white cards in a 3-col grid, scale reveal.
-// Matches /services.
+// Matches /services. Bilingual in zh mode.
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+
 import { Icons, type LucideIcon } from "../shared/icons";
 import { Reveal } from "../shared/Reveal";
 
@@ -7,6 +11,8 @@ interface PaymentMethod {
   icon: LucideIcon;
   title: string;
   description: string;
+  titleZh: string;
+  descriptionZh: string;
 }
 
 const METHODS: PaymentMethod[] = [
@@ -14,27 +20,36 @@ const METHODS: PaymentMethod[] = [
     icon: Icons.creditCard,
     title: "International Credit Card",
     description: "Visa / Mastercard",
+    titleZh: "国际信用卡",
+    descriptionZh: "Visa / Mastercard",
   },
   {
     icon: Icons.refreshCw,
     title: "Bank Transfer",
     description: "Wire transfer to HK account",
+    titleZh: "银行转账",
+    descriptionZh: "电汇至香港账户",
   },
   {
     icon: Icons.shield,
     title: "Secure Payment",
     description: "Encrypted transactions",
+    titleZh: "安全支付",
+    descriptionZh: "加密交易保障",
   },
 ];
 
 export function PaymentMethodsSection() {
+  const { lang } = useLanguage();
+  const zh = lang === "zh";
+
   return (
     <section aria-labelledby="payment-methods-heading">
       <h2
         id="payment-methods-heading"
         className="text-2xl font-bold mb-8 text-center text-[#1A1A2E]"
       >
-        Payment Methods
+        {zh ? "支付方式" : "Payment Methods"}
       </h2>
       <ul className="grid grid-cols-1 md:grid-cols-3 gap-6 list-none" role="list">
         {METHODS.map((method) => {
@@ -49,9 +64,11 @@ export function PaymentMethodsSection() {
                   <Icon className="h-8 w-8" />
                 </div>
                 <h3 className="text-lg font-bold mb-2 text-[#1A1A2E]">
-                  {method.title}
+                  {zh ? method.titleZh : method.title}
                 </h3>
-                <p className="text-gray-500 text-sm">{method.description}</p>
+                <p className="text-gray-500 text-sm">
+                  {zh ? method.descriptionZh : method.description}
+                </p>
               </li>
             </Reveal>
           );

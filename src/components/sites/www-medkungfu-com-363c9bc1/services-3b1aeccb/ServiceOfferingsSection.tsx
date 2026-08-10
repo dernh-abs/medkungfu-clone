@@ -1,4 +1,9 @@
+"use client";
+
 // "Service Offerings" — 6 white cards in a 3-col grid. Matches /services.
+// Bilingual: card titles/descriptions switch to Chinese in zh mode.
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+
 import { Icons, type LucideIcon } from "../shared/icons";
 import { Reveal } from "../shared/Reveal";
 
@@ -6,6 +11,8 @@ interface Offering {
   icon: LucideIcon;
   title: string;
   description: string;
+  titleZh: string;
+  descriptionZh: string;
 }
 
 const OFFERINGS: Offering[] = [
@@ -13,35 +20,50 @@ const OFFERINGS: Offering[] = [
     icon: Icons.video,
     title: "Expert Video Consultation",
     description: "Connect with top specialists remotely before your trip.",
+    titleZh: "专家视频咨询",
+    descriptionZh: "在出行前远程连接顶尖专家。",
   },
   {
     icon: Icons.calendar,
     title: "Full-process Butler",
     description: "End-to-end coordination from appointment to discharge.",
+    titleZh: "全程管家服务",
+    descriptionZh: "从预约到出院的端到端协调。",
   },
   {
     icon: Icons.plane,
     title: "Visa & Travel",
     description: "Assistance with medical visas and flight arrangements.",
+    titleZh: "签证与旅行",
+    descriptionZh: "协助办理医疗签证和航班安排。",
   },
   {
     icon: Icons.messageSquare,
     title: "Translation & Escort",
     description: "Professional medical translators accompanying you.",
+    titleZh: "翻译与陪同",
+    descriptionZh: "专业医疗翻译全程陪同。",
   },
   {
     icon: Icons.home,
     title: "Accommodation",
     description: "Comfortable stays near partner hospitals.",
+    titleZh: "住宿安排",
+    descriptionZh: "合作医院附近的舒适住宿。",
   },
   {
     icon: Icons.fileText,
     title: "Rehabilitation Follow-up",
     description: "Continuous care after you return home.",
+    titleZh: "康复随访",
+    descriptionZh: "回国后持续护理。",
   },
 ];
 
 export function ServiceOfferingsSection() {
+  const { lang } = useLanguage();
+  const zh = lang === "zh";
+
   return (
     <section aria-labelledby="services-heading">
       <h2 id="services-heading" className="sr-only">
@@ -63,10 +85,10 @@ export function ServiceOfferingsSection() {
                   <Icon className="h-8 w-8" />
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-[#1A1A2E]">
-                  {offering.title}
+                  {zh ? offering.titleZh : offering.title}
                 </h3>
                 <p className="text-gray-500 leading-relaxed">
-                  {offering.description}
+                  {zh ? offering.descriptionZh : offering.description}
                 </p>
               </li>
             </Reveal>
