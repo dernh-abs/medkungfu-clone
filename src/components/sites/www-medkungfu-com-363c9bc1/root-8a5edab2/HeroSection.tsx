@@ -36,14 +36,14 @@ export function HeroSection() {
               </div>
             </Reveal>
             <Reveal y={20}>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1A1A2E] mb-6 font-montserrat leading-[1.1]">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1A1A2E] mb-6 font-montserrat">
                 Your Personal
                 <span className="text-[#1B4D3E]"> Healthcare Guide</span>
                 <br />in China
               </h1>
             </Reveal>
             <Reveal y={20}>
-              <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-xl leading-relaxed">
+              <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-xl">
                 We care about your health as much as you do. Connecting global
                 patients with China&apos;s top medical resources through
                 personalized, concierge-level service.
@@ -90,7 +90,7 @@ export function HeroSection() {
                   <img
                     src="/sites/www-medkungfu-com-363c9bc1/root-8a5edab2/images/medkungfu-doctor-hero.jpg"
                     alt="Professional Chinese female doctor providing medical consultation"
-                    className="w-full h-full object-cover"
+                    className="w-full h-[500px] object-cover object-top"
                     width={904}
                     height={1200}
                   />

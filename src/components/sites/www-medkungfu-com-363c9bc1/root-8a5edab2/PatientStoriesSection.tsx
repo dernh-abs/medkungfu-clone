@@ -57,6 +57,7 @@ export function PatientStoriesSection() {
                   <p>{s.quote}</p>
                 </blockquote>
                 <footer className="flex items-center space-x-4">
+                  {/* eslint-disable-next-line @next/next/no-img-element -- small static avatar, intentional */}
                   <img
                     src={s.image}
                     alt={s.name}

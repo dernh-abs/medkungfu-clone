@@ -12,10 +12,11 @@ export function CTASection() {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const form = e.currentTarget;
     setSubmitting(true);
     await new Promise((resolve) => setTimeout(resolve, 800));
     setSubmitting(false);
-    e.currentTarget.reset();
+    form.reset();
   };
 
   return (
