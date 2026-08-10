@@ -1,7 +1,11 @@
 // Shared page template for MedKungFu stem-cell project detail pages.
 // Renders every section of the captured <main role="main"> from a data object.
-// Server component; scroll reveals are delegated to the Reveal client component.
+// Bilingual: renders Chinese content when the site language is zh (via the
+// `zhConfig` prop); otherwise renders the English `data` unchanged.
+"use client";
 import Link from "next/link";
+
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 import { Icons, type IconName } from "../../shared/icons";
 import { Reveal } from "../../shared/Reveal";
@@ -507,6 +511,8 @@ function CaseStudiesSection({ data }: { data: CaseStudiesData }) {
 }
 
 function CostSection({ data }: { data: CostSectionData }) {
+  const { lang } = useLanguage();
+  const isZh = lang === "zh";
   const body = data.body;
   return (
     <section className={`${data.pyClass} ${data.bgClass}`}>
@@ -534,14 +540,18 @@ function CostSection({ data }: { data: CostSectionData }) {
                   <table className="w-full">
                     <thead>
                       <tr className={body.headerBorderClass}>
-                        <th className="text-left py-4 px-4 font-bold text-[#1A1A2E]">Item</th>
-                        <th className="text-center py-4 px-4 font-bold text-[#1A1A2E]">
-                          Per Session
+                        <th className="text-left py-4 px-4 font-bold text-[#1A1A2E]">
+                          {isZh ? "项目" : "Item"}
                         </th>
                         <th className="text-center py-4 px-4 font-bold text-[#1A1A2E]">
-                          Total Course
+                          {isZh ? "单次" : "Per Session"}
                         </th>
-                        <th className="text-left py-4 px-4 font-bold text-[#1A1A2E]">Notes</th>
+                        <th className="text-center py-4 px-4 font-bold text-[#1A1A2E]">
+                          {isZh ? "疗程" : "Total Course"}
+                        </th>
+                        <th className="text-left py-4 px-4 font-bold text-[#1A1A2E]">
+                          {isZh ? "备注" : "Notes"}
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
@@ -630,23 +640,34 @@ function CtaSection({ data }: { data: CtaData }) {
   );
 }
 
-export function StemCellDetailPage({ data }: { data: StemCellPageData }) {
+export function StemCellDetailPage({
+  data,
+  zhConfig,
+}: {
+  data: StemCellPageData;
+  /** Chinese variant of the same data. When the site language is zh, this is
+   *  rendered instead of the English `data`. The aria-label stays English on
+   *  both locales (matches the source site's zh pages). */
+  zhConfig?: StemCellPageData;
+}) {
+  const { lang } = useLanguage();
+  const c = lang === "zh" && zhConfig ? zhConfig : data;
   return (
     <main
       role="main"
       aria-label={data.ariaLabel}
       className="min-h-screen bg-[#F5F7FA]"
     >
-      <HeroSection hero={data.hero} />
-      <ProductIntroSection data={data.productIntro} />
-      <AdvantagesSection data={data.advantages} />
-      <IndicationsSection data={data.indications} />
-      <TreatmentDetailsSection data={data.treatmentDetails} />
-      <TreatmentProcessSection data={data.treatmentProcess} />
-      <EfficacySection data={data.efficacy} />
-      <CaseStudiesSection data={data.caseStudies} />
-      <CostSection data={data.cost} />
-      <CtaSection data={data.cta} />
+      <HeroSection hero={c.hero} />
+      <ProductIntroSection data={c.productIntro} />
+      <AdvantagesSection data={c.advantages} />
+      <IndicationsSection data={c.indications} />
+      <TreatmentDetailsSection data={c.treatmentDetails} />
+      <TreatmentProcessSection data={c.treatmentProcess} />
+      <EfficacySection data={c.efficacy} />
+      <CaseStudiesSection data={c.caseStudies} />
+      <CostSection data={c.cost} />
+      <CtaSection data={c.cta} />
     </main>
   );
 }

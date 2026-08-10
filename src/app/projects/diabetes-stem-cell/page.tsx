@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { StemCellDetailPage } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/stem-cell/StemCellDetailPage";
 import { diabetes } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/stem-cell/diabetes";
+import { diabetesZh } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/stem-cell/diabetesZh";
 import { SiteFooter } from "@/components/sites/www-medkungfu-com-363c9bc1/shared/SiteFooter";
 import { SiteHeader } from "@/components/sites/www-medkungfu-com-363c9bc1/shared/SiteHeader";
 
@@ -16,7 +17,7 @@ export default function Page() {
     <>
       <SiteHeader />
       <main className="flex-grow pt-[72px]">
-        <StemCellDetailPage data={diabetes} />
+        <StemCellDetailPage data={diabetes} zhConfig={diabetesZh} />
       </main>
       <SiteFooter />
     </>

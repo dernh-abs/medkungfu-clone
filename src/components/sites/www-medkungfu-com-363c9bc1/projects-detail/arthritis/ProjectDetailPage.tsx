@@ -3,7 +3,12 @@
 // Hero → Intro → Core Advantages → Indications → Treatment Content →
 // Treatment Process → Efficacy Data → Real Cases → Support Services →
 // Pricing → (Contact). Each section is data-driven; see `types.ts` + `data/*`.
+// Bilingual: renders Chinese content when the site language is zh (via the
+// `zhConfig` prop); otherwise renders the English `data` unchanged.
+"use client";
 import Link from "next/link";
+
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 import { Icons } from "../../shared/icons";
 import { Reveal } from "../../shared/Reveal";
@@ -985,20 +990,31 @@ function ContactSection({ contact }: { contact: ContactSectionData }) {
 // ---------------------------------------------------------------------------
 // Page assembly
 // ---------------------------------------------------------------------------
-export function ProjectDetailPage({ data }: { data: PageData }) {
+export function ProjectDetailPage({
+  data,
+  zhConfig,
+}: {
+  data: PageData;
+  /** Chinese variant of the same data. When the site language is zh, this is
+   *  rendered instead of the English `data`. The aria-label stays English on
+   *  both locales (matches the source site's zh pages). */
+  zhConfig?: PageData;
+}) {
+  const { lang } = useLanguage();
+  const c = lang === "zh" && zhConfig ? zhConfig : data;
   return (
     <main role="main" aria-label={data.mainAriaLabel} className="min-h-screen bg-white">
-      <HeroSection hero={data.hero} />
-      <IntroSection intro={data.intro} />
-      <AdvantagesSection {...data.advantages} />
-      <IndicationsSection {...data.indications} />
-      <TreatmentSection {...data.treatment} />
-      <ProcessSection {...data.process} />
-      <EfficacySectionView efficacy={data.efficacy} />
-      <CasesSection {...data.cases} />
-      <ServicesSection {...data.services} />
-      <PricingSectionView pricing={data.pricing} />
-      {data.contact && <ContactSection contact={data.contact} />}
+      <HeroSection hero={c.hero} />
+      <IntroSection intro={c.intro} />
+      <AdvantagesSection {...c.advantages} />
+      <IndicationsSection {...c.indications} />
+      <TreatmentSection {...c.treatment} />
+      <ProcessSection {...c.process} />
+      <EfficacySectionView efficacy={c.efficacy} />
+      <CasesSection {...c.cases} />
+      <ServicesSection {...c.services} />
+      <PricingSectionView pricing={c.pricing} />
+      {c.contact && <ContactSection contact={c.contact} />}
     </main>
   );
 }
