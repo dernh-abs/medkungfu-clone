@@ -5,6 +5,7 @@
 import { RU_ABOUT } from "./ru-about";
 import { RU_CONTACT } from "./ru-contact";
 import { RU_HOME } from "./ru-home";
+import { RU_PROJECTS } from "./ru-projects";
 import { RU_SERVICES } from "./ru-services";
 import { RU_WHY_CHINA } from "./ru-why-china";
 
@@ -14,4 +15,5 @@ export const RU: Record<string, string> = {
   ...RU_WHY_CHINA,
   ...RU_ABOUT,
   ...RU_CONTACT,
+  ...RU_PROJECTS,
 };
