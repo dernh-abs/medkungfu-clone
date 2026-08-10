@@ -14,6 +14,8 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     // Research artifacts (captured DOMs, downloaded bundles) are not source.
     "docs/**",
+    // Builder worktrees (build artifacts inside them) are not source.
+    ".claude/**",
   ]),
 ]);
 
