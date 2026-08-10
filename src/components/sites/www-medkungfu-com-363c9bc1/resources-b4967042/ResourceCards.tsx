@@ -1,7 +1,14 @@
+"use client";
+
 // "Resource Center" — 3 resource card groups (guides / tools / city guides)
-// with download rows. Matches /resources.
+// with download rows. Matches /resources. The source keeps /resources in
+// English even in zh mode (no Chinese content), so zh falls back to English;
+// ru resolves each English string through the merged RU map (ru-resources.ts),
+// falling back to English when a key is missing.
 import { Icons, type LucideIcon } from "../shared/icons";
 import { Reveal } from "../shared/Reveal";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import { RU } from "@/lib/i18n/ru";
 
 interface ResourceGroup {
   icon: LucideIcon;
@@ -40,6 +47,10 @@ const GROUPS: ResourceGroup[] = [
 ];
 
 export function ResourceCards() {
+  const { lang } = useLanguage();
+  const ru = lang === "ru";
+  const localize = (text: string) => (ru ? (RU[text] ?? text) : text);
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
       {GROUPS.map((group) => {
@@ -51,7 +62,9 @@ export function ResourceCards() {
                 <div className="p-3 bg-[#1B4D3E]/10 text-[#1B4D3E] rounded-lg">
                   <Icon className="h-6 w-6" />
                 </div>
-                <h2 className="text-xl font-bold text-[#1A1A2E]">{group.title}</h2>
+                <h2 className="text-xl font-bold text-[#1A1A2E]">
+                  {localize(group.title)}
+                </h2>
               </div>
               <ul className="space-y-4 list-none" role="list">
                 {group.items.map((item) => (
@@ -59,7 +72,7 @@ export function ResourceCards() {
                     <div className="flex items-start">
                       <Icons.download className="mt-1 mr-3 text-gray-400 group-hover:text-[#1B4D3E] transition-colors h-[18px] w-[18px]" />
                       <span className="text-gray-600 group-hover:text-[#1B4D3E] transition-colors text-sm leading-relaxed">
-                        {item}
+                        {localize(item)}
                       </span>
                     </div>
                   </li>
