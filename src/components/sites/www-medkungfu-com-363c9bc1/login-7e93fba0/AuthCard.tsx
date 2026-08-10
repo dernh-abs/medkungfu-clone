@@ -4,6 +4,9 @@
 // Demo form (no real auth): submit is simulated. Matches the source.
 import { useState, type FormEvent } from "react";
 
+import { RU } from "@/lib/i18n/ru";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+
 import { Icons } from "../shared/icons";
 import { Reveal } from "../shared/Reveal";
 
@@ -14,6 +17,10 @@ const inputBrandFocus = "focus:border-[#1B4D3E] focus:ring-1 focus:ring-[#1B4D3E
 
 export function AuthCard() {
   const [mode, setMode] = useState<"login" | "signup">("login");
+  const { lang } = useLanguage();
+  // The source /ru/login only translates the Email label; everything else
+  // stays English there, and /login keeps English in zh mode.
+  const emailLabel = lang === "ru" ? (RU["Email"] ?? "Email") : "Email";
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -54,7 +61,7 @@ export function AuthCard() {
         )}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
-            Email
+            {emailLabel}
           </label>
           <div className="relative">
             <Icons.mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
