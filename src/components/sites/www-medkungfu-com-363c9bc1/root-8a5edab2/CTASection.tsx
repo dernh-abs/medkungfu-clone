@@ -3,11 +3,15 @@
 // Gradient green "Start Your Medical Journey" CTA section with a contact
 // inquiry form (2-col fieldset on desktop). Matches MedKungFu's homepage.
 // The form simulates submission: ~800ms delay, then resets.
+// Bilingual via cta.* keys.
 import { useState, type FormEvent } from "react";
+
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 import { Reveal } from "../shared/Reveal";
 
 export function CTASection() {
+  const { t } = useLanguage();
   const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -30,7 +34,7 @@ export function CTASection() {
             id="cta-heading"
             className="text-3xl md:text-4xl font-bold mb-12 font-montserrat"
           >
-            Start Your Medical Journey
+            {t("cta.title")}
           </h2>
         </Reveal>
         <Reveal y={20}>
@@ -41,33 +45,33 @@ export function CTASection() {
             <fieldset className="grid grid-cols-1 md:grid-cols-2 gap-6 border-0 p-0 m-0">
               <div>
                 <label htmlFor="name" className="sr-only">
-                  Name
+                  {t("cta.name")}
                 </label>
                 <input
                   id="name"
                   type="text"
                   name="name"
-                  placeholder="Name"
+                  placeholder={t("cta.name")}
                   required
                   className="px-6 py-4 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:border-white w-full"
                 />
               </div>
               <div>
                 <label htmlFor="contact" className="sr-only">
-                  Email / WhatsApp
+                  {t("cta.contact")}
                 </label>
                 <input
                   id="contact"
                   type="text"
                   name="contact"
-                  placeholder="Email / WhatsApp"
+                  placeholder={t("cta.contact")}
                   required
                   className="px-6 py-4 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:border-white w-full"
                 />
               </div>
               <div>
                 <label htmlFor="interest_area" className="sr-only">
-                  Area of Interest
+                  {t("cta.interest")}
                 </label>
                 <select
                   id="interest_area"
@@ -77,7 +81,7 @@ export function CTASection() {
                   className="px-6 py-4 rounded-lg bg-white/10 border border-white/20 text-white focus:outline-none focus:border-white appearance-none cursor-pointer w-full"
                 >
                   <option value="" disabled>
-                    Area of Interest
+                    {t("cta.interest")}
                   </option>
                   <option value="oncology">Oncology</option>
                   <option value="cardiology">Cardiology</option>
@@ -106,7 +110,7 @@ export function CTASection() {
                 disabled={submitting}
                 className="w-full md:w-auto px-12 py-4 bg-white text-[#1B4D3E] font-bold rounded-lg hover:bg-gray-100 transition-colors shadow-lg disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
               >
-                {submitting ? "Submitting..." : "Submit Inquiry"}
+                {submitting ? "Submitting..." : t("cta.submit")}
               </button>
             </div>
           </form>

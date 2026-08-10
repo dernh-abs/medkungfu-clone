@@ -3,25 +3,28 @@
 // Contact inquiry form for the /contact page — Name, Email/WhatsApp,
 // Area of Interest (checkbox chips), and a message textarea. Matches the
 // source site's markup. Submission is simulated (demo): ~800ms, then a
-// confirmation message and reset.
+// confirmation message and reset. Bilingual via the site translation
+// dictionary (contact.* keys; shared form labels reuse cta.* keys).
 import { useState, type FormEvent } from "react";
 
 import { Reveal } from "../shared/Reveal";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const INTERESTS = [
-  { value: "checkup", label: "Health Checkup" },
-  { value: "tcm", label: "Traditional Chinese Medicine" },
-  { value: "dentistry", label: "Dentistry" },
-  { value: "orthopedics", label: "Orthopedics" },
-  { value: "oncology", label: "Oncology" },
-  { value: "ent", label: "ENT" },
-  { value: "other", label: "Other" },
+  { value: "checkup", labelKey: "contact.interestCheckup" },
+  { value: "tcm", labelKey: "contact.interestTcm" },
+  { value: "dentistry", labelKey: "contact.interestDentistry" },
+  { value: "orthopedics", labelKey: "contact.interestOrthopedics" },
+  { value: "oncology", labelKey: "contact.interestOncology" },
+  { value: "ent", labelKey: "contact.interestEnt" },
+  { value: "other", labelKey: "contact.interestOther" },
 ];
 
 const inputClass =
   "w-full px-4 py-3 rounded-lg border border-gray-200 focus:border-[#1B4D3E] focus:ring-1 focus:ring-[#1B4D3E] outline-none transition-colors";
 
 export function ContactForm() {
+  const { t } = useLanguage();
   const [submitting, setSubmitting] = useState(false);
   const [sent, setSent] = useState(false);
 
@@ -41,11 +44,11 @@ export function ContactForm() {
       className="lg:col-span-2 bg-white p-8 md:p-10 rounded-2xl shadow-sm"
     >
       <h2 id="contact-form-heading" className="sr-only">
-        Contact Form
+        {t("contact.formAriaLabel")}
       </h2>
       <Reveal y={20}>
         <h3 className="text-2xl font-bold mb-8 text-[#1A1A2E]">
-          Send us a Message
+          {t("contact.sendMessage")}
         </h3>
         {sent ? (
           <p className="rounded-lg bg-[#1B4D3E]/10 text-[#1B4D3E] px-6 py-5 font-medium">
@@ -55,13 +58,13 @@ export function ContactForm() {
         ) : (
           <form className="space-y-6" onSubmit={handleSubmit}>
             <fieldset className="grid grid-cols-1 md:grid-cols-2 gap-6 border-0 p-0 m-0">
-              <legend className="sr-only">Personal Information</legend>
+              <legend className="sr-only">{t("contact.personalInformation")}</legend>
               <div>
                 <label
                   htmlFor="name"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
-                  Name
+                  {t("cta.name")}
                   <span className="text-red-500 ml-1" aria-hidden="true">
                     *
                   </span>
@@ -70,7 +73,7 @@ export function ContactForm() {
                   id="name"
                   type="text"
                   name="name"
-                  placeholder="Name"
+                  placeholder={t("cta.name")}
                   required
                   aria-required="true"
                   aria-describedby="name-help"
@@ -78,7 +81,7 @@ export function ContactForm() {
                   className={inputClass}
                 />
                 <span id="name-help" className="sr-only">
-                  Your full name is required
+                  {t("contact.nameHelp")}
                 </span>
               </div>
               <div>
@@ -86,7 +89,7 @@ export function ContactForm() {
                   htmlFor="contact"
                   className="block text-sm font-medium text-gray-700 mb-2"
                 >
-                  Email / WhatsApp
+                  {t("cta.contact")}
                   <span className="text-red-500 ml-1" aria-hidden="true">
                     *
                   </span>
@@ -95,7 +98,7 @@ export function ContactForm() {
                   id="contact"
                   type="text"
                   name="contact"
-                  placeholder="Email / WhatsApp"
+                  placeholder={t("cta.contact")}
                   required
                   aria-required="true"
                   aria-describedby="contact-help"
@@ -103,14 +106,14 @@ export function ContactForm() {
                   className={inputClass}
                 />
                 <span id="contact-help" className="sr-only">
-                  Your email or phone number is required
+                  {t("contact.contactHelp")}
                 </span>
               </div>
             </fieldset>
 
             <fieldset className="border-0 p-0 m-0" aria-describedby="interest-help">
               <legend className="block text-sm font-medium text-gray-700 mb-3">
-                Area of Interest
+                {t("cta.interest")}
                 <span className="text-red-500 ml-1" aria-hidden="true">
                   *
                 </span>
@@ -127,12 +130,12 @@ export function ContactForm() {
                       className="sr-only"
                       value={interest.value}
                     />
-                    <span>{interest.label}</span>
+                    <span>{t(interest.labelKey)}</span>
                   </label>
                 ))}
               </div>
               <span id="interest-help" className="mt-2 block text-xs text-gray-500">
-                Choose one or more areas of interest
+                {t("contact.interestHelp")}
               </span>
             </fieldset>
 
@@ -141,18 +144,18 @@ export function ContactForm() {
                 htmlFor="message"
                 className="block text-sm font-medium text-gray-700 mb-2"
               >
-                Your needs / questions
+                {t("contact.needsLabel")}
               </label>
               <textarea
                 id="message"
                 name="message"
-                placeholder="Please describe your needs or questions..."
+                placeholder={t("contact.needsPlaceholder")}
                 rows={5}
                 aria-describedby="message-help"
                 className={`${inputClass} resize-none`}
               />
               <span id="message-help" className="sr-only">
-                Describe your needs or questions
+                {t("contact.needsHelp")}
               </span>
             </div>
 
@@ -162,7 +165,7 @@ export function ContactForm() {
               aria-busy={submitting}
               className="inline-flex h-[60px] w-[180px] items-center justify-center rounded-lg bg-[#1E6B55] text-lg font-semibold text-white transition-colors hover:bg-[#185846] focus:outline-none focus:ring-2 focus:ring-[#1E6B55] focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {submitting ? "Sending..." : "Send Message"}
+              {submitting ? t("contact.sending") : t("contact.sendButton")}
             </button>
           </form>
         )}

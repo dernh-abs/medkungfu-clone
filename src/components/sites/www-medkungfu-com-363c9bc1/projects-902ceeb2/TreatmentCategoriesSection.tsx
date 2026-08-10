@@ -1,10 +1,13 @@
 // "Treatment Categories" section of the /projects page.
 // 6 white cards in a 2-col grid (lg+) with icon tile, title, zh label,
-// description, and a list of treatment links.
+// description, and a list of treatment links. Category titles that have a
+// dictionary key (projects.*) are translated; the rest stay English.
+"use client";
 import Link from "next/link";
 
 import { Icons, type LucideIcon } from "../shared/icons";
 import { Reveal } from "../shared/Reveal";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface Treatment {
   label: string;
@@ -13,6 +16,8 @@ interface Treatment {
 
 interface Category {
   title: string;
+  /** Dictionary key (projects.*) used when a translation exists. */
+  titleKey?: string;
   zhLabel: string;
   description: string;
   icon: LucideIcon;
@@ -24,6 +29,7 @@ interface Category {
 const CATEGORIES: Category[] = [
   {
     title: "Precision Oncology",
+    titleKey: "projects.oncology",
     zhLabel: "肿瘤精准治疗",
     description: "Heavy Ion/Proton Therapy, CAR-T, BNCT & NK Cell Therapy",
     icon: Icons.activity,
@@ -39,6 +45,7 @@ const CATEGORIES: Category[] = [
   },
   {
     title: "Regenerative Medicine",
+    titleKey: "projects.regenerative",
     zhLabel: "再生医学",
     description: "Stem Cell Therapy for Multiple Chronic Conditions",
     icon: Icons.dna,
@@ -108,6 +115,7 @@ const CATEGORIES: Category[] = [
 ];
 
 export function TreatmentCategoriesSection() {
+  const { t } = useLanguage();
   return (
     <section aria-labelledby="categories-heading">
       <h2 id="categories-heading" className="sr-only">
@@ -126,7 +134,7 @@ export function TreatmentCategoriesSection() {
                   <Icon className="h-12 w-12" />
                 </div>
                 <h3 className="text-2xl font-bold text-[#1A1A2E] mb-1 font-montserrat">
-                  {cat.title}
+                  {cat.titleKey ? t(cat.titleKey) : cat.title}
                 </h3>
                 <p className="text-sm text-gray-400 mb-3">{cat.zhLabel}</p>
                 <p className="text-gray-500 mb-6">{cat.description}</p>

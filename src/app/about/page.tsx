@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 
 import { SiteHeader } from "@/components/sites/www-medkungfu-com-363c9bc1/shared/SiteHeader";
 import { SiteFooter } from "@/components/sites/www-medkungfu-com-363c9bc1/shared/SiteFooter";
-import { Reveal } from "@/components/sites/www-medkungfu-com-363c9bc1/shared/Reveal";
 import {
+  AboutHeader,
   AboutIntro,
   MissionSection,
   ValuesSection,
@@ -28,11 +28,7 @@ export default function AboutPage() {
         >
           <div className="container-custom">
             <div className="text-center mb-16">
-              <Reveal>
-                <h1 className="text-4xl font-bold text-[#1A1A2E] mb-8 font-montserrat">
-                  About MedKungFu
-                </h1>
-              </Reveal>
+              <AboutHeader />
               <AboutIntro />
             </div>
             <MissionSection />

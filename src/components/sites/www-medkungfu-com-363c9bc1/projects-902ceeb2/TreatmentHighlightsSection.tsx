@@ -1,7 +1,11 @@
 // "Treatment Highlights" section matching MedKungFu's /projects page.
 // White rounded panel with 4 light-gray cards in a 2-col grid.
+// Heading is bilingual via the site translation dictionary (projects.* keys).
+"use client";
+
 import { Icons, type LucideIcon } from "../shared/icons";
 import { Reveal } from "../shared/Reveal";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 interface Highlight {
   title: string;
@@ -41,6 +45,7 @@ const HIGHLIGHTS: Highlight[] = [
 ];
 
 export function TreatmentHighlightsSection() {
+  const { t } = useLanguage();
   return (
     <section
       aria-labelledby="highlights-heading"
@@ -50,7 +55,7 @@ export function TreatmentHighlightsSection() {
         id="highlights-heading"
         className="text-2xl font-bold mb-10 text-center text-[#1A1A2E] font-montserrat"
       >
-        Treatment Highlights
+        {t("projects.treatmentHighlights")}
       </h2>
       <ul className="grid grid-cols-1 md:grid-cols-2 gap-8 list-none" role="list">
         {HIGHLIGHTS.map((item) => {

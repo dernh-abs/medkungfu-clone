@@ -1,54 +1,57 @@
 // About MedKungFu — Who We Are / Our Commitment / Mission & Core Services /
-// Our Values / Our Expert Team. Matches /about.
+// Our Values / Our Expert Team. Matches /about. Bilingual via the site
+// translation dictionary (about.* keys).
+"use client";
+
 import { Icons, type LucideIcon } from "../shared/icons";
 import { Reveal } from "../shared/Reveal";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
-const WHO_WE_ARE =
-  "MedKungFu China is a specialized international medical placement service dedicated to connecting global patients with China's world-class healthcare system. We serve as a reliable bridge between international patients and China's top-tier medical institutions.";
-
-const OUR_COMMITMENT =
-  "From visa assistance to post-treatment rehabilitation care, we handle every detail of your medical journey—allowing you to focus solely on what matters most: your recovery. We understand that seeking medical care abroad can be filled with uncertainty and stress. That's precisely why we've built a seamless, end-to-end service covering every aspect of your medical journey. From initial consultation to post-treatment remote follow-up, our multilingual team ensures you not only receive quality medical solutions but also experience empathetic, efficient, and culturally sensitive support throughout your entire journey.";
-
-const CORE_SERVICES = [
-  "International Precision Referral: Matching you with the most suitable hospitals and specialists",
-  "Telemedicine Second Opinion: Accessing assessments from China's top doctors without leaving home",
-  "One-stop Medical Accompaniment: Dedicated multilingual support from arrival to discharge",
-  "Full-cycle Health Management: Continuous care covering pre-treatment, during treatment, and post-treatment",
+const CORE_SERVICE_KEYS = [
+  "about.service1",
+  "about.service2",
+  "about.service3",
+  "about.service4",
 ];
 
 interface Value {
   icon: LucideIcon;
-  title: string;
-  description: string;
+  titleKey: string;
+  descriptionKey: string;
 }
 
 const VALUES: Value[] = [
   {
     icon: Icons.shield,
-    title: "Transparency",
-    description: "Clear pricing and honest communication.",
+    titleKey: "about.value1Title",
+    descriptionKey: "about.value1Desc",
   },
   {
     icon: Icons.award,
-    title: "Professionalism",
-    description: "Expert medical teams with global standards.",
+    titleKey: "about.value2Title",
+    descriptionKey: "about.value2Desc",
   },
   {
     icon: Icons.heart,
-    title: "Compassion",
-    description: "Treating every patient with warmth and care.",
+    titleKey: "about.value3Title",
+    descriptionKey: "about.value3Desc",
   },
   {
     icon: Icons.globe,
-    title: "Responsibility",
-    description: "Bridging borders for better health outcomes.",
+    titleKey: "about.value4Title",
+    descriptionKey: "about.value4Desc",
   },
 ];
 
-const TEAM = [
-  { title: "Medical Advisors", description: "Experts from top-tier Chinese hospitals" },
-  { title: "Operations Team", description: "Rich experience in cross-border healthcare" },
-  { title: "Multilingual Support", description: "Professional medical translators" },
+interface TeamMember {
+  titleKey: string;
+  descriptionKey: string;
+}
+
+const TEAM: TeamMember[] = [
+  { titleKey: "about.team1Title", descriptionKey: "about.team1Desc" },
+  { titleKey: "about.team2Title", descriptionKey: "about.team2Desc" },
+  { titleKey: "about.team3Title", descriptionKey: "about.team3Desc" },
 ];
 
 function SectionHeading({ id, text }: { id: string; text: string }) {
@@ -64,25 +67,45 @@ function SectionHeading({ id, text }: { id: string; text: string }) {
   );
 }
 
+export function AboutHeader() {
+  const { t } = useLanguage();
+  return (
+    <Reveal>
+      <h1 className="text-4xl font-bold text-[#1A1A2E] mb-8 font-montserrat">
+        {t("about.title")}
+      </h1>
+    </Reveal>
+  );
+}
+
 export function AboutIntro() {
+  const { t } = useLanguage();
   return (
     <article className="bg-white rounded-2xl shadow-sm p-8 md:p-12 max-w-4xl mx-auto">
       <section aria-labelledby="who-we-are-heading">
-        <SectionHeading id="who-we-are-heading" text="Who We Are" />
-        <p className="text-gray-600 leading-relaxed text-lg">{WHO_WE_ARE}</p>
+        <SectionHeading id="who-we-are-heading" text={t("about.whoWeAre")} />
+        <p className="text-gray-600 leading-relaxed text-lg">
+          {t("about.whoWeAreDesc")}
+        </p>
       </section>
       <section
         aria-labelledby="our-commitment-heading"
         className="border-t border-gray-100 pt-8 mt-8"
       >
-        <SectionHeading id="our-commitment-heading" text="Our Commitment" />
-        <p className="text-gray-600 leading-relaxed text-lg">{OUR_COMMITMENT}</p>
+        <SectionHeading
+          id="our-commitment-heading"
+          text={t("about.ourCommitment")}
+        />
+        <p className="text-gray-600 leading-relaxed text-lg">
+          {t("about.ourCommitmentDesc")}
+        </p>
       </section>
     </article>
   );
 }
 
 export function MissionSection() {
+  const { t } = useLanguage();
   return (
     <section
       aria-labelledby="mission-vision-heading"
@@ -92,22 +115,23 @@ export function MissionSection() {
         Mission and Core Services
       </h2>
       <article className="bg-white p-10 rounded-2xl shadow-sm">
-        <h3 className="text-2xl font-bold text-[#1B4D3E] mb-4">Our Mission</h3>
+        <h3 className="text-2xl font-bold text-[#1B4D3E] mb-4">
+          {t("about.ourMission")}
+        </h3>
         <p className="text-gray-600 leading-relaxed">
-          To share China&apos;s cutting-edge medical achievements with the world,
-          making quality healthcare accessible across borders.
+          {t("about.ourMissionDesc")}
         </p>
       </article>
       <article className="bg-[#1B4D3E] p-10 rounded-2xl shadow-sm text-white">
-        <h3 className="text-2xl font-bold mb-4">Core Services</h3>
+        <h3 className="text-2xl font-bold mb-4">{t("about.coreServices")}</h3>
         <ul className="space-y-3 list-none" role="list">
-          {CORE_SERVICES.map((service) => (
-            <li key={service} className="flex items-center" role="listitem">
+          {CORE_SERVICE_KEYS.map((key) => (
+            <li key={key} className="flex items-center" role="listitem">
               <div
                 className="w-2 h-2 bg-[#7CB342] rounded-full mr-3"
                 aria-hidden="true"
               />
-              {service}
+              {t(key)}
             </li>
           ))}
         </ul>
@@ -117,19 +141,20 @@ export function MissionSection() {
 }
 
 export function ValuesSection() {
+  const { t } = useLanguage();
   return (
     <section aria-labelledby="values-heading" className="mb-20">
       <h2
         id="values-heading"
         className="text-3xl font-bold text-center mb-12 text-[#1A1A2E]"
       >
-        Our Values
+        {t("about.ourValues")}
       </h2>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 list-none" role="list">
         {VALUES.map((value) => {
           const Icon = value.icon;
           return (
-            <Reveal key={value.title} y={20} className="flex">
+            <Reveal key={value.titleKey} y={20} className="flex">
               <li className="bg-white p-8 rounded-xl shadow-sm text-center card-hover w-full">
                 <div
                   className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#1B4D3E]/10 text-[#1B4D3E] mb-6"
@@ -137,8 +162,8 @@ export function ValuesSection() {
                 >
                   <Icon className="h-8 w-8" />
                 </div>
-                <h3 className="text-lg font-bold mb-2">{value.title}</h3>
-                <p className="text-gray-500 text-sm">{value.description}</p>
+                <h3 className="text-lg font-bold mb-2">{t(value.titleKey)}</h3>
+                <p className="text-gray-500 text-sm">{t(value.descriptionKey)}</p>
               </li>
             </Reveal>
           );
@@ -149,19 +174,22 @@ export function ValuesSection() {
 }
 
 export function TeamSection() {
+  const { t } = useLanguage();
   return (
     <section
       aria-labelledby="team-heading"
       className="bg-white rounded-2xl p-10 shadow-sm"
     >
       <h2 id="team-heading" className="text-2xl font-bold text-center mb-10">
-        Our Expert Team
+        {t("about.expertTeam")}
       </h2>
       <dl className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
         {TEAM.map((member) => (
-          <div key={member.title}>
-            <dt className="font-bold text-[#1A1A2E] mb-2">{member.title}</dt>
-            <dd className="text-sm text-gray-500">{member.description}</dd>
+          <div key={member.titleKey}>
+            <dt className="font-bold text-[#1A1A2E] mb-2">
+              {t(member.titleKey)}
+            </dt>
+            <dd className="text-sm text-gray-500">{t(member.descriptionKey)}</dd>
           </div>
         ))}
       </dl>

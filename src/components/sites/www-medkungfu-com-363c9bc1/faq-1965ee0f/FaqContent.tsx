@@ -2,10 +2,13 @@
 
 // /faq — category sidebar + FAQ accordion. Client component driving the
 // category filter and expand/collapse states. Matches the source.
+// Renders Chinese question/answer and category labels when the site
+// language is zh; otherwise English.
 import { useState } from "react";
 
 import { FAQ_CATEGORIES, FAQ_ITEMS } from "./faq-data";
 import { Icons } from "../shared/icons";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 const MEDICAL_NOTICE =
   "MedKungfu provides cross-border medical resource recommendation, record organization, process coordination, interpretation, escort, visa and accommodation support, and follow-up assistance. It does not directly provide diagnosis, treatment, or outcome guarantees. Diagnosis, treatment plans, indications, risks, costs, and timelines are subject to final assessment by medical institutions and specialists.";
@@ -14,6 +17,7 @@ const ENTITY_NOTE =
   "MedKungFu's corporate entity is MEDTECH CHINA LIMITED. The contracting entity, payment entity, service responsibilities, and refund rules are subject to formal agreements, payment documents, and official statements.";
 
 export function FaqContent() {
+  const { lang } = useLanguage();
   const [activeCategory, setActiveCategory] = useState("core");
   const [expandedId, setExpandedId] = useState<number | null>(1);
 
@@ -49,7 +53,9 @@ export function FaqContent() {
                       : "text-gray-700 hover:bg-[#EEF5F1] hover:text-[#1B4D3E]"
                   }`}
                 >
-                  <span className="block font-medium">{cat.en}</span>
+                  <span className="block font-medium">
+                    {lang === "zh" ? cat.zh : cat.en}
+                  </span>
                   <span className="text-xs opacity-70">{count} Q&amp;A</span>
                 </button>
               );
@@ -102,7 +108,7 @@ export function FaqContent() {
                   >
                     <Icons.helpCircle className="text-[#1B4D3E] mt-0.5 flex-shrink-0 h-[22px] w-[22px]" />
                     <span className="flex-1 font-semibold text-[#1A1A2E] leading-relaxed">
-                      {item.question}
+                      {lang === "zh" ? item.questionZh : item.question}
                     </span>
                     <Icons.chevronDown
                       className={`text-gray-400 mt-1 flex-shrink-0 h-5 w-5 transition-transform ${
@@ -113,7 +119,7 @@ export function FaqContent() {
                   {open && (
                     <div style={{ height: "auto", opacity: 1 }}>
                       <div className="px-5 md:px-6 pb-6 pl-[58px] text-gray-700 leading-relaxed">
-                        {item.answer}
+                        {lang === "zh" ? item.answerZh : item.answer}
                       </div>
                     </div>
                   )}

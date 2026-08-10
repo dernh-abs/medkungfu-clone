@@ -1,143 +1,151 @@
+"use client";
+
 // "Our Service Process" — 7-phase alternating timeline with center line
 // on desktop and a left line on mobile. Matches /services.
+// Bilingual via services.process* / services.process{N}* keys.
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+
 import { Icons, type LucideIcon } from "../shared/icons";
 import { Reveal } from "../shared/Reveal";
 
 interface ProcessStep {
-  name: string;
-  description: string;
+  nameKey: string;
+  descKey: string;
 }
 
 interface ProcessPhase {
   icon: LucideIcon;
-  title: string;
+  titleKey: string;
   steps: ProcessStep[];
 }
 
 const PHASES: ProcessPhase[] = [
   {
     icon: Icons.phone,
-    title: "Inquiry & Initial Consultation",
+    titleKey: "services.processTitle1",
     steps: [
       {
-        name: "Remote Consultation",
-        description:
-          "Initial contact via phone, email, or video call to understand your medical needs",
+        nameKey: "services.process1Item1",
+        descKey: "services.process1Desc1",
       },
       {
-        name: "Medical Records Collection & Translation",
-        description:
-          "Gather and professionally translate your medical history and diagnostic reports",
+        nameKey: "services.process1Item2",
+        descKey: "services.process1Desc2",
       },
     ],
   },
   {
     icon: Icons.stethoscope,
-    title: "Medical Resource Matching & Remote Assessment",
+    titleKey: "services.processTitle2",
     steps: [
       {
-        name: "Precision Hospital Matching",
-        description:
-          "Match you with the most suitable hospitals and specialists based on your condition",
+        nameKey: "services.process2Item1",
+        descKey: "services.process2Desc1",
       },
       {
-        name: "Expert Remote Video Assessment",
-        description:
-          "Video consultation with top specialists to evaluate treatment feasibility",
+        nameKey: "services.process2Item2",
+        descKey: "services.process2Desc2",
       },
       {
-        name: "Written Treatment Recommendation Report",
-        description:
-          "Receive a detailed medical assessment and personalized treatment plan",
+        nameKey: "services.process2Item3",
+        descKey: "services.process2Desc3",
       },
     ],
   },
   {
     icon: Icons.fileSignature,
-    title: "Service Agreement & Appointment Scheduling",
+    titleKey: "services.processTitle3",
     steps: [
       {
-        name: "Service Agreement Signing",
-        description:
-          "Formal contract outlining services, fees, and mutual responsibilities",
+        nameKey: "services.process3Item1",
+        descKey: "services.process3Desc1",
       },
       {
-        name: "Priority Hospital Appointment",
-        description:
-          "Secure priority scheduling through our green channel access",
+        nameKey: "services.process3Item2",
+        descKey: "services.process3Desc2",
       },
     ],
   },
   {
     icon: Icons.briefcase,
-    title: "Pre-departure Preparation",
+    titleKey: "services.processTitle4",
     steps: [
       {
-        name: "Visa Application Assistance",
-        description: "Guidance and support for medical visa application process",
+        nameKey: "services.process4Item1",
+        descKey: "services.process4Desc1",
       },
       {
-        name: "Travel Arrangements",
-        description:
-          "Flight booking, accommodation near hospital, and itinerary planning",
+        nameKey: "services.process4Item2",
+        descKey: "services.process4Desc2",
       },
     ],
   },
   {
     icon: Icons.mapPin,
-    title: "Arrival in China & Hospital Admission",
+    titleKey: "services.processTitle5",
     steps: [
       {
-        name: "Airport Pickup Service",
-        description:
-          "Professional greeting and transportation from airport to accommodation",
+        nameKey: "services.process5Item1",
+        descKey: "services.process5Desc1",
       },
       {
-        name: "Exclusive Hospital Admission Channel",
-        description:
-          "Priority check-in and dedicated admission process without waiting",
+        nameKey: "services.process5Item2",
+        descKey: "services.process5Desc2",
       },
     ],
   },
   {
     icon: Icons.heartPulse,
-    title: "Examination & Treatment",
+    titleKey: "services.processTitle6",
     steps: [
       {
-        name: "Pre-treatment Examinations",
-        description: "Comprehensive diagnostic tests and health assessments",
+        nameKey: "services.process6Item1",
+        descKey: "services.process6Desc1",
       },
       {
-        name: "Treatment Implementation",
-        description:
-          "Execution of the personalized treatment plan by expert medical teams",
+        nameKey: "services.process6Item2",
+        descKey: "services.process6Desc2",
       },
       {
-        name: "Personalized Support During Hospitalization",
-        description:
-          "Dedicated care coordinator, translation services, and daily assistance",
+        nameKey: "services.process6Item3",
+        descKey: "services.process6Desc3",
       },
     ],
   },
   {
     icon: Icons.clipboardCheck,
-    title: "Discharge & Follow-up Management",
+    titleKey: "services.processTitle7",
     steps: [
       {
-        name: "Discharge & Return Journey",
-        description:
-          "Medical summary, medication guidance, and travel arrangements home",
+        nameKey: "services.process7Item1",
+        descKey: "services.process7Desc1",
       },
       {
-        name: "Remote Follow-up",
-        description:
-          "Ongoing medical consultation, recovery monitoring, and local coordination",
+        nameKey: "services.process7Item2",
+        descKey: "services.process7Desc2",
       },
     ],
   },
 ];
 
+export function ServicesHero() {
+  const { t } = useLanguage();
+
+  return (
+    <Reveal className="text-center mb-16">
+      <h1 className="text-4xl font-bold text-[#1A1A2E] mb-4 font-montserrat">
+        {t("services.title")}
+      </h1>
+      <p className="text-gray-600 max-w-2xl mx-auto">
+        {t("services.subtitle")}
+      </p>
+    </Reveal>
+  );
+}
+
 export function ServiceProcessSection() {
+  const { t } = useLanguage();
+
   return (
     <section
       aria-labelledby="process-heading"
@@ -145,11 +153,10 @@ export function ServiceProcessSection() {
     >
       <Reveal y={20} className="text-center mb-12">
         <h2 id="process-heading" className="text-3xl font-bold mb-4 text-[#1A1A2E]">
-          Our Service Process
+          {t("services.processTitle")}
         </h2>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          Seven comprehensive stages from initial inquiry to post-treatment
-          follow-up, ensuring a seamless medical journey.
+          {t("services.processSubtitle")}
         </p>
       </Reveal>
       <div className="relative">
@@ -169,7 +176,7 @@ export function ServiceProcessSection() {
             const Icon = phase.icon;
             const reversed = i % 2 === 1; // even phases alternate to the right
             return (
-              <Reveal key={phase.title} y={30} className="flex">
+              <Reveal key={phase.titleKey} y={30} className="flex">
                 <li
                   className={`relative flex flex-col md:flex-row${
                     reversed ? " md:flex-row-reverse" : ""
@@ -197,7 +204,7 @@ export function ServiceProcessSection() {
                         reversed ? "" : " md:flex-row-reverse"
                       }`}
                     >
-                      <span>Phase {i + 1}</span>
+                      <span>{t(`services.processPhase${i + 1}`)}</span>
                     </div>
                   </div>
                   {/* Center icon node (desktop) */}
@@ -218,21 +225,21 @@ export function ServiceProcessSection() {
                         <span className="w-10 h-10 rounded-full bg-[#1B4D3E] text-white flex items-center justify-center flex-shrink-0">
                           <Icon className="h-7 w-7" />
                         </span>
-                        <span>{phase.title}</span>
+                        <span>{t(phase.titleKey)}</span>
                       </h3>
                       <h3 className="text-xl font-bold text-[#1A1A2E] mb-4 hidden md:block">
-                        {phase.title}
+                        {t(phase.titleKey)}
                       </h3>
                       <ul className="space-y-3 list-none" role="list">
                         {phase.steps.map((step) => (
-                          <li key={step.name} className="flex items-start gap-3">
+                          <li key={step.nameKey} className="flex items-start gap-3">
                             <Icons.checkCircle className="text-[#1B4D3E] flex-shrink-0 mt-0.5 h-[18px] w-[18px]" />
                             <div>
                               <span className="font-semibold text-[#1A1A2E] text-sm">
-                                {step.name}
+                                {t(step.nameKey)}
                               </span>
                               <p className="text-gray-500 text-sm mt-0.5">
-                                {step.description}
+                                {t(step.descKey)}
                               </p>
                             </div>
                           </li>

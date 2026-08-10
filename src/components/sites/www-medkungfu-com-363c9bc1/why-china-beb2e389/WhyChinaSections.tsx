@@ -1,93 +1,105 @@
+"use client";
+
 // "Why Choose China Medical?" — 6 core-advantage cards + dark green
 // distinctive-features grid + CTA. Matches /why-china.
+// Bilingual via whyChina.* keys.
 import Link from "next/link";
+
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 import { Icons, type LucideIcon } from "../shared/icons";
 import { Reveal } from "../shared/Reveal";
 
 interface Feature {
   icon: LucideIcon;
-  title: string;
-  description: string;
+  titleKey: string;
+  descKey: string;
 }
 
 const ADVANTAGES: Feature[] = [
   {
     icon: Icons.award,
-    title: "World-Class Medical Technology",
-    description:
-      "China leads globally in advanced treatments including Heavy Ion/Proton therapy with 54 specialized centers, CAR-T cell therapy with 40%+ of global clinical trials, and 76 new drugs approved in 2025 ranking #1 worldwide.",
+    titleKey: "whyChina.advantage1Title",
+    descKey: "whyChina.advantage1Desc",
   },
   {
     icon: Icons.clock,
-    title: "Exceptional Efficiency",
-    description:
-      "No long waiting times. Joint replacement surgery can be completed in about 1 month, compared to 6-12 months in many Western countries.",
+    titleKey: "whyChina.advantage2Title",
+    descKey: "whyChina.advantage2Desc",
   },
   {
     icon: Icons.heartPulse,
-    title: "Comprehensive Care System",
-    description:
-      "The world's only complete Integrative Medicine system combining modern technology with traditional Chinese medicine wisdom for holistic treatment.",
+    titleKey: "whyChina.advantage3Title",
+    descKey: "whyChina.advantage3Desc",
   },
   {
     icon: Icons.microscope,
-    title: "Cutting-Edge Innovation",
-    description:
-      "Leading in Stem Cell therapy with 100+ registered institutions and Interventional Therapy at global leadership level.",
+    titleKey: "whyChina.advantage4Title",
+    descKey: "whyChina.advantage4Desc",
   },
   {
     icon: Icons.globe,
-    title: "International Standards",
-    description:
-      "Dozens of international medical service hospitals with JCI accreditation and standardized processes meeting global healthcare standards.",
+    titleKey: "whyChina.advantage5Title",
+    descKey: "whyChina.advantage5Desc",
   },
   {
     icon: Icons.plane,
-    title: "Medical Tourism Friendly",
-    description:
-      "Hainan offers visa-free entry for medical reasons with 30-day stay permitted, making access convenient for international patients.",
+    titleKey: "whyChina.advantage6Title",
+    descKey: "whyChina.advantage6Desc",
   },
 ];
 
 const DISTINCTIVE: Feature[] = [
   {
     icon: Icons.stethoscope,
-    title: "Expert Medical Teams",
-    description:
-      "Highly skilled doctors trained in both domestic and international institutions",
+    titleKey: "whyChina.feature1Title",
+    descKey: "whyChina.feature1Desc",
   },
   {
     icon: Icons.building,
-    title: "Modern Facilities",
-    description:
-      "State-of-the-art hospitals equipped with the latest medical technology",
+    titleKey: "whyChina.feature2Title",
+    descKey: "whyChina.feature2Desc",
   },
   {
     icon: Icons.leaf,
-    title: "Holistic Approach",
-    description:
-      "Integration of TCM and Western medicine for comprehensive treatment",
+    titleKey: "whyChina.feature3Title",
+    descKey: "whyChina.feature3Desc",
   },
   {
     icon: Icons.zap,
-    title: "Rapid Innovation",
-    description:
-      "Fast adoption of breakthrough treatments and medical technologies",
+    titleKey: "whyChina.feature4Title",
+    descKey: "whyChina.feature4Desc",
   },
 ];
 
+export function WhyChinaHero() {
+  const { t } = useLanguage();
+
+  return (
+    <Reveal className="text-center mb-16">
+      <h1 className="text-4xl md:text-5xl font-bold text-[#1A1A2E] mb-6 font-montserrat">
+        {t("whyChina.title")}
+      </h1>
+      <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
+        {t("whyChina.subtitle")}
+      </p>
+    </Reveal>
+  );
+}
+
 export function CoreAdvantagesSection() {
+  const { t } = useLanguage();
+
   return (
     <section aria-labelledby="core-advantages-heading" className="mb-16">
       <Reveal className="text-3xl font-bold text-center mb-12 text-[#1A1A2E]">
-        <h2 id="core-advantages-heading">Core Advantages</h2>
+        <h2 id="core-advantages-heading">{t("whyChina.coreAdvantages")}</h2>
       </Reveal>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 list-none" role="list">
         {ADVANTAGES.map((feature) => {
           const Icon = feature.icon;
           return (
-            <Reveal key={feature.title} className="flex">
+            <Reveal key={feature.titleKey} className="flex">
               <li className="bg-white rounded-2xl shadow-sm p-8 card-hover w-full">
                 <div
                   className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#1B4D3E]/10 text-[#1B4D3E] mb-6"
@@ -96,10 +108,10 @@ export function CoreAdvantagesSection() {
                   <Icon className="h-10 w-10" />
                 </div>
                 <h3 className="text-xl font-bold mb-4 text-[#1A1A2E]">
-                  {feature.title}
+                  {t(feature.titleKey)}
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
-                  {feature.description}
+                  {t(feature.descKey)}
                 </p>
               </li>
             </Reveal>
@@ -111,6 +123,8 @@ export function CoreAdvantagesSection() {
 }
 
 export function DistinctiveFeaturesSection() {
+  const { t } = useLanguage();
+
   return (
     <section
       aria-labelledby="distinctive-features-heading"
@@ -118,14 +132,14 @@ export function DistinctiveFeaturesSection() {
     >
       <Reveal className="text-3xl font-bold text-center mb-12 text-white">
         <h2 id="distinctive-features-heading">
-          The Distinctive Features of Chinese Medical Care
+          {t("whyChina.distinctiveFeatures")}
         </h2>
       </Reveal>
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 list-none" role="list">
         {DISTINCTIVE.map((feature) => {
           const Icon = feature.icon;
           return (
-            <Reveal key={feature.title} className="flex">
+            <Reveal key={feature.titleKey} className="flex">
               <li className="text-center w-full">
                 <div
                   className="inline-flex items-center justify-center w-14 h-14 rounded-full bg-white/20 text-white mb-5"
@@ -134,10 +148,10 @@ export function DistinctiveFeaturesSection() {
                   <Icon className="h-7 w-7" />
                 </div>
                 <h3 className="text-lg font-bold mb-3 text-white">
-                  {feature.title}
+                  {t(feature.titleKey)}
                 </h3>
                 <p className="text-white/80 text-sm leading-relaxed">
-                  {feature.description}
+                  {t(feature.descKey)}
                 </p>
               </li>
             </Reveal>
@@ -149,6 +163,8 @@ export function DistinctiveFeaturesSection() {
 }
 
 export function WhyChinaCtaSection() {
+  const { t } = useLanguage();
+
   return (
     <Reveal className="text-center bg-white rounded-2xl shadow-sm p-10">
       <section aria-labelledby="cta-heading">
@@ -156,19 +172,17 @@ export function WhyChinaCtaSection() {
           id="cta-heading"
           className="text-2xl font-bold text-[#1A1A2E] mb-4"
         >
-          Ready to Experience World-Class Healthcare?
+          {t("whyChina.ctaTitle")}
         </h2>
         <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-          Let us guide you through China&apos;s exceptional medical system with
-          personalized concierge service tailored to your unique healthcare
-          needs.
+          {t("whyChina.ctaDesc")}
         </p>
         <nav aria-label="Contact CTA">
           <Link
             href="/contact"
             className="inline-flex items-center justify-center gap-2 bg-[#1B4D3E] text-white px-8 py-4 rounded-lg text-lg font-medium hover:bg-[#143D30] transition-all duration-300"
           >
-            Start Your Medical Journey
+            {t("whyChina.ctaButton")}
           </Link>
         </nav>
       </section>

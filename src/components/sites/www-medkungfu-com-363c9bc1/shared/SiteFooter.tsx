@@ -1,9 +1,13 @@
 // SiteFooter — dark green footer matching MedKungFu's homepage.
 // Brand column + social, Quick Links, Support, Contact Us, medical notices,
-// and legal bar. Server component.
+// and legal bar. Bilingual via the site translation dictionary (footer.* and
+// contact.* keys).
+"use client";
 import Link from "next/link";
 
 import type { ComponentType, ReactNode } from "react";
+
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 import {
   FacebookIcon,
@@ -69,6 +73,8 @@ function FooterLink({
 }
 
 export function SiteFooter() {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-[#1B4D3E] text-white">
       <div className="container-custom px-4 py-16">
@@ -130,13 +136,13 @@ export function SiteFooter() {
           {/* CONTACT US */}
           <div>
             <h4 className="font-semibold text-lg mb-6 font-montserrat">
-              Contact Us
+              {t("contact.title")}
             </h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <Icons.mail className="text-[#7CB342] mt-0.5 flex-shrink-0 h-[18px] w-[18px]" />
                 <div>
-                  <p className="text-sm text-white/50 mb-1">Email</p>
+                  <p className="text-sm text-white/50 mb-1">{t("contact.email")}</p>
                   <a
                     href="mailto:contact@medkungfu.com"
                     className="text-white hover:text-[#7CB342] transition-colors"
@@ -148,7 +154,7 @@ export function SiteFooter() {
               <li className="flex items-start gap-3">
                 <Icons.phone className="text-[#7CB342] mt-0.5 flex-shrink-0 h-[18px] w-[18px]" />
                 <div>
-                  <p className="text-sm text-white/50 mb-1">WhatsApp</p>
+                  <p className="text-sm text-white/50 mb-1">{t("contact.whatsapp")}</p>
                   <a
                     href="https://wa.me/16462968491"
                     className="text-white hover:text-[#7CB342] transition-colors"
@@ -200,9 +206,7 @@ export function SiteFooter() {
       <div className="border-t border-white/10">
         <div className="container-custom px-4 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-white/50 text-sm">
-              © 2026 MedKungFu. All rights reserved.
-            </p>
+            <p className="text-white/50 text-sm">{t("footer.rights")}</p>
             <div className="flex items-center gap-6">
               <Link
                 href="/privacy"
