@@ -1,3 +1,6 @@
+"use client";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+
 import { Icons } from "@/components/sites/www-medkungfu-com-363c9bc1/shared/icons";
 import { Reveal } from "@/components/sites/www-medkungfu-com-363c9bc1/shared/Reveal";
 
@@ -16,6 +19,24 @@ const leaders = [
     name: "Jiang Guoliang",
     role: "Honorary Director",
     bio: "Hospital Honorary Director",
+  },
+];
+
+const leadersZh = [
+  {
+    name: "虞先濬",
+    role: "院长",
+    bio: "主任医师、二级教授\n复旦大学附属肿瘤医院院长\n2025年7月就任",
+  },
+  {
+    name: "郭小毛",
+    role: "临床技术委员会主任",
+    bio: "原院长",
+  },
+  {
+    name: "蒋国梁",
+    role: "荣誉主任",
+    bio: "医院荣誉主任",
   },
 ];
 
@@ -90,6 +111,57 @@ const specialtyGroups: SpecialtyGroup[] = [
   },
 ];
 
+const specialtyGroupsZh: SpecialtyGroup[] = [
+  {
+    title: "头颈及中枢神经肿瘤科",
+    members: [
+      {
+        initial: "孔",
+        name: "孔琳",
+        title: "主任医师、博士生导师",
+        bio: "院长助理、头颈及中枢神经肿瘤一科主任\n中国人体健康科技促进会质子重离子放疗专委会主任委员\n团队累计完成粒子放疗超4000例\n国际首创混合线束放疗初诊鼻咽癌，斩获第61届PTCOG\"戈伊丁奖\"",
+      },
+      {
+        initial: "胡",
+        name: "胡超苏",
+        title: "主任医师、博士生导师",
+        bio: "头颈及中枢神经肿瘤二科主任\n复旦大学鼻咽癌诊治中心主任\n团队完成千余例粒子放疗患者诊疗",
+      },
+    ],
+    coreMembers: ["胡微煦 副主任医师", "胡集祎 主任医师"],
+  },
+  {
+    title: "胸部肿瘤科",
+    members: [
+      {
+        initial: "吴",
+        name: "吴开良",
+        title: "主任医师、博士生导师",
+        bio: "院长助理、胸部肿瘤科主任\n兼任中国医学装备协会离子放射治疗分会副会长\n团队率先规模化运用质子重离子笔形束扫描技术治疗肺癌\n在国际上率先确立胸部肿瘤重离子放疗剂量分割方案",
+      },
+    ],
+    coreMembers: ["茅静芳 主任医师、科室副主任", "陈剑 主任医师、硕士生导师", "高晶 副主任医师"],
+  },
+  {
+    title: "腹盆腔/乳腺肿瘤科",
+    members: [
+      {
+        initial: "章",
+        name: "章青",
+        title: "主任医师、研究生导师",
+        bio: "腹盆腔/乳腺肿瘤科主任\n上海抗癌协会放疗专业委员会常委",
+      },
+    ],
+    coreMembers: [
+      "王征 主任医师、腹盆腔肿瘤科副主任",
+      "管西寅 副主任医师",
+      "蔡昕 副主任医师",
+      "梅欣 副主任医师",
+      "李萍 副主任医师",
+    ],
+  },
+];
+
 const otherExperts = [
   {
     name: "Song Shaoli",
@@ -98,23 +170,36 @@ const otherExperts = [
   },
 ];
 
+const otherExpertsZh = [
+  {
+    name: "宋少莉",
+    title: "主任医师、博士生导师",
+    bio: "核医学科主任\n上海分子影像探针工程技术研究中心主任\n上海市领军人才\n为全院精准诊断、影像评估提供核心技术支撑",
+  },
+];
+
 export function ExpertTeamSection() {
+  const { lang } = useLanguage();
+  const isZh = lang === "zh";
+  const leaderItems = isZh ? leadersZh : leaders;
+  const groups = isZh ? specialtyGroupsZh : specialtyGroups;
+  const expertItems = isZh ? otherExpertsZh : otherExperts;
   return (
     <section className="py-20 lg:py-32 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Reveal y={20} className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
-            Expert Team · Quality Care
+            {isZh ? "专家团队 实力护航" : "Expert Team · Quality Care"}
           </h2>
           <p className="text-gray-600 max-w-3xl mx-auto">
-            Deeply integrated with Fudan University Shanghai Cancer Center with
-            shared resources, gathering top domestic talent in oncology
-            radiotherapy
+            {isZh
+              ? "医院与复旦大学附属肿瘤医院深度融合、资源共享，汇聚国内顶尖肿瘤放疗人才"
+              : "Deeply integrated with Fudan University Shanghai Cancer Center with shared resources, gathering top domestic talent in oncology radiotherapy"}
           </p>
         </Reveal>
 
         <div className="grid md:grid-cols-3 gap-8 mb-16">
-          {leaders.map((leader) => (
+          {leaderItems.map((leader) => (
             <Reveal
               key={leader.name}
               y={20}
@@ -135,7 +220,7 @@ export function ExpertTeamSection() {
         </div>
 
         <div className="space-y-12">
-          {specialtyGroups.map((group) => (
+          {groups.map((group) => (
             <Reveal
               key={group.title}
               y={20}
@@ -169,7 +254,7 @@ export function ExpertTeamSection() {
               </div>
               <div>
                 <h4 className="font-medium text-gray-700 mb-3">
-                  Department Core Members
+                  {isZh ? "科室骨干" : "Department Core Members"}
                 </h4>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-3">
                   {group.coreMembers.map((member) => (
@@ -189,10 +274,10 @@ export function ExpertTeamSection() {
 
         <div className="mt-12">
           <h3 className="text-2xl font-bold text-[#1A1A2E] mb-6">
-            Other Core Experts
+            {isZh ? "其他核心专家" : "Other Core Experts"}
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {otherExperts.map((expert) => (
+            {expertItems.map((expert) => (
               <Reveal
                 key={expert.name}
                 y={20}

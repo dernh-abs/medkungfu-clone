@@ -1,7 +1,10 @@
+"use client";
 import {
   Icons,
   type LucideIcon,
 } from "@/components/sites/www-medkungfu-com-363c9bc1/shared/icons";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+
 import { Reveal } from "@/components/sites/www-medkungfu-com-363c9bc1/shared/Reveal";
 
 interface InternationalService {
@@ -37,17 +40,43 @@ const services: InternationalService[] = [
   },
 ];
 
+const servicesZh: InternationalService[] = [
+  {
+    title: "定制化多学科会诊（MDT）",
+    description: "汇聚国内外知名专家资源，为患者提供个性化诊疗方案。",
+    icon: Icons.users,
+  },
+  {
+    title: "全周期专属服务",
+    description: "从签证协助、机场接送、住院诊疗到出院随访的全程陪伴。",
+    icon: Icons.globe,
+  },
+  {
+    title: "多语种翻译服务",
+    description: "提供英语、日语等多语种翻译服务，确保无障碍沟通。",
+    icon: Icons.checkCircle,
+  },
+  {
+    title: "舒适住院环境",
+    description: "病区配备中央空调、淋浴间、电视、冰箱、微波炉等生活设施。",
+    icon: Icons.building,
+  },
+];
+
 export function InternationalServicesSection() {
+  const { lang } = useLanguage();
+  const isZh = lang === "zh";
+  const items = isZh ? servicesZh : services;
   return (
     <section id="services" className="py-16 md:py-24 bg-white">
       <div className="container-custom">
         <Reveal y={20} className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-[#1A1A2E]">
-            International Patient Services
+            {isZh ? "国际患者服务" : "International Patient Services"}
           </h2>
         </Reveal>
         <div className="grid md:grid-cols-2 gap-8">
-          {services.map((service) => (
+          {items.map((service) => (
             <Reveal
               key={service.title}
               scale={0.95}

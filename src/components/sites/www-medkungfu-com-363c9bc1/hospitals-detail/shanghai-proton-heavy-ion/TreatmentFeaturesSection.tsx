@@ -1,3 +1,6 @@
+"use client";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+
 import { Reveal } from "@/components/sites/www-medkungfu-com-363c9bc1/shared/Reveal";
 
 const treatments = [
@@ -39,22 +42,58 @@ const treatments = [
   },
 ];
 
+const treatmentsZh = [
+  {
+    title: "鼻咽癌",
+    description: "国际收治重离子放疗鼻咽癌患者数量最多的粒子中心",
+    highlight: "初治患者5年总生存率93.8%",
+  },
+  {
+    title: "肺癌",
+    description: "85%肺癌患者采用重离子放疗",
+    highlight: "Ⅰ期早期非小细胞肺癌5年总生存率73.8%",
+  },
+  {
+    title: "胰腺癌",
+    description: "国际首创单纯重离子治疗局部复发鼻咽癌",
+    highlight: "3年总生存率33.1%，中位生存时间26.8个月",
+  },
+  {
+    title: "前列腺癌",
+    description: "局限期患者行单纯重离子放疗",
+    highlight: "5年总生存率97.2%，前列腺特异生存率100%",
+  },
+  {
+    title: "乳腺癌",
+    description: "以质子放疗为主",
+    highlight: "5年总生存率97.3%",
+  },
+  {
+    title: "肝癌",
+    description: "精准杀伤肿瘤细胞，最大程度保护正常肝组织",
+    highlight: "在不可切除肝癌、肝转移瘤等领域展现出显著临床优势",
+  },
+];
+
 export function TreatmentFeaturesSection() {
+  const { lang } = useLanguage();
+  const isZh = lang === "zh";
+  const items = isZh ? treatmentsZh : treatments;
   return (
     <section className="py-20 lg:py-32 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Reveal y={20} className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
-            Technical Features &amp; Advantageous Treatments
+            {isZh ? "技术特色 & 优势治疗项目" : "Technical Features &amp; Advantageous Treatments"}
           </h2>
           <p className="text-gray-600 max-w-3xl mx-auto">
-            The hospital specializes in heavy ion radiotherapy, with 75% of
-            clinical patients receiving pure heavy ion or combined heavy
-            ion-proton therapy
+            {isZh
+              ? "医院以重离子放疗为核心特色，临床中75%患者采用单纯重离子或重离子联合质子治疗"
+              : "The hospital specializes in heavy ion radiotherapy, with 75% of clinical patients receiving pure heavy ion or combined heavy ion-proton therapy"}
           </p>
         </Reveal>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {treatments.map((treatment) => (
+          {items.map((treatment) => (
             <Reveal
               key={treatment.title}
               y={20}
