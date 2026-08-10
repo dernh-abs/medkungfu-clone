@@ -1,5 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Open_Sans, Montserrat } from "next/font/google";
+
+import { LanguageProvider } from "@/lib/i18n/LanguageProvider";
+
 import "./globals.css";
 
 const openSans = Open_Sans({
@@ -34,7 +37,7 @@ export default function RootLayout({
       className={`${openSans.variable} ${montserrat.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-[#F5F7FA] text-[#1A1A2E] font-sans">
-        {children}
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );

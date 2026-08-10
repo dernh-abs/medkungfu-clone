@@ -2,6 +2,7 @@
 
 // Fixed top navigation bar matching MedKungFu's header.
 // Green brand color #1B4D3E, accent #7CB342. Mobile menu toggles below lg.
+// Language switcher (EN / 简体中文 / Русский) matches the source site.
 import { useState } from "react";
 
 import Link from "next/link";
@@ -9,22 +10,32 @@ import { usePathname } from "next/navigation";
 
 import { X } from "lucide-react";
 
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import type { SupportedLanguage } from "@/lib/i18n/translations";
+
 import { Icons } from "./icons";
 
-interface NavLink {
-  href: string;
-  label: string;
-}
-
-const NAV_LINKS: NavLink[] = [
-  { href: "/", label: "Home" },
-  { href: "/projects", label: "Medical Projects" },
-  { href: "/services", label: "Services" },
-  { href: "/hospitals", label: "Hospitals" },
-  { href: "/stories", label: "Patient Stories" },
-  { href: "/about", label: "About Us" },
-  { href: "/faq", label: "FAQ" },
+const NAV_KEYS: { href: string; key: string }[] = [
+  { href: "/", key: "nav.home" },
+  { href: "/projects", key: "nav.projects" },
+  { href: "/services", key: "nav.services" },
+  { href: "/hospitals", key: "nav.hospitals" },
+  { href: "/stories", key: "nav.stories" },
+  { href: "/about", key: "nav.about" },
+  { href: "/faq", key: "nav.faq" },
 ];
+
+const LANGUAGES: { code: SupportedLanguage; label: string }[] = [
+  { code: "en", label: "English" },
+  { code: "zh", label: "简体中文" },
+  { code: "ru", label: "Русский" },
+];
+
+const LANG_BADGE: Record<SupportedLanguage, string> = {
+  en: "EN",
+  zh: "中文",
+  ru: "RU",
+};
 
 function isActive(href: string, pathname: string) {
   if (href === "/") return pathname === "/";
@@ -33,7 +44,9 @@ function isActive(href: string, pathname: string) {
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
   const pathname = usePathname();
+  const { lang, setLang, t } = useLanguage();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#1B4D3E] text-white shadow-md">
@@ -49,7 +62,7 @@ export function SiteHeader() {
 
         {/* Desktop nav */}
         <nav className="hidden lg:flex items-center space-x-6">
-          {NAV_LINKS.map((link) => (
+          {NAV_KEYS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
@@ -57,7 +70,7 @@ export function SiteHeader() {
                 isActive(link.href, pathname) ? "text-[#7CB342]" : "text-white"
               }`}
             >
-              {link.label}
+              {t(link.key)}
             </Link>
           ))}
         </nav>
@@ -67,12 +80,37 @@ export function SiteHeader() {
             href="/login"
             className="bg-[#7CB342] text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-[#689F38] transition-colors"
           >
-            Book Consultation
+            {t("nav.consult")}
           </Link>
-          <button className="flex items-center space-x-1 text-sm hover:text-[#7CB342]">
-            <Icons.globe className="h-4 w-4" />
-            <span>EN</span>
-          </button>
+          {/* Language switcher */}
+          <div className="relative">
+            <button
+              className="flex items-center space-x-1 text-sm hover:text-[#7CB342]"
+              onClick={() => setLangOpen(!langOpen)}
+              aria-label="Select language"
+            >
+              <Icons.globe className="h-4 w-4" />
+              <span>{LANG_BADGE[lang]}</span>
+            </button>
+            {langOpen && (
+              <div className="absolute right-0 mt-2 w-40 bg-white text-[#1A1A2E] rounded-lg shadow-xl py-2 z-50">
+                {LANGUAGES.map((langOption) => (
+                  <button
+                    key={langOption.code}
+                    onClick={() => {
+                      setLang(langOption.code);
+                      setLangOpen(false);
+                    }}
+                    className={`block w-full text-left px-4 py-2 text-sm hover:bg-[#F5F7FA] ${
+                      lang === langOption.code ? "text-[#1B4D3E] font-semibold" : ""
+                    }`}
+                  >
+                    {langOption.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Mobile hamburger */}
@@ -88,22 +126,40 @@ export function SiteHeader() {
       {/* Mobile menu panel */}
       {open && (
         <div className="lg:hidden bg-[#1B4D3E] border-t border-white/10 px-4 py-4 space-y-3">
-          {NAV_LINKS.map((link) => (
+          {NAV_KEYS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               className="block text-white/90 hover:text-[#7CB342]"
               onClick={() => setOpen(false)}
             >
-              {link.label}
+              {t(link.key)}
             </Link>
           ))}
+          <div className="flex items-center gap-3 pt-2">
+            {LANGUAGES.map((langOption) => (
+              <button
+                key={langOption.code}
+                onClick={() => {
+                  setLang(langOption.code);
+                  setOpen(false);
+                }}
+                className={`text-sm ${
+                  lang === langOption.code
+                    ? "text-[#7CB342] font-semibold"
+                    : "text-white/80 hover:text-[#7CB342]"
+                }`}
+              >
+                {langOption.label}
+              </button>
+            ))}
+          </div>
           <Link
             href="/login"
             className="block bg-[#7CB342] text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-[#689F38] transition-colors text-center"
             onClick={() => setOpen(false)}
           >
-            Book Consultation
+            {t("nav.consult")}
           </Link>
         </div>
       )}
