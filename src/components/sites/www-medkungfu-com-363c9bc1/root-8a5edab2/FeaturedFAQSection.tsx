@@ -7,6 +7,7 @@
 import Link from "next/link";
 
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import { RU } from "@/lib/i18n/ru";
 
 import { FAQ_ITEMS } from "../faq-1965ee0f/faq-data";
 import { Icons } from "../shared/icons";
@@ -89,6 +90,7 @@ function faqIdFromHref(href: string): number | null {
 export function FeaturedFAQSection() {
   const { lang } = useLanguage();
   const zh = lang === "zh";
+  const ru = lang === "ru";
 
   return (
     <section
@@ -108,19 +110,23 @@ export function FeaturedFAQSection() {
               >
                 {zh
                   ? "海外患者最常问的问题"
-                  : "Questions International Patients Ask First"}
+                  : ru
+                    ? "Вопросы, которые задают пациенты в первую очередь"
+                    : "Questions International Patients Ask First"}
               </h2>
               <p className="text-gray-600 leading-relaxed">
                 {zh
                   ? "先了解服务边界、病历准备、医院匹配、费用周期和随访方式，再判断是否适合启动赴华医疗评估。"
-                  : "Understand service boundaries, record preparation, hospital matching, costs, timelines, and follow-up before deciding whether to start a China medical assessment."}
+                  : ru
+                    ? "Понять границы обслуживания, записывать подготовку, соответствие больниц, расходы, сроки и последующее наблюдение, прежде чем принимать решение о начале медицинской оценки в Китае."
+                    : "Understand service boundaries, record preparation, hospital matching, costs, timelines, and follow-up before deciding whether to start a China medical assessment."}
               </p>
             </div>
             <Link
               href="/faq"
               className="inline-flex items-center gap-2 text-[#1B4D3E] font-semibold hover:text-[#7CB342] transition-colors shrink-0"
             >
-              {zh ? "查看完整 72 问" : "Read all 72 FAQs"}
+              {zh ? "查看完整 72 问" : ru ? "Прочитайте все 72 FAQ" : "Read all 72 FAQs"}
               <Icons.arrowRight className="h-[18px] w-[18px]" />
             </Link>
           </div>
@@ -129,8 +135,16 @@ export function FeaturedFAQSection() {
           {FAQS.map((faq) => {
             const faqId = faqIdFromHref(faq.href);
             const item = faqId != null ? FAQ_ITEMS.find((f) => f.id === faqId) : undefined;
-            const question = zh && item ? item.questionZh : faq.question;
-            const answer = zh && item ? item.answerZh : faq.answer;
+            const question = ru
+              ? (RU[faq.question] ?? faq.question)
+              : zh && item
+                ? item.questionZh
+                : faq.question;
+            const answer = ru
+              ? (RU[faq.answer] ?? faq.answer)
+              : zh && item
+                ? item.answerZh
+                : faq.answer;
             return (
               <Reveal key={faq.href} y={12} className="flex">
                 <Link

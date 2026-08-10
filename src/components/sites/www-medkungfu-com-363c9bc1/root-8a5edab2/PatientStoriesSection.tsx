@@ -1,5 +1,11 @@
 // "Patient Stories" section: white section with 3 testimonial cards.
 // Each card: quote icon, italic quote text, avatar + name, revealed with scale(0.95).
+// Bilingual: heading, quotes, and names switch to Russian in ru mode.
+"use client";
+
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import { RU } from "@/lib/i18n/ru";
+
 import { Icons } from "../shared/icons";
 import { Reveal } from "../shared/Reveal";
 
@@ -33,6 +39,9 @@ const STORIES: PatientStory[] = [
 ];
 
 export function PatientStoriesSection() {
+  const { lang } = useLanguage();
+  const ru = lang === "ru";
+
   return (
     <section
       aria-labelledby="patient-stories-heading"
@@ -43,7 +52,7 @@ export function PatientStoriesSection() {
           id="patient-stories-heading"
           className="text-3xl font-bold text-center mb-12 text-[#1A1A2E] font-montserrat"
         >
-          Patient Stories
+          {ru ? "Истории пациентов" : "Patient Stories"}
         </h2>
         <ul className="grid grid-cols-1 md:grid-cols-3 gap-8 list-none">
           {STORIES.map((s) => (
@@ -54,18 +63,18 @@ export function PatientStoriesSection() {
                   aria-hidden="true"
                 />
                 <blockquote className="text-gray-700 italic mb-6 relative z-10 pt-4">
-                  <p>{s.quote}</p>
+                  <p>{ru ? (RU[s.quote] ?? s.quote) : s.quote}</p>
                 </blockquote>
                 <footer className="flex items-center space-x-4">
                   {/* eslint-disable-next-line @next/next/no-img-element -- small static avatar, intentional */}
                   <img
                     src={s.image}
-                    alt={s.name}
+                    alt={ru ? (RU[s.name] ?? s.name) : s.name}
                     className="w-12 h-12 rounded-full object-cover"
                     loading="lazy"
                   />
                   <cite className="text-sm font-semibold text-[#1A1A2E] not-italic">
-                    {s.name}
+                    {ru ? (RU[s.name] ?? s.name) : s.name}
                   </cite>
                 </footer>
               </li>

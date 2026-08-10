@@ -1,7 +1,9 @@
 "use client";
 
 // Language context matching the source site's i18n: persisted in
-// localStorage["medkungfu-language"], defaults to "en", ru falls back to en.
+// localStorage["medkungfu-language"], defaults to "en". zh uses the nested
+// translation dictionary; ru resolves the English text and looks it up in the
+// merged Russian map (ru-translations/*.json), falling back to English.
 import {
   createContext,
   useCallback,
@@ -13,6 +15,7 @@ import {
 } from "react";
 
 import { TRANSLATIONS, type SupportedLanguage } from "./translations";
+import { RU } from "./ru";
 
 const STORAGE_KEY = "medkungfu-language";
 
@@ -71,17 +74,19 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   const t = useCallback<TranslateFn>(
     (key: string) => {
-      // ru content is not shipped — fall back to en.
-      const activeLang: SupportedLanguage = lang === "ru" ? "en" : lang;
-      const dict = TRANSLATIONS[activeLang]?.translation ?? {};
+      const enDict = TRANSLATIONS.en?.translation ?? {};
+      const enText = lookup(enDict, key) ?? resolve(enDict, key) ?? key;
+      // Russian: resolve the English text, then look it up in the RU map.
+      if (lang === "ru") {
+        return RU[enText] ?? enText;
+      }
+      // zh / en use the nested dictionary.
+      const dict = TRANSLATIONS[lang]?.translation ?? {};
       const direct = lookup(dict, key);
       if (direct !== undefined) return direct;
       const nested = resolve(dict, key);
       if (nested !== undefined) return nested;
-      // Fall back to English, then to the key itself.
-      const enDict = TRANSLATIONS.en?.translation ?? {};
-      const enValue = lookup(enDict, key) ?? resolve(enDict, key);
-      return enValue ?? key;
+      return enText;
     },
     [lang]
   );
