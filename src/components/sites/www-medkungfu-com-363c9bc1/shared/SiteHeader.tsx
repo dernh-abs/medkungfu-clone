@@ -56,7 +56,7 @@ export function SiteHeader() {
             MedKungfu
           </span>
           <span className="text-[10px] tracking-[0.2em] text-white/80 -mt-1">
-            HEALTHCARE · CONCIERGE
+            {t("HEALTHCARE · CONCIERGE")}
           </span>
         </Link>
 

@@ -86,13 +86,11 @@ export function SiteFooter() {
                 MedKungfu
               </span>
               <span className="text-[10px] tracking-[0.2em] text-white/70 block -mt-1">
-                HEALTHCARE · CONCIERGE
+                {t("HEALTHCARE · CONCIERGE")}
               </span>
             </Link>
             <p className="text-white/70 text-sm leading-relaxed mb-6">
-              Your trusted healthcare concierge in China. Connecting global
-              patients with top-tier medical resources through personalized,
-              professional service.
+              {t("Your trusted healthcare concierge in China. Connecting global patients with top-tier medical resources through personalized, professional service.")}
             </p>
             <div className="flex gap-4">
               {SOCIAL_LINKS.map((s) => (
@@ -110,12 +108,12 @@ export function SiteFooter() {
           {/* QUICK LINKS */}
           <div>
             <h4 className="font-semibold text-lg mb-6 font-montserrat">
-              Quick Links
+              {t("Quick Links")}
             </h4>
             <ul className="space-y-3">
               {QUICK_LINKS.map((l) => (
                 <li key={l.label}>
-                  <FooterLink href={l.href}>{l.label}</FooterLink>
+                  <FooterLink href={l.href}>{t(l.label)}</FooterLink>
                 </li>
               ))}
             </ul>
@@ -123,12 +121,12 @@ export function SiteFooter() {
           {/* SUPPORT */}
           <div>
             <h4 className="font-semibold text-lg mb-6 font-montserrat">
-              Support
+              {t("Support")}
             </h4>
             <ul className="space-y-3">
               {SUPPORT_LINKS.map((l) => (
                 <li key={l.label}>
-                  <FooterLink href={l.href}>{l.label}</FooterLink>
+                  <FooterLink href={l.href}>{t(l.label)}</FooterLink>
                 </li>
               ))}
             </ul>
@@ -136,13 +134,13 @@ export function SiteFooter() {
           {/* CONTACT US */}
           <div>
             <h4 className="font-semibold text-lg mb-6 font-montserrat">
-              {t("contact.title")}
+              {t("Contact Us")}
             </h4>
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
                 <Icons.mail className="text-[#7CB342] mt-0.5 flex-shrink-0 h-[18px] w-[18px]" />
                 <div>
-                  <p className="text-sm text-white/50 mb-1">{t("contact.email")}</p>
+                  <p className="text-sm text-white/50 mb-1">{t("Email")}</p>
                   <a
                     href="mailto:contact@medkungfu.com"
                     className="text-white hover:text-[#7CB342] transition-colors"
@@ -154,7 +152,7 @@ export function SiteFooter() {
               <li className="flex items-start gap-3">
                 <Icons.phone className="text-[#7CB342] mt-0.5 flex-shrink-0 h-[18px] w-[18px]" />
                 <div>
-                  <p className="text-sm text-white/50 mb-1">{t("contact.whatsapp")}</p>
+                  <p className="text-sm text-white/50 mb-1">WhatsApp</p>
                   <a
                     href="https://wa.me/16462968491"
                     className="text-white hover:text-[#7CB342] transition-colors"
@@ -166,12 +164,12 @@ export function SiteFooter() {
               <li className="flex items-start gap-3">
                 <Icons.mapPin className="text-[#7CB342] mt-0.5 flex-shrink-0 h-[18px] w-[18px]" />
                 <div>
-                  <p className="text-sm text-white/50 mb-1">Office</p>
+                  <p className="text-sm text-white/50 mb-1">{t("Office")}</p>
                   <p className="text-white/70 text-sm">
-                    Shanghai, China
+                    {t("Shanghai, China")}
                     <br />
                     <span className="text-white/50">
-                      Serving patients across 6 major cities
+                      {t("Serving patients across 6 major cities")}
                     </span>
                   </p>
                 </div>
@@ -185,19 +183,10 @@ export function SiteFooter() {
         <div className="container-custom px-4 py-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 text-xs leading-relaxed text-white/60">
             <p>
-              Medical notice: MedKungfu provides cross-border medical resource
-              recommendation, record organization, process coordination,
-              interpretation, escort, visa and accommodation support, and
-              follow-up assistance. It does not directly provide diagnosis,
-              treatment, or outcome guarantees. Diagnosis, treatment plans,
-              indications, risks, costs, and timelines are subject to final
-              assessment by medical institutions and specialists.
+              {t("Medical notice: MedKungfu provides cross-border medical resource recommendation, record organization, process coordination, interpretation, escort, visa and accommodation support, and follow-up assistance. It does not directly provide diagnosis, treatment, or outcome guarantees. Diagnosis, treatment plans, indications, risks, costs, and timelines are subject to final assessment by medical institutions and specialists.")}
             </p>
             <p>
-              Entity note: MedKungFu&apos;s corporate entity is MEDTECH CHINA
-              LIMITED. The contracting entity, payment entity, service
-              responsibilities, and refund rules are subject to formal
-              agreements, payment documents, and official statements.
+              {t("Entity note: MedKungFu's corporate entity is MEDTECH CHINA LIMITED. The contracting entity, payment entity, service responsibilities, and refund rules are subject to formal agreements, payment documents, and official statements.")}
             </p>
           </div>
         </div>
@@ -212,19 +201,19 @@ export function SiteFooter() {
                 href="/privacy"
                 className="text-white/50 hover:text-white text-sm transition-colors"
               >
-                Privacy Policy
+                {t("Privacy Policy")}
               </Link>
               <Link
                 href="/terms"
                 className="text-white/50 hover:text-white text-sm transition-colors"
               >
-                Terms of Service
+                {t("Terms of Service")}
               </Link>
               <Link
                 href="/refund"
                 className="text-white/50 hover:text-white text-sm transition-colors"
               >
-                Refund Policy
+                {t("Refund Policy")}
               </Link>
             </div>
           </div>
