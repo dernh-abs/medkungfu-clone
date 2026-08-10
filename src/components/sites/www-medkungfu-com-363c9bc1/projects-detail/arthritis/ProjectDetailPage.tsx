@@ -49,14 +49,18 @@ function HeroSection({ hero }: { hero: HeroData }) {
             </p>
           )}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <button
+            <a
+              href="#contact"
               className={`px-8 py-4 ${hero.buttonClass} text-white font-semibold rounded-lg transition-colors`}
             >
               Consult Now
-            </button>
-            <button className="px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors">
+            </a>
+            <a
+              href="#intro"
+              className="px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
+            >
               Learn More
-            </button>
+            </a>
           </div>
         </div>
       </div>

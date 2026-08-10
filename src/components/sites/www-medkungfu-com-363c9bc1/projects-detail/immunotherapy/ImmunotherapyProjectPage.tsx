@@ -158,18 +158,18 @@ function Hero({ hero }: { hero: HeroConfig }) {
           </h1>
           <p className="text-xl md:text-2xl text-white/90 mb-8">{hero.subtitle}</p>
           <div className="flex flex-wrap gap-4">
-            <button
-              type="button"
+            <a
+              href="#contact"
               className="bg-white text-[#1B4D3E] px-8 py-4 rounded-lg font-semibold hover:bg-white/90 transition-all"
             >
               {hero.primaryBtn}
-            </button>
-            <button
-              type="button"
+            </a>
+            <a
+              href="#process"
               className="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white/10 transition-all"
             >
               {hero.secondaryBtn}
-            </button>
+            </a>
           </div>
         </div>
       </div>
@@ -178,18 +178,28 @@ function Hero({ hero }: { hero: HeroConfig }) {
 }
 
 function StickyNav({ items }: { items: string[] }) {
+  // Map each sticky-nav label to its on-page section anchor (matches the source site).
+  const SECTION_IDS: Record<string, string> = {
+    Introduction: "intro",
+    "Core Advantages": "advantages",
+    Indications: "indications",
+    "Treatment Process": "process",
+    "Efficacy Data": "efficacy",
+    Cases: "cases",
+    "Why Choose Us": "why-choose-us",
+  };
   return (
     <div className="bg-white shadow-sm sticky top-[72px] z-40">
       <div className="container-custom">
         <div className="flex flex-wrap gap-6 py-4 text-sm">
           {items.map((item) => (
-            <button
+            <a
               key={item}
-              type="button"
+              href={`#${SECTION_IDS[item] ?? item.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
               className="text-gray-600 hover:text-[#1B4D3E] font-medium transition-colors"
             >
               {item}
-            </button>
+            </a>
           ))}
         </div>
       </div>
@@ -205,7 +215,7 @@ function IntroSection({
   paragraphs: ReactNode[];
 }) {
   return (
-    <section className="py-20">
+    <section id="intro" className="py-20">
       <div className="container-custom">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-8 text-center">
@@ -234,7 +244,7 @@ function AdvantagesSection({
   bg?: string;
 }) {
   return (
-    <section className={`py-20 ${bg ?? ""}`}>
+    <section id="advantages" className={`py-20 ${bg ?? ""}`}>
       <div className="container-custom">
         <Reveal className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
@@ -418,7 +428,7 @@ function ProcessSection({
   bg?: string;
 }) {
   return (
-    <section className={`py-20 ${bg ?? ""}`}>
+    <section id="process" className={`py-20 ${bg ?? ""}`}>
       <div className="container-custom">
         <Reveal className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">

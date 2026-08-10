@@ -139,6 +139,8 @@
   }
   html {
     @apply font-sans;
+    /* Match the source site's smooth in-page scrolling (hero "Learn More" etc.) */
+    scroll-behavior: smooth;
   }
 }
 

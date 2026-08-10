@@ -55,12 +55,18 @@ export default function AcupunctureBeautyPage() {
                     </span>
                   </div>
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <button className="px-8 py-4 bg-rose-500 text-white font-semibold rounded-lg hover:bg-rose-600 transition-colors">
+                    <a
+                      href="#contact"
+                      className="px-8 py-4 bg-rose-500 text-white font-semibold rounded-lg hover:bg-rose-600 transition-colors"
+                    >
                       Consult Now
-                    </button>
-                    <button className="px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors">
+                    </a>
+                    <a
+                      href="#intro"
+                      className="px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
+                    >
                       Learn More
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>

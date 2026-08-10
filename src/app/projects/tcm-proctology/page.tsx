@@ -56,12 +56,18 @@ export default function TcmProctologyPage() {
                     </span>
                   </div>
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                    <button className="px-8 py-4 bg-emerald-500 text-white font-semibold rounded-lg hover:bg-emerald-600 transition-colors">
+                    <a
+                      href="mailto:contact@medkungfu.com"
+                      className="px-8 py-4 bg-emerald-500 text-white font-semibold rounded-lg hover:bg-emerald-600 transition-colors"
+                    >
                       Email Consultation
-                    </button>
-                    <button className="px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors">
+                    </a>
+                    <a
+                      href="#intro"
+                      className="px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
+                    >
                       Medical Projects → Learn More →
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>
