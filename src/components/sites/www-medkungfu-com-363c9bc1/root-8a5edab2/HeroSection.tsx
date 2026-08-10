@@ -1,18 +1,21 @@
+"use client";
+
 // Hero section (below fixed nav) matching MedKungFu's homepage.
 // Big green-tinted hero: trust badge, headline, copy, stat bullets, dual CTAs,
 // and a floating doctor image card with partner-hospital figcaption.
+// Bilingual via the site translation dictionary (hero.* keys).
 import Link from "next/link";
+
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 import { Icons } from "../shared/icons";
 import { Reveal } from "../shared/Reveal";
 
-const STATS = [
-  ["Trusted by expats across China"],
-  ["100+ Foreigner-friendly Hospitals"],
-  ["6+ Major Cities Covered"],
-] as const;
+const STAT_KEYS = ["hero.trustPoint1", "hero.trustPoint2", "hero.trustPoint3"];
 
 export function HeroSection() {
+  const { t } = useLanguage();
+
   return (
     <header
       role="banner"
@@ -32,32 +35,31 @@ export function HeroSection() {
             <Reveal y={20}>
               <div className="inline-flex items-center gap-2 bg-[#1B4D3E]/10 text-[#1B4D3E] rounded-full px-4 py-2 mb-6 text-sm font-medium">
                 <Icons.checkCircle className="h-4 w-4" />
-                <span>TRUSTED BY EXPATS ACROSS CHINA</span>
+                <span>{t("hero.trustBadge")}</span>
               </div>
             </Reveal>
             <Reveal y={20}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#1A1A2E] mb-6 font-montserrat">
-                Your Personal
-                <span className="text-[#1B4D3E]"> Healthcare Guide</span>
-                <br />in China
+                {t("hero.headline1")}
+                <span className="text-[#1B4D3E]"> {t("hero.headline2")}</span>
+                <br />
+                {t("hero.headline3")}
               </h1>
             </Reveal>
             <Reveal y={20}>
               <p className="text-lg md:text-xl text-gray-600 mb-8 max-w-xl">
-                We care about your health as much as you do. Connecting global
-                patients with China&apos;s top medical resources through
-                personalized, concierge-level service.
+                {t("hero.subheadline")}
               </p>
             </Reveal>
             <Reveal y={20}>
               <ul className="flex flex-wrap gap-4 mb-10 list-none">
-                {STATS.map((s) => (
+                {STAT_KEYS.map((key) => (
                   <li
-                    key={s[0]}
+                    key={key}
                     className="flex items-center gap-2 text-sm text-gray-600"
                   >
                     <div className="w-2 h-2 bg-[#7CB342] rounded-full" />
-                    <span>{s[0]}</span>
+                    <span>{t(key)}</span>
                   </li>
                 ))}
               </ul>
@@ -68,14 +70,14 @@ export function HeroSection() {
                   href="/projects"
                   className="inline-flex items-center justify-center gap-2 bg-[#1B4D3E] text-white px-8 py-4 rounded-lg text-lg font-medium shadow-md hover:bg-[#143D30] transition-all duration-300"
                 >
-                  Explore Medical Projects
+                  {t("hero.explore")}
                   <Icons.arrowRight className="h-5 w-5" />
                 </Link>
                 <Link
                   href="/contact"
                   className="inline-flex items-center justify-center gap-2 bg-white text-[#1B4D3E] border-2 border-[#1B4D3E] px-8 py-4 rounded-lg text-lg font-medium hover:bg-[#1B4D3E]/5 transition-all duration-300"
                 >
-                  Book Consultation
+                  {t("hero.book")}
                 </Link>
               </div>
             </Reveal>
@@ -102,10 +104,10 @@ export function HeroSection() {
                     </div>
                     <div>
                       <p className="font-semibold text-[#1A1A2E]">
-                        Partner Hospitals
+                        {t("hero.partnerHospitals")}
                       </p>
                       <p className="text-sm text-gray-500">
-                        Across 6 major cities
+                        {t("hero.acrossCities")}
                       </p>
                     </div>
                   </div>
