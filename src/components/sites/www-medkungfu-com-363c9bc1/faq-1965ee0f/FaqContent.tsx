@@ -29,7 +29,7 @@ export function FaqContent() {
 
   return (
     <section className="container-custom py-10">
-      <div className="grid grid-cols-1 lg:grid-cols-[300px,1fr] gap-8 items-start">
+      <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-8 items-start">
         {/* Sidebar */}
         <aside className="lg:sticky lg:top-24 bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
           <div className="flex items-center gap-2 mb-4 text-[#1A1A2E]">
