@@ -3,6 +3,7 @@
 // "Why Choose Us?" — 9 icon items in a 3-col grid. Matches /services.
 // Bilingual: heading and items switch to Chinese in zh mode.
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import { RU } from "@/lib/i18n/ru";
 
 import { Icons, type LucideIcon } from "../shared/icons";
 import { Reveal } from "../shared/Reveal";
@@ -93,6 +94,7 @@ const REASONS: Reason[] = [
 export function WhyChooseUsSection() {
   const { lang } = useLanguage();
   const zh = lang === "zh";
+  const ru = lang === "ru";
 
   return (
     <section
@@ -103,7 +105,7 @@ export function WhyChooseUsSection() {
         id="why-choose-us-heading"
         className="text-2xl font-bold mb-10 text-center text-[#1A1A2E]"
       >
-        {zh ? "为什么选择我们？" : "Why Choose Us?"}
+        {zh ? "为什么选择我们？" : ru ? "Почему выбирают нас?" : "Why Choose Us?"}
       </h2>
       <ul
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 list-none"
@@ -122,10 +124,18 @@ export function WhyChooseUsSection() {
                 </div>
                 <div>
                   <h4 className="font-bold text-[#1A1A2E] mb-1">
-                    {zh ? reason.titleZh : reason.title}
+                    {ru
+                      ? (RU[reason.title] ?? reason.title)
+                      : zh
+                        ? reason.titleZh
+                        : reason.title}
                   </h4>
                   <p className="text-sm text-gray-600">
-                    {zh ? reason.descriptionZh : reason.description}
+                    {ru
+                      ? (RU[reason.description] ?? reason.description)
+                      : zh
+                        ? reason.descriptionZh
+                        : reason.description}
                   </p>
                 </div>
               </li>

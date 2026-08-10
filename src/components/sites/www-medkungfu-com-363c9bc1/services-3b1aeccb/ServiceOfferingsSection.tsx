@@ -3,6 +3,7 @@
 // "Service Offerings" — 6 white cards in a 3-col grid. Matches /services.
 // Bilingual: card titles/descriptions switch to Chinese in zh mode.
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import { RU } from "@/lib/i18n/ru";
 
 import { Icons, type LucideIcon } from "../shared/icons";
 import { Reveal } from "../shared/Reveal";
@@ -63,6 +64,7 @@ const OFFERINGS: Offering[] = [
 export function ServiceOfferingsSection() {
   const { lang } = useLanguage();
   const zh = lang === "zh";
+  const ru = lang === "ru";
 
   return (
     <section aria-labelledby="services-heading">
@@ -85,10 +87,18 @@ export function ServiceOfferingsSection() {
                   <Icon className="h-8 w-8" />
                 </div>
                 <h3 className="text-xl font-bold mb-3 text-[#1A1A2E]">
-                  {zh ? offering.titleZh : offering.title}
+                  {ru
+                    ? (RU[offering.title] ?? offering.title)
+                    : zh
+                      ? offering.titleZh
+                      : offering.title}
                 </h3>
                 <p className="text-gray-500 leading-relaxed">
-                  {zh ? offering.descriptionZh : offering.description}
+                  {ru
+                    ? (RU[offering.description] ?? offering.description)
+                    : zh
+                      ? offering.descriptionZh
+                      : offering.description}
                 </p>
               </li>
             </Reveal>

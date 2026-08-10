@@ -3,6 +3,7 @@
 // "Payment Methods" — 3 white cards in a 3-col grid, scale reveal.
 // Matches /services. Bilingual in zh mode.
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import { RU } from "@/lib/i18n/ru";
 
 import { Icons, type LucideIcon } from "../shared/icons";
 import { Reveal } from "../shared/Reveal";
@@ -42,6 +43,7 @@ const METHODS: PaymentMethod[] = [
 export function PaymentMethodsSection() {
   const { lang } = useLanguage();
   const zh = lang === "zh";
+  const ru = lang === "ru";
 
   return (
     <section aria-labelledby="payment-methods-heading">
@@ -49,7 +51,7 @@ export function PaymentMethodsSection() {
         id="payment-methods-heading"
         className="text-2xl font-bold mb-8 text-center text-[#1A1A2E]"
       >
-        {zh ? "支付方式" : "Payment Methods"}
+        {zh ? "支付方式" : ru ? "Способы оплаты" : "Payment Methods"}
       </h2>
       <ul className="grid grid-cols-1 md:grid-cols-3 gap-6 list-none" role="list">
         {METHODS.map((method) => {
@@ -64,10 +66,18 @@ export function PaymentMethodsSection() {
                   <Icon className="h-8 w-8" />
                 </div>
                 <h3 className="text-lg font-bold mb-2 text-[#1A1A2E]">
-                  {zh ? method.titleZh : method.title}
+                  {ru
+                    ? (RU[method.title] ?? method.title)
+                    : zh
+                      ? method.titleZh
+                      : method.title}
                 </h3>
                 <p className="text-gray-500 text-sm">
-                  {zh ? method.descriptionZh : method.description}
+                  {ru
+                    ? (RU[method.description] ?? method.description)
+                    : zh
+                      ? method.descriptionZh
+                      : method.description}
                 </p>
               </li>
             </Reveal>

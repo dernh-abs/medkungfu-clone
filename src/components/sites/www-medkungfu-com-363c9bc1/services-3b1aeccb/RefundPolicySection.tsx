@@ -3,6 +3,7 @@
 // "Refund Policy" — 5 scenario/result cards in a 2-col grid with
 // alternating x-slide reveals. Matches /services. Bilingual in zh mode.
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import { RU } from "@/lib/i18n/ru";
 
 import { Icons } from "../shared/icons";
 import { Reveal } from "../shared/Reveal";
@@ -50,6 +51,7 @@ const RULES: RefundRule[] = [
 export function RefundPolicySection() {
   const { lang } = useLanguage();
   const zh = lang === "zh";
+  const ru = lang === "ru";
 
   return (
     <section
@@ -60,7 +62,7 @@ export function RefundPolicySection() {
         id="refund-policy-heading"
         className="text-2xl font-bold mb-8 text-center text-[#1A1A2E]"
       >
-        {zh ? "退款政策" : "Refund Policy"}
+        {zh ? "退款政策" : ru ? "Политика возврата" : "Refund Policy"}
       </h2>
       <dl className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {RULES.map((rule, i) => (
@@ -70,10 +72,18 @@ export function RefundPolicySection() {
                 <Icons.checkCircle className="text-[#1B4D3E] flex-shrink-0 mt-0.5 h-5 w-5" />
                 <div>
                   <dt className="text-gray-700 text-sm mb-1">
-                    {zh ? rule.scenarioZh : rule.scenario}
+                    {ru
+                      ? (RU[rule.scenario] ?? rule.scenario)
+                      : zh
+                        ? rule.scenarioZh
+                        : rule.scenario}
                   </dt>
                   <dd className="font-semibold text-[#1B4D3E]">
-                    {zh ? rule.resultZh : rule.result}
+                    {ru
+                      ? (RU[rule.result] ?? rule.result)
+                      : zh
+                        ? rule.resultZh
+                        : rule.result}
                   </dd>
                 </div>
               </div>
