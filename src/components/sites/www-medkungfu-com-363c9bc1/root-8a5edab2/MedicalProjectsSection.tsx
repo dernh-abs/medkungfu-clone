@@ -62,7 +62,8 @@ export function MedicalProjectsSection() {
           id="medical-projects-heading"
           className="text-3xl font-bold text-center mb-12 text-[#1A1A2E] font-montserrat"
         >
-          {t("projects.pageTitle")}
+          {/* The source keeps this heading in English even in zh mode. */}
+          Advantageous Medical Projects
         </h2>
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 list-none">
           {PROJECTS.map((p) => {

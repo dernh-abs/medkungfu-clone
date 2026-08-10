@@ -1,7 +1,14 @@
+"use client";
+
 // "Questions International Patients Ask First" — Featured FAQ section.
 // White section with 10 static FAQ cards in a 2-col grid (no accordion).
+// Bilingual: the heading, subtitle, link, and each Q&A switch to Chinese when
+// the site language is zh (zh text comes from the shared FAQ data).
 import Link from "next/link";
 
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
+
+import { FAQ_ITEMS } from "../faq-1965ee0f/faq-data";
 import { Icons } from "../shared/icons";
 import { Reveal } from "../shared/Reveal";
 
@@ -74,7 +81,15 @@ const FAQS: FeaturedFaq[] = [
   },
 ];
 
+function faqIdFromHref(href: string): number | null {
+  const m = href.match(/faq-(\d+)$/);
+  return m ? Number(m[1]) : null;
+}
+
 export function FeaturedFAQSection() {
+  const { lang } = useLanguage();
+  const zh = lang === "zh";
+
   return (
     <section
       aria-labelledby="featured-faq-heading"
@@ -91,44 +106,52 @@ export function FeaturedFAQSection() {
                 id="featured-faq-heading"
                 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4 font-montserrat"
               >
-                Questions International Patients Ask First
+                {zh
+                  ? "海外患者最常问的问题"
+                  : "Questions International Patients Ask First"}
               </h2>
               <p className="text-gray-600 leading-relaxed">
-                Understand service boundaries, record preparation, hospital
-                matching, costs, timelines, and follow-up before deciding
-                whether to start a China medical assessment.
+                {zh
+                  ? "先了解服务边界、病历准备、医院匹配、费用周期和随访方式，再判断是否适合启动赴华医疗评估。"
+                  : "Understand service boundaries, record preparation, hospital matching, costs, timelines, and follow-up before deciding whether to start a China medical assessment."}
               </p>
             </div>
             <Link
               href="/faq"
               className="inline-flex items-center gap-2 text-[#1B4D3E] font-semibold hover:text-[#7CB342] transition-colors shrink-0"
             >
-              Read all 72 FAQs
+              {zh ? "查看完整 72 问" : "Read all 72 FAQs"}
               <Icons.arrowRight className="h-[18px] w-[18px]" />
             </Link>
           </div>
         </Reveal>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {FAQS.map((faq) => (
-            <Reveal key={faq.question} y={12} className="flex">
-              <Link
-                href={faq.href}
-                className="group border border-gray-200 rounded-lg p-5 hover:border-[#7CB342] hover:shadow-md transition-all bg-[#FBFCFC] w-full"
-              >
-                <div className="flex items-start gap-3">
-                  <Icons.helpCircle className="text-[#1B4D3E] mt-0.5 flex-shrink-0 h-5 w-5" />
-                  <div>
-                    <h3 className="font-semibold text-[#1A1A2E] leading-relaxed group-hover:text-[#1B4D3E]">
-                      {faq.question}
-                    </h3>
-                    <p className="mt-2 text-sm text-gray-600 line-clamp-2">
-                      {faq.answer}
-                    </p>
+          {FAQS.map((faq) => {
+            const faqId = faqIdFromHref(faq.href);
+            const item = faqId != null ? FAQ_ITEMS.find((f) => f.id === faqId) : undefined;
+            const question = zh && item ? item.questionZh : faq.question;
+            const answer = zh && item ? item.answerZh : faq.answer;
+            return (
+              <Reveal key={faq.href} y={12} className="flex">
+                <Link
+                  href={faq.href}
+                  className="group border border-gray-200 rounded-lg p-5 hover:border-[#7CB342] hover:shadow-md transition-all bg-[#FBFCFC] w-full"
+                >
+                  <div className="flex items-start gap-3">
+                    <Icons.helpCircle className="text-[#1B4D3E] mt-0.5 flex-shrink-0 h-5 w-5" />
+                    <div>
+                      <h3 className="font-semibold text-[#1A1A2E] leading-relaxed group-hover:text-[#1B4D3E]">
+                        {question}
+                      </h3>
+                      <p className="mt-2 text-sm text-gray-600 line-clamp-2">
+                        {answer}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            </Reveal>
-          ))}
+                </Link>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>
