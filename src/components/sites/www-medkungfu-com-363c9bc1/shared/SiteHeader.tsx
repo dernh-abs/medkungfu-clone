@@ -5,19 +5,19 @@
 import { useState } from "react";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 import { X } from "lucide-react";
 
-import { Icons } from "../shared/icons";
+import { Icons } from "./icons";
 
 interface NavLink {
   href: string;
   label: string;
-  active?: boolean;
 }
 
 const NAV_LINKS: NavLink[] = [
-  { href: "/", label: "Home", active: true },
+  { href: "/", label: "Home" },
   { href: "/projects", label: "Medical Projects" },
   { href: "/services", label: "Services" },
   { href: "/hospitals", label: "Hospitals" },
@@ -26,8 +26,14 @@ const NAV_LINKS: NavLink[] = [
   { href: "/faq", label: "FAQ" },
 ];
 
+function isActive(href: string, pathname: string) {
+  if (href === "/") return pathname === "/";
+  return pathname === href || pathname.startsWith(href + "/");
+}
+
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-[#1B4D3E] text-white shadow-md">
@@ -48,7 +54,7 @@ export function SiteHeader() {
               key={link.href}
               href={link.href}
               className={`text-sm font-medium transition-colors hover:text-[#7CB342] ${
-                link.active ? "text-[#7CB342]" : "text-white"
+                isActive(link.href, pathname) ? "text-[#7CB342]" : "text-white"
               }`}
             >
               {link.label}

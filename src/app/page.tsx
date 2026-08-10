@@ -1,4 +1,4 @@
-import { SiteHeader } from "@/components/sites/www-medkungfu-com-363c9bc1/root-8a5edab2/SiteHeader";
+import { SiteHeader } from "@/components/sites/www-medkungfu-com-363c9bc1/shared/SiteHeader";
 import { HeroSection } from "@/components/sites/www-medkungfu-com-363c9bc1/root-8a5edab2/HeroSection";
 import { CityStrip } from "@/components/sites/www-medkungfu-com-363c9bc1/root-8a5edab2/CityStrip";
 import { ServicesSection } from "@/components/sites/www-medkungfu-com-363c9bc1/root-8a5edab2/ServicesSection";
@@ -9,7 +9,7 @@ import { ServiceProcessSection } from "@/components/sites/www-medkungfu-com-363c
 import { PatientStoriesSection } from "@/components/sites/www-medkungfu-com-363c9bc1/root-8a5edab2/PatientStoriesSection";
 import { FeaturedFAQSection } from "@/components/sites/www-medkungfu-com-363c9bc1/root-8a5edab2/FeaturedFAQSection";
 import { CTASection } from "@/components/sites/www-medkungfu-com-363c9bc1/root-8a5edab2/CTASection";
-import { SiteFooter } from "@/components/sites/www-medkungfu-com-363c9bc1/root-8a5edab2/SiteFooter";
+import { SiteFooter } from "@/components/sites/www-medkungfu-com-363c9bc1/shared/SiteFooter";
 
 export default function Home() {
   return (

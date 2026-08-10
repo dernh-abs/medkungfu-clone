@@ -11,7 +11,7 @@ import {
   InstagramIcon,
   LinkedInIcon,
   TwitterIcon,
-} from "../shared/icons";
+} from "./icons";
 
 interface FooterLinkItem {
   href: string;
