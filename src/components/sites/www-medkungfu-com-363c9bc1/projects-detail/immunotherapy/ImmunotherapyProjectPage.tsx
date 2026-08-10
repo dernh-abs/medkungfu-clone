@@ -1,11 +1,12 @@
 // Shared data-driven template for MedKungFu immunotherapy project detail pages
 // (EBV-related DC vaccine therapy, BNCT, Autologous NK cell therapy).
 // Transcribed verbatim from the captured rendered.html for each slug.
-import type { ReactNode } from "react";
-
+// Bilingual: renders Chinese content when the site language is zh (via the
+// `zhConfig` prop); otherwise renders the English `config` unchanged.
+"use client";
 import Link from "next/link";
 
-import type { LucideIcon } from "lucide-react";
+import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
 import { Icons } from "../../shared/icons";
 import { Reveal } from "../../shared/Reveal";
@@ -18,8 +19,22 @@ export interface TextCard {
   description: string;
 }
 
+/** A paragraph made of plain text with an optional emphasized span. */
+export interface IntroParagraph {
+  /** Text before the emphasized span (leading/trailing spaces preserved). */
+  before: string;
+  /** Optional text rendered in a bold green span. */
+  highlight?: string;
+  /** Text after the emphasized span (leading/trailing spaces preserved). */
+  after?: string;
+}
+
+/** Icon name resolved via the shared `Icons` object (serializable across the
+ *  server→client boundary, unlike passing a component reference). */
+export type IconName = keyof typeof Icons;
+
 export interface IconCard extends TextCard {
-  icon: LucideIcon;
+  icon: IconName;
 }
 
 export interface ProcessStep {
@@ -83,7 +98,7 @@ export interface ImmunotherapyProjectConfig {
   ariaLabel: string;
   hero: HeroConfig;
   stickyNav: string[];
-  intro: { heading: string; paragraphs: ReactNode[] };
+  intro: { heading: string; paragraphs: IntroParagraph[] };
   advantages: {
     heading: string;
     subtitle?: string;
@@ -101,7 +116,7 @@ export interface ImmunotherapyProjectConfig {
     heading: string;
     subtitle: string;
     steps: ProcessStep[];
-    summaryNote?: ReactNode;
+    summaryNote?: IntroParagraph;
     bg?: string;
   };
   efficacy?: {
@@ -187,6 +202,14 @@ function StickyNav({ items }: { items: string[] }) {
     "Efficacy Data": "efficacy",
     Cases: "cases",
     "Why Choose Us": "why-choose-us",
+    // Chinese labels (zh locale)
+    简介: "intro",
+    核心优势: "advantages",
+    适应症: "indications",
+    治疗流程: "process",
+    疗效数据: "efficacy",
+    案例展示: "cases",
+    为什么选择我们: "why-choose-us",
   };
   return (
     <div className="bg-white shadow-sm sticky top-[72px] z-40">
@@ -212,7 +235,7 @@ function IntroSection({
   paragraphs,
 }: {
   heading: string;
-  paragraphs: ReactNode[];
+  paragraphs: IntroParagraph[];
 }) {
   return (
     <section id="intro" className="py-20">
@@ -223,7 +246,22 @@ function IntroSection({
           </h2>
           <div className="bg-white rounded-2xl p-8 md:p-12 shadow-sm">
             {paragraphs.map((p, i) => (
-              <div key={i}>{p}</div>
+              <p
+                key={i}
+                className={
+                  i === paragraphs.length - 1
+                    ? "text-lg text-gray-700 leading-relaxed"
+                    : "text-lg text-gray-700 leading-relaxed mb-6"
+                }
+              >
+                {p.before}
+                {p.highlight && (
+                  <span className="font-semibold text-[#1B4D3E]">
+                    {p.highlight}
+                  </span>
+                )}
+                {p.after}
+              </p>
             ))}
           </div>
         </div>
@@ -255,11 +293,13 @@ function AdvantagesSection({
           )}
         </Reveal>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {items.map((item) => (
+          {items.map((item) => {
+            const ItemIcon = Icons[item.icon];
+            return (
             <Reveal key={item.title} y={30} className="flex">
               <div className="bg-[#F5F7FA] rounded-2xl p-8 card-hover w-full">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#1B4D3E]/10 text-[#1B4D3E] mb-6">
-                  <item.icon className="h-10 w-10" aria-hidden="true" />
+                  <ItemIcon className="h-10 w-10" aria-hidden="true" />
                 </div>
                 <h3 className="text-xl font-bold text-[#1A1A2E] mb-4">
                   {item.title}
@@ -269,7 +309,8 @@ function AdvantagesSection({
                 </p>
               </div>
             </Reveal>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
@@ -424,7 +465,7 @@ function ProcessSection({
   heading: string;
   subtitle: string;
   steps: ProcessStep[];
-  summaryNote?: ReactNode;
+  summaryNote?: IntroParagraph;
   bg?: string;
 }) {
   return (
@@ -457,7 +498,15 @@ function ProcessSection({
           ))}
           {summaryNote && (
             <div className="mt-12 text-center">
-              <p className="text-gray-600">{summaryNote}</p>
+              <p className="text-gray-600">
+                {summaryNote.before}
+                {summaryNote.highlight && (
+                  <span className="font-semibold text-[#1B4D3E]">
+                    {summaryNote.highlight}
+                  </span>
+                )}
+                {summaryNote.after}
+              </p>
             </div>
           )}
         </div>
@@ -603,6 +652,8 @@ function CostSection({
   amount: string;
   bg?: string;
 }) {
+  const { lang } = useLanguage();
+  const isZh = lang === "zh";
   return (
     <section className={`py-20 ${bg ?? ""}`}>
       <div className="container-custom">
@@ -614,9 +665,13 @@ function CostSection({
           <div className="bg-[#1B4D3E] rounded-2xl p-8 text-white">
             <p className="text-lg mb-4">{label}</p>
             <p className="text-4xl md:text-5xl font-bold mb-4">{amount}</p>
-            <p className="text-white/70">Transparent pricing, no hidden fees</p>
+            <p className="text-white/70">
+              {isZh ? "价格透明，无隐藏费用" : "Transparent pricing, no hidden fees"}
+            </p>
             <p className="text-white/50 text-sm mt-4">
-              *Specific costs subject to final hospital assessment.
+              {isZh
+                ? "*具体费用以医院最终评估为准。"
+                : "*Specific costs subject to final hospital assessment."}
             </p>
           </div>
         </Reveal>
@@ -646,20 +701,23 @@ function WhyChooseUsSection({
           </h2>
         </Reveal>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {items.map((item) => (
+          {items.map((item) => {
+            const ItemIcon = Icons[item.icon];
+            return (
             <Reveal
               key={item.title}
               className={`${cardBg} rounded-xl p-6 flex items-start gap-4`}
             >
               <div className="p-2 bg-[#1B4D3E]/10 text-[#1B4D3E] rounded-lg flex-shrink-0">
-                <item.icon className="h-6 w-6" aria-hidden="true" />
+                <ItemIcon className="h-6 w-6" aria-hidden="true" />
               </div>
               <div>
                 <h3 className="font-bold text-[#1A1A2E] mb-1">{item.title}</h3>
                 <p className="text-sm text-gray-600">{item.description}</p>
               </div>
             </Reveal>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>
@@ -667,13 +725,14 @@ function WhyChooseUsSection({
 }
 
 function ImportantNotice({ text, bg }: { text: string; bg?: string }) {
+  const { lang } = useLanguage();
   return (
     <section className={`py-20 ${bg ?? ""}`}>
       <div className="container-custom">
         <div className="max-w-4xl mx-auto bg-amber-50 border border-amber-200 rounded-2xl p-8">
           <h3 className="text-xl font-bold text-amber-800 mb-4 flex items-center gap-2">
             <Icons.shield className="h-6 w-6" aria-hidden="true" />
-            Important Notice
+            {lang === "zh" ? "重要提示" : "Important Notice"}
           </h3>
           <p className="text-amber-700 leading-relaxed">{text}</p>
         </div>
@@ -737,80 +796,80 @@ function CtaSection({
 // ---------------------------------------------------------------------------
 export function ImmunotherapyProjectPage({
   config,
+  zhConfig,
 }: {
   config: ImmunotherapyProjectConfig;
+  /** Chinese variant of the same config. When the site language is zh, this
+   *  is rendered instead of the English config. The aria-label stays English
+   *  on both locales (matches the source site's zh pages). */
+  zhConfig?: ImmunotherapyProjectConfig;
 }) {
+  const { lang } = useLanguage();
+  const c = lang === "zh" && zhConfig ? zhConfig : config;
   return (
     <main
       role="main"
       aria-label={config.ariaLabel}
       className="min-h-screen bg-[#F5F7FA]"
     >
-      <Hero hero={config.hero} />
-      <StickyNav items={config.stickyNav} />
-      <IntroSection
-        heading={config.intro.heading}
-        paragraphs={config.intro.paragraphs}
-      />
+      <Hero hero={c.hero} />
+      <StickyNav items={c.stickyNav} />
+      <IntroSection heading={c.intro.heading} paragraphs={c.intro.paragraphs} />
       <AdvantagesSection
-        heading={config.advantages.heading}
-        subtitle={config.advantages.subtitle}
-        items={config.advantages.items}
-        bg={config.advantages.bg}
+        heading={c.advantages.heading}
+        subtitle={c.advantages.subtitle}
+        items={c.advantages.items}
+        bg={c.advantages.bg}
       />
-      {config.indications && <IndicationsSection config={config.indications} />}
-      {config.treatmentContent && (
+      {c.indications && <IndicationsSection config={c.indications} />}
+      {c.treatmentContent && (
         <TreatmentContentSection
-          heading={config.treatmentContent.heading}
-          subtitle={config.treatmentContent.subtitle}
-          items={config.treatmentContent.items}
-          bg={config.treatmentContent.bg}
+          heading={c.treatmentContent.heading}
+          subtitle={c.treatmentContent.subtitle}
+          items={c.treatmentContent.items}
+          bg={c.treatmentContent.bg}
         />
       )}
       <ProcessSection
-        heading={config.process.heading}
-        subtitle={config.process.subtitle}
-        steps={config.process.steps}
-        summaryNote={config.process.summaryNote}
-        bg={config.process.bg}
+        heading={c.process.heading}
+        subtitle={c.process.subtitle}
+        steps={c.process.steps}
+        summaryNote={c.process.summaryNote}
+        bg={c.process.bg}
       />
-      {config.efficacy && (
+      {c.efficacy && (
         <EfficacySection
-          heading={config.efficacy.heading}
-          subtitle={config.efficacy.subtitle}
-          stats={config.efficacy.stats}
-          safetyHeading={config.efficacy.safetyHeading}
-          table={config.efficacy.table}
-          footnote={config.efficacy.footnote}
-          bg={config.efficacy.bg}
+          heading={c.efficacy.heading}
+          subtitle={c.efficacy.subtitle}
+          stats={c.efficacy.stats}
+          safetyHeading={c.efficacy.safetyHeading}
+          table={c.efficacy.table}
+          footnote={c.efficacy.footnote}
+          bg={c.efficacy.bg}
         />
       )}
-      {config.cases && (
-        <CasesSection
-          heading={config.cases.heading}
-          items={config.cases.items}
-          bg={config.cases.bg}
-        />
+      {c.cases && (
+        <CasesSection heading={c.cases.heading} items={c.cases.items} bg={c.cases.bg} />
       )}
       <CostSection
-        heading={config.cost.heading}
-        intro={config.cost.intro}
-        label={config.cost.label}
-        amount={config.cost.amount}
-        bg={config.cost.bg}
+        heading={c.cost.heading}
+        intro={c.cost.intro}
+        label={c.cost.label}
+        amount={c.cost.amount}
+        bg={c.cost.bg}
       />
       <WhyChooseUsSection
-        heading={config.whyChooseUs.heading}
-        items={config.whyChooseUs.items}
-        variant={config.whyChooseUs.variant}
-        bg={config.whyChooseUs.bg}
+        heading={c.whyChooseUs.heading}
+        items={c.whyChooseUs.items}
+        variant={c.whyChooseUs.variant}
+        bg={c.whyChooseUs.bg}
       />
-      <ImportantNotice text={config.notice.text} bg={config.notice.bg} />
+      <ImportantNotice text={c.notice.text} bg={c.notice.bg} />
       <CtaSection
-        heading={config.cta.heading}
-        subtitle={config.cta.subtitle}
-        primary={config.cta.primary}
-        secondary={config.cta.secondary}
+        heading={c.cta.heading}
+        subtitle={c.cta.subtitle}
+        primary={c.cta.primary}
+        secondary={c.cta.secondary}
       />
     </main>
   );
