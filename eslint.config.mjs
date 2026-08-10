@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Research artifacts (captured DOMs, downloaded bundles) are not source.
+    "docs/**",
   ]),
 ]);
 
