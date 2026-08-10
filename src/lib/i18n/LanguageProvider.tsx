@@ -4,6 +4,7 @@
 // localStorage["medkungfu-language"], defaults to "en", ru falls back to en.
 import {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
@@ -46,8 +47,12 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<SupportedLanguage>("en");
 
   useEffect(() => {
+    // Read the persisted language once after hydration. This setState is
+    // intentionally synchronous-on-mount so SSR renders the default and the
+    // persisted choice applies right after — the standard i18n pattern.
     const stored = window.localStorage.getItem(STORAGE_KEY);
     if (stored === "zh" || stored === "ru" || stored === "en") {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- reading persisted language on mount
       setLangState(stored);
     }
     document.documentElement.lang =
@@ -58,27 +63,30 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     document.documentElement.lang = lang === "zh" ? "zh-CN" : lang;
   }, [lang]);
 
-  const setLang = (next: SupportedLanguage) => {
+  const setLang = useCallback((next: SupportedLanguage) => {
     setLangState(next);
     window.localStorage.setItem(STORAGE_KEY, next);
     document.documentElement.lang = next === "zh" ? "zh-CN" : next;
-  };
+  }, []);
 
-  const t: TranslateFn = (key: string) => {
-    // ru content is not shipped — fall back to en.
-    const activeLang: SupportedLanguage = lang === "ru" ? "en" : lang;
-    const dict = TRANSLATIONS[activeLang]?.translation ?? {};
-    const direct = lookup(dict, key);
-    if (direct !== undefined) return direct;
-    const nested = resolve(dict, key);
-    if (nested !== undefined) return nested;
-    // Fall back to English, then to the key itself.
-    const enDict = TRANSLATIONS.en?.translation ?? {};
-    const enValue = lookup(enDict, key) ?? resolve(enDict, key);
-    return enValue ?? key;
-  };
+  const t = useCallback<TranslateFn>(
+    (key: string) => {
+      // ru content is not shipped — fall back to en.
+      const activeLang: SupportedLanguage = lang === "ru" ? "en" : lang;
+      const dict = TRANSLATIONS[activeLang]?.translation ?? {};
+      const direct = lookup(dict, key);
+      if (direct !== undefined) return direct;
+      const nested = resolve(dict, key);
+      if (nested !== undefined) return nested;
+      // Fall back to English, then to the key itself.
+      const enDict = TRANSLATIONS.en?.translation ?? {};
+      const enValue = lookup(enDict, key) ?? resolve(enDict, key);
+      return enValue ?? key;
+    },
+    [lang]
+  );
 
-  const value = useMemo(() => ({ lang, setLang, t }), [lang]);
+  const value = useMemo(() => ({ lang, setLang, t }), [lang, setLang, t]);
 
   return (
     <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>
