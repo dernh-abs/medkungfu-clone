@@ -22,6 +22,14 @@ const heroStatsZh = [
   { value: "近20种", label: "覆盖疾病类型" },
   { value: "CAP+ISO", label: "国际双认证" },
 ];
+const heroStatsRu = [
+  { value: "7", label: "Операционные больницы" },
+  { value: "1500+", label: "Испытания элементов" },
+  { value: "~20 типов", label: "Покрытые типы заболеваний" },
+  { value: "CAP+ISO", label: "Международная двойная сертификация" },
+];
+
+
 
 const diagnosticPackages: {
   num: string;
@@ -157,6 +165,80 @@ const diagnosticPackagesZh: {
     duration: "参考周期：NGS 10–20 工作日；PD-L1 8 工作日；类器官芯片 15–20 工作日",
   },
 ];
+const diagnosticPackagesRu: {
+  num: string;
+  title: string;
+  subtitle: string;
+  items: string[];
+  warning: string;
+  duration: string;
+}[] = [
+  {
+    num: "01",
+    title: "Точный пакет диагностики опухоли",
+    subtitle:
+      "Случаи с аномалиями визуализации, патологическими подозрениями, рецидивами или сложной типизацией",
+    items: [
+      "Консультация по патологии: окрашивание + иммуногистохимия (качественный обзор патологии)",
+      "Тестирование 600+ гена NGS: молекулярная типизация опухоли, оценка прогноза",
+      "Интегрированный диагностический отчет: объединение результатов молекулярной диагностики с патологическими выводами",
+      "Рекомендации по направлению лечения: предоставление рекомендаций на основе результатов набора текста",
+    ],
+    warning:
+      "Результаты анализов не заменяют патологическую диагностику; окончательный диагноз требует сочетания визуализации и рекомендаций клинического врача.",
+    duration:
+      "Reference Duration: Pathology consultation 5-7 working days; NGS genetic testing 10-15 working days",
+  },
+  {
+    num: "02",
+    title: "Пакет оценки генетического риска опухолей",
+    subtitle:
+      "Лица или члены семьи с семейной историей, ранней историей опухоли или предыдущей историей опухоли",
+    items: [
+      "Тестирование гена генетической восприимчивости опухоли (900+ панель генов)",
+      "Охватывает гены генетической восприимчивости, связанные с гематологическими опухолями и твердыми опухолями (рекомендуется NCCN / CSCO)",
+      "Доклад об оценке генетического риска и план последующих рекомендаций",
+    ],
+    warning:
+      "Этот пакет предназначен для оценки генетического риска; отрицательные результаты не означают отсутствия риска; требуется дальнейшая оценка клиническими врачами.",
+    duration: "Reference Duration: 18-23 working days",
+  },
+  {
+    num: "03",
+    title: "Трудный пакет второго мнения по опухоли",
+    subtitle:
+      "Пациенты с неясными диагнозами из других больниц, которые хотят получить второе мнение",
+    items: [
+      "Обзор оригинальных патологических материалов (слайды, парафиновое встраивание, отчеты о патологии)",
+      "Пересмотр слайда патологии (HE + иммуногистохимия, дополнительные предметы, если оригинальное тестирование недостаточно)",
+      "Завершение молекулярного тестирования (дополнение NGS, FISH и т. д., если оригинальное тестирование неполное)",
+      "Многопрофильное экспертное заключение (интеграция всех результатов анализов, предоставление клинических рекомендаций)",
+    ],
+    warning:
+      "Письмо-обращение является только для справки и не заменяет формальный отчет о патологической диагностике; окончательный диагноз все еще требует подтверждения клинического врача.",
+    duration:
+      "Reference Duration: Issued in stages based on material completeness; please confirm specific timeline with staff",
+  },
+  {
+    num: "04",
+    title: "Предоперационный пакет молекулярного типирования",
+    subtitle:
+      "Пациенты с подтвержденными опухолями готовятся к выбору лекарств или разработке планов лечения",
+    items: [
+      "800+ ген NGS (кровь или ткань ctDNA): полный анализ опухоли и типизации",
+      "Тестирование MSI/TMB: оценка потенциальной пользы для иммунотерапии",
+      "Экспрессия белка PD-L1: ссылка на иммуноконтрольный препарат против антител",
+      "Цели лекарств, лекарственная устойчивость, анализ генов, связанных с ингибитором PARP",
+      "Тест на чувствительность к органоидным чипам (необязательно): персонализированная ссылка на лекарства",
+    ],
+    warning:
+      "Результаты испытаний обеспечивают молекулярную основу для принятия решений о лечении; окончательный план лечения требует подтверждения лечащим врачом.",
+    duration:
+      "Reference Duration: NGS 10-20 working days; PD-L1 8 working days; organoid chip 15-20 working days",
+  },
+];
+
+
 
 const pricingRows: { item: string; price: string }[] = [
   { item: "Pathology Consultation (Standard)", price: "$1,800" },
@@ -189,6 +271,23 @@ const pricingRowsZh: { item: string; price: string }[] = [
   { item: "肿瘤转录组测序（RNA-seq）", price: "$1,700" },
   { item: "类器官芯片药敏测试", price: "$6,400" },
 ];
+const pricingRowsRu: { item: string; price: string }[] = [
+  { item: "Консультация по патологии (стандартная)", price: "$1,800" },
+  { item: "Консультация по патологии (экспертный уровень)", price: "$2,300" },
+  { item: "Пан-рак 600+ Генная панель (Тиссу)", price: "$2,500" },
+  { item: "Пан-рак 800+ Генная панель (Тиссу)", price: "$3,900" },
+  { item: "Пан-рак 800+ Генная панель (ктДНК крови)", price: "$4,300" },
+  { item: "321 Gene Panel (Тиссум)", price: "$2,700" },
+  { item: "321 Gene Panel (ктДНК крови)", price: "$3,100" },
+  { item: "Тестирование экспрессии белка PD-L1", price: "$1,000" },
+  { item: "Тестирование РНК на слияние опухолей/перестройку", price: "$2,500" },
+  { item: "Секвенирование всего экзома (WES, Tissue)", price: "$6,000" },
+  { item: "Гематологическое глубокое секвенирование опухолей (339 генов)", price: "$1,900" },
+  { item: "Секвенирование транскриптома опухоли (RNA-seq)", price: "$1,700" },
+  { item: "Органоидный чип тест на чувствительность", price: "$6,400" },
+];
+
+
 
 const capabilities: {
   icon: LucideIcon;
@@ -251,6 +350,38 @@ const capabilitiesZh: {
       "类器官芯片平台可对肿瘤组织进行个体化药敏测试，模拟多种治疗方案的实际疗效，为治疗决策提供更多个体化参考。",
   },
 ];
+const capabilitiesRu: {
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}[] = [
+  {
+    icon: Icons.award,
+    title: "CAP + ISO15189 Международная двойная сертификация",
+    description:
+      "Двойная сертификация Колледжем американских патологов (CAP) и Международной организацией по стандартизации (ISO15189), одним из самых высоких стандартов качества лабораторий во всем мире. Каждый элемент тестирования проходит строгую внутреннюю проверку и многодисциплинарную практику для обеспечения надежности результатов.",
+  },
+  {
+    icon: Icons.testTube,
+    title: "1500+ тестовых предметов, охватывающих гематологические и твердые опухоли",
+    description:
+      "Охватывает гематологические опухоли (лимфома, множественная миелома, лейкемия и т. д.) и почти 20 типов солидных опухолей, от консультации по патологии до полного секвенирования экзомов, доступных в виде отдельных предметов или пакетов.",
+  },
+  {
+    icon: Icons.globe,
+    title: "Поддержка удаленной почтовой службы Specimen",
+    description:
+      "Для иностранных пациентов, не имеющих возможности посетить лично, MedKungfu может координировать рассылку образцов с парафином или слайдов патологии для тестирования; нет необходимости ехать в Пекин лично.",
+  },
+  {
+    icon: Icons.microscope,
+    title: "Органоидная чип-платформа (опциональное улучшение)",
+    description:
+      "Платформа органоидных чипов может выполнять персонализированное тестирование чувствительности к лекарственным средствам на опухолевых тканях, имитируя фактическую эффективность различных планов лечения, предоставляя более персонализированные рекомендации для решений по лечению.",
+  },
+];
+
+
 
 const suitableItems = [
   "Imaging shows mass or nodule, nature not yet clear, needs further typing",
@@ -269,6 +400,16 @@ const suitableItemsZh = [
   "有肿瘤家族史，希望了解个人遗传易感风险并制定随访计划",
   "在其他机构诊断不明确，希望得到专业精准诊断中心的独立第二意见",
 ];
+const suitableItemsRu = [
+  "Изображение показывает массу или узелок, природа еще не ясна, нуждается в дальнейшей типизации.",
+  "Отчет о внешней патологии больницы указывает на высококачественный или сложный подтип, запрашивая мнение профессионального обзора.",
+  "Подтвержденная злокачественная опухоль, желающая понять цели и связанные с иммунотерапией биомаркеры",
+  "Рецидив или лекарственная устойчивость после лечения первой линии, необходимо переоценить молекулярную типизацию для корректировки плана.",
+  "Семейная история опухолей, желающие понять личный генетический риск восприимчивости и разработать план наблюдения",
+  "Неясная диагностика в других учреждениях, получение независимого второго мнения от профессионального центра точной диагностики",
+];
+
+
 
 const processSteps: {
   num: string;
@@ -355,6 +496,50 @@ const processStepsZh: {
     duration: "报告出具后",
   },
 ];
+const processStepsRu: {
+  num: string;
+  title: string;
+  description: string;
+  duration: string;
+}[] = [
+  {
+    num: "1",
+    title: "Организация данных и предварительная оценка",
+    description:
+      "Подавать медицинские записи, отчеты о патологии и данные визуализации; MedKungfu помогает в организации и передаче в диагностический центр для предварительной оценки для подтверждения подходящей комбинации пакетов.",
+    duration: "3-5 рабочих дней",
+  },
+  {
+    num: "2",
+    title: "Экспертное подтверждение плана",
+    description:
+      "Специалисты диагностического центра проводят дистанционную консультацию для подтверждения конкретных комбинаций тестов и требований к образцам, предоставляя пациентам необходимый список материалов.",
+    duration: "5-7 рабочих дней",
+  },
+  {
+    num: "3",
+    title: "Почтовые рассылки (встраивание парафинов / слайды)",
+    description:
+      "Для иностранных пациентов, не имеющих возможности посетить их лично, доступна международная рассылка образцов с парафином или слайдов патологии; MedKungfu помогает подтвердить требования к рассылке и отслеживанию.",
+    duration: "Зависит от логистики",
+  },
+  {
+    num: "4",
+    title: "Лабораторные испытания и отчет",
+    description:
+      "Диагностический центр лаборатории получает образцы и проводит тестирование, выдавая молекулярно-диагностические отчеты в рамках цикла. Если необходимы дополнительные образцы или качество не соответствует стандартам, уведомление будет предоставлено немедленно.",
+    duration: "Зависит от тестовых элементов",
+  },
+  {
+    num: "5",
+    title: "Интерпретация доклада и последующие меры",
+    description:
+      "Специалисты предоставляют клинические рекомендации на основе результатов диагностики; MedKungfu помогает с переводом и обобщением и координирует планы последующего наблюдения.",
+    duration: "После выпуска доклада",
+  },
+];
+
+
 
 const whyUs: { icon: LucideIcon; title: string; description: string }[] = [
   {
@@ -408,18 +593,47 @@ const whyUsZh: { icon: LucideIcon; title: string; description: string }[] = [
       "如患者希望进一步就诊（CAR-T治疗、神经外科、骨髓移植等），可协助安排内部绿色通道转介。",
   },
 ];
+const whyUsRu: { icon: LucideIcon; title: string; description: string }[] = [
+  {
+    icon: Icons.fileText,
+    title: "Организация медицинской документации и перевод",
+    description:
+      "Двуязычные профессиональные координаторы помогают в организации медицинских материалов, обеспечивая безбарьерную связь между пациентами и диагностическими группами.",
+  },
+  {
+    icon: Icons.globe,
+    title: "Координация рассылки Specimen",
+    description:
+      "Оказывает помощь в подтверждении международных требований к почтовой рассылке и стандартов контроля качества, координируя с местными больницами процедуры выписки слайдов/парафинов.",
+  },
+  {
+    icon: Icons.checkCircle,
+    title: "Китайский интерпретатор",
+    description:
+      "Диагностические отчеты в основном выпускаются на китайском языке; MedKungfu может организовать интерпретацию отчетов на уровне специалистов, чтобы пациенты полностью понимали результаты.",
+  },
+  {
+    icon: Icons.arrowRight,
+    title: "Последующее лечение Реферал",
+    description:
+      "Если пациенты хотят продолжить лечение (CAR-T, нейрохирургия, трансплантация костного мозга и т.д.), можно организовать внутренние направления по зеленому каналу.",
+  },
+];
+
+
 
 export default function PrecisionOncologyDiagnosticsContent() {
   const { lang } = useLanguage();
   const isZh = lang === "zh";
+  const isRu = lang === "ru";
 
-  const stats = isZh ? heroStatsZh : heroStats;
-  const packages = isZh ? diagnosticPackagesZh : diagnosticPackages;
-  const rows = isZh ? pricingRowsZh : pricingRows;
-  const caps = isZh ? capabilitiesZh : capabilities;
-  const suitable = isZh ? suitableItemsZh : suitableItems;
-  const steps = isZh ? processStepsZh : processSteps;
-  const reasons = isZh ? whyUsZh : whyUs;
+  const stats = isZh ? heroStatsZh : isRu ? heroStatsRu : heroStats;
+  const packages = isZh ? diagnosticPackagesZh : isRu ? diagnosticPackagesRu : diagnosticPackages;
+  const rows = isZh ? pricingRowsZh : isRu ? pricingRowsRu : pricingRows;
+  const caps = isZh ? capabilitiesZh : isRu ? capabilitiesRu : capabilities;
+  const suitable = isZh ? suitableItemsZh : isRu ? suitableItemsRu : suitableItems;
+  const steps = isZh ? processStepsZh : isRu ? processStepsRu : processSteps;
+  const reasons = isZh ? whyUsZh : isRu ? whyUsRu : whyUs;
 
   return (
     <main
@@ -439,22 +653,22 @@ export default function PrecisionOncologyDiagnosticsContent() {
               MedKungfu HEALTHCARE · CONCIERGE
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              {isZh ? "精准肿瘤诊断服务" : "Precision Oncology Diagnostics"}
+              {isZh ? "精准肿瘤诊断服务" : isRu ? "Точная онкология диагностика" : "Precision Oncology Diagnostics"}
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-gray-200">
               {isZh
                 ? "肿瘤分子诊断 · 遗传风险评估 · 精准分型与用药指导"
-                : "Tumor Molecular Diagnosis · Genetic Risk Assessment · Precision Typing & Medication Guidance"}
+                : isRu ? "Молекулярная диагностика опухоли · Оценка генетического риска · Точный типирование и руководство по лекарствам" : "Tumor Molecular Diagnosis · Genetic Risk Assessment · Precision Typing & Medication Guidance"}
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm md:text-base mb-12">
               <span className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full">
-                {isZh ? "MICM-P整合诊断" : "MICM-P Integrated Diagnosis"}
+                {isZh ? "MICM-P整合诊断" : isRu ? "MICM-P интегрированная диагностика" : "MICM-P Integrated Diagnosis"}
               </span>
               <span className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full">
-                {isZh ? "CAP + ISO15189双认证" : "CAP + ISO15189 Dual Certification"}
+                {isZh ? "CAP + ISO15189双认证" : isRu ? "CAP + ISO15189 Двойная сертификация" : "CAP + ISO15189 Dual Certification"}
               </span>
               <span className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full">
-                {isZh ? "1500+检测项目" : "1500+ Testing Items"}
+                {isZh ? "1500+检测项目" : isRu ? "1500+ тестовых предметов" : "1500+ Testing Items"}
               </span>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
@@ -481,23 +695,23 @@ export default function PrecisionOncologyDiagnosticsContent() {
         <div className="container-custom">
           <Reveal y={20} className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-6 text-center">
-              {isZh ? "关于高博诊断中心" : "About Gaobo Diagnostic Center"}
+              {isZh ? "关于高博诊断中心" : isRu ? "Диагностический центр Gaobo" : "About Gaobo Diagnostic Center"}
             </h2>
             <div className="bg-white rounded-2xl p-8 shadow-lg">
               <p className="text-gray-600 leading-relaxed mb-4">
                 {isZh
                   ? "我们的合作诊断中心是中国领先的临床导向型肿瘤精准诊断机构，采用国际标准的MICM-P整合诊断模式（形态学、免疫学、细胞遗传学、分子生物学、病理学），专注于血液恶性肿瘤及复杂实体肿瘤的精准诊断、治疗评估与转化研究。"
-                  : "Our partner diagnostic center is China's leading clinically-oriented precision oncology diagnostics institution, adopting the international standard MICM-P integrated diagnosis model (Morphology, Immunology, Cytogenetics, Molecular Biology, Pathology), focusing on precision diagnosis, treatment evaluation and translational research for hematologic malignancies and complex solid tumors."}
+                  : isRu ? "Наш партнерский диагностический центр является ведущим клинически ориентированным учреждением точной онкологии в Китае, приняв международную стандартную модель интегрированной диагностики MICM-P (Морфология, иммунология, цитогенетика, молекулярная биология, патология), уделяя особое внимание точной диагностике, оценке лечения и трансляционным исследованиям гематологических злокачественных новообразований и сложных солидных опухолей." : "Our partner diagnostic center is China's leading clinically-oriented precision oncology diagnostics institution, adopting the international standard MICM-P integrated diagnosis model (Morphology, Immunology, Cytogenetics, Molecular Biology, Pathology), focusing on precision diagnosis, treatment evaluation and translational research for hematologic malignancies and complex solid tumors."}
               </p>
               <p className="text-gray-600 leading-relaxed mb-4">
                 {isZh
                   ? "诊断中心覆盖北京、上海、广东三大区域，拥有多家参考实验室及中心实验室，实验室总面积超7000平方米。核心团队均拥有超30年检验与诊断研究经验，每年开展约30个研发项目，拥有十余项实用新型专利。"
-                  : "The diagnostic center covers three major regions: Beijing, Shanghai, and Guangdong, with multiple reference laboratories and central laboratories, totaling over 7,000 square meters. The core team has over 30 years of testing and diagnostic research experience, conducting approximately 30 R&D projects annually, with more than ten utility model patents."}
+                  : isRu ? "Диагностический центр охватывает три основных региона: Пекин, Шанхай и Гуандун, с несколькими справочными лабораториями и центральными лабораториями, общей площадью более 7000 квадратных метров. Основная команда имеет более чем 30-летний опыт тестирования и диагностических исследований, проводя около 30 научно-исследовательских проектов ежегодно, с более чем десятью патентами на полезные модели." : "The diagnostic center covers three major regions: Beijing, Shanghai, and Guangdong, with multiple reference laboratories and central laboratories, totaling over 7,000 square meters. The core team has over 30 years of testing and diagnostic research experience, conducting approximately 30 R&D projects annually, with more than ten utility model patents."}
               </p>
               <p className="text-gray-600 leading-relaxed">
                 {isZh
                   ? "对于无法亲自到院的海外患者，诊断中心支持远程服务：可通过邮寄石蜡包埋或病理切片的方式提交病理会诊及基因检测申请。"
-                  : "For overseas patients unable to visit in person, the diagnostic center supports remote services: pathology consultation and genetic testing applications can be submitted by mailing paraffin-embedded samples or pathology slides."}
+                  : isRu ? "Для иностранных пациентов, не имеющих возможности посетить их лично, диагностический центр поддерживает удаленные услуги: консультации по патологии и генетические тесты могут быть представлены путем отправки образцов с парафином или слайдов патологии." : "For overseas patients unable to visit in person, the diagnostic center supports remote services: pathology consultation and genetic testing applications can be submitted by mailing paraffin-embedded samples or pathology slides."}
               </p>
             </div>
           </Reveal>
@@ -515,12 +729,12 @@ export default function PrecisionOncologyDiagnosticsContent() {
               <Icons.alertCircle className="text-yellow-600 mr-4 flex-shrink-0 mt-1 h-6 w-6" />
               <div>
                 <h3 className="font-bold text-yellow-800 mb-2">
-                  {isZh ? "重要说明" : "Important Notice"}
+                  {isZh ? "重要说明" : isRu ? "Важное уведомление" : "Important Notice"}
                 </h3>
                 <p className="text-yellow-700 text-sm leading-relaxed">
                   {isZh
                     ? "本诊断服务用于肿瘤风险评估和精准诊断，不替代临床诊断。所有检测结果均需结合病理、影像及临床医生综合评估，方可作为诊断依据。阴性结果不等于无风险。"
-                    : "This diagnostic service is for tumor risk assessment and precision diagnosis, not replacing clinical diagnosis. All test results must be combined with pathology, imaging and comprehensive clinical doctor evaluation to serve as diagnostic basis. Negative results do not mean no risk."}
+                    : isRu ? "Данная диагностическая услуга предназначена для оценки риска развития опухоли и точной диагностики, а не для замены клинической диагностики. Все результаты теста должны сочетаться с патологией, визуализацией и комплексной клинической оценкой врача, чтобы служить диагностической основой. Отрицательные результаты не означают отсутствия риска." : "This diagnostic service is for tumor risk assessment and precision diagnosis, not replacing clinical diagnosis. All test results must be combined with pathology, imaging and comprehensive clinical doctor evaluation to serve as diagnostic basis. Negative results do not mean no risk."}
                 </p>
               </div>
             </div>
@@ -533,13 +747,13 @@ export default function PrecisionOncologyDiagnosticsContent() {
         <div className="container-custom">
           <Reveal y={20}>
             <h2 className="text-3xl md:text-4xl font-bold text-center text-[#1A1A2E] mb-4">
-              {isZh ? "四大精准诊断套餐" : "Four Precision Diagnostic Packages"}
+              {isZh ? "四大精准诊断套餐" : isRu ? "Четыре точных диагностических пакета" : "Four Precision Diagnostic Packages"}
             </h2>
           </Reveal>
           <p className="text-center text-gray-600 mb-12 max-w-3xl mx-auto">
             {isZh
               ? "根据患者就诊路径与现有标本情况，诊断中心提供定制化精准诊断方案。以下四种套餐分别对应不同阶段的诊断需求，可单项选择或组合使用。"
-              : "Based on patient visit pathways and existing specimen conditions, the diagnostic center provides customized precision diagnostic plans. The following four packages correspond to different stages of diagnostic needs and can be selected individually or used in combination."}
+              : isRu ? "На основе путей посещения пациента и существующих условий образца диагностический центр предоставляет индивидуальные планы точной диагностики. Следующие четыре упаковки соответствуют различным этапам диагностических потребностей и могут быть выбраны индивидуально или использованы в комбинации." : "Based on patient visit pathways and existing specimen conditions, the diagnostic center provides customized precision diagnostic plans. The following four packages correspond to different stages of diagnostic needs and can be selected individually or used in combination."}
           </p>
           <div className="space-y-8">
             {packages.map((pkg) => (
@@ -592,22 +806,22 @@ export default function PrecisionOncologyDiagnosticsContent() {
             <h2 className="text-3xl md:text-4xl font-bold text-center text-[#1A1A2E] mb-4">
               {isZh
                 ? "主要检测项目参考价格"
-                : "Reference Prices for Major Testing Items"}
+                : isRu ? "Справочные цены на основные тестовые предметы" : "Reference Prices for Major Testing Items"}
             </h2>
           </Reveal>
           <p className="text-center text-gray-600 mb-12 max-w-3xl mx-auto">
             {isZh
               ? "以下为主要单项检测的参考价格（美元），实际费用因样本类型及组合方案有所差异。FFPE石蜡块样本另加基础处理费 $310 + 每块 $20。套餐价格请联系咨询。"
-              : "The following are reference prices for major individual testing items (USD). Actual costs vary depending on sample type and combination plans. FFPE paraffin block samples incur an additional basic processing fee of $310 + $20 per block. Please contact us for package pricing."}
+              : isRu ? "Ниже приведены справочные цены на основные отдельные элементы тестирования (USD). Фактические затраты варьируются в зависимости от типа выборки и планов комбинации. FFPE-парафиновые пробы несут дополнительную базовую плату за обработку в размере $310 + $20 за блок. Пожалуйста, свяжитесь с нами для получения пакета цен." : "The following are reference prices for major individual testing items (USD). Actual costs vary depending on sample type and combination plans. FFPE paraffin block samples incur an additional basic processing fee of $310 + $20 per block. Please contact us for package pricing."}
           </p>
           <div className="max-w-4xl mx-auto">
             <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
               <div className="grid grid-cols-2 bg-[#1B4D3E] text-white">
                 <div className="p-6 font-bold">
-                  {isZh ? "检测项目" : "Testing Item"}
+                  {isZh ? "检测项目" : isRu ? "Испытание элемента" : "Testing Item"}
                 </div>
                 <div className="p-6 font-bold text-center">
-                  {isZh ? "参考价格（USD）" : "Reference Price (USD)"}
+                  {isZh ? "参考价格（USD）" : isRu ? "Цена ссылки (USD)" : "Reference Price (USD)"}
                 </div>
               </div>
               {rows.map((row, i) => (
@@ -631,7 +845,7 @@ export default function PrecisionOncologyDiagnosticsContent() {
             <p className="text-sm text-gray-500 mt-6 text-center">
               {isZh
                 ? "* 以上价格以美元计价，仅供参考；最终报价以实验室确认为准。MedKungfu可协助安排报价及付款流程。"
-                : "* The above prices are in USD for reference only; final quotes are subject to laboratory confirmation. MedKungfu can assist with quote arrangement and payment processes."}
+                : isRu ? "* Вышеуказанные цены указаны только в долларах США; окончательные котировки подлежат лабораторному подтверждению. MedKungfu может помочь в организации котировок и процессах оплаты." : "* The above prices are in USD for reference only; final quotes are subject to laboratory confirmation. MedKungfu can assist with quote arrangement and payment processes."}
             </p>
           </div>
         </div>
@@ -642,13 +856,13 @@ export default function PrecisionOncologyDiagnosticsContent() {
         <div className="container-custom">
           <Reveal y={20}>
             <h2 className="text-3xl md:text-4xl font-bold text-center text-[#1A1A2E] mb-4">
-              {isZh ? "技术能力与资质" : "Technical Capabilities & Qualifications"}
+              {isZh ? "技术能力与资质" : isRu ? "Технические возможности и квалификации" : "Technical Capabilities & Qualifications"}
             </h2>
           </Reveal>
           <p className="text-center text-gray-600 mb-12 max-w-3xl mx-auto">
             {isZh
               ? "MICM-P整合诊断是本次合作诊断中心的核心方法论：形态学（M）+ 免疫学（I）+ 细胞遗传学（C）+ 分子生物学（M）+ 病理学（P）各维度协同诊断，而非单一检测指标。这一模式可有效减少误诊漏诊风险，并为病情复杂或少见的患者提供更准确的诊断方向。"
-              : "MICM-P integrated diagnosis is the core methodology of this partner diagnostic center: Morphology (M) + Immunology (I) + Cytogenetics (C) + Molecular Biology (M) + Pathology (P) collaborative diagnosis across dimensions, rather than single testing indicators. This model can effectively reduce the risk of misdiagnosis and missed diagnosis, and provide more accurate diagnostic directions for patients with complex or rare conditions."}
+              : isRu ? "Интегрированная диагностика MICM-P является основной методологией этого партнерского диагностического центра: морфология (M) + иммунология (I) + цитогенетика (C) + молекулярная биология (M) + патология (P) совместная диагностика по всем измерениям, а не отдельные показатели тестирования. Эта модель может эффективно снизить риск неправильной диагностики и пропущенной диагностики, а также обеспечить более точные диагностические направления для пациентов со сложными или редкими состояниями." : "MICM-P integrated diagnosis is the core methodology of this partner diagnostic center: Morphology (M) + Immunology (I) + Cytogenetics (C) + Molecular Biology (M) + Pathology (P) collaborative diagnosis across dimensions, rather than single testing indicators. This model can effectively reduce the risk of misdiagnosis and missed diagnosis, and provide more accurate diagnostic directions for patients with complex or rare conditions."}
           </p>
           <div className="grid md:grid-cols-2 gap-8">
             {caps.map((cap, i) => (
@@ -686,7 +900,7 @@ export default function PrecisionOncologyDiagnosticsContent() {
         <div className="container-custom">
           <Reveal y={20}>
             <h2 className="text-3xl md:text-4xl font-bold text-center text-[#1A1A2E] mb-12">
-              {isZh ? "适合就诊的典型情境" : "Typical Scenarios Suitable for Consultation"}
+              {isZh ? "适合就诊的典型情境" : isRu ? "Типичные сценарии, подходящие для консультации" : "Typical Scenarios Suitable for Consultation"}
             </h2>
           </Reveal>
           <div className="max-w-4xl mx-auto">
@@ -713,13 +927,13 @@ export default function PrecisionOncologyDiagnosticsContent() {
             <h2 className="text-3xl md:text-4xl font-bold text-center text-[#1A1A2E] mb-4">
               {isZh
                 ? "服务流程 · 国际患者专属通道"
-                : "Service Process · International Patient Exclusive Channel"}
+                : isRu ? "Международный канал для пациентов International Patient Exclusive Channel" : "Service Process · International Patient Exclusive Channel"}
             </h2>
           </Reveal>
           <p className="text-center text-gray-600 mb-12 max-w-3xl mx-auto">
             {isZh
               ? "MedKungfu为每位患者提供从材料整理到报告解读的全程协调服务。"
-              : "MedKungfu provides comprehensive coordination services for each patient from material organization to report interpretation."}
+              : isRu ? "MedKungfu предоставляет комплексные координационные услуги для каждого пациента из материальной организации." : "MedKungfu provides comprehensive coordination services for each patient from material organization to report interpretation."}
           </p>
           <div className="space-y-6">
             {steps.map((step) => (
@@ -754,7 +968,7 @@ export default function PrecisionOncologyDiagnosticsContent() {
         <div className="container-custom">
           <Reveal y={20}>
             <h2 className="text-3xl md:text-4xl font-bold text-center text-[#1A1A2E] mb-12">
-              {isZh ? "为什么选择 MedKungfu？" : "Why Choose MedKungfu?"}
+              {isZh ? "为什么选择 MedKungfu？" : isRu ? "Почему стоит выбрать MedKungfu?" : "Why Choose MedKungfu?"}
             </h2>
           </Reveal>
           <div className="grid md:grid-cols-2 gap-8">
@@ -780,17 +994,17 @@ export default function PrecisionOncologyDiagnosticsContent() {
         <div className="container-custom">
           <Reveal y={30} className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              {isZh ? "联系我们 · 一小时内回复" : "Contact Us · Reply Within One Hour"}
+              {isZh ? "联系我们 · 一小时内回复" : isRu ? "Свяжитесь с нами · Ответьте в течение одного часа" : "Contact Us · Reply Within One Hour"}
             </h2>
             <p className="text-xl mb-4 text-gray-200">
               {isZh
                 ? "开启您的精准肿瘤诊断之旅"
-                : "Begin Your Precision Oncology Diagnostics Journey"}
+                : isRu ? "Начните свое путешествие в точной онкологии" : "Begin Your Precision Oncology Diagnostics Journey"}
             </p>
             <p className="text-gray-300 mb-8">
               {isZh
                 ? "联系我们进行免费初步评估，提交病历及影像资料，我们将安排专家进行远程预筛。"
-                : "Contact us for a free preliminary assessment. Submit your medical records and imaging data, and we will arrange for specialists to conduct remote pre-screening."}
+                : isRu ? "Свяжитесь с нами для бесплатной предварительной оценки. Отправьте свои медицинские записи и данные визуализации, и мы организуем для специалистов проведение удаленного предварительного скрининга." : "Contact us for a free preliminary assessment. Submit your medical records and imaging data, and we will arrange for specialists to conduct remote pre-screening."}
             </p>
             <a
               href="mailto:contact@medkungfu.com"

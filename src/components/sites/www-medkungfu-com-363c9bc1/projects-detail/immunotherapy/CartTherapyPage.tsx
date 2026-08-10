@@ -23,6 +23,14 @@ const HERO_PILLS_ZH = [
   "2-4周极速排期",
   "NMPA批准产品",
 ];
+const HERO_PILLS_RU = [
+  "6000+ клинических инфузий",
+  "96,4% отклика",
+  "2-4 недельный график",
+  "Утвержденные продукты NMPA",
+];
+
+
 
 const INDICATIONS = [
   "Multiple Myeloma",
@@ -39,6 +47,15 @@ const INDICATIONS_ZH = [
   "套细胞淋巴瘤",
   "其他高级别淋巴瘤",
 ];
+const INDICATIONS_RU = [
+  "Множественная миелома",
+  "Диффузная большая B-клеточная лимфома",
+  "Острый лимфобластный лейкоз",
+  "Лимфоциты мантийной клетки",
+  "Другие высококлассные лимфомы",
+];
+
+
 
 const TREATMENT_CONTENT = [
   "Pre-treatment evaluation – PET-MR, bone marrow biopsy, blood tests, T-cell function testing",
@@ -57,6 +74,16 @@ const TREATMENT_CONTENT_ZH = [
   "CAR-T细胞回输 – 一日静脉输注",
   "住院监测与支持治疗 – 处理细胞因子释放综合征、神经毒性等副作用",
 ];
+const TREATMENT_CONTENT_RU = [
+  "Предварительная оценка лечения - ПЭТ-MR, биопсия костного мозга, анализы крови, тестирование функции Т-клеток",
+  "Сбор Т-клеток – сбор Т-клеток пациента через лейкаферез",
+  "CAR-T клеточный препарат – генетическая модификация и расширение в сертифицированной GMP лаборатории",
+  "Лимфоциты истощение - легкая химиотерапия в подготовке к инфузии",
+  "CAR-T клеточная инфузия – однодневная внутривенная инфузия",
+  "Мониторинг и поддерживающая помощь в больнице - управление синдромом высвобождения цитокинов, нейротоксичностью и другими побочными эффектами",
+];
+
+
 
 interface Advantage {
   icon: typeof Icons.activity;
@@ -141,6 +168,46 @@ const ADVANTAGES_ZH: Advantage[] = [
       "截至2026年，合作医院已完成超过4,000例输注，积累了大量针对不同分型、不同病程患者的真实世界数据。医疗团队在处理细胞因子释放综合征（CRS）等常见副作用方面经验丰富。",
   },
 ];
+const ADVANTAGES_RU: Advantage[] = [
+  {
+    icon: Icons.trendingUp,
+    title: "Клинические результаты мирового класса",
+    description:
+      "Множественная миелома ORR до 96,4%, высокосортная лимфома 83%, ВСЕ полная ремиссия 95,1%. Китайские клинические данные всесторонне выходят на международный уровень.",
+  },
+  {
+    icon: Icons.shield,
+    title: "Значительное преимущество в затратах",
+    description:
+      "Общая стоимость лечения составляет около 200 000-250 000 долларов США (включая оценку, подготовку клеток, госпитализацию и основные лекарства), что намного ниже, чем эквивалентное лечение в Европе / США (обычно более 500 000 долларов США). Экономия покрывает рейсы туда и обратно, полный перевод и проживание.",
+  },
+  {
+    icon: Icons.clock,
+    title: "Минимальное время ожидания",
+    description:
+      "Зачисление через 2-4 недели, приоритетное размещение через зеленый канал MedKungfu. Аналогичные процедуры в Европе и США обычно требуют 6-12 месяцев ожидания. Для неотложных пациентов время ожидания часто означает отсутствие оптимального окна лечения.",
+  },
+  {
+    icon: Icons.globe,
+    title: "Комплексные международные услуги для пациентов",
+    description:
+      "В больницах-партнерах есть специализированные англоязычные международные отделения и удобные международные каналы для пациентов, с выделенным персоналом для процедур приема и осмотра, обеспечивающих безбарьерную медицинскую помощь для иностранных пациентов.",
+  },
+  {
+    icon: Icons.microscope,
+    title: "Гибкий доступ к клиническим испытаниям",
+    description:
+      "Китай является одной из стран с наибольшим количеством клинических испытаний CAR-T во всем мире, с более гибким охватом показаний. Для пациентов, которые считаются «трудными в лечении» или не реагируют на стандартные методы лечения в других странах, каналы клинических испытаний в Китае предоставляют дополнительные возможности.",
+  },
+  {
+    icon: Icons.users,
+    title: "Большой реальный мировой опыт",
+    description:
+      "По состоянию на 2026 год партнерские больницы завершили более 4000 инфузий, аккумулируя обширные реальные данные для пациентов с различными подтипами и стадиями заболевания. Медицинская команда имеет опыт в управлении общими побочными эффектами, такими как синдром высвобождения цитокинов (CRS).",
+  },
+];
+
+
 
 interface ProcessStep {
   title: string;
@@ -225,6 +292,46 @@ const PROCESS_STEPS_ZH: ProcessStep[] = [
       "住院密切监测，重点管理细胞因子释放综合征（CRS）和免疫效应细胞相关神经毒性（ICANS）等副作用。医疗团队24小时待命，支持治疗完善。病情稳定后可出院，MedKungfu持续协调3–24个月远程随访。",
   },
 ];
+const PROCESS_STEPS_RU: ProcessStep[] = [
+  {
+    title: "Предварительная оценка",
+    duration: "2-3 дня",
+    description:
+      "ПЭТ-МР, биопсия костного мозга, анализы крови, тестирование функции Т-клеток. Комплексная оценка стадии заболевания, функции органов и показаний к лечению CAR-T для подтверждения права пациента на лечение. MedKungfu обеспечивает двуязычное сопровождение на протяжении всего экзамена, помогая с экзаменационными назначениями и устным переводом результатов.",
+  },
+  {
+    title: "Коллекция T-Cell",
+    duration: "1 день",
+    description:
+      "Т-клетки собираются из периферической крови пациента через лейкаферез (единый сбор), принимая примерно 2-4 часа, без анестезии, завершенной в тот же день. После сбора клетки отправляются в сертифицированную GMP лабораторию для генетической модификации.",
+  },
+  {
+    title: "CAR-T клеточная подготовка",
+    duration: "2-3 недели",
+    description:
+      "Собранные Т-клетки отправляются в сертифицированную GMP лабораторию для трансдукции вирусного вектора гена химерного антигена рецептора и расширения клеток. В течение этой фазы пациенты могут временно покинуть больницу или отдохнуть поблизости в ожидании завершения клеточной подготовки. MedKungfu помогает с организацией близлежащих планов проживания и отдыха.",
+  },
+  {
+    title: "Лимфоцит истощение химиотерапия",
+    duration: "3-5 дней",
+    description:
+      "Мягкая химиотерапия (режим ФК: флударабин + циклофосфамид) проводится перед инфузией для очистки существующих лимфоцитов в организме, создавая пространство для расширения клеток CAR-T. Эта фаза завершается под наблюдением больницы, при этом MedKungfu обеспечивает полное сопровождение и помощь в коммуникации.",
+  },
+  {
+    title: "CAR-T клеточная инфузия",
+    duration: "1 день",
+    description:
+      "Клетки CAR-T вводятся обратно в организм через одну внутривенную инфузию, которая занимает около 30-60 минут. Это основной этап всего процесса лечения. После инфузии модифицированные Т-клетки будут продолжать расширяться в организме, точно идентифицируя и атакуя раковые клетки.",
+  },
+  {
+    title: "Hospital Monitoring &amp; Discharge Follow-up",
+    duration: "2-4 недели",
+    description:
+      "Тесный мониторинг в больнице с акцентом на управление побочными эффектами, такими как синдром высвобождения цитокинов (CRS) и нейротоксичность, связанная с иммунными эффекторами клеток (ICANS). Медицинская команда в режиме ожидания 24 часа с комплексной поддерживающей помощью. Пациенты могут быть выписаны при стабильном, с MedKungfu, координирующим 3-24 месяца удаленного наблюдения.",
+  },
+];
+
+
 
 const EFFICACY_ROWS = [
   {
@@ -291,6 +398,40 @@ const EFFICACY_ROWS_ZH = [
     ],
   },
 ];
+const EFFICACY_ROWS_RU = [
+  {
+    cells: [
+      { text: "Множественная миелома", className: "py-4 px-4 text-white" },
+      { text: "96.4%", className: "py-4 px-4 text-purple-300 font-bold" },
+      { text: "80.4%", className: "py-4 px-4 text-purple-300 font-bold" },
+      { text: "Не уточняется", className: "py-4 px-4 text-gray-300" },
+    ],
+  },
+  {
+    cells: [
+      {
+        text: "Высококлассная лимфома (DLBCL и т.д.)",
+        className: "py-4 px-4 text-white",
+      },
+      { text: "83%", className: "py-4 px-4 text-purple-300 font-bold" },
+      { text: "58%", className: "py-4 px-4 text-purple-300 font-bold" },
+      { text: "84%", className: "py-4 px-4 text-gray-300" },
+    ],
+  },
+  {
+    cells: [
+      { text: "Лейкемия (B-ALL)", className: "py-4 px-4 text-white" },
+      {
+        text: "Не уточняется",
+        className: "py-4 px-4 text-purple-300 font-bold",
+      },
+      { text: "95.1%", className: "py-4 px-4 text-purple-300 font-bold" },
+      { text: "73.6%", className: "py-4 px-4 text-gray-300" },
+    ],
+  },
+];
+
+
 
 const WHY_CHOOSE_US = [
   {
@@ -357,18 +498,53 @@ const WHY_CHOOSE_US_ZH = [
       "出院后持续协调3至24个月远程随访，定期追踪疗效评估，衔接后续诊疗方案。",
   },
 ];
+const WHY_CHOOSE_US_RU = [
+  {
+    title: "Соответствующие операции · Безопасность фонда",
+    description:
+      "Компания напрямую подписывает и собирает платежи, обеспечивая безопасность фонда. Прямое подключение к больнице, отсутствие наценки посредника, медицинские сборы, выплачиваемые непосредственно в больницу, полностью прозрачны.",
+  },
+  {
+    title: "2-4 недельный зеленый канал",
+    description:
+      "Благодаря партнерским каналам MedKungfu, система оценки приоритетности приема пациентов значительно сокращает время ожидания и обеспечивает безопасность для пациентов, нуждающихся в срочной медицинской помощи.",
+  },
+  {
+    title: "Полная двуязычная поддержка",
+    description:
+      "Посвященные двуязычные медицинские координаторы сопровождают всех, включая назначения на обследование, перевод медицинской документации, общение между врачом и пациентом, внутрибольничное сопровождение и процедуры выписки.",
+  },
+  {
+    title: "Прозрачная цена · Гарантия возврата",
+    description:
+      "Подробная цитата, полная или пропорциональная компенсация, доступная в 7 сценариях, защищает права пациентов без скрытых платежей.",
+  },
+  {
+    title: "Предпутевое планирование · Помощь при прибытии",
+    description:
+      "Помощь с визовыми приглашениями, трансферами из аэропорта, близлежащими мероприятиями по размещению, обеспечение пациентов и семей не беспокоиться с первого дня прибытия.",
+  },
+  {
+    title: "Долгосрочное последующее управление",
+    description:
+      "Непрерывная координация 3-24 месяцев дистанционного наблюдения после выписки, регулярное отслеживание оценки эффективности, связывание последующих планов лечения.",
+  },
+];
+
+
 
 export function CartTherapyPage() {
   const { lang } = useLanguage();
   const isZh = lang === "zh";
+  const isRu = lang === "ru";
 
-  const heroPills = isZh ? HERO_PILLS_ZH : HERO_PILLS;
-  const indications = isZh ? INDICATIONS_ZH : INDICATIONS;
-  const treatmentContent = isZh ? TREATMENT_CONTENT_ZH : TREATMENT_CONTENT;
-  const advantages = isZh ? ADVANTAGES_ZH : ADVANTAGES;
-  const processSteps = isZh ? PROCESS_STEPS_ZH : PROCESS_STEPS;
-  const efficacyRows = isZh ? EFFICACY_ROWS_ZH : EFFICACY_ROWS;
-  const whyChooseUs = isZh ? WHY_CHOOSE_US_ZH : WHY_CHOOSE_US;
+  const heroPills = isZh ? HERO_PILLS_ZH : isRu ? HERO_PILLS_RU : HERO_PILLS;
+  const indications = isZh ? INDICATIONS_ZH : isRu ? INDICATIONS_RU : INDICATIONS;
+  const treatmentContent = isZh ? TREATMENT_CONTENT_ZH : isRu ? TREATMENT_CONTENT_RU : TREATMENT_CONTENT;
+  const advantages = isZh ? ADVANTAGES_ZH : isRu ? ADVANTAGES_RU : ADVANTAGES;
+  const processSteps = isZh ? PROCESS_STEPS_ZH : isRu ? PROCESS_STEPS_RU : PROCESS_STEPS;
+  const efficacyRows = isZh ? EFFICACY_ROWS_ZH : isRu ? EFFICACY_ROWS_RU : EFFICACY_ROWS;
+  const whyChooseUs = isZh ? WHY_CHOOSE_US_ZH : isRu ? WHY_CHOOSE_US_RU : WHY_CHOOSE_US;
 
   return (
     <main
@@ -382,22 +558,22 @@ export function CartTherapyPage() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white py-32">
           <div>
             <p className="text-lg text-purple-200 mb-4 tracking-wider">
-              {isZh ? "免疫治疗方案" : "Immunotherapy Programme"}
+              {isZh ? "免疫治疗方案" : isRu ? "Программа иммунотерапии" : "Immunotherapy Programme"}
             </p>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               {isZh
                 ? "CAR-T血液恶性肿瘤治疗"
-                : "CAR-T Cell Therapy for Hematologic Malignancies"}
+                : isRu ? "CAR-T клеточная терапия гематологических злокачественных новообразований" : "CAR-T Cell Therapy for Hematologic Malignancies"}
             </h1>
             <p className="text-xl md:text-2xl text-purple-200 mb-4">
               {isZh
                 ? "CAR-T Cell Therapy for Hematologic Malignancies"
-                : "CAR-T血液恶性肿瘤治疗"}
+                : isRu ? "CAR-T клеточная терапия гематологических злокачественных новообразований" : "CAR-T血液恶性肿瘤治疗"}
             </p>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-8">
               {isZh
                 ? "革命性个体化免疫疗法 · 改造自身免疫细胞精准攻击癌细胞"
-                : "Revolutionary Personalized Immunotherapy · Engineering Immune Cells to Precisely Target Cancer"}
+                : isRu ? "Революционная персонализированная иммунотерапия · Инженерные иммунные клетки для точной борьбы с раком" : "Revolutionary Personalized Immunotherapy · Engineering Immune Cells to Precisely Target Cancer"}
             </p>
             <div className="flex flex-wrap justify-center gap-4 mb-8">
               {heroPills.map((pill) => (
@@ -414,13 +590,13 @@ export function CartTherapyPage() {
                 href="#contact"
                 className="px-8 py-4 bg-purple-500 text-white font-semibold rounded-lg hover:bg-purple-600 transition-colors"
               >
-                {isZh ? "立即咨询" : "Consult Now"}
+                {isZh ? "立即咨询" : isRu ? "Получить консультацию" : "Consult Now"}
               </a>
               <a
                 href="#intro"
                 className="px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
               >
-                {isZh ? "了解更多" : "Learn More"}
+                {isZh ? "了解更多" : isRu ? "Узнать больше" : "Learn More"}
               </a>
             </div>
           </div>
@@ -433,17 +609,17 @@ export function CartTherapyPage() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <Reveal y={0}>
               <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-6">
-                {isZh ? "什么是CAR-T疗法？" : "What is CAR-T Therapy?"}
+                {isZh ? "什么是CAR-T疗法？" : isRu ? "Что такое CAR-T терапия?" : "What is CAR-T Therapy?"}
               </h2>
               <p className="text-gray-600 text-lg mb-6">
                 {isZh
                   ? "CAR-T（嵌合抗原受体T细胞）疗法是一种革命性的个体化免疫疗法。治疗团队提取患者自身的T细胞，在GMP认证实验室中通过基因工程对其进行改造，使其携带能够精准识别并攻击癌细胞的嵌合抗原受体（CAR）。改造后的CAR-T细胞经扩增后回输患者体内，形成持续发挥抗肿瘤作用的\"活体药物\"。整个过程以患者自身细胞为原料，是目前血液恶性肿瘤领域最前沿的治疗手段之一。"
-                  : "CAR-T (Chimeric Antigen Receptor T-cell) therapy is a revolutionary personalized immunotherapy. The treatment team extracts the patient's own T-cells and genetically modifies them in a GMP-certified laboratory to carry chimeric antigen receptors (CAR) that can precisely identify and attack cancer cells. The modified CAR-T cells are expanded and infused back into the patient's body, forming a \"living drug\" that continuously exerts anti-tumor effects. The entire process uses the patient's own cells as raw material, making it one of the most advanced treatment methods in the field of hematologic malignancies."}
+                  : isRu ? "CAR-T (Т-клетки с химерным антиген-рецептором) является революционной персонализированной иммунотерапией. Команда по лечению извлекает собственные Т-клетки пациента и генетически модифицирует их в сертифицированной GMP лаборатории для переноса химерных антигенных рецепторов (CAR), которые могут точно идентифицировать и атаковать раковые клетки. Модифицированные клетки CAR-T расширяются и вводятся обратно в организм пациента, образуя «живой препарат», который постоянно оказывает противоопухолевое действие. Весь процесс использует собственные клетки пациента в качестве сырья, что делает его одним из самых передовых методов лечения в области гематологических злокачественных новообразований." : "CAR-T (Chimeric Antigen Receptor T-cell) therapy is a revolutionary personalized immunotherapy. The treatment team extracts the patient's own T-cells and genetically modifies them in a GMP-certified laboratory to carry chimeric antigen receptors (CAR) that can precisely identify and attack cancer cells. The modified CAR-T cells are expanded and infused back into the patient's body, forming a \"living drug\" that continuously exerts anti-tumor effects. The entire process uses the patient's own cells as raw material, making it one of the most advanced treatment methods in the field of hematologic malignancies."}
               </p>
               <p className="text-gray-600 mb-6">
                 {isZh
                   ? "截至2026年，中国已完成了超过6,000例CAR-T细胞输注，多款商业化产品已获国家药品监督管理局（NMPA）批准。所有合作医院均采用NMPA正式批准的CAR-T产品，在具备GMP资质的实验室完成细胞制备，并在三甲医院设有专属国际患者服务通道。这意味着患者将在正规监管框架内接受治疗，安全性与可追溯性均有制度保障。"
-                  : "As of 2026, China has completed over 6,000 CAR-T cell infusions, with multiple commercial products approved by the National Medical Products Administration (NMPA). All partner hospitals use NMPA-approved CAR-T products, complete cell preparation in GMP-certified laboratories, and have dedicated international patient service channels in Grade 3A hospitals. This means patients will receive treatment within a formal regulatory framework, with institutional guarantees for safety and traceability."}
+                  : isRu ? "По состоянию на 2026 год Китай завершил более 6000 инфузий клеток CAR-T, причем несколько коммерческих продуктов были одобрены Национальным управлением медицинских продуктов (NMPA). Все больницы-партнеры используют одобренные NMPA продукты CAR-T, полную клеточную подготовку в сертифицированных GMP лабораториях и имеют специализированные международные каналы обслуживания пациентов в больницах 3A класса. Это означает, что пациенты будут получать лечение в рамках официальной нормативной базы с институциональными гарантиями безопасности и прослеживаемости." : "As of 2026, China has completed over 6,000 CAR-T cell infusions, with multiple commercial products approved by the National Medical Products Administration (NMPA). All partner hospitals use NMPA-approved CAR-T products, complete cell preparation in GMP-certified laboratories, and have dedicated international patient service channels in Grade 3A hospitals. This means patients will receive treatment within a formal regulatory framework, with institutional guarantees for safety and traceability."}
               </p>
               <div className="bg-purple-50 rounded-xl p-6">
                 <div className="grid grid-cols-2 gap-4">
@@ -452,7 +628,7 @@ export function CartTherapyPage() {
                       6,000+
                     </div>
                     <p className="text-gray-600 text-sm">
-                      {isZh ? "例临床输注" : "Clinical Infusions"}
+                      {isZh ? "例临床输注" : isRu ? "Клинические настои" : "Clinical Infusions"}
                     </p>
                   </div>
                   <div className="text-center">
@@ -460,7 +636,7 @@ export function CartTherapyPage() {
                       NMPA
                     </div>
                     <p className="text-gray-600 text-sm">
-                      {isZh ? "批准产品" : "Approved Products"}
+                      {isZh ? "批准产品" : isRu ? "Утвержденные продукты" : "Approved Products"}
                     </p>
                   </div>
                 </div>
@@ -483,12 +659,12 @@ export function CartTherapyPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
-              {isZh ? "为什么选择中国？" : "Why Choose China?"}
+              {isZh ? "为什么选择中国？" : isRu ? "Почему выбирают Китай?" : "Why Choose China?"}
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               {isZh
                 ? "六大核心优势，让CAR-T治疗更高效、更经济"
-                : "Six core advantages making CAR-T treatment more efficient and economical"}
+                : isRu ? "Шесть основных преимуществ, которые делают лечение CAR-T более эффективным и экономичным" : "Six core advantages making CAR-T treatment more efficient and economical"}
             </p>
           </Reveal>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -515,12 +691,12 @@ export function CartTherapyPage() {
               <h2 className="text-3xl font-bold text-[#1A1A2E] mb-8">
                 {isZh
                   ? "适应症（血液恶性肿瘤）"
-                  : "Indications (Hematologic Malignancies)"}
+                  : isRu ? "Показания (гематологические злокачественные образования)" : "Indications (Hematologic Malignancies)"}
               </h2>
               <p className="text-gray-600 mb-6">
                 {isZh
                   ? "CAR-T疗法主要适用于复发/难治性："
-                  : "CAR-T therapy is mainly suitable for relapsed/refractory:"}
+                  : isRu ? "Терапия CAR-T в основном подходит для рецидивирующих/рефрактерных:" : "CAR-T therapy is mainly suitable for relapsed/refractory:"}
               </p>
               <div className="space-y-4">
                 {indications.map((item) => (
@@ -539,12 +715,12 @@ export function CartTherapyPage() {
               <p className="text-gray-500 text-sm mt-6">
                 {isZh
                   ? "是否适合接受CAR-T治疗，需由我方合作的医疗团队进行个体化评估。"
-                  : "Whether suitable for CAR-T treatment requires individualized assessment by our partner medical team."}
+                  : isRu ? "Подходит ли препарат для лечения CAR-T, требуется индивидуальная оценка со стороны нашей медицинской команды." : "Whether suitable for CAR-T treatment requires individualized assessment by our partner medical team."}
               </p>
             </Reveal>
             <Reveal y={0} className="bg-slate-900 rounded-2xl p-8 text-white">
               <h3 className="text-2xl font-bold mb-6">
-                {isZh ? "治疗内容" : "Treatment Content"}
+                {isZh ? "治疗内容" : isRu ? "Содержание лечения" : "Treatment Content"}
               </h3>
               <div className="space-y-4">
                 {treatmentContent.map((item, i) => (
@@ -564,10 +740,10 @@ export function CartTherapyPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
-              {isZh ? "治疗流程" : "Treatment Process"}
+              {isZh ? "治疗流程" : isRu ? "Процесс лечения" : "Treatment Process"}
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              {isZh ? "从抵达至出院约3-6周" : "Approximately 3-6 weeks from arrival to discharge"}
+              {isZh ? "从抵达至出院约3-6周" : isRu ? "Примерно 3-6 недель с момента прибытия на увольнение" : "Approximately 3-6 weeks from arrival to discharge"}
             </p>
           </Reveal>
           <div className="space-y-6">
@@ -600,7 +776,7 @@ export function CartTherapyPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              {isZh ? "疗效 – 中国临床数据" : "Efficacy – Chinese Clinical Data"}
+              {isZh ? "疗效 – 中国临床数据" : isRu ? "Эффективность – китайские клинические данные" : "Efficacy – Chinese Clinical Data"}
             </h2>
           </Reveal>
           <div className="overflow-x-auto">
@@ -608,18 +784,18 @@ export function CartTherapyPage() {
               <thead>
                 <tr className="border-b border-slate-700">
                   <th className="text-left py-4 px-4 text-purple-400 font-semibold">
-                    {isZh ? "癌症类型" : "Cancer Type"}
+                    {isZh ? "癌症类型" : isRu ? "Тип рака" : "Cancer Type"}
                   </th>
                   <th className="text-left py-4 px-4 text-purple-400 font-semibold">
-                    {isZh ? "总缓解率（ORR）" : "Overall Response Rate (ORR)"}
+                    {isZh ? "总缓解率（ORR）" : isRu ? "Общая скорость реагирования (ORR)" : "Overall Response Rate (ORR)"}
                   </th>
                   <th className="text-left py-4 px-4 text-purple-400 font-semibold">
                     {isZh
                       ? "≥完全缓解（CR）率"
-                      : "≥Complete Response (CR) Rate"}
+                      : isRu ? "≥ Полный ответ (CR)" : "≥Complete Response (CR) Rate"}
                   </th>
                   <th className="text-left py-4 px-4 text-purple-400 font-semibold">
-                    {isZh ? "1年总生存率" : "1-Year Overall Survival"}
+                    {isZh ? "1年总生存率" : isRu ? "1 год общей выживаемости" : "1-Year Overall Survival"}
                   </th>
                 </tr>
               </thead>
@@ -644,22 +820,22 @@ export function CartTherapyPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal className="bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl p-8 md:p-12 text-white">
             <h2 className="text-3xl font-bold mb-6">
-              {isZh ? "案例展示" : "Case Study"}
+              {isZh ? "案例展示" : isRu ? "Тематическое исследование" : "Case Study"}
             </h2>
             <h3 className="text-xl font-bold mb-4">
               {isZh
                 ? "南非奥运冠军（62岁）– 高危多发性骨髓瘤"
-                : "South African Olympic Champion (62) – High-Risk Multiple Myeloma"}
+                : isRu ? "Олимпийский чемпион Южной Африки (62 года) - миелома высокого риска" : "South African Olympic Champion (62) – High-Risk Multiple Myeloma"}
             </h3>
             <p className="text-purple-100 mb-6">
               {isZh
                 ? "其在多个国家被判定为\"难以治疗\"。前往上海瑞金医院接受全面评估并顺利进行CAR-T治疗。在中国先进的CAR-T医疗体系支持下成功完成治疗。"
-                : "Deemed \"difficult to treat\" in multiple countries. Traveled to Shanghai Ruijin Hospital for comprehensive evaluation and successfully underwent CAR-T treatment. Successfully completed treatment with support from China's advanced CAR-T medical system."}
+                : isRu ? "Считалось, что «трудно лечить» в разных странах. Побывал в больнице Руйджин в Шанхае для комплексной оценки и успешно прошел курс лечения CAR-T. Успешно завершено лечение при поддержке передовой китайской медицинской системы CAR-T." : "Deemed \"difficult to treat\" in multiple countries. Traveled to Shanghai Ruijin Hospital for comprehensive evaluation and successfully underwent CAR-T treatment. Successfully completed treatment with support from China's advanced CAR-T medical system."}
             </p>
             <p className="text-purple-200 font-medium">
               {isZh
                 ? "已有数千名国际患者选择来中国接受CAR-T治疗——您也可以是其中之一。"
-                : "Thousands of international patients have chosen to come to China for CAR-T treatment – you can be one of them."}
+                : isRu ? "Тысячи иностранных пациентов решили приехать в Китай для лечения CAR-T." : "Thousands of international patients have chosen to come to China for CAR-T treatment – you can be one of them."}
             </p>
           </Reveal>
         </div>
@@ -671,7 +847,7 @@ export function CartTherapyPage() {
           <div className="grid lg:grid-cols-2 gap-12">
             <Reveal y={0}>
               <h2 className="text-3xl font-bold text-[#1A1A2E] mb-8">
-                {isZh ? "参考治疗费用" : "Reference Treatment Costs"}
+                {isZh ? "参考治疗费用" : isRu ? "Справочные затраты на лечение" : "Reference Treatment Costs"}
               </h2>
               <div className="bg-white rounded-2xl p-8 shadow-sm">
                 <div className="space-y-4">
@@ -679,7 +855,7 @@ export function CartTherapyPage() {
                     <span className="text-gray-700">
                       {isZh
                         ? "医疗费（直付医院：评估、CAR-T细胞治疗、最长28天住院、基本药物）"
-                        : "Medical fees (direct-pay hospital: evaluation, CAR-T therapy, up to 28 days hospitalization, basic medications)"}
+                        : isRu ? "Медицинские сборы (госпитальная плата: оценка, терапия CAR-T, до 28 дней госпитализации, основные лекарства)" : "Medical fees (direct-pay hospital: evaluation, CAR-T therapy, up to 28 days hospitalization, basic medications)"}
                     </span>
                     <span className="text-purple-600 font-bold">
                       $200,000-$250,000
@@ -689,13 +865,13 @@ export function CartTherapyPage() {
                 <p className="text-gray-500 text-sm mt-4">
                   {isZh
                     ? "*具体费用以医院最终评估为准。"
-                    : "*Specific costs subject to final hospital assessment."}
+                    : isRu ? "* Конкретные расходы, подлежащие окончательной оценке в больнице." : "*Specific costs subject to final hospital assessment."}
                 </p>
               </div>
             </Reveal>
             <Reveal y={0}>
               <h2 className="text-3xl font-bold text-[#1A1A2E] mb-8">
-                {isZh ? "为什么选择我们？" : "Why Choose Us?"}
+                {isZh ? "为什么选择我们？" : isRu ? "Почему выбирают нас?" : "Why Choose Us?"}
               </h2>
               <div className="grid grid-cols-2 gap-4">
                 {whyChooseUs.map((item) => (
@@ -717,25 +893,25 @@ export function CartTherapyPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Reveal>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              {isZh ? "开启您的CAR-T治疗之旅" : "Start Your CAR-T Treatment Journey"}
+              {isZh ? "开启您的CAR-T治疗之旅" : isRu ? "Начните свое путешествие по лечению CAR-T" : "Start Your CAR-T Treatment Journey"}
             </h2>
             <p className="text-purple-200 mb-8">
               {isZh
                 ? "革命性免疫疗法，为血液恶性肿瘤患者带来新希望"
-                : "Revolutionary immunotherapy bringing new hope to hematologic malignancy patients"}
+                : isRu ? "Революционная иммунотерапия, дающая новую надежду пациентам с гематологической злокачественностью" : "Revolutionary immunotherapy bringing new hope to hematologic malignancy patients"}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
                 href="mailto:contact@medkungfu.com"
                 className="px-8 py-4 bg-white text-purple-900 font-semibold rounded-lg hover:bg-purple-50 transition-colors"
               >
-                {isZh ? "邮件咨询" : "Email Consultation"}
+                {isZh ? "邮件咨询" : isRu ? "Консультация по электронной почте" : "Email Consultation"}
               </a>
               <Link
                 href="/contact"
                 className="px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
               >
-                {isZh ? "在线留言" : "Online Inquiry"}
+                {isZh ? "在线留言" : isRu ? "Онлайн-запрос" : "Online Inquiry"}
               </Link>
             </div>
           </Reveal>

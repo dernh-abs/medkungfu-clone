@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/sites/www-medkungfu-com-363c9bc1/shared
 import { ProjectDetailPage } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/arthritis/ProjectDetailPage";
 import { mscTcmPage } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/arthritis/data/msc-tcm";
 import { mscTcmPageZh } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/arthritis/data/msc-tcm-zh";
+import { mscTcmPageRu } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/arthritis/data/msc-tcm-ru";
 
 export const metadata: Metadata = {
   title: "MSC Joint Regeneration Therapy",
@@ -17,7 +18,7 @@ export default function MscTcmPage() {
     <>
       <SiteHeader />
       <main className="flex-grow pt-[72px]">
-        <ProjectDetailPage data={mscTcmPage} zhConfig={mscTcmPageZh} />
+        <ProjectDetailPage data={mscTcmPage} zhConfig={mscTcmPageZh} ruConfig={mscTcmPageRu} />
       </main>
       <SiteFooter />
     </>

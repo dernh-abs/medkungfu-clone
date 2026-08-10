@@ -30,6 +30,17 @@ const basePackageItemsZh = [
   "免疫与炎症：风湿三项、免疫球蛋白、超敏C反应蛋白",
   "传染病筛查：乙肝/丙肝/梅毒/HIV",
 ];
+const basePackageItemsRu = [
+  "Общий осмотр (рост/вес/ИМТ, кровяное давление, пульс)",
+  "Физический осмотр: внутренняя медицина, хирургия, офтальмология, ЛОР, стоматология",
+  "Рутинные тесты: полный анализ крови, мочеиспускание + осадок, фекальная оккультная кровь",
+  "Комплексная биохимия: 12 пунктов функции печени, 5 пунктов функции почек, 8 пунктов липидного профиля (включая ApoA, ApoB, ApoE, Lp(a)), глюкоза натощак + HbA1c",
+  "Маркеры повреждения миокарда: тропонин, сердечная ферментная панель",
+  "Иммунитет и воспаление: панель ревматизма, иммуноглобулины, hs-CRP",
+  "Скрининг инфекционных заболеваний: гепатит B/C, сифилис, ВИЧ",
+];
+
+
 
 const deepScreeningModules: { title: string; items: string[] }[] = [
   {
@@ -152,6 +163,68 @@ const deepScreeningModulesZh: { title: string; items: string[] }[] = [
     ],
   },
 ];
+const deepScreeningModulesRu: { title: string; items: string[] }[] = [
+  {
+    title: "1. Глубокий сердечно-сосудистый скрининг",
+    items: [
+      "256-срезовый спектральный КТ коронарный CTA",
+      "функциональная оценка КТ-FFR (оценка неинвазивной ишемии миокарда, точность >95%)",
+      "Эхокардиография + 3D реконструкция",
+      "24-часовая ЭКГ Холтера (необязательно), обнаружение артериосклероза",
+      "Ультразвук сонных сеток + измерение толщины интима-медиа (IMT)",
+      "Сердечная ферментная панель, тропонин, гомоцистеин",
+    ],
+  },
+  {
+    title: "2. Глубокий скрининг цереброваскулярных сосудов",
+    items: [
+      "3,0 Т сверхвысокополевой мозг МРТ простое сканирование + DWI",
+      "МРА мозга (сосудистый стеноз, аневризма, пороки развития)",
+      "Оценка стабильности сонной бляшки, транскраниальный доплер (TCD)",
+      "Белки, связанные с болезнью Альцгеймера + генотипирование APOE",
+      "Анализ стресса мозговых волн + шкала когнитивных функций",
+    ],
+  },
+  {
+    title: "3. шейный и поясничный позвоночник Глубокий скрининг",
+    items: [
+      "70 см крупноствольная 3.0T исследовательская шейная отделка позвоночника МРТ, поясничный отдел позвоночника МРТ",
+      "Двухэнергетическая рентгеновская плотность кости (DXA) - все тело + позвоночник + бедро",
+      "Остеопороз три сывороточных маркера (25-OH витамин D, TRAP 5b, CTX-I)",
+    ],
+  },
+  {
+    title: "4. Глубокий скрининг коленного сустава",
+    items: [
+      "Колено МРТ (мениска, связки, хрящ, пателлофеморальный сустав)",
+      "Плотность костей + оценка поражения костей",
+      "Комплексная оценка совместной функции (диапазон движения, анализ походки)",
+      "Ключевые показатели метаболизма костей: витамин D, K и т.д.",
+    ],
+  },
+  {
+    title: "5. Глубокий скрининг опухоли",
+    items: [
+      "Полная панель опухолевых маркеров (CEA, AFP, CA19-9, CA125, PSA и т. Д.)",
+      "Семь аутоантител рака легких + VEGF",
+      "Низкие дозы спирали грудной клетки КТ - золотой стандарт для раннего скрининга рака легких",
+      "Полностью цифровая ПЭТ-КТ сканирование всего тела или 3,0Т диффузионно-взвешенная визуализация всего тела",
+      "Ранний скрининг жидкой биопсии (анализ метилирования ктДНК)",
+      "Полное секвенирование экзом (WES)",
+    ],
+  },
+  {
+    title: "6. Глубокий скрининг пищеварительного тракта",
+    items: [
+      "Безболезненная гастроскопия/колоноскопия сна (импортная анестезия, синхронное удаление полипа)",
+      "или магнитно-контролируемая капсульная эндоскопия (неинвазивная, безболезненная)",
+      "Тест дыхания C13/C14 (Helicobacter pylori)",
+      "Тест на метилирование гена Stool SDC2 (ранний скрининг колоректального рака)",
+    ],
+  },
+];
+
+
 
 const extensionModules = [
   "Functional medicine integrated analysis (vitamin groups, amino acid profiles, trace elements, gut microbiota)",
@@ -168,6 +241,15 @@ const extensionModulesZh = [
   "心血管药物基因检测",
   "宫颈癌PAX1/JAM3基因甲基化检测",
 ];
+const extensionModulesRu = [
+  "Интегрированный анализ функциональной медицины (витаминные группы, аминокислотные профили, микроэлементы, микробиота кишечника)",
+  "Полная аллергенная панель (17 ингаляций + 14 продуктов питания)",
+  "Скрининг аутоиммунных заболеваний (панель антиядерных антител)",
+  "Сердечно-сосудистые препараты генетического тестирования",
+  "Тест на метилирование гена PAX1/JAM3",
+];
+
+
 
 const vipProcess: { step: string; title: string; items: string[] }[] = [
   {
@@ -236,6 +318,41 @@ const vipProcessZh: { step: string; title: string; items: string[] }[] = [
     ],
   },
 ];
+const vipProcessRu: { step: string; title: string; items: string[] }[] = [
+  {
+    step: "1",
+    title: "До прибытия - Персонализированная настройка",
+    items: [
+      "Дистанционные консультации с специализированным консультантом по вопросам здравоохранения",
+      "Онлайн-опросник здоровья + оценка рисков ИИ",
+      'Создайте персонализированный план «1+X+Y»',
+      "Помощь с письмом-приглашением на медицинскую визу",
+    ],
+  },
+  {
+    step: "2",
+    title: "День проверки - эффективная роскошь",
+    items: [
+      "VIP-зона независимой экспертизы, полностью отделенная от обычных зон",
+      "Сопровождение один на один (беспрерывный англоязычный консультант по вопросам здравоохранения)",
+      "Разделенные по признаку пола зоны + независимые экзаменационные залы",
+      "Интеллектуальная система наведения планирует кратчайший маршрут",
+      "Элегантный лаундж: мягкие диваны, изысканные прохладительные напитки",
+    ],
+  },
+  {
+    step: "3",
+    title: "Post-Checkup - Немедленная и долгосрочная проверка",
+    items: [
+      "Предварительный доклад за тот же день + устный перевод на один день экспертами на уровне руководителей",
+      "Мультидисциплинарная консультация MDT (для сложных аномалий)",
+      "Зеленый канал для основных положительных результатов",
+      "Пожизненные электронные медицинские записи",
+    ],
+  },
+];
+
+
 
 const premiumFeatures = [
   "Base package + all six deep screening modules",
@@ -252,6 +369,15 @@ const premiumFeaturesZh = [
   "无痛胃肠镜/胶囊胃镜二选一",
   "PET-CT（依风险评估）",
 ];
+const premiumFeaturesRu = [
+  "Базовый пакет + все шесть модулей глубокого скрининга",
+  "Коронарный CTA, колено МРТ",
+  "Ген APOE, обнаружение артериосклероза",
+  "Безболезненная гастроскопия / колоноскопия или капсульная эндоскопия",
+  "PET-КТ (на основе оценки рисков)",
+];
+
+
 
 const ultimateFeatures = [
   "All Premium package contents",
@@ -272,6 +398,17 @@ const ultimateFeaturesZh = [
   "入住式VIP体验",
   "全年健康管理",
 ];
+const ultimateFeaturesRu = [
+  "Все содержимое пакета Premium",
+  "Функциональная оценка КТ-FFR",
+  "Жидкая биопсия мультиракового раннего скрининга",
+  "Целая последовательность экзом",
+  "Полностью тело PET-КТ",
+  "Жилой VIP опыт",
+  "Круглый год управления здравоохранением",
+];
+
+
 
 const travelSupport: { icon: LucideIcon; title: string; description: string }[] = [
   {
@@ -318,6 +455,30 @@ const travelSupportZh: { icon: LucideIcon; title: string; description: string }[
     description: "可定制文化或休闲行程",
   },
 ];
+const travelSupportRu: { icon: LucideIcon; title: string; description: string }[] = [
+  {
+    icon: Icons.plane,
+    title: "Визовая помощь",
+    description: "Предоставить официальное медицинское приглашение для подачи заявления на визу",
+  },
+  {
+    icon: Icons.globe,
+    title: "Языковые услуги",
+    description: "Англоязычный координатор по всему миру (другие языки доступны по запросу)",
+  },
+  {
+    icon: Icons.mapPin,
+    title: "Транспорт и размещение",
+    description: "Трансферы из аэропорта, тарифы на гостиничное партнерство премиум-класса",
+  },
+  {
+    icon: Icons.award,
+    title: "Расширение путешествий",
+    description: "Настраиваемые культурные или развлекательные маршруты",
+  },
+];
+
+
 
 const whoIsItFor = [
   "Global corporate executives, entrepreneurs, high-net-worth family members",
@@ -334,6 +495,15 @@ const whoIsItForZh = [
   "有肿瘤、心脑血管疾病或消化道疾病家族史",
   "希望将精密体检+高端旅行一站完成，并极度重视隐私与效率",
 ];
+const whoIsItForRu = [
+  "Глобальные корпоративные руководители, предприниматели, члены семьи с высоким уровнем дохода",
+  "Возраст 30-65 лет, обеспокоенный сердечно-сосудистым, скелетным, опухолевым и пищеварительным здоровьем",
+  "Долгосрочная работа на рабочем месте, работа под высоким давлением, проблемы со здоровьем шейного/ поясничного отдела позвоночника",
+  "Семейная история опухолей, сердечно-сосудистых / цереброваскулярных заболеваний или расстройств пищеварения",
+  "Хотите сочетать точный контроль с роскошными путешествиями, высоко ценимую конфиденциальность и эффективность",
+];
+
+
 
 const coreAdvantages: { icon: LucideIcon; title: string; description: string }[] = [
   {
@@ -387,20 +557,49 @@ const coreAdvantagesZh: { icon: LucideIcon; title: string; description: string }
       "VIP独立检区与常规区域完全分离，一对一私密沟通，男女分区，健康数据最高等级加密。",
   },
 ];
+const coreAdvantagesRu: { icon: LucideIcon; title: string; description: string }[] = [
+  {
+    icon: Icons.microscope,
+    title: "Продвинутое оборудование мирового класса",
+    description:
+      "Оснащен 256-срезовыми спектральными КТ, 3,0T сверхвысокопольным МРТ, полностью цифровыми PET-КТ и диагностическими системами с поддержкой ИИ, улучшая скорость обнаружения небольших поражений на 50%.",
+  },
+  {
+    icon: Icons.dollarSign,
+    title: "Значительное преимущество в затратах",
+    description:
+      "Для эквивалентных пакетов проверки качества цены в материковом Китае составляют всего 35-45% от цен в США.",
+  },
+  {
+    icon: Icons.clock,
+    title: "Опыт максимальной эффективности",
+    description:
+      "Полный процесс назначения с отчетами о результатах основной экспертизы за тот же день и устным переводом экспертов. Быстрее всего: утренняя проверка, послеобеденный отчет, немедленная экспертная оценка.",
+  },
+  {
+    icon: Icons.shield,
+    title: "Защита конфиденциальности в первую очередь",
+    description:
+      "VIP-зона для проведения независимых экспертиз полностью отделена от обычных зон, индивидуальное частное общение, гендерно-отдельные зоны, шифрование данных о здоровье на самом высоком уровне.",
+  },
+];
+
+
 
 export default function PremiumHealthCheckupContent() {
   const { lang } = useLanguage();
   const isZh = lang === "zh";
+  const isRu = lang === "ru";
 
-  const baseItems = isZh ? basePackageItemsZh : basePackageItems;
-  const modules = isZh ? deepScreeningModulesZh : deepScreeningModules;
-  const extensionItems = isZh ? extensionModulesZh : extensionModules;
-  const process = isZh ? vipProcessZh : vipProcess;
-  const premium = isZh ? premiumFeaturesZh : premiumFeatures;
-  const ultimate = isZh ? ultimateFeaturesZh : ultimateFeatures;
-  const support = isZh ? travelSupportZh : travelSupport;
-  const audience = isZh ? whoIsItForZh : whoIsItFor;
-  const advantages = isZh ? coreAdvantagesZh : coreAdvantages;
+  const baseItems = isZh ? basePackageItemsZh : isRu ? basePackageItemsRu : basePackageItems;
+  const modules = isZh ? deepScreeningModulesZh : isRu ? deepScreeningModulesRu : deepScreeningModules;
+  const extensionItems = isZh ? extensionModulesZh : isRu ? extensionModulesRu : extensionModules;
+  const process = isZh ? vipProcessZh : isRu ? vipProcessRu : vipProcess;
+  const premium = isZh ? premiumFeaturesZh : isRu ? premiumFeaturesRu : premiumFeatures;
+  const ultimate = isZh ? ultimateFeaturesZh : isRu ? ultimateFeaturesRu : ultimateFeatures;
+  const support = isZh ? travelSupportZh : isRu ? travelSupportRu : travelSupport;
+  const audience = isZh ? whoIsItForZh : isRu ? whoIsItForRu : whoIsItFor;
+  const advantages = isZh ? coreAdvantagesZh : isRu ? coreAdvantagesRu : coreAdvantages;
 
   return (
     <main
@@ -414,10 +613,10 @@ export default function PremiumHealthCheckupContent() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white py-32">
           <div>
             <p className="text-lg text-blue-200 mb-4 tracking-wider">
-              {isZh ? "健康体检项目" : "Health Checkup Programme"}
+              {isZh ? "健康体检项目" : isRu ? "Программа проверки здоровья" : "Health Checkup Programme"}
             </p>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              {isZh ? "高端国际健康体检" : "Premium International Health Checkup"}
+              {isZh ? "高端国际健康体检" : isRu ? "Премиум Международный контроль здоровья" : "Premium International Health Checkup"}
             </h1>
             <p className="text-xl md:text-2xl text-blue-200 mb-4">
               {isZh
@@ -425,25 +624,25 @@ export default function PremiumHealthCheckupContent() {
                 : "高端国际健康筛查"}
             </p>
             <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-4">
-              {isZh ? "臻享全景·全方位套餐" : "Comprehensive Panoramic Package"}
+              {isZh ? "臻享全景·全方位套餐" : isRu ? "Комплексный панорамный пакет" : "Comprehensive Panoramic Package"}
             </p>
             <p className="text-base text-gray-400 max-w-2xl mx-auto mb-8">
               {isZh
                 ? "专为来华高端人士打造 | 一次体检·六大深筛·全程隐私无忧"
-                : "Designed for high-end visitors to China | One checkup · Six deep screenings · Complete privacy"}
+                : isRu ? "Предназначен для высококлассных посетителей в Китае | Один осмотр · Шесть глубоких скринингов · Полная конфиденциальность" : "Designed for high-end visitors to China | One checkup · Six deep screenings · Complete privacy"}
             </p>
             <div className="flex flex-wrap justify-center gap-4 mb-8">
               <span className="px-4 py-2 bg-white/10 rounded-full text-sm">
-                {isZh ? "全球尖端设备" : "World-Class Equipment"}
+                {isZh ? "全球尖端设备" : isRu ? "Оборудование мирового класса" : "World-Class Equipment"}
               </span>
               <span className="px-4 py-2 bg-white/10 rounded-full text-sm">
-                {isZh ? "AI辅助诊断" : "AI-Assisted Diagnosis"}
+                {isZh ? "AI辅助诊断" : isRu ? "Диагностика с помощью ИИ" : "AI-Assisted Diagnosis"}
               </span>
               <span className="px-4 py-2 bg-white/10 rounded-full text-sm">
-                {isZh ? "当日出报告" : "Same-Day Reports"}
+                {isZh ? "当日出报告" : isRu ? "Отчеты за тот же день" : "Same-Day Reports"}
               </span>
               <span className="px-4 py-2 bg-white/10 rounded-full text-sm">
-                {isZh ? "全程隐私保护" : "Complete Privacy"}
+                {isZh ? "全程隐私保护" : isRu ? "Полная конфиденциальность" : "Complete Privacy"}
               </span>
             </div>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -451,13 +650,13 @@ export default function PremiumHealthCheckupContent() {
                 href="#packages"
                 className="px-8 py-4 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-colors"
               >
-                {isZh ? "查看套餐" : "View Packages"}
+                {isZh ? "查看套餐" : isRu ? "Посмотреть пакеты" : "View Packages"}
               </a>
               <a
                 href="#intro"
                 className="px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
               >
-                {isZh ? "了解更多" : "Learn More"}
+                {isZh ? "了解更多" : isRu ? "Узнать больше" : "Learn More"}
               </a>
             </div>
           </div>
@@ -470,22 +669,22 @@ export default function PremiumHealthCheckupContent() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <Reveal x={-30}>
               <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-6">
-                {isZh ? "为什么选择来中国做体检？" : "Why Choose China for Your Health Checkup?"}
+                {isZh ? "为什么选择来中国做体检？" : isRu ? "Почему стоит выбрать Китай для проверки здоровья?" : "Why Choose China for Your Health Checkup?"}
               </h2>
               <p className="text-gray-600 text-lg mb-6">
                 {isZh
                   ? "中国顶级医疗中心现已配备全球同步的尖端设备、AI辅助诊断系统。"
-                  : "China's top medical centers are now equipped with world-class advanced equipment and AI-assisted diagnostic systems."}
+                  : isRu ? "Ведущие медицинские центры Китая теперь оснащены передовым оборудованием мирового класса и диагностическими системами с поддержкой ИИ." : "China's top medical centers are now equipped with world-class advanced equipment and AI-assisted diagnostic systems."}
               </p>
               <p className="text-gray-600 mb-6">
                 {isZh
                   ? "您可以将年度深度体检与奢华旅行完美结合，最快上午体检、下午出报告、即刻专家解读，其余时间尽享旅程。"
-                  : "You can perfectly combine your annual in-depth checkup with a luxury trip. Fastest: morning checkup, afternoon report, immediate expert review, enjoy the rest of your journey."}
+                  : isRu ? "Вы можете идеально сочетать свой ежегодный углубленный осмотр с роскошной поездкой. Самое быстрое: утренний осмотр, послеобеденный отчет, немедленный экспертный обзор, наслаждайтесь остальной частью вашего путешествия." : "You can perfectly combine your annual in-depth checkup with a luxury trip. Fastest: morning checkup, afternoon report, immediate expert review, enjoy the rest of your journey."}
               </p>
               <div className="flex items-center space-x-4 text-blue-600">
                 <Icons.checkCircle className="h-6 w-6" />
                 <span className="font-semibold">
-                  {isZh ? "精密体检+高端旅行一站完成" : "Precision Checkup + Luxury Travel in One Stop"}
+                  {isZh ? "精密体检+高端旅行一站完成" : isRu ? "Точная проверка + роскошные поездки на одной остановке" : "Precision Checkup + Luxury Travel in One Stop"}
                 </span>
               </div>
             </Reveal>
@@ -498,10 +697,10 @@ export default function PremiumHealthCheckupContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal y={20} className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
-              {isZh ? "核心优势" : "Core Advantages"}
+              {isZh ? "核心优势" : isRu ? "Основные преимущества" : "Core Advantages"}
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              {isZh ? "为什么选择我们的高端健康体检服务" : "Why choose our premium health checkup service"}
+              {isZh ? "为什么选择我们的高端健康体检服务" : isRu ? "Почему стоит выбрать нашу премиальную службу проверки здоровья" : "Why choose our premium health checkup service"}
             </p>
           </Reveal>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -529,7 +728,7 @@ export default function PremiumHealthCheckupContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal y={20} className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
-              {isZh ? "适合人群" : "Who Is It For?"}
+              {isZh ? "适合人群" : isRu ? "Для кого это?" : "Who Is It For?"}
             </h2>
           </Reveal>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -554,18 +753,18 @@ export default function PremiumHealthCheckupContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal y={20} className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              {isZh ? "核心定制体系：“1+X+Y”" : 'Core Customization System: "1+X+Y"'}
+              {isZh ? "核心定制体系：“1+X+Y”" : isRu ? 'Система базовой настройки: «1+X+Y»' : 'Core Customization System: "1+X+Y"'}
             </h2>
             <p className="text-gray-400 max-w-2xl mx-auto">
               {isZh
                 ? "基础必查核心包 + 六大深度筛查模块 + 个性化延展模块"
-                : "Essential base package + Six deep screening modules + Personalized extension modules"}
+                : isRu ? "Базовый пакет + Шесть модулей глубокого скрининга + персонализированные модули расширения" : "Essential base package + Six deep screening modules + Personalized extension modules"}
             </p>
           </Reveal>
 
           <div className="mb-12">
             <h3 className="text-2xl font-bold text-blue-400 mb-6">
-              {isZh ? "“1” – 基础必查核心包" : '"1" - Essential Base Package'}
+              {isZh ? "“1” – 基础必查核心包" : isRu ? '«1» - базовый пакет' : '"1" - Essential Base Package'}
             </h3>
             <div className="bg-slate-800 rounded-2xl p-8">
               <div className="grid md:grid-cols-2 gap-4">
@@ -581,7 +780,7 @@ export default function PremiumHealthCheckupContent() {
 
           <div className="mb-12">
             <h3 className="text-2xl font-bold text-blue-400 mb-6">
-              {isZh ? "“X” – 六大深度筛查模块" : '"X" - Six Deep Screening Modules'}
+              {isZh ? "“X” – 六大深度筛查模块" : isRu ? '«X» — шесть модулей глубокого скрининга' : '"X" - Six Deep Screening Modules'}
             </h3>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {modules.map((module) => (
@@ -607,7 +806,7 @@ export default function PremiumHealthCheckupContent() {
 
           <div>
             <h3 className="text-2xl font-bold text-blue-400 mb-6">
-              {isZh ? "“Y” – 个性化延展模块（按需选配）" : '"Y" - Personalized Extension Modules (Optional)'}
+              {isZh ? "“Y” – 个性化延展模块（按需选配）" : isRu ? '«Y» - персонализированные модули расширения (факультативно)' : '"Y" - Personalized Extension Modules (Optional)'}
             </h3>
             <div className="bg-slate-800 rounded-2xl p-8">
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -628,7 +827,7 @@ export default function PremiumHealthCheckupContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal y={20} className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
-              {isZh ? "一站式贵宾服务流程" : "One-Stop VIP Service Process"}
+              {isZh ? "一站式贵宾服务流程" : isRu ? "Одностопный VIP-процесс" : "One-Stop VIP Service Process"}
             </h2>
           </Reveal>
           <div className="space-y-8">
@@ -658,16 +857,16 @@ export default function PremiumHealthCheckupContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal y={20} className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
-              {isZh ? "套餐版本与费用" : "Package Versions & Pricing"}
+              {isZh ? "套餐版本与费用" : isRu ? "Пакет версий и цен" : "Package Versions & Pricing"}
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              {isZh ? "选择适合您的体检套餐" : "Choose the checkup package that suits you"}
+              {isZh ? "选择适合您的体检套餐" : isRu ? "Выберите пакет проверки, который подходит вам" : "Choose the checkup package that suits you"}
             </p>
           </Reveal>
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <Reveal y={20} className="rounded-2xl p-8 bg-white shadow-sm">
               <h3 className="text-2xl font-bold mb-2">
-                {isZh ? "尊享版" : "Premium"}
+                {isZh ? "尊享版" : isRu ? "Премиум" : "Premium"}
               </h3>
               <div className="text-3xl font-bold mb-6 text-blue-600">
                 $2,500 – $4,800
@@ -683,7 +882,7 @@ export default function PremiumHealthCheckupContent() {
             </Reveal>
             <Reveal y={20} className="rounded-2xl p-8 bg-blue-600 text-white shadow-xl">
               <h3 className="text-2xl font-bold mb-2">
-                {isZh ? "至臻版" : "Ultimate"}
+                {isZh ? "至臻版" : isRu ? "Максимальный" : "Ultimate"}
               </h3>
               <div className="text-3xl font-bold mb-6 text-white">$4,800 – $8,000</div>
               <ul className="space-y-3">
@@ -701,15 +900,15 @@ export default function PremiumHealthCheckupContent() {
             className="text-center mt-12 bg-blue-100 rounded-2xl p-8 max-w-3xl mx-auto"
           >
             <h3 className="text-xl font-bold text-[#1A1A2E] mb-4">
-              {isZh ? "费用优势" : "Cost Advantage"}
+              {isZh ? "费用优势" : isRu ? "Цена выгода" : "Cost Advantage"}
             </h3>
             <p className="text-gray-600">
               {isZh
                 ? "同等质量的体检套餐，中国大陆定价仅为美国的35%-45%。"
-                : "For equivalent quality checkup packages, pricing in mainland China is only 35%-45% of US prices."}
+                : isRu ? "Для эквивалентных пакетов проверки качества цены в материковом Китае составляют всего 35-45% от цен в США." : "For equivalent quality checkup packages, pricing in mainland China is only 35%-45% of US prices."}
             </p>
             <p className="text-gray-500 text-sm mt-4">
-              {isZh ? "*具体费用以医院最终评估为准。" : "*Specific costs subject to final hospital assessment."}
+              {isZh ? "*具体费用以医院最终评估为准。" : isRu ? "* Конкретные расходы, подлежащие окончательной оценке в больнице." : "*Specific costs subject to final hospital assessment."}
             </p>
           </Reveal>
         </div>
@@ -720,7 +919,7 @@ export default function PremiumHealthCheckupContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal y={20} className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
-              {isZh ? "国际医疗旅行无缝支持" : "Seamless International Medical Travel Support"}
+              {isZh ? "国际医疗旅行无缝支持" : isRu ? "Поддержка международных медицинских путешествий" : "Seamless International Medical Travel Support"}
             </h2>
           </Reveal>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -746,25 +945,25 @@ export default function PremiumHealthCheckupContent() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Reveal y={20}>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              {isZh ? "开启您的“体检+旅行”臻享之旅" : 'Start Your "Checkup + Travel" Premium Journey'}
+              {isZh ? "开启您的“体检+旅行”臻享之旅" : isRu ? 'Начните свой «Checkup + Travel»' : 'Start Your "Checkup + Travel" Premium Journey'}
             </h2>
             <p className="text-blue-200 mb-8">
               {isZh
                 ? "一次深度体检，六大维度洞察，全周期健康守护。将年度健康管理变成一场身心焕新的奢华旅程。"
-                : "One in-depth checkup, six-dimensional insights, full-cycle health protection. Transform annual health management into a luxurious journey of physical and mental renewal."}
+                : isRu ? "Один углубленный осмотр, шестимерные идеи, защита здоровья на протяжении всего цикла. Превратите ежегодное управление здравоохранением в роскошное путешествие физического и психического обновления." : "One in-depth checkup, six-dimensional insights, full-cycle health protection. Transform annual health management into a luxurious journey of physical and mental renewal."}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
                 href="mailto:contact@medkungfu.com"
                 className="px-8 py-4 bg-white text-blue-900 font-semibold rounded-lg hover:bg-blue-50 transition-colors"
               >
-                {isZh ? "邮件咨询" : "Email Inquiry"}
+                {isZh ? "邮件咨询" : isRu ? "Email-запрос" : "Email Inquiry"}
               </a>
               <Link
                 href="/contact"
                 className="px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
               >
-                {isZh ? "在线留言" : "Online Inquiry"}
+                {isZh ? "在线留言" : isRu ? "Онлайн-запрос" : "Online Inquiry"}
               </Link>
             </div>
           </Reveal>

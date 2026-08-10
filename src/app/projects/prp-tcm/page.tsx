@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/sites/www-medkungfu-com-363c9bc1/shared
 import { ProjectDetailPage } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/arthritis/ProjectDetailPage";
 import { prpTcmPage } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/arthritis/data/prp-tcm";
 import { prpTcmPageZh } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/arthritis/data/prp-tcm-zh";
+import { prpTcmPageRu } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/arthritis/data/prp-tcm-ru";
 
 export const metadata: Metadata = {
   title: "PRP-TCM Joint Regeneration Therapy",
@@ -17,7 +18,7 @@ export default function PrpTcmPage() {
     <>
       <SiteHeader />
       <main className="flex-grow pt-[72px]">
-        <ProjectDetailPage data={prpTcmPage} zhConfig={prpTcmPageZh} />
+        <ProjectDetailPage data={prpTcmPage} zhConfig={prpTcmPageZh} ruConfig={prpTcmPageRu} />
       </main>
       <SiteFooter />
     </>

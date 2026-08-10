@@ -21,6 +21,14 @@ const heroBadgesZh = [
   "个性化方案",
   "双语陪诊",
 ];
+const heroBadgesRu = [
+  "Около 30 минут",
+  "Неинвазивный – быстрое восстановление",
+  "Персонализированный план",
+  "Двуязычное сопровождение",
+];
+
+
 
 const mechanisms: { num: string; title: string; description: string }[] = [
   {
@@ -63,6 +71,28 @@ const mechanismsZh: { num: string; title: string; description: string }[] = [
       "通过整体辨证调理，补益因减重或年龄增长所致的气血亏虚，从根本上提升皮肤的自我修复与维持能力，效果随疗程积累，持续而自然。",
   },
 ];
+const mechanismsRu: { num: string; title: string; description: string }[] = [
+  {
+    num: "01",
+    title: "Регулирование Ци и крови · Укрепление фонда",
+    description:
+      "Благодаря сочетанию дистальных и местных акупунктур, гармонизировать ци всего тела и кровоток, обеспечить достаточный питательный фундамент для тканей лица, а также улучшить тусклый цвет лица и провисание, вызванное ци и дефицитом крови.",
+  },
+  {
+    num: "02",
+    title: "Стимулировать локально · способствовать циркуляции крови",
+    description:
+      "Тонкие иглы точно стимулируют акупунктуры лица, способствуют местному кровообращению, активируют активность фибробластов, способствуют синтезу и обновлению коллагена и улучшают полноту контура лица.",
+  },
+  {
+    num: "03",
+    title: "Регенерация стимулов · дефицит наполнения",
+    description:
+      "Благодаря холистической дифференциации синдрома и кондиционированию, добавке ци и дефициту крови, вызванному потерей веса или старением, фундаментально улучшают способность кожи к самовосстановлению и поддержанию, с эффектами, накапливающимися в течение курса лечения, устойчивыми и естественными.",
+  },
+];
+
+
 
 const coreAdvantages: { title: string; description: string }[] = [
   {
@@ -109,6 +139,30 @@ const coreAdvantagesZh: { title: string; description: string }[] = [
       "针灸的系统性调理不局限于面部，同时改善气血循环、睡眠质量与整体体质。许多患者面部紧致改善的同时，也反馈气色变好、精力更充沛——这是单纯局部医美无法实现的整体获益。",
   },
 ];
+const coreAdvantagesRu: { title: string; description: string }[] = [
+  {
+    title: "Неинвазивная процедура, нулевой период восстановления",
+    description:
+      "Никаких разрезов, никаких инъекций, никакой анестезии, нормальная деятельность может возобновиться сразу после лечения. По сравнению с недельным периодом восстановления хирургических подтяжек лица и ощущения инородного тела и отеков, которые могут возникнуть при подъеме нити, иглоукалывание почти не имеет побочных эффектов и не влияет на повседневную жизнь и работу.",
+  },
+  {
+    title: "Никаких аллогенных веществ, безопасных и контролируемых",
+    description:
+      "Наполнители гиалуроновой кислоты и ботулинический токсин являются экзогенными инъекционными веществами, с риском аллергии, узелков, смещения или жесткости лица. Иглоукалывание использует только тонкие иглы для микростимуляции, стимулируя собственную способность кожи к восстановлению, без аллогенных компонентов, поступающих в организм.",
+  },
+  {
+    title: "Лечит как корень, так и симптомы, естественные и длительные эффекты",
+    description:
+      "Методы наполнителя относятся к наполнение внешней силой, а эффекты исчезают после прекращения лечения. Иглоукалывание улучшает способность кожи к самоподдержанию из корня, гармонизируя ци и кровь и способствуя регенерации коллагена. Эффекты накапливаются с течением времени, улучшения естественны, и неестественные чувства вряд ли произойдут.",
+  },
+  {
+    title: "Холистическое кондиционирование, одновременное улучшение",
+    description:
+      "Систематическая кондиционирование иглоукалывания не ограничивается лицом, но также улучшает ци и кровообращение, качество сна и общую конституцию. Многие пациенты сообщают об улучшении цвета лица и увеличении энергии, в то время как их стеснение лица улучшается - это целостное преимущество, которое не может быть достигнуто с помощью чисто местной медицинской эстетики.",
+  },
+];
+
+
 
 const candidates: { num: string; title: string; description: string }[] = [
   {
@@ -175,6 +229,40 @@ const candidatesZh: { num: string; title: string; description: string }[] = [
       "希望通过整体调理气血，同步改善面色、气色与体质状态者。",
   },
 ];
+const candidatesRu: { num: string; title: string; description: string }[] = [
+  {
+    num: "1",
+    title: "Те, у кого лицо отвисло после потери веса",
+    description:
+      "Те, кто испытывает проблемы с провисанием лица, полостью или «обвалом лица» после потери веса и хотят улучшить контуры лица, не прибегая к операции или инъекционным наполнителям.",
+  },
+  {
+    num: "2",
+    title: "Люди с превентивной красотой",
+    description:
+      "Похудевшие, которые надеются пройти лечение красоты лица одновременно во время постепенной потери веса, чтобы предотвратить провисание кожи.",
+  },
+  {
+    num: "3",
+    title: "Возрастная обвисание лица",
+    description:
+      "Те, у кого потеря коллагена лица и обвисание контура из-за старения или генетических факторов.",
+  },
+  {
+    num: "4",
+    title: "Те, кто ищет естественную терапию",
+    description:
+      "Те, кто ищет безопасные, неинвазивные, естественные методы красоты и обеспокоены хирургическими операциями или инъекционными процедурами, такими как гиалуроновая кислота.",
+  },
+  {
+    num: "5",
+    title: "Для тех, кто нуждается в целостном кондиционировании",
+    description:
+      "Те, кто надеется улучшить цвет лица, внешний вид и физическое состояние одновременно с помощью целостной ци и кондиционирования крови.",
+  },
+];
+
+
 
 const contraindications = [
   "Pregnant women",
@@ -189,6 +277,14 @@ const contraindicationsZh = [
   "局部皮肤感染、破损或活动性湿疹/皮炎者",
   "血糖未受控的糖尿病患者",
 ];
+const contraindicationsRu = [
+  "Беременные женщины",
+  "Те, у кого есть коагуляционные расстройства",
+  "Те, у кого есть местная инфекция кожи, повреждение или активная экзема / дерматит",
+  "Диабетические пациенты с неконтролируемым уровнем сахара в крови",
+];
+
+
 
 const processSteps: {
   num: string;
@@ -289,6 +385,57 @@ const processStepsZh: {
       "完成疗程后，医师提供书面中英文治疗总结与居家维护建议，包括：日常饮食调养（气血双补）；推荐的自我穴位按摩手法；生活习惯建议（充足睡眠、避免快速减重等）。",
   },
 ];
+const processStepsRu: {
+  num: string;
+  title: string;
+  duration: string;
+  description: string;
+}[] = [
+  {
+    num: "1",
+    title: "Предварительная онлайн-консультация и оценка потребностей",
+    duration: "1-3 рабочих дня",
+    description:
+      "Свяжитесь с MedKungfu по электронной почте, чтобы сообщить о проблемах с лицом. Эта терапия обычно не требует предоперационной удаленной видеоконсультации; при наличии особых потребностей или сложной истории болезни дистанционная оценка ТКМ может быть организована отдельно.",
+  },
+  {
+    num: "2",
+    title: "Развивайте маршрут путешествия по Китаю",
+    duration: "3-7 рабочих дней",
+    description:
+      "После подтверждения намерения получить лечение, MedKungfu помогает в планировании поездки в Китай, в том числе: помощь с необходимыми материалами для получения визы (например, письмо-приглашение в больницу); рекомендации проживания рядом с больницей; помощь в бронировании трансферов из аэропорта; и предложение разумной продолжительности пребывания на основе индивидуального плана лечения, разработанного врачом.",
+  },
+  {
+    num: "3",
+    title: "Предварительная оценка допуска",
+    duration: "День 1 после прибытия",
+    description:
+      "После поступления в сопровождении двуязычного медицинского сопровождения в больницу. Врач проводит первую личную консультацию, в том числе: анализ идентификации конституции ТКМ и дифференциации синдрома; оценка степени и распространения провисания лица; подтверждение отсутствия противопоказаний; разработка персонализированного рецепта на иглоукалывание и плана лечения.",
+  },
+  {
+    num: "4",
+    title: "Реализация лечения иглоукалыванием",
+    duration: "Каждый раз около 30 минут",
+    description:
+      "Каждое лечение занимает около 30 минут, во главе с старшими иглотерапевтами. Двуязычные медицинские эскорты MedKungfu присутствуют повсюду, чтобы обеспечить безбарьерную связь.",
+  },
+  {
+    num: "5",
+    title: "Оценка эффекта фазы и корректировка плана",
+    duration: "После каждой фазы",
+    description:
+      "После завершения каждой фазы врач оценивает эффект лечения, в том числе: изменения в герметичности и полноте лица; улучшение цвета лица и общего состояния; и корректирует частоту назначения иглоукалывания или лечения на основе индивидуального ответа.",
+  },
+  {
+    num: "6",
+    title: "Предварительное резюме и руководство по обслуживанию дома",
+    duration: "В конце курса лечения",
+    description:
+      "После завершения курса лечения врач предоставляет письменное резюме лечения на китайском языке и рекомендации по домашнему обслуживанию, в том числе: ежедневное диетическое кондиционирование (ци и добавление крови); рекомендуемые методы массажа с помощью самоточечных массажей; рекомендации по привычке к образу жизни (адекватный сон, избегание быстрой потери веса и т. Д.).",
+  },
+];
+
+
 
 const whyChoose: { title: string; description: string }[] = [
   {
@@ -335,18 +482,43 @@ const whyChooseZh: { title: string; description: string }[] = [
       "协助准备医疗签证邀请函及申请指导，提供入境引导、文化适应建议，并为患者及家属安排合适住宿，让整个行程无后顾之忧。",
   },
 ];
+const whyChooseRu: { title: string; description: string }[] = [
+  {
+    title: "Двуязычный медицинский перевод",
+    description:
+      "Персонал сопровождает пациентов для медицинских визитов, обеспечивая полный процесс медицинского перевода; медицинские записи, диагностические отчеты и планы лечения предоставляются в китайско-английском переводе для обеспечения безбарьерной связи между пациентами и врачами.",
+  },
+  {
+    title: "Трансфер частных автомобилей · Полное сопровождение",
+    description:
+      "Обеспечивает трансфер частных автомобилей в аэропорту, с выделенным персоналом, ответственным за доставку / высадку и полное сопровождение процесса для каждого посещения, поэтому пациентам не нужно сталкиваться с транспортными и навигационными трудностями в больнице.",
+  },
+  {
+    title: "Специальный координатор · Служба в стиле Батлера",
+    description:
+      "Оснащен специализированным координатором пациентов на протяжении всего процесса, координируя встречи, отслеживая прогресс в посещении и покрывая немедицинские потребности в жизни, такие как обеды, покупки и местные туры, действительно достигая универсального обслуживания в стиле дворецкого.",
+  },
+  {
+    title: "Виза · Маршрут · Размещение в одном месте",
+    description:
+      "Оказывает помощь в подготовке писем с приглашением на медицинскую визу и руководства по подаче заявления, предоставляет руководство по въезду и рекомендации по культурной адаптации, а также организует подходящее жилье для пациентов и семей, обеспечивая беззаботное путешествие.",
+  },
+];
+
+
 
 export default function AcupunctureBeautyContent() {
   const { lang } = useLanguage();
   const isZh = lang === "zh";
+  const isRu = lang === "ru";
 
-  const badges = isZh ? heroBadgesZh : heroBadges;
-  const mechanics = isZh ? mechanismsZh : mechanisms;
-  const advantages = isZh ? coreAdvantagesZh : coreAdvantages;
-  const candidateList = isZh ? candidatesZh : candidates;
-  const contraindicationList = isZh ? contraindicationsZh : contraindications;
-  const steps = isZh ? processStepsZh : processSteps;
-  const reasons = isZh ? whyChooseZh : whyChoose;
+  const badges = isZh ? heroBadgesZh : isRu ? heroBadgesRu : heroBadges;
+  const mechanics = isZh ? mechanismsZh : isRu ? mechanismsRu : mechanisms;
+  const advantages = isZh ? coreAdvantagesZh : isRu ? coreAdvantagesRu : coreAdvantages;
+  const candidateList = isZh ? candidatesZh : isRu ? candidatesRu : candidates;
+  const contraindicationList = isZh ? contraindicationsZh : isRu ? contraindicationsRu : contraindications;
+  const steps = isZh ? processStepsZh : isRu ? processStepsRu : processSteps;
+  const reasons = isZh ? whyChooseZh : isRu ? whyChooseRu : whyChoose;
 
   return (
     <main
@@ -364,7 +536,7 @@ export default function AcupunctureBeautyContent() {
                 Beauty Programme
               </p>
               <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
-                {isZh ? "针灸美颜紧肤疗法" : "Acupuncture Facial Rejuvenation"}
+                {isZh ? "针灸美颜紧肤疗法" : isRu ? "Иглоукалывание Лицевое омоложение" : "Acupuncture Facial Rejuvenation"}
               </h1>
               <p className="text-xl md:text-2xl text-rose-200 mb-4">
                 Acupuncture Facial Rejuvenation
@@ -372,7 +544,7 @@ export default function AcupunctureBeautyContent() {
               <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-8">
                 {isZh
                   ? "气血调和，从内而外焕活容颜"
-                  : "Harmonize Qi and Blood, Rejuvenate Beauty from Within"}
+                  : isRu ? "Гармонизируйте Ци и кровь, омолаживайте красоту изнутри" : "Harmonize Qi and Blood, Rejuvenate Beauty from Within"}
               </p>
               <div className="flex flex-wrap justify-center gap-4 mb-8">
                 {badges.map((badge) => (
@@ -389,13 +561,13 @@ export default function AcupunctureBeautyContent() {
                   href="#contact"
                   className="px-8 py-4 bg-rose-500 text-white font-semibold rounded-lg hover:bg-rose-600 transition-colors"
                 >
-                  {isZh ? "立即咨询" : "Consult Now"}
+                  {isZh ? "立即咨询" : isRu ? "Получить консультацию" : "Consult Now"}
                 </a>
                 <a
                   href="#intro"
                   className="px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
                 >
-                  {isZh ? "了解更多" : "Learn More"}
+                  {isZh ? "了解更多" : isRu ? "Узнать больше" : "Learn More"}
                 </a>
               </div>
             </div>
@@ -415,29 +587,29 @@ export default function AcupunctureBeautyContent() {
                 <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-6">
                   {isZh
                     ? "什么是针灸美颜紧肤疗法？"
-                    : "What is Acupuncture Facial Rejuvenation?"}
+                    : isRu ? "Что такое акупунктурное омоложение лица?" : "What is Acupuncture Facial Rejuvenation?"}
                 </h2>
                 <p className="text-gray-600 text-lg mb-6">
                   {isZh
                     ? "针灸是中国传统医学（中医）的核心治疗手段之一，有着超过两千年的临床历史。它通过将极细的毫针刺入人体特定穴位，刺激经络系统，调节气血运行，从而恢复身体的自然平衡与自愈能力。"
-                    : "Acupuncture is one of the core treatment methods of traditional Chinese medicine (TCM), with over two thousand years of clinical history. It involves inserting extremely fine needles into specific acupoints of the human body to stimulate the meridian system, regulate qi and blood flow, thereby restoring the body's natural balance and self-healing ability."}
+                    : isRu ? "Иглоукалывание является одним из основных методов лечения традиционной китайской медицины (ТКМ), с более чем двухтысячелетней клинической историей. Он включает в себя вставку чрезвычайно тонких игл в определенные точки человеческого тела, чтобы стимулировать систему меридиана, регулировать ци и кровоток, тем самым восстанавливая естественный баланс организма и способность к самовосстановлению." : "Acupuncture is one of the core treatment methods of traditional Chinese medicine (TCM), with over two thousand years of clinical history. It involves inserting extremely fine needles into specific acupoints of the human body to stimulate the meridian system, regulate qi and blood flow, thereby restoring the body's natural balance and self-healing ability."}
                 </p>
                 <p className="text-gray-600 mb-6">
                   {isZh
                     ? "世界卫生组织（WHO）已将其列为多类病症的推荐疗法，在中国各级三甲医院中，针灸科均为正式临床科室，由执照医师主诊。"
-                    : "The World Health Organization (WHO) has listed it as a recommended therapy for various conditions. In Chinese tertiary hospitals at all levels, acupuncture departments are formal clinical departments, diagnosed by licensed physicians."}
+                    : isRu ? "Всемирная организация здравоохранения (WHO) включила его в список рекомендуемых методов лечения различных заболеваний. В китайских высших больницах на всех уровнях отделения иглоукалывания являются формальными клиническими отделениями, диагностируемыми лицензированными врачами." : "The World Health Organization (WHO) has listed it as a recommended therapy for various conditions. In Chinese tertiary hospitals at all levels, acupuncture departments are formal clinical departments, diagnosed by licensed physicians."}
                 </p>
                 <p className="text-gray-600 mb-6">
                   {isZh
                     ? "在美容医学领域，针灸近年来被广泛用于面部紧致、气色改善与抗衰老。其原理在于通过经络调节与微刺激，激活皮肤自身的修复与再生机制，而非依赖外来物质填充。"
-                    : "In the field of aesthetic medicine, acupuncture has been widely used in recent years for facial tightening, complexion improvement and anti-aging. Its principle lies in activating the skin's own repair and regeneration mechanisms through meridian regulation and micro-stimulation, rather than relying on exogenous substance filling."}
+                    : isRu ? "В области эстетической медицины иглоукалывание широко используется в последние годы для подтяжки лица, улучшения цвета лица и борьбы со старением. Его принцип заключается в активации собственных механизмов восстановления и регенерации кожи посредством регулирования меридианов и микростимуляции, а не в использовании экзогенного наполнения вещества." : "In the field of aesthetic medicine, acupuncture has been widely used in recent years for facial tightening, complexion improvement and anti-aging. Its principle lies in activating the skin's own repair and regeneration mechanisms through meridian regulation and micro-stimulation, rather than relying on exogenous substance filling."}
                 </p>
                 <div className="flex items-center space-x-4 text-rose-600">
                   <Icons.checkCircle className="h-6 w-6" />
                   <span className="font-semibold">
                     {isZh
                       ? "针灸美颜的核心逻辑不是\"填\"，而是\"养\""
-                      : "The core logic of acupuncture beauty is not \"filling\" but \"nourishing\""}
+                      : isRu ? "Основная логика красоты иглоукалывания не «наполняет», а «питает»" : "The core logic of acupuncture beauty is not \"filling\" but \"nourishing\""}
                   </span>
                 </div>
               </Reveal>
@@ -460,12 +632,12 @@ export default function AcupunctureBeautyContent() {
               <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
                 {isZh
                   ? "针灸如何改善垮脸"
-                  : "How Acupuncture Improves Facial Sagging"}
+                  : isRu ? "Как иглоукалывание улучшает провисание лица" : "How Acupuncture Improves Facial Sagging"}
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
                 {isZh
                   ? "面对减重后\"垮脸\"困扰，中医针灸从\"气血平衡\"的整体观出发，提供了一条安全而有效的改善途径"
-                  : "Facing the \"collapsed face\" trouble after weight loss, TCM acupuncture provides a safe and effective improvement approach from the holistic view of \"qi and blood balance\""}
+                  : isRu ? "Столкнувшись с проблемой «обрушенного лица» после потери веса, иглоукалывание ТКМ обеспечивает безопасный и эффективный подход к улучшению с целостного взгляда на «ци и баланс крови»." : "Facing the \"collapsed face\" trouble after weight loss, TCM acupuncture provides a safe and effective improvement approach from the holistic view of \"qi and blood balance\""}
               </p>
             </Reveal>
             <div className="grid md:grid-cols-3 gap-8">
@@ -489,12 +661,12 @@ export default function AcupunctureBeautyContent() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <Reveal className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
-                {isZh ? "核心优势" : "Core Advantages"}
+                {isZh ? "核心优势" : isRu ? "Основные преимущества" : "Core Advantages"}
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
                 {isZh
                   ? "与其他医美方式的差异化优势"
-                  : "Differentiated advantages compared to other aesthetic methods"}
+                  : isRu ? "Дифференцированные преимущества по сравнению с другими эстетическими методами" : "Differentiated advantages compared to other aesthetic methods"}
               </p>
             </Reveal>
             <div className="grid md:grid-cols-2 gap-8">
@@ -522,12 +694,12 @@ export default function AcupunctureBeautyContent() {
             <div className="grid lg:grid-cols-2 gap-12">
               <Reveal x={-30}>
                 <h2 className="text-3xl font-bold text-[#1A1A2E] mb-8">
-                  {isZh ? "适用人群" : "Suitable Candidates"}
+                  {isZh ? "适用人群" : isRu ? "Подходящие кандидаты" : "Suitable Candidates"}
                 </h2>
                 <p className="text-gray-600 mb-6">
                   {isZh
                     ? "以下情况的患者尤为适合本疗法。所有患者在首次治疗前均需经医师评估，以确认适应症并制定个性化方案。"
-                    : "Patients with the following conditions are particularly suitable for this therapy. All patients need to be assessed by a physician before the first treatment to confirm indications and develop personalized plans."}
+                    : isRu ? "Пациенты со следующими состояниями особенно подходят для этой терапии. Все пациенты должны быть оценены врачом перед первым лечением, чтобы подтвердить показания и разработать индивидуальные планы." : "Patients with the following conditions are particularly suitable for this therapy. All patients need to be assessed by a physician before the first treatment to confirm indications and develop personalized plans."}
                 </p>
                 <div className="space-y-4">
                   {candidateList.map((item) => (
@@ -552,12 +724,12 @@ export default function AcupunctureBeautyContent() {
               </Reveal>
               <Reveal x={30}>
                 <h2 className="text-3xl font-bold text-[#1A1A2E] mb-8">
-                  {isZh ? "禁忌人群" : "Contraindications"}
+                  {isZh ? "禁忌人群" : isRu ? "Противопоказания" : "Contraindications"}
                 </h2>
                 <p className="text-gray-600 mb-6">
                   {isZh
                     ? "以下情况不宜接受本疗法，请在咨询时如实告知医师："
-                    : "The following conditions should not receive this therapy, please inform the physician truthfully during consultation:"}
+                    : isRu ? "Следующие условия не должны получать эту терапию, пожалуйста, сообщите врачу правдиво во время консультации:" : "The following conditions should not receive this therapy, please inform the physician truthfully during consultation:"}
                 </p>
                 <div className="bg-white rounded-xl p-6 shadow-sm">
                   <ul className="space-y-4">
@@ -574,7 +746,7 @@ export default function AcupunctureBeautyContent() {
                   <p className="text-gray-500 text-sm mt-6 pt-4 border-t">
                     {isZh
                       ? "首次治疗前，医师将进行中医体质辨识与面部评估，确保方案与您的个体状态精准匹配。"
-                      : "Before the first treatment, the physician will conduct TCM constitution identification and facial assessment to ensure the plan precisely matches your individual condition."}
+                      : isRu ? "Перед первым лечением врач проведет идентификацию конституции ТКМ и оценку лица, чтобы убедиться, что план точно соответствует вашему индивидуальному состоянию." : "Before the first treatment, the physician will conduct TCM constitution identification and facial assessment to ensure the plan precisely matches your individual condition."}
                   </p>
                 </div>
               </Reveal>
@@ -587,12 +759,12 @@ export default function AcupunctureBeautyContent() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <Reveal className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
-                {isZh ? "治疗流程" : "Treatment Process"}
+                {isZh ? "治疗流程" : isRu ? "Процесс лечения" : "Treatment Process"}
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
                 {isZh
                   ? "从首次咨询到返程随访，MedKungfu为每一位赴华接受治疗的海外患者提供从行前规划到返程随访的全链路陪诊服务"
-                  : "From initial consultation to return follow-up, MedKungfu provides end-to-end accompanying diagnosis services for every overseas patient coming to China for treatment, from pre-departure planning to return follow-up"}
+                  : isRu ? "От начальной консультации до последующего наблюдения за пациентом, MedKungfu предоставляет комплексные сопутствующие услуги по диагностике для каждого зарубежного пациента, приезжающего в Китай для лечения, от планирования до отъезда до последующего наблюдения." : "From initial consultation to return follow-up, MedKungfu provides end-to-end accompanying diagnosis services for every overseas patient coming to China for treatment, from pre-departure planning to return follow-up"}
               </p>
             </Reveal>
             <div className="space-y-6">
@@ -625,12 +797,12 @@ export default function AcupunctureBeautyContent() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <Reveal className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                {isZh ? "为什么选择我们" : "Why Choose Us"}
+                {isZh ? "为什么选择我们" : isRu ? "Почему выбирают нас" : "Why Choose Us"}
               </h2>
               <p className="text-rose-200 max-w-2xl mx-auto">
                 {isZh
                   ? "MedKungfu为每一位赴华接受治疗的海外患者提供专业的医疗旅游服务"
-                  : "MedKungfu provides professional medical tourism services for every overseas patient coming to China for treatment"}
+                  : isRu ? "MedKungfu предоставляет профессиональные услуги медицинского туризма для каждого зарубежного пациента, приезжающего в Китай для лечения." : "MedKungfu provides professional medical tourism services for every overseas patient coming to China for treatment"}
               </p>
             </Reveal>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -657,31 +829,31 @@ export default function AcupunctureBeautyContent() {
               <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-6">
                 {isZh
                   ? "准备好开始您的龙华针灸美颜之旅了吗？"
-                  : "Ready to Start Your Longhua Acupuncture Beauty Journey?"}
+                  : isRu ? "Готовы начать свое путешествие по красоте иглоукалывания Longhua?" : "Ready to Start Your Longhua Acupuncture Beauty Journey?"}
               </h2>
               <p className="text-gray-600 mb-8">
                 {isZh
                   ? "联系我们进行免费初步评估。我们的医学顾问将尽快回复，并为您安排专业的双语咨询服务。"
-                  : "Contact us for a free preliminary assessment. Our medical consultants will respond as soon as possible and arrange professional bilingual consultation services for you."}
+                  : isRu ? "Свяжитесь с нами для бесплатной предварительной оценки. Наши медицинские консультанты ответят вам как можно скорее и организуют для вас профессиональные консультации на двух языках." : "Contact us for a free preliminary assessment. Our medical consultants will respond as soon as possible and arrange professional bilingual consultation services for you."}
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a
                   href="mailto:contact@medkungfu.com"
                   className="px-8 py-4 bg-rose-500 text-white font-semibold rounded-lg hover:bg-rose-600 transition-colors"
                 >
-                  {isZh ? "邮件咨询" : "Email Consultation"}
+                  {isZh ? "邮件咨询" : isRu ? "Консультация по электронной почте" : "Email Consultation"}
                 </a>
                 <Link
                   href="/contact"
                   className="px-8 py-4 border-2 border-rose-500 text-rose-500 font-semibold rounded-lg hover:bg-rose-50 transition-colors"
                 >
-                  {isZh ? "在线留言" : "Online Inquiry"}
+                  {isZh ? "在线留言" : isRu ? "Онлайн-запрос" : "Online Inquiry"}
                 </Link>
               </div>
               <p className="text-gray-500 mt-8">
                 {isZh
                   ? "邮箱：contact@medkungfu.com"
-                  : "Email: contact@medkungfu.com"}
+                  : isRu ? "Электронная почта: contact@medkungfu.com" : "Email: contact@medkungfu.com"}
               </p>
             </Reveal>
           </div>

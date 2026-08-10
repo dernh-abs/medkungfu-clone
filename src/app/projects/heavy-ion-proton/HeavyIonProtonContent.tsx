@@ -56,6 +56,30 @@ const coreAdvantagesZh = [
       "百余位境外患者慕名来华治疗，医院配置英语/多语言服务、国际保险直付系统，海外患者就医全程无忧",
   },
 ];
+const coreAdvantagesRu = [
+  {
+    title: "Клиническая эффективность мирового класса",
+    description:
+      "5-летняя общая выживаемость 70,4% для пациентов с терапией частиц, 93,8% для носоглоточной карциномы и 97,2% для локализованного рака предстательной железы, достигая ведущих международных уровней",
+  },
+  {
+    title: "Короткий цикл лечения и быстрое планирование",
+    description:
+      "Несколько центров предлагают VIP-зеленые каналы, уделяя приоритетное внимание иностранным пациентам с временем ожидания, сокращенным до 3-5 дней.",
+  },
+  {
+    title: "Значительная экономическая эффективность",
+    description:
+      "Используя одно и то же международное оборудование высшего уровня (Varian ProBeam, Mevion и т. д.), общие затраты на лечение составляют всего 1/4 до 1/5 от развитых стран.",
+  },
+  {
+    title: "Высокие международные стандарты обслуживания",
+    description:
+      "Сотни иностранных пациентов приезжают в Китай для лечения, а больницы предоставляют услуги на английском языке и международные системы прямых платежей по страхованию.",
+  },
+];
+
+
 
 const indications: {
   bgClass: string;
@@ -162,6 +186,67 @@ const indicationsZh: {
     ],
   },
 ];
+const indicationsRu: {
+  bgClass: string;
+  titleClass: string;
+  bulletClass: string;
+  title: string;
+  icon: LucideIcon;
+  items: string[];
+}[] = [
+  {
+    bgClass: "bg-red-50",
+    titleClass: "text-red-700",
+    bulletClass: "text-red-500",
+    title: "Голова и шея",
+    icon: Icons.target,
+    items: [
+      "Насофарингеальный, орофарингеальный и рак гортани",
+      "Внутричерепные/опухоли основания черепа (менингиома, хордома и т.д.)",
+      "Медуллобластома, эпендимома и т.д.",
+    ],
+  },
+  {
+    bgClass: "bg-orange-50",
+    titleClass: "text-orange-700",
+    bulletClass: "text-orange-500",
+    title: "Торакальный и абдоминальный",
+    icon: Icons.heart,
+    items: [
+      "Рак легких (небольшие клетки)",
+      "Рак молочной железы",
+      "Рак пищевода",
+      "Рак печени",
+    ],
+  },
+  {
+    bgClass: "bg-purple-50",
+    titleClass: "text-purple-700",
+    bulletClass: "text-purple-500",
+    title: "Органы малого таза и другие направления",
+    icon: Icons.shield,
+    items: [
+      "Рак простаты",
+      "Рак поджелудочной железы",
+      "Опухоли костей и мягких тканей (остеосаркома, хордома и т. Д.)",
+      "Рак почек и ректального рака",
+    ],
+  },
+  {
+    bgClass: "bg-green-50",
+    titleClass: "text-green-700",
+    bulletClass: "text-green-500",
+    title: "Специальные рекомендации",
+    icon: Icons.award,
+    items: [
+      "Педиатрические опухоли (глобально признанный предпочтительный вариант)",
+      "Рецидивирующие/рефрактерные опухоли",
+      "Сложные опухоли вблизи критических функциональных областей",
+    ],
+  },
+];
+
+
 
 const treatmentServices: { title: string; icon: LucideIcon; items: string[] }[] = [
   {
@@ -214,6 +299,33 @@ const treatmentServicesZh: { title: string; icon: LucideIcon; items: string[] }[
     ],
   },
 ];
+const treatmentServicesRu: { title: string; icon: LucideIcon; items: string[] }[] = [
+  {
+    title: "Основные медицинские услуги",
+    icon: Icons.checkCircle,
+    items: [
+      "Многодисциплинарные консультации и оценка командами МДТ",
+      "Высокоточное моделирование и позиционирование с использованием изображений КТ/МРТ",
+      "Персонализированное планирование лечения с использованием передовых систем планирования",
+      "Изготовление пользовательского устройства иммобилизации для каждого пациента",
+      "Реализация терапии ионным лучом – 15-30 минут за сеанс, 1-3 минуты фактического облучения",
+      "Профессиональный уход и тщательный мониторинг во время лечения",
+    ],
+  },
+  {
+    title: "Премиум-сервисы поддержки",
+    icon: Icons.award,
+    items: [
+      "Полноценные медицинские услуги от начальной консультации до завершения лечения",
+      "Комплексные исследования, включая ПЭТ-КТ/МР и лабораторные испытания",
+      "Премиум частные / люкс уровня палат с профессиональными командами медсестер",
+      "Симптоматическое поддерживающее лечение и вспомогательные препараты",
+      "Руководство по реабилитации после выписки и долгосрочное наблюдение",
+    ],
+  },
+];
+
+
 
 const processSteps = [
   {
@@ -297,6 +409,51 @@ const processStepsZh = [
     description: "出院后定期复查，远程随访管理，病情监测不中断",
   },
 ];
+const processStepsRu = [
+  {
+    num: 1,
+    title: "1.Дистанционные консультации и скрининг",
+    duration: "2-5 дней",
+    description:
+      "Подать медицинские записи для дистанционной оценки MDT и предварительного планирования лечения",
+  },
+  {
+    num: 2,
+    title: "2. Визовые и туристические соглашения",
+    duration: "1-2 недели",
+    description:
+      "Приглашение на медицинскую визу, международная координация страхования, планирование поездок",
+  },
+  {
+    num: 3,
+    title: "3.Оценка прибытия и приема",
+    duration: "2-3 дня",
+    description:
+      "Комплексный физический осмотр, позиционирование изображений, прямой прием VIP-подопечных",
+  },
+  {
+    num: 4,
+    title: "4.Планирование лечения",
+    duration: "3-5 дней",
+    description:
+      "Определение цели, расчет дозы, обзор плана лечения и проверка",
+  },
+  {
+    num: 5,
+    title: "5.Реализация лечения",
+    duration: "5-6 недель",
+    description:
+      "Ежедневное протонное/тяжелое ионное облучение, безболезненное во всем, профессиональная помощь",
+  },
+  {
+    num: 6,
+    title: "6. Реабилитация и последующая деятельность",
+    duration: "Вперед",
+    description: "Регулярные проверки после выписки, дистанционное управление последующей деятельностью",
+  },
+];
+
+
 
 const efficacyStats = [
   { value: "70.4%", label: "5-Year Overall Survival Rate" },
@@ -311,6 +468,14 @@ const efficacyStatsZh = [
   { value: "82.1%", label: "Ⅱ期患者5年总生存率" },
   { value: "4.2%", label: "3级不良反应发生率" },
 ];
+const efficacyStatsRu = [
+  { value: "70.4%", label: "5-летний общий показатель выживаемости" },
+  { value: "83.8%", label: "Стадия 0-I 5-летнее выживание" },
+  { value: "82.1%", label: "II стадия 5-летнего выживания" },
+  { value: "4.2%", label: "3 Нежелательные события" },
+];
+
+
 
 const whyChoose = [
   {
@@ -389,17 +554,62 @@ const whyChooseZh = [
     description: "治疗后持续远程随访，病情监测不中断",
   },
 ];
+const whyChooseRu = [
+  {
+    title: "Совершенство мирового класса",
+    description:
+      "Клиническая эффективность достигает международных уровней, аккредитованы несколько центров JCI",
+  },
+  {
+    title: "Лидер в области технологий тяжелых ионов",
+    description:
+      "Китай является мировым лидером в области применения тяжелых ионов в клинических условиях с запатентованными системами.",
+  },
+  {
+    title: "Прямой доступ к лучшим центрам",
+    description:
+      "Формальное партнерство с ведущими центрами в Шанхае, Шаньдуне, Гуанчжоу, Ухане, Ганьсу, Аньхой",
+  },
+  {
+    title: "Прозрачные цены",
+    description:
+      "Медицинский пакет «все включено», прямая больничная оплата, никаких скрытых сборов",
+  },
+  {
+    title: "VIP Ward Experience - опыт",
+    description:
+      "Частные / люксовые отделения по всему миру с профессиональными командами медсестер",
+  },
+  {
+    title: "Эффективное планирование",
+    description:
+      "Первоначальная оценка и лечение начинаются в течение 2-3 недель, избегая длительного ожидания.",
+  },
+  {
+    title: "Полная двуязычная поддержка",
+    description:
+      "Перевод медицинской документации, устный перевод на месте, международная координация страхования",
+  },
+  {
+    title: "Долгосрочные последующие меры",
+    description:
+      "Непрерывное дистанционное наблюдение после лечения с непрерывным мониторингом",
+  },
+];
+
+
 
 export default function HeavyIonProtonContent() {
   const { lang } = useLanguage();
   const isZh = lang === "zh";
+  const isRu = lang === "ru";
 
-  const advs = isZh ? coreAdvantagesZh : coreAdvantages;
-  const inds = isZh ? indicationsZh : indications;
-  const services = isZh ? treatmentServicesZh : treatmentServices;
-  const steps = isZh ? processStepsZh : processSteps;
-  const stats = isZh ? efficacyStatsZh : efficacyStats;
-  const reasons = isZh ? whyChooseZh : whyChoose;
+  const advs = isZh ? coreAdvantagesZh : isRu ? coreAdvantagesRu : coreAdvantages;
+  const inds = isZh ? indicationsZh : isRu ? indicationsRu : indications;
+  const services = isZh ? treatmentServicesZh : isRu ? treatmentServicesRu : treatmentServices;
+  const steps = isZh ? processStepsZh : isRu ? processStepsRu : processSteps;
+  const stats = isZh ? efficacyStatsZh : isRu ? efficacyStatsRu : efficacyStats;
+  const reasons = isZh ? whyChooseZh : isRu ? whyChooseRu : whyChoose;
 
   return (
     <main
@@ -414,24 +624,24 @@ export default function HeavyIonProtonContent() {
             <Icons.activity className="h-10 w-10" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-[#1A1A2E] mb-4">
-            {isZh ? "重离子/质子治疗" : "Heavy Ion/Proton Therapy"}
+            {isZh ? "重离子/质子治疗" : isRu ? "Тяжелая ионно-протонная терапия" : "Heavy Ion/Proton Therapy"}
           </h1>
           <p className="text-xl text-[#1B4D3E] font-medium mb-4">
             {isZh
               ? "精准\"定向爆破\"肿瘤，守护生命之光"
-              : "Precision \"Targeted Demolition\" of Tumors, Guarding the Light of Life"}
+              : isRu ? "Точный «целевой снос» опухолей, охраняющий свет жизни" : "Precision \"Targeted Demolition\" of Tumors, Guarding the Light of Life"}
           </p>
           <p className="text-gray-600 max-w-3xl mx-auto">
             {isZh
               ? "重离子（碳离子）和质子治疗是目前国际公认最先进的肿瘤放射治疗技术。精准集中于肿瘤，实现亚毫米级的\"定点爆破\"，同时最大限度地保护周边正常组织，显著降低治疗副作用。中国已在粒子放疗领域跻身国际先进行列，成为全球重离子技术临床应用创新的领跑者。"
-              : "Heavy ion (carbon ion) and proton therapy are internationally recognized as the most advanced tumor radiotherapy technologies. Precisely concentrated on tumors, achieving sub-millimeter \"targeted demolition\" while maximizing protection of surrounding normal tissue and significantly reducing treatment side effects. China has joined the international advanced ranks in particle radiotherapy and become a global leader in heavy ion clinical application innovation."}
+              : isRu ? "Тяжелые ионы (углерод-ионная) и протонная терапия признаны на международном уровне как самые передовые технологии опухолевой лучевой терапии. Концентрируется на опухолях, достигая субмиллиметрового «целевого сноса», при этом максимально защищая окружающие нормальные ткани и значительно снижая побочные эффекты лечения. Китай присоединился к международным передовым рядам в области радиотерапии частиц и стал мировым лидером в области инноваций в области применения тяжелых ионов в клинических условиях." : "Heavy ion (carbon ion) and proton therapy are internationally recognized as the most advanced tumor radiotherapy technologies. Precisely concentrated on tumors, achieving sub-millimeter \"targeted demolition\" while maximizing protection of surrounding normal tissue and significantly reducing treatment side effects. China has joined the international advanced ranks in particle radiotherapy and become a global leader in heavy ion clinical application innovation."}
           </p>
         </div>
 
         {/* CORE ADVANTAGES */}
         <section className="bg-white rounded-2xl p-10 shadow-sm mb-12">
           <h2 className="text-2xl font-bold mb-8 text-center text-[#1A1A2E]">
-            {isZh ? "核心优势 – 为什么选择中国？" : "Core Advantages – Why Choose China?"}
+            {isZh ? "核心优势 – 为什么选择中国？" : isRu ? "Основные преимущества: почему выбирают Китай?" : "Core Advantages – Why Choose China?"}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {advs.map((adv) => (
@@ -460,12 +670,12 @@ export default function HeavyIonProtonContent() {
         {/* INDICATIONS */}
         <section className="bg-white rounded-2xl p-10 shadow-sm mb-12">
           <h2 className="text-2xl font-bold mb-8 text-center text-[#1A1A2E]">
-            {isZh ? "适应症 – 哪些肿瘤适合治疗？" : "Indications – Which Tumors Are Suitable?"}
+            {isZh ? "适应症 – 哪些肿瘤适合治疗？" : isRu ? "Показания – какие опухоли подходят?" : "Indications – Which Tumors Are Suitable?"}
           </h2>
           <p className="text-gray-600 mb-8 text-center">
             {isZh
               ? "重离子和质子治疗尤其适合对常规放疗不敏感、位于重要器官附近或儿童/青少年患者。目前可收治50余种常见肿瘤疾病。"
-              : "Heavy ion and proton therapy are especially suitable for tumors resistant to conventional radiotherapy, located near vital organs, or pediatric/adolescent patients. Currently treats over 50 types of common tumors."}
+              : isRu ? "Тяжелая ионная и протонная терапия особенно подходит для опухолей, устойчивых к обычной лучевой терапии, расположенных вблизи жизненно важных органов, или педиатрических / подростковых пациентов. В настоящее время лечит более 50 типов распространенных опухолей." : "Heavy ion and proton therapy are especially suitable for tumors resistant to conventional radiotherapy, located near vital organs, or pediatric/adolescent patients. Currently treats over 50 types of common tumors."}
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {inds.map((ind) => (
@@ -490,7 +700,7 @@ export default function HeavyIonProtonContent() {
           <p className="text-gray-500 text-sm mt-6 text-center">
             {isZh
               ? "注：是否适合接受重离子/质子治疗，需由多学科专家团队进行个体化评估。"
-              : "Note: Suitability for heavy ion/proton therapy requires individualized evaluation by a multidisciplinary expert team."}
+              : isRu ? "Примечание: Пригодность для терапии тяжелыми ионами/протонами требует индивидуальной оценки многопрофильной группой экспертов." : "Note: Suitability for heavy ion/proton therapy requires individualized evaluation by a multidisciplinary expert team."}
           </p>
         </section>
 
@@ -499,7 +709,7 @@ export default function HeavyIonProtonContent() {
           <h2 className="text-2xl font-bold mb-8 text-center text-[#1A1A2E]">
             {isZh
               ? "治疗内容（医疗服务部分）"
-              : "Treatment Services (Medical Care)"}
+              : isRu ? "Медицинская помощь (Medical Care)" : "Treatment Services (Medical Care)"}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {services.map((group) => (
@@ -529,7 +739,7 @@ export default function HeavyIonProtonContent() {
           <h2 className="text-2xl font-bold mb-8 text-center text-[#1A1A2E]">
             {isZh
               ? "治疗流程（从初诊至康复）"
-              : "Treatment Process (From Initial Consultation to Recovery)"}
+              : isRu ? "Процесс лечения (от первичной консультации до восстановления)" : "Treatment Process (From Initial Consultation to Recovery)"}
           </h2>
           <div className="space-y-6">
             {steps.map((step, i) => (
@@ -558,7 +768,7 @@ export default function HeavyIonProtonContent() {
           <p className="text-center text-gray-600 mt-6">
             {isZh
               ? "从抵华至完成治疗，全程通常需6–8周。"
-              : "From arrival to treatment completion, the entire process typically takes 6-8 weeks."}
+              : isRu ? "От прибытия до завершения лечения весь процесс обычно занимает 6-8 недель." : "From arrival to treatment completion, the entire process typically takes 6-8 weeks."}
           </p>
         </section>
 
@@ -567,7 +777,7 @@ export default function HeavyIonProtonContent() {
           <h2 className="text-2xl font-bold mb-8 text-center">
             {isZh
               ? "疗效 – 中国临床数据（2026版）"
-              : "Efficacy – China Clinical Data (2026 Edition)"}
+              : isRu ? "Эффективность: Китайские клинические данные (2026)" : "Efficacy – China Clinical Data (2026 Edition)"}
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map((stat) => (
@@ -583,14 +793,14 @@ export default function HeavyIonProtonContent() {
           <p className="text-center text-sm opacity-70 mt-6">
             {isZh
               ? "数据来源：上海市质子重离子医院2026版生存报告，截至2026年5月，累计治疗患者9317例"
-              : "Data Source: Shanghai Proton and Heavy Ion Hospital 2026 Survival Report, 9,317 patients treated as of May 2026"}
+              : isRu ? "Шанхайский протонный и тяжелый ионный госпиталь 2026 Отчет о выживании, 9317 пациентов, лечившихся по состоянию на май 2026 года" : "Data Source: Shanghai Proton and Heavy Ion Hospital 2026 Survival Report, 9,317 patients treated as of May 2026"}
           </p>
         </section>
 
         {/* CASE STUDIES */}
         <section className="bg-white rounded-2xl p-10 shadow-sm mb-12">
           <h2 className="text-2xl font-bold mb-8 text-center text-[#1A1A2E]">
-            {isZh ? "案例展示" : "Case Studies"}
+            {isZh ? "案例展示" : isRu ? "Тематические исследования" : "Case Studies"}
           </h2>
           <div className="space-y-6">
             <Reveal y={20}>
@@ -599,12 +809,12 @@ export default function HeavyIonProtonContent() {
                   <Icons.users className="h-5 w-5 mr-2" />
                   {isZh
                     ? "案例一：伊拉克青年Aron的七千公里希望之旅"
-                    : "Case 1: Aron's 7,000km Journey of Hope from Iraq"}
+                    : isRu ? "Дело 1: 7000 км пути Арона из Ирака" : "Case 1: Aron's 7,000km Journey of Hope from Iraq"}
                 </h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
                   {isZh
                     ? "来自伊拉克的Aron罹患脑膜瘤，经历三次开颅手术后肿瘤仍反复复发。根据国际权威NCCN指南推荐，质子治疗被列为肿瘤紧邻脑干、脊髓及视神经等关键区域的脑肿瘤的优先选项。经跨洋视频会诊，中国医院的专家为其制定了精准质子治疗方案。患者顺利完成30次质子放疗后敲响\"康复之鼓\"，\"从伊拉克到中国跨越7000公里的信任，换来的是生命的重生。\""
-                    : "Aron from Iraq suffered from meningioma that recurred after three craniotomies. According to NCCN guidelines, proton therapy is the preferred option for brain tumors near critical areas. After transoceanic video consultation, Chinese experts formulated a precise proton treatment plan. After completing 30 sessions, Aron rang the \"recovery bell\" - \"7,000 kilometers of trust from Iraq to China brought a rebirth of life.\""}
+                    : isRu ? "Арон из Ирака страдал менингиомой, которая повторялась после трех краниотомий. Согласно рекомендациям NCCN, протонная терапия является предпочтительным вариантом для опухолей головного мозга вблизи критических областей. После трансокеанических видеоконсультаций китайские специалисты сформулировали точный план лечения протонами. После завершения 30 сеансов Арон позвонил в «колокол восстановления» — «7000 километров доверия из Ирака в Китай принесли возрождение жизни»." : "Aron from Iraq suffered from meningioma that recurred after three craniotomies. According to NCCN guidelines, proton therapy is the preferred option for brain tumors near critical areas. After transoceanic video consultation, Chinese experts formulated a precise proton treatment plan. After completing 30 sessions, Aron rang the \"recovery bell\" - \"7,000 kilometers of trust from Iraq to China brought a rebirth of life.\""}
                 </p>
               </div>
             </Reveal>
@@ -614,12 +824,12 @@ export default function HeavyIonProtonContent() {
                   <Icons.users className="h-5 w-5 mr-2" />
                   {isZh
                     ? "案例二：印尼罕见脊索瘤患者的中国\"救赎\""
-                    : "Case 2: Indonesian Chordoma Patient's Chinese \"Salvation\""}
+                    : isRu ? "Случай 2: китайское «спасение» индонезийского пациента Чордомы" : "Case 2: Indonesian Chordoma Patient's Chinese \"Salvation\""}
                 </h3>
                 <p className="text-gray-600 text-sm leading-relaxed">
                   {isZh
                     ? "30多岁的印尼青年Rafi确诊脊索瘤（发病率仅百万分之一）后，辗转印尼、马来西亚均被告知建议质子治疗，但当地并无该设备。在全球搜索中，他们比较了多个国家的费用后，最终选择了中国医院——总费用不到新加坡的一半。经多学科团队联合制定\"手术+质子\"整合方案，Rafi顺利完成了治疗。"
-                    : "Rafi, a 30-year-old Indonesian diagnosed with chordoma (incidence of only one in a million), was advised to undergo proton therapy but no equipment was available locally. After comparing costs globally, they chose a Chinese hospital - total cost less than half of Singapore. With an integrated \"surgery + proton\" plan by the MDT team, Rafi successfully completed treatment."}
+                    : isRu ? "Рафи, 30-летнему индонезийцу с диагнозом хордома (заболеваемость только одного человека из миллиона), было рекомендовано пройти протонную терапию, но в стране не было оборудования. Сравнив затраты по всему миру, они выбрали китайскую больницу — общая стоимость меньше половины Сингапура. Благодаря комплексному плану «хирургия + протон» команды MDT Рафи успешно завершил лечение." : "Rafi, a 30-year-old Indonesian diagnosed with chordoma (incidence of only one in a million), was advised to undergo proton therapy but no equipment was available locally. After comparing costs globally, they chose a Chinese hospital - total cost less than half of Singapore. With an integrated \"surgery + proton\" plan by the MDT team, Rafi successfully completed treatment."}
                 </p>
               </div>
             </Reveal>
@@ -629,17 +839,17 @@ export default function HeavyIonProtonContent() {
         {/* TREATMENT COST */}
         <section className="bg-white rounded-2xl p-10 shadow-sm mb-12">
           <h2 className="text-2xl font-bold mb-6 text-center text-[#1A1A2E]">
-            {isZh ? "治疗费用" : "Treatment Cost"}
+            {isZh ? "治疗费用" : isRu ? "Стоимость лечения" : "Treatment Cost"}
           </h2>
           <div className="text-center">
             <p className="text-gray-600 mb-4">
               {isZh
                 ? "中国提供质子/重离子治疗的全程特需医疗服务套餐，采用一口价收费模式，涵盖门诊、检查、治疗、药物、高端病房及全程护理，价格透明，无任何隐藏费用。"
-                : "China offers all-inclusive premium medical service packages for proton/heavy ion therapy with transparent pricing, covering consultations, examinations, treatment, medications, premium wards, and full nursing care with no hidden fees."}
+                : isRu ? "Китай предлагает комплексные пакеты премиальных медицинских услуг для протонной / тяжелой ионной терапии с прозрачным ценообразованием, охватывающие консультации, обследования, лечение, лекарства, премиальные палаты и полный уход без скрытых сборов." : "China offers all-inclusive premium medical service packages for proton/heavy ion therapy with transparent pricing, covering consultations, examinations, treatment, medications, premium wards, and full nursing care with no hidden fees."}
             </p>
             <div className="inline-block bg-[#1B4D3E]/10 text-[#1B4D3E] px-8 py-4 rounded-xl">
               <span className="text-sm">
-                {isZh ? "参考全程治疗费用:" : "Reference Total Treatment Cost:"}
+                {isZh ? "参考全程治疗费用:" : isRu ? "Общая стоимость лечения:" : "Reference Total Treatment Cost:"}
               </span>
               <span className="text-2xl font-bold ml-2">
                 $28,000 – $42,000 USD
@@ -648,7 +858,7 @@ export default function HeavyIonProtonContent() {
             <p className="text-gray-500 text-sm mt-4">
               {isZh
                 ? "（具体费用以医院最终评估为准。）"
-                : "(Actual costs subject to final hospital evaluation.)"}
+                : isRu ? "(Окончательные расходы, подлежащие оценке в больнице.)" : "(Actual costs subject to final hospital evaluation.)"}
             </p>
           </div>
         </section>
@@ -657,7 +867,7 @@ export default function HeavyIonProtonContent() {
         <section className="bg-white rounded-2xl p-10 shadow-sm mb-12">
           <h2 className="text-2xl font-bold mb-8 text-center text-[#1A1A2E] flex items-center justify-center">
             <Icons.checkCircle className="h-7 w-7 mr-3 text-[#1B4D3E]" />
-            {isZh ? "选择我们的理由" : "Why Choose Us"}
+            {isZh ? "选择我们的理由" : isRu ? "Почему выбирают нас" : "Why Choose Us"}
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {reasons.map((item) => (
@@ -681,18 +891,18 @@ export default function HeavyIonProtonContent() {
             <h2 className="text-2xl font-bold mb-4">
               {isZh
                 ? "开启您的重离子/质子治疗之旅"
-                : "Start Your Heavy Ion/Proton Therapy Journey"}
+                : isRu ? "Начните свое путешествие по тяжелой ионной / протонной терапии" : "Start Your Heavy Ion/Proton Therapy Journey"}
             </h2>
             <p className="mb-6 opacity-90">
               {isZh
                 ? "联系我们的专业团队，获取免费远程评估和治疗方案"
-                : "Contact our professional team for a free remote evaluation and treatment plan"}
+                : isRu ? "Свяжитесь с нашей профессиональной командой для бесплатного дистанционного обследования и лечения." : "Contact our professional team for a free remote evaluation and treatment plan"}
             </p>
             <Link
               href="/contact"
               className="inline-flex items-center bg-white text-[#1B4D3E] px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
             >
-              {isZh ? "立即咨询" : "Contact Us Now"}
+              {isZh ? "立即咨询" : isRu ? "Свяжитесь с нами сейчас" : "Contact Us Now"}
               <Icons.arrowRight className="h-5 w-5 ml-2" />
             </Link>
           </div>

@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/sites/www-medkungfu-com-363c9bc1/shared
 import { ProjectDetailPage } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/arthritis/ProjectDetailPage";
 import { maciTcmPage } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/arthritis/data/maci-tcm";
 import { maciTcmPageZh } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/arthritis/data/maci-tcm-zh";
+import { maciTcmPageRu } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/arthritis/data/maci-tcm-ru";
 
 export const metadata: Metadata = {
   title: "MACI-TCM Joint Regeneration Therapy",
@@ -17,7 +18,7 @@ export default function MaciTcmPage() {
     <>
       <SiteHeader />
       <main className="flex-grow pt-[72px]">
-        <ProjectDetailPage data={maciTcmPage} zhConfig={maciTcmPageZh} />
+        <ProjectDetailPage data={maciTcmPage} zhConfig={maciTcmPageZh} ruConfig={maciTcmPageRu} />
       </main>
       <SiteFooter />
     </>

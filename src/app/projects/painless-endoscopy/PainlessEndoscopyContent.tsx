@@ -47,6 +47,25 @@ const whyChooseItemsZh: { title: string; description: string }[] = [
       "中国已对75个国家实行免签或落地签。其他国家可凭我们出具的正式医疗邀请函快速办理医疗签证。",
   },
 ];
+const whyChooseItemsRu: { title: string; description: string }[] = [
+  {
+    title: "1. ведущее оборудование и технологии",
+    description:
+      "Ведущие медицинские центры Китая оснащены системами гастроскопии, синхронизированными с международными стандартами, с использованием новейших флагманских эндоскопических платформ от ведущих мировых производителей.",
+  },
+  {
+    title: "2. Нет долгих ожиданий",
+    description:
+      "Западные страны: для назначения специалистов часто требуется 30+ дней (США) или 18+ недель в общественных системах (Великобритания). В Китае: от начальной консультации до сдачи экзамена, можно организовать всего за 3-5 рабочих дней.",
+  },
+  {
+    title: "3. Поддержка визового комфорта",
+    description:
+      "Китай ввел безвизовый режим для 75 стран. Граждане других стран могут быстро получить медицинскую визу с помощью нашего официального медицинского приглашения.",
+  },
+];
+
+
 
 const stats: { value: string; label: string }[] = [
   { value: "3-5 Days", label: "Fastest Arrangement" },
@@ -61,6 +80,14 @@ const statsZh: { value: string; label: string }[] = [
   { value: "当日", label: "出初步报告" },
   { value: "75国", label: "免签或落地签" },
 ];
+const statsRu: { value: string; label: string }[] = [
+  { value: "3-5 дней", label: "Самая быстрая договоренность" },
+  { value: "3-4 часа", label: "Общая продолжительность" },
+  { value: "В тот же день", label: "Предварительный доклад" },
+  { value: "75 стран", label: "Безвизовый / по прибытии" },
+];
+
+
 
 const detectableIssues = [
   "Inflammation",
@@ -71,6 +98,15 @@ const detectableIssues = [
 ];
 
 const detectableIssuesZh = ["炎症", "糜烂", "溃疡", "息肉", "早期癌症"];
+const detectableIssuesRu = [
+  "воспаление",
+  "эрозия",
+  "язь",
+  "полипы",
+  "Ранний рак",
+];
+
+
 
 const whoIsItFor = [
   "Age ≥40 (recommended by international guidelines for routine screening)",
@@ -87,6 +123,15 @@ const whoIsItForZh = [
   "长期服用阿司匹林或非甾体抗炎药",
   "既往有息肉史，需复查",
 ];
+const whoIsItForRu = [
+  "Возраст ≥40 лет (рекомендуется международными рекомендациями по обычному скринингу)",
+  "Семейная история рака желудка или колоректального рака",
+  "Пищеварительные симптомы (кислотный рефлюкс, боли в животе, кровь в стуле, изменения в привычках кишечника)",
+  "Долгосрочное применение аспирина или нестероидных противовоспалительных препаратов",
+  "Предыдущая история полипов, требующих последующего наблюдения",
+];
+
+
 
 const notSuitable = [
   "Severe cardiopulmonary disease",
@@ -101,6 +146,14 @@ const notSuitableZh = [
   "急性肠梗阻",
   "其他由医生评估确定的情况",
 ];
+const notSuitableRu = [
+  "Тяжелая сердечно-легочная болезнь",
+  "Неисправленные нарушения свертывания",
+  "Острая кишечная непроходимость",
+  "Другие условия, определяемые оценкой врача",
+];
+
+
 
 const processStep1 = [
   "Chinese-English health advisors remotely collect health information, medical history, medication details, allergy history",
@@ -117,6 +170,15 @@ const processStep1Zh = [
   "出具正式医疗签证邀请函",
   "协助预订医院附近合作酒店",
 ];
+const processStep1Ru = [
+  "Китайско-английские консультанты по вопросам здравоохранения дистанционно собирают информацию о здоровье, историю болезни, данные о лекарствах, историю аллергии",
+  "Гастроэнтеролог + анестезиолог совместно оценивают и разрабатывают индивидуальный план обследования",
+  "Руководство безопасное прекращение приема антикоагулянтов, обеспечить руководство по диете с низким содержанием клетчатки и приготовление кишечника в виде сплит-дозы",
+  "Официальное письмо-приглашение по медицинской визе",
+  "Помощь в бронировании отелей-партнеров рядом с больницей",
+];
+
+
 
 const processStep2 = [
   "Dinner: low-fiber meal (congee, white bread, noodles, peeled melons)",
@@ -131,6 +193,14 @@ const processStep2Zh = [
   "晚餐后禁食固体食物，可饮清水直至检查前4小时",
   "收到中英文对照的详细准备指南",
 ];
+const processStep2Ru = [
+  "Ужин: низкокалорийная еда (конги, белый хлеб, лапша, очищенные дыни)",
+  "Принимайте препарат в виде сплит-дозы в соответствии с письменными инструкциями (один раз вечером, один раз ранним утром в день обследования).",
+  "Нет твердой пищи после ужина, чистая вода разрешена до 4 часов до обследования.",
+  "Получить подробное руководство по двуязычной подготовке",
+];
+
+
 
 const processTimeline: { time: string; text: string }[] = [
   { time: "9:00", text: "Arrive at VIP International Medical Center, personal reception, sign bilingual informed consent, change clothes" },
@@ -151,6 +221,17 @@ const processTimelineZh: { time: string; text: string }[] = [
   { time: "11:30", text: "提供清淡点心，主治医生当面解读初步内镜报告（含彩色图片）" },
   { time: "12:00", text: "离院（建议当日不驾驶、不饮酒、不操作精密仪器）" },
 ];
+const processTimelineRu: { time: string; text: string }[] = [
+  { time: "9:00", text: "Прибытие в VIP Международный медицинский центр, личный прием, подписание двуязычного информированного согласия, смена одежды" },
+  { time: "9:30", text: "Установите IV доступ, анестезиолог вводит пропофол - засыпайте в течение 30 секунд" },
+  { time: "9:45", text: "Гастроскопия (5-8 мин) + колоноскопия (15-20 мин) - полностью безболезненная" },
+  { time: "10:15", text: "Если ≤3 небольших полипов обнаружено → немедленная резекция холодного отростка, безболезненная, без памяти" },
+  { time: "10:30", text: "Проснитесь в кабинете реабилитации, профессиональные медсестры постоянно контролируют жизненные показатели в течение 45 минут." },
+  { time: "11:30", text: "Легкие напитки, предоставляемые, лечащий врач объясняет предварительный отчет эндоскопии лицом к лицу (с цветными изображениями)" },
+  { time: "12:00", text: "Выгрузка (не рекомендуется водить машину, пить алкоголь или использовать точные приборы в тот же день)" },
+];
+
+
 
 const processStep4 = [
   "Within 24 hours: dedicated health advisor calls/messages with precautions",
@@ -165,6 +246,14 @@ const processStep4Zh = [
   "建立终身电子健康档案",
   "如发现需要进一步治疗的问题，启动三甲医院绿色转诊通道",
 ];
+const processStep4Ru = [
+  "В течение 24 часов: специальные звонки / сообщения консультанта по вопросам здравоохранения с мерами предосторожности",
+  "Дистанционное наблюдение (видео или голос), оценка восстановления и предоставление дополнительных рекомендаций",
+  "Пожизненные электронные медицинские записи",
+  "Если проблемы, требующие дальнейшего лечения, обнаружены, активируйте зеленый канал направления в больницы высшего уровня.",
+];
+
+
 
 const packageIncludes = [
   "Anesthesia assessment + IV anesthesia",
@@ -187,6 +276,18 @@ const packageIncludesZh = [
   "术后恢复室监护延长",
   "中英文报告+24小时紧急联系",
 ];
+const packageIncludesRu = [
+  "Оценка анестезии + IV анестезия",
+  "Комбинированная гастроскопия + колоноскопия",
+  "Биопсия (≤3 сайта)",
+  "Тест дыхания C13 (Helicobacter pylori)",
+  "ЭКГ + коагуляционная функция + CBC / биохимия",
+  "Резекция полипов холодного занавеса (≤3 полипа)",
+  "Расширенный контроль послеоперационной реабилитационной палаты",
+  "Двуязычные отчеты + 24-часовой контакт в экстренной ситуации",
+];
+
+
 
 const qualityStandards: { title: string; description: string }[] = [
   {
@@ -247,6 +348,40 @@ const qualityStandardsZh: { title: string; description: string }[] = [
     description: "VIP国际独立区域，男女分检，独立诊室，健康数据加密",
   },
 ];
+const qualityStandardsRu: { title: string; description: string }[] = [
+  {
+    title: "Эндоскопическое оборудование",
+    description:
+      "Olympus / Fujifilm HD системы с узкополосной визуализацией (NBI) и увеличительной эндоскопией",
+  },
+  {
+    title: "Управление анестезией",
+    description:
+      "Пропофол IV анестезия с непрерывным контролем, посещая анестезиолога - частота сердечно-легочных осложнений <0,1%",
+  },
+  {
+    title: "Боуэл Подготовка",
+    description:
+      "Подготовка к сплит-дозам кишечника в соответствии с последними рекомендациями ASGE / ESGE 2024-2025",
+  },
+  {
+    title: "Инфекционный контроль",
+    description:
+      "Процесс очистки и дезинфекции эндоскопа соответствует стандартам ISO 15883, одноразовые расходные материалы для каждого пациента.",
+  },
+  {
+    title: "Лабораторная сертификация",
+    description:
+      "Патология и генетическое тестирование сертифицированы по международным стандартам ISO 15189",
+  },
+  {
+    title: "Защита конфиденциальности",
+    description:
+      "VIP-интернациональная независимая зона, гендерно-отдельные обследования, частные кабинеты, зашифрованные данные о здоровье",
+  },
+];
+
+
 
 const faqItems: FAQItem[] = [
   {
@@ -324,6 +459,46 @@ const faqItemsZh: FAQItem[] = [
       "多数情况下可以。我们会要求您提供近期用药情况和相关检查报告，麻醉医生和消化科医生会联合评估风险，必要时请国内专科医生会诊。",
   },
 ];
+const faqItemsRu: FAQItem[] = [
+  {
+    question: "Действительно ли обследование безболезненно?",
+    answer:
+      "Yes. Under short-acting IV anesthesia (propofol), you will fall asleep within about 30 seconds and enter a comfortable sleep state for 20-30 minutes. The combined gastroscopy and colonoscopy are completed completely painlessly, and you wake up in the recovery room without any discomfort or memory of the procedure.",
+  },
+  {
+    question: "А если полипы будут найдены?",
+    answer:
+      "If ≤3 small polyps are found, they are removed immediately during the same session using the cold snare resection technique - examination becomes treatment, no second appointment needed. Any additional costs for extra polyp removal (>3) or special treatments are disclosed to you in advance.",
+  },
+  {
+    question: "Как скоро я смогу вернуться домой после процедуры?",
+    answer:
+      "You are advised not to drive, drink alcohol, or operate precision instruments on the same day. Most patients can safely travel home the following day once the anesthesia has fully cleared. Our health advisor will provide personalized guidance based on your recovery.",
+  },
+  {
+    question:
+      "Отчеты на английском? Можно ли их использовать для страховых случаев или показать семейному врачу?",
+    answer:
+      "Yes. Bilingual reports with color images are provided, and pathology and genetic testing are certified to ISO 15189 international standards. The reports can be shown to your family doctor or submitted for insurance claims.",
+  },
+  {
+    question: "Мне нужен кто-то, чтобы сопровождать меня?",
+    answer:
+      "It is recommended due to the IV anesthesia. Our English-speaking health advisor provides one-on-one accompaniment throughout - reception, informed consent, examination, and recovery room monitoring - so you are well supported even if you travel alone.",
+  },
+  {
+    question: "Можно ли пить воду перед обследованием?",
+    answer:
+      "No solid food is allowed after dinner the night before. Clear water is allowed until 4 hours before the examination, following the split-dose bowel preparation schedule and the detailed bilingual preparation guide provided in advance.",
+  },
+  {
+    question: "У меня высокое кровяное давление/диабет, могу ли я это сделать?",
+    answer:
+      "In most cases, yes. The gastroenterologist and anesthesiologist jointly assess your condition and medication history in advance to develop a personalized examination plan. Specific contraindications are determined by physician assessment.",
+  },
+];
+
+
 
 const travelSupport: { icon: LucideIcon; title: string; description: string }[] = [
   {
@@ -370,24 +545,49 @@ const travelSupportZh: { icon: LucideIcon; title: string; description: string }[
     description: "可定制文化或休闲行程",
   },
 ];
+const travelSupportRu: { icon: LucideIcon; title: string; description: string }[] = [
+  {
+    icon: Icons.plane,
+    title: "Визовая помощь",
+    description: "Предоставить официальное медицинское приглашение для подачи заявления на визу",
+  },
+  {
+    icon: Icons.globe,
+    title: "Языковые услуги",
+    description: "Англоязычный координатор по всему миру (другие языки доступны по запросу)",
+  },
+  {
+    icon: Icons.mapPin,
+    title: "Транспорт и размещение",
+    description: "Трансферы из аэропорта, тарифы на гостиничное партнерство премиум-класса",
+  },
+  {
+    icon: Icons.award,
+    title: "Расширение путешествий",
+    description: "Настраиваемые культурные или развлекательные маршруты",
+  },
+];
+
+
 
 export default function PainlessEndoscopyContent() {
   const { lang } = useLanguage();
   const isZh = lang === "zh";
+  const isRu = lang === "ru";
 
-  const choose = isZh ? whyChooseItemsZh : whyChooseItems;
-  const statList = isZh ? statsZh : stats;
-  const issues = isZh ? detectableIssuesZh : detectableIssues;
-  const audience = isZh ? whoIsItForZh : whoIsItFor;
-  const unsuitable = isZh ? notSuitableZh : notSuitable;
-  const step1 = isZh ? processStep1Zh : processStep1;
-  const step2 = isZh ? processStep2Zh : processStep2;
-  const timeline = isZh ? processTimelineZh : processTimeline;
-  const step4 = isZh ? processStep4Zh : processStep4;
-  const includes = isZh ? packageIncludesZh : packageIncludes;
-  const standards = isZh ? qualityStandardsZh : qualityStandards;
-  const faqList = isZh ? faqItemsZh : faqItems;
-  const support = isZh ? travelSupportZh : travelSupport;
+  const choose = isZh ? whyChooseItemsZh : isRu ? whyChooseItemsRu : whyChooseItems;
+  const statList = isZh ? statsZh : isRu ? statsRu : stats;
+  const issues = isZh ? detectableIssuesZh : isRu ? detectableIssuesRu : detectableIssues;
+  const audience = isZh ? whoIsItForZh : isRu ? whoIsItForRu : whoIsItFor;
+  const unsuitable = isZh ? notSuitableZh : isRu ? notSuitableRu : notSuitable;
+  const step1 = isZh ? processStep1Zh : isRu ? processStep1Ru : processStep1;
+  const step2 = isZh ? processStep2Zh : isRu ? processStep2Ru : processStep2;
+  const timeline = isZh ? processTimelineZh : isRu ? processTimelineRu : processTimeline;
+  const step4 = isZh ? processStep4Zh : isRu ? processStep4Ru : processStep4;
+  const includes = isZh ? packageIncludesZh : isRu ? packageIncludesRu : packageIncludes;
+  const standards = isZh ? qualityStandardsZh : isRu ? qualityStandardsRu : qualityStandards;
+  const faqList = isZh ? faqItemsZh : isRu ? faqItemsRu : faqItems;
+  const support = isZh ? travelSupportZh : isRu ? travelSupportRu : travelSupport;
 
   return (
     <main
@@ -401,10 +601,10 @@ export default function PainlessEndoscopyContent() {
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white py-32">
           <div>
             <p className="text-lg text-teal-200 mb-4 tracking-wider">
-              {isZh ? "内镜检查项目" : "Endoscopy Programme"}
+              {isZh ? "内镜检查项目" : isRu ? "Программа эндоскопии" : "Endoscopy Programme"}
             </p>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-              {isZh ? "高端国际无痛胃肠镜" : "Premium International Painless Endoscopy"}
+              {isZh ? "高端国际无痛胃肠镜" : isRu ? "Премиум Международная безболезненная эндоскопия" : "Premium International Painless Endoscopy"}
             </h1>
             <p className="text-xl md:text-2xl text-teal-200 mb-4">
               {isZh ? "Painless Endoscopy Package" : "无痛内镜套餐"}
@@ -412,25 +612,25 @@ export default function PainlessEndoscopyContent() {
             <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-4">
               {isZh
                 ? "消化道深度筛查 · 无痛无忧 · 当日完成 · 国际标准"
-                : "Deep Digestive Screening · Painless & Worry-Free · Same-Day Completion · International Standards"}
+                : isRu ? "Глубокий скрининг пищеварения · Безболезненный и без беспокойства · Завершение одного дня · Международные стандарты" : "Deep Digestive Screening · Painless & Worry-Free · Same-Day Completion · International Standards"}
             </p>
             <p className="text-base text-gray-400 max-w-2xl mx-auto mb-8">
               {isZh
                 ? "面向全球企业高管、高净值人士，专程来华接受高品质、高性价比的无痛胃肠镜联合检查"
-                : "For global executives and high-net-worth individuals seeking high-quality, cost-effective combined painless gastroscopy and colonoscopy in China"}
+                : isRu ? "Для руководителей и состоятельных людей, ищущих высококачественную, экономически эффективную комбинированную безболезненную гастроскопию и колоноскопию в Китае" : "For global executives and high-net-worth individuals seeking high-quality, cost-effective combined painless gastroscopy and colonoscopy in China"}
             </p>
             <div className="flex flex-wrap justify-center gap-4 mb-8">
               <span className="px-4 py-2 bg-white/10 rounded-full text-sm">
-                {isZh ? "无痛舒适" : "Painless & Comfortable"}
+                {isZh ? "无痛舒适" : isRu ? "Безболезненный и удобный" : "Painless & Comfortable"}
               </span>
               <span className="px-4 py-2 bg-white/10 rounded-full text-sm">
-                {isZh ? "当日完成" : "Same-Day Completion"}
+                {isZh ? "当日完成" : isRu ? "Завершение одного дня" : "Same-Day Completion"}
               </span>
               <span className="px-4 py-2 bg-white/10 rounded-full text-sm">
-                {isZh ? "检查即治疗" : "Examination as Treatment"}
+                {isZh ? "检查即治疗" : isRu ? "Экзамен как лечение" : "Examination as Treatment"}
               </span>
               <span className="px-4 py-2 bg-white/10 rounded-full text-sm">
-                {isZh ? "国际标准" : "International Standards"}
+                {isZh ? "国际标准" : isRu ? "Международные стандарты" : "International Standards"}
               </span>
             </div>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -438,13 +638,13 @@ export default function PainlessEndoscopyContent() {
                 href="#packages"
                 className="px-8 py-4 bg-teal-500 text-white font-semibold rounded-lg hover:bg-teal-600 transition-colors"
               >
-                {isZh ? "查看套餐" : "View Packages"}
+                {isZh ? "查看套餐" : isRu ? "Посмотреть пакеты" : "View Packages"}
               </a>
               <a
                 href="#intro"
                 className="px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
               >
-                {isZh ? "了解更多" : "Learn More"}
+                {isZh ? "了解更多" : isRu ? "Узнать больше" : "Learn More"}
               </a>
             </div>
           </div>
@@ -457,7 +657,7 @@ export default function PainlessEndoscopyContent() {
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <Reveal x={-30}>
               <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-6">
-                {isZh ? "为什么选择来中国做无痛胃肠镜？" : "Why Choose China for Painless Endoscopy?"}
+                {isZh ? "为什么选择来中国做无痛胃肠镜？" : isRu ? "Почему стоит выбрать Китай для безболезненной эндоскопии?" : "Why Choose China for Painless Endoscopy?"}
               </h2>
               <div className="space-y-6">
                 {choose.map((item) => (
@@ -494,30 +694,30 @@ export default function PainlessEndoscopyContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal y={20} className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
-              {isZh ? "什么是“无痛胃肠镜”？" : 'What is "Painless Endoscopy"?'}
+              {isZh ? "什么是“无痛胃肠镜”？" : isRu ? 'Что такое «безболезненная эндоскопия»?' : 'What is "Painless Endoscopy"?'}
             </h2>
           </Reveal>
           <div className="grid lg:grid-cols-2 gap-12">
             <Reveal x={-30} className="bg-white rounded-2xl p-8 shadow-sm">
               <h3 className="text-xl font-bold text-[#1A1A2E] mb-4">
-                {isZh ? "检查过程" : "Examination Process"}
+                {isZh ? "检查过程" : isRu ? "Процесс экспертизы" : "Examination Process"}
               </h3>
               <p className="text-gray-600 mb-6">
                 {isZh
                   ? "在短效静脉麻醉（丙泊酚）下，一次性完成胃镜（上消化道）和结肠镜（下消化道）联合检查。您将进入舒适的睡眠状态约20-30分钟，由经验丰富的消化内镜医生完成食管、胃、十二指肠、全部结直肠的精细探查。"
-                  : "Under short-acting IV anesthesia (propofol), complete combined gastroscopy (upper digestive tract) and colonoscopy (lower digestive tract) in one session. You will enter a comfortable sleep state for about 20-30 minutes while experienced gastroenterologists perform detailed examination of esophagus, stomach, duodenum, and entire colon and rectum."}
+                  : isRu ? "Под короткой анестезией IV (пропофол), полная комбинированная гастроскопия (верхний пищеварительный тракт) и колоноскопия (нижний пищеварительный тракт) за один сеанс. Вы войдете в комфортное состояние сна примерно на 20-30 минут, в то время как опытные гастроэнтерологи проведут детальное обследование пищевода, желудка, двенадцатиперстной кишки и всей толстой кишки и прямой кишки." : "Under short-acting IV anesthesia (propofol), complete combined gastroscopy (upper digestive tract) and colonoscopy (lower digestive tract) in one session. You will enter a comfortable sleep state for about 20-30 minutes while experienced gastroenterologists perform detailed examination of esophagus, stomach, duodenum, and entire colon and rectum."}
               </p>
               <div className="bg-teal-50 rounded-xl p-4">
                 <p className="text-teal-700 font-medium">
                   {isZh
                     ? "若发现≤3颗小息肉，当场使用“冷圈套切除”技术同步切除——检查即治疗，无需二次预约。"
-                    : 'If ≤3 small polyps are found, they are removed immediately using "cold snare resection" technique - examination becomes treatment, no second appointment needed.'}
+                    : isRu ? 'Если обнаруживаются ≤3 небольших полипов, их сразу же удаляют с помощью техники «резекции холодных пятен» — обследование становится лечением, второго назначения не требуется.' : 'If ≤3 small polyps are found, they are removed immediately using "cold snare resection" technique - examination becomes treatment, no second appointment needed.'}
                 </p>
               </div>
             </Reveal>
             <Reveal x={30}>
               <h3 className="text-xl font-bold text-[#1A1A2E] mb-4">
-                {isZh ? "可以查出并处理哪些问题？" : "What Issues Can Be Detected and Treated?"}
+                {isZh ? "可以查出并处理哪些问题？" : isRu ? "Какие проблемы можно выявить и решить?" : "What Issues Can Be Detected and Treated?"}
               </h3>
               <div className="grid grid-cols-2 gap-4">
                 {issues.map((issue) => (
@@ -541,7 +741,7 @@ export default function PainlessEndoscopyContent() {
           <div className="grid lg:grid-cols-2 gap-12">
             <Reveal x={-30}>
               <h2 className="text-3xl font-bold text-[#1A1A2E] mb-8">
-                {isZh ? "谁适合做？" : "Who Is It For?"}
+                {isZh ? "谁适合做？" : isRu ? "Для кого это?" : "Who Is It For?"}
               </h2>
               <div className="space-y-4">
                 {audience.map((item) => (
@@ -557,7 +757,7 @@ export default function PainlessEndoscopyContent() {
             </Reveal>
             <Reveal x={30}>
               <h2 className="text-3xl font-bold text-[#1A1A2E] mb-8">
-                {isZh ? "不适用于" : "Not Suitable For"}
+                {isZh ? "不适用于" : isRu ? "Не подходит для" : "Not Suitable For"}
               </h2>
               <div className="bg-rose-50 rounded-2xl p-6">
                 <ul className="space-y-3">
@@ -569,7 +769,7 @@ export default function PainlessEndoscopyContent() {
                   ))}
                 </ul>
                 <p className="text-gray-500 text-sm mt-4 pt-4 border-t">
-                  {isZh ? "具体禁忌由医生评估确定。" : "Specific contraindications determined by physician assessment."}
+                  {isZh ? "具体禁忌由医生评估确定。" : isRu ? "Конкретные противопоказания, определяемые оценкой врача." : "Specific contraindications determined by physician assessment."}
                 </p>
               </div>
             </Reveal>
@@ -582,7 +782,7 @@ export default function PainlessEndoscopyContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal y={20} className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              {isZh ? "一站式专业服务流程" : "One-Stop Professional Service Process"}
+              {isZh ? "一站式专业服务流程" : isRu ? "Единый процесс профессионального обслуживания" : "One-Stop Professional Service Process"}
             </h2>
           </Reveal>
           <div className="space-y-8">
@@ -593,10 +793,10 @@ export default function PainlessEndoscopyContent() {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold">
-                    {isZh ? "来华前远程医疗定制" : "Pre-Arrival Remote Medical Customization"}
+                    {isZh ? "来华前远程医疗定制" : isRu ? "Удаленная медицинская кастомизация до прибытия" : "Pre-Arrival Remote Medical Customization"}
                   </h3>
                   <span className="text-teal-400 text-sm">
-                    {isZh ? "提前7-14天" : "7-14 days in advance"}
+                    {isZh ? "提前7-14天" : isRu ? "7-14 дней вперед" : "7-14 days in advance"}
                   </span>
                 </div>
               </div>
@@ -617,10 +817,10 @@ export default function PainlessEndoscopyContent() {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold">
-                    {isZh ? "检查前1天（自行准备）" : "Day Before Examination (Self-Preparation)"}
+                    {isZh ? "检查前1天（自行准备）" : isRu ? "День до экзамена (самоподготовка)" : "Day Before Examination (Self-Preparation)"}
                   </h3>
                   <span className="text-teal-400 text-sm">
-                    {isZh ? "检查前24小时" : "24 hours before examination"}
+                    {isZh ? "检查前24小时" : isRu ? "24 часа до экзамена" : "24 hours before examination"}
                   </span>
                 </div>
               </div>
@@ -641,10 +841,10 @@ export default function PainlessEndoscopyContent() {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold">
-                    {isZh ? "检查当日" : "Examination Day"}
+                    {isZh ? "检查当日" : isRu ? "День экзамена" : "Examination Day"}
                   </h3>
                   <span className="text-teal-400 text-sm">
-                    {isZh ? "全程3-4小时" : "Total 3-4 hours"}
+                    {isZh ? "全程3-4小时" : isRu ? "Всего 3-4 часа" : "Total 3-4 hours"}
                   </span>
                 </div>
               </div>
@@ -670,10 +870,10 @@ export default function PainlessEndoscopyContent() {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold">
-                    {isZh ? "检后医疗随访" : "Post-Examination Medical Follow-up"}
+                    {isZh ? "检后医疗随访" : isRu ? "Послеоперационное медицинское наблюдение" : "Post-Examination Medical Follow-up"}
                   </h3>
                   <span className="text-teal-400 text-sm">
-                    {isZh ? "检查后持续" : "Ongoing after examination"}
+                    {isZh ? "检查后持续" : isRu ? "Продолжение после осмотра" : "Ongoing after examination"}
                   </span>
                 </div>
               </div>
@@ -695,7 +895,7 @@ export default function PainlessEndoscopyContent() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal y={20} className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
-              {isZh ? "套餐与费用" : "Package & Pricing"}
+              {isZh ? "套餐与费用" : isRu ? "Пакет и цены" : "Package & Pricing"}
             </h2>
           </Reveal>
           <Reveal
@@ -703,14 +903,14 @@ export default function PainlessEndoscopyContent() {
             className="bg-gradient-to-br from-teal-500 to-teal-600 rounded-2xl p-8 text-white shadow-xl"
           >
             <h3 className="text-2xl font-bold mb-6">
-              {isZh ? "高端无痛胃肠镜套餐" : "Premium Painless Endoscopy Package"}
+              {isZh ? "高端无痛胃肠镜套餐" : isRu ? "Премиум безболезненная эндоскопия пакет" : "Premium Painless Endoscopy Package"}
             </h3>
             <div className="text-4xl font-bold mb-6">$900 – $1,200</div>
             <p className="text-teal-100 mb-6">
-              {isZh ? "以上均为全包价，无隐形收费" : "All-inclusive pricing, no hidden fees"}
+              {isZh ? "以上均为全包价，无隐形收费" : isRu ? "Цена по системе «все включено», никаких скрытых сборов" : "All-inclusive pricing, no hidden fees"}
             </p>
             <h4 className="font-bold mb-4">
-              {isZh ? "包含内容：" : "Includes:"}
+              {isZh ? "包含内容：" : isRu ? "Включает:" : "Includes:"}
             </h4>
             <div className="grid md:grid-cols-2 gap-3">
               {includes.map((item) => (
@@ -723,10 +923,10 @@ export default function PainlessEndoscopyContent() {
             <p className="text-teal-100 text-sm mt-6 pt-4 border-t border-teal-400">
               {isZh
                 ? "*如需额外息肉切除超过3颗或特殊治疗，将提前告知费用"
-                : "*Additional costs will be disclosed in advance for extra polyp removal (>3) or special treatments"}
+                : isRu ? "Дополнительные расходы будут раскрыты заранее для дополнительного удаления полипа (> 3) или специальных процедур." : "*Additional costs will be disclosed in advance for extra polyp removal (>3) or special treatments"}
             </p>
             <p className="text-teal-100/70 text-sm mt-2">
-              {isZh ? "*具体费用以医院最终评估为准。" : "*Specific costs subject to final hospital assessment."}
+              {isZh ? "*具体费用以医院最终评估为准。" : isRu ? "* Конкретные расходы, подлежащие окончательной оценке в больнице." : "*Specific costs subject to final hospital assessment."}
             </p>
           </Reveal>
         </div>
@@ -737,7 +937,7 @@ export default function PainlessEndoscopyContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal y={20} className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
-              {isZh ? "国际质量与安全标准" : "International Quality & Safety Standards"}
+              {isZh ? "国际质量与安全标准" : isRu ? "Международные стандарты качества и безопасности" : "International Quality & Safety Standards"}
             </h2>
           </Reveal>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -762,7 +962,7 @@ export default function PainlessEndoscopyContent() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal y={20} className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
-              {isZh ? "常见问题（FAQ）" : "Frequently Asked Questions (FAQ)"}
+              {isZh ? "常见问题（FAQ）" : isRu ? "Часто задаваемые вопросы (FAQ)" : "Frequently Asked Questions (FAQ)"}
             </h2>
           </Reveal>
           <FAQAccordion items={faqList} />
@@ -774,7 +974,7 @@ export default function PainlessEndoscopyContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <Reveal y={20} className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
-              {isZh ? "国际医疗旅行无缝支持" : "Seamless International Medical Travel Support"}
+              {isZh ? "国际医疗旅行无缝支持" : isRu ? "Поддержка международных медицинских путешествий" : "Seamless International Medical Travel Support"}
             </h2>
           </Reveal>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -800,25 +1000,25 @@ export default function PainlessEndoscopyContent() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Reveal y={20}>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              {isZh ? "开启您的无痛胃肠镜检查之旅" : "Start Your Painless Endoscopy Journey"}
+              {isZh ? "开启您的无痛胃肠镜检查之旅" : isRu ? "Начните свое путешествие безболезненной эндоскопии" : "Start Your Painless Endoscopy Journey"}
             </h2>
             <p className="text-teal-200 mb-8">
               {isZh
                 ? "无痛、高效、精准——上午检查，下午取报告，专业闭环管理"
-                : "Painless, efficient, precise - morning examination, afternoon report, professional closed-loop management"}
+                : isRu ? "Безболезненный, эффективный, точный - утренний осмотр, послеобеденный отчет, профессиональное управление замкнутым циклом" : "Painless, efficient, precise - morning examination, afternoon report, professional closed-loop management"}
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <a
                 href="mailto:contact@medkungfu.com"
                 className="px-8 py-4 bg-white text-teal-900 font-semibold rounded-lg hover:bg-teal-50 transition-colors"
               >
-                {isZh ? "邮件咨询" : "Email Inquiry"}
+                {isZh ? "邮件咨询" : isRu ? "Email-запрос" : "Email Inquiry"}
               </a>
               <Link
                 href="/contact"
                 className="px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
               >
-                {isZh ? "在线留言" : "Online Inquiry"}
+                {isZh ? "在线留言" : isRu ? "Онлайн-запрос" : "Online Inquiry"}
               </Link>
             </div>
           </Reveal>

@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/sites/www-medkungfu-com-363c9bc1/shared
 import { ProjectDetailPage } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/arthritis/ProjectDetailPage";
 import { arthroplastyTcmPage } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/arthritis/data/arthroplasty-tcm";
 import { arthroplastyTcmPageZh } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/arthritis/data/arthroplasty-tcm-zh";
+import { arthroplastyTcmPageRu } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/arthritis/data/arthroplasty-tcm-ru";
 
 export const metadata: Metadata = {
   title: "Precision Joint Replacement Combined with TCM Accelerated Recovery",
@@ -17,7 +18,7 @@ export default function ArthroplastyTcmPage() {
     <>
       <SiteHeader />
       <main className="flex-grow pt-[72px]">
-        <ProjectDetailPage data={arthroplastyTcmPage} zhConfig={arthroplastyTcmPageZh} />
+        <ProjectDetailPage data={arthroplastyTcmPage} zhConfig={arthroplastyTcmPageZh} ruConfig={arthroplastyTcmPageRu} />
       </main>
       <SiteFooter />
     </>

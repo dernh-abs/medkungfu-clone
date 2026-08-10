@@ -513,6 +513,7 @@ function CaseStudiesSection({ data }: { data: CaseStudiesData }) {
 function CostSection({ data }: { data: CostSectionData }) {
   const { lang } = useLanguage();
   const isZh = lang === "zh";
+  const isRu = lang === "ru";
   const body = data.body;
   return (
     <section className={`${data.pyClass} ${data.bgClass}`}>
@@ -541,16 +542,16 @@ function CostSection({ data }: { data: CostSectionData }) {
                     <thead>
                       <tr className={body.headerBorderClass}>
                         <th className="text-left py-4 px-4 font-bold text-[#1A1A2E]">
-                          {isZh ? "项目" : "Item"}
+                          {isZh ? "项目" : isRu ? "Пункт" : "Item"}
                         </th>
                         <th className="text-center py-4 px-4 font-bold text-[#1A1A2E]">
-                          {isZh ? "单次" : "Per Session"}
+                          {isZh ? "单次" : isRu ? "За сессию" : "Per Session"}
                         </th>
                         <th className="text-center py-4 px-4 font-bold text-[#1A1A2E]">
-                          {isZh ? "疗程" : "Total Course"}
+                          {isZh ? "疗程" : isRu ? "Полный курс" : "Total Course"}
                         </th>
                         <th className="text-left py-4 px-4 font-bold text-[#1A1A2E]">
-                          {isZh ? "备注" : "Notes"}
+                          {isZh ? "备注" : isRu ? "Заметки" : "Notes"}
                         </th>
                       </tr>
                     </thead>
@@ -643,15 +644,24 @@ function CtaSection({ data }: { data: CtaData }) {
 export function StemCellDetailPage({
   data,
   zhConfig,
+  ruConfig,
 }: {
   data: StemCellPageData;
   /** Chinese variant of the same data. When the site language is zh, this is
    *  rendered instead of the English `data`. The aria-label stays English on
    *  both locales (matches the source site's zh pages). */
   zhConfig?: StemCellPageData;
+  /** Russian variant of the same data. When the site language is ru, this is
+   *  rendered instead of the English `data`. */
+  ruConfig?: StemCellPageData;
 }) {
   const { lang } = useLanguage();
-  const c = lang === "zh" && zhConfig ? zhConfig : data;
+  const c =
+    lang === "ru" && ruConfig
+      ? ruConfig
+      : lang === "zh" && zhConfig
+        ? zhConfig
+        : data;
   return (
     <main
       role="main"

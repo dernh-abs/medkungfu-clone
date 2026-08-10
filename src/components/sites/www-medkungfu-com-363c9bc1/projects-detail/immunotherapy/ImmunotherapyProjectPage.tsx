@@ -210,6 +210,14 @@ function StickyNav({ items }: { items: string[] }) {
     疗效数据: "efficacy",
     案例展示: "cases",
     为什么选择我们: "why-choose-us",
+    // Russian labels (ru locale)
+    Введение: "intro",
+    "Основные преимущества": "advantages",
+    Показания: "indications",
+    "Процесс лечения": "process",
+    "Данные об эффективности": "efficacy",
+    "Тематические исследования": "cases",
+    "Почему выбирают нас": "why-choose-us",
   };
   return (
     <div className="bg-white shadow-sm sticky top-[72px] z-40">
@@ -654,6 +662,7 @@ function CostSection({
 }) {
   const { lang } = useLanguage();
   const isZh = lang === "zh";
+  const isRu = lang === "ru";
   return (
     <section className={`py-20 ${bg ?? ""}`}>
       <div className="container-custom">
@@ -666,12 +675,18 @@ function CostSection({
             <p className="text-lg mb-4">{label}</p>
             <p className="text-4xl md:text-5xl font-bold mb-4">{amount}</p>
             <p className="text-white/70">
-              {isZh ? "价格透明，无隐藏费用" : "Transparent pricing, no hidden fees"}
+              {isZh
+                ? "价格透明，无隐藏费用"
+                : isRu
+                  ? "Прозрачные цены, никаких скрытых сборов"
+                  : "Transparent pricing, no hidden fees"}
             </p>
             <p className="text-white/50 text-sm mt-4">
               {isZh
                 ? "*具体费用以医院最终评估为准。"
-                : "*Specific costs subject to final hospital assessment."}
+                : isRu
+                  ? "* Конкретные расходы, подлежащие окончательной оценке в больнице."
+                  : "*Specific costs subject to final hospital assessment."}
             </p>
           </div>
         </Reveal>
@@ -732,7 +747,7 @@ function ImportantNotice({ text, bg }: { text: string; bg?: string }) {
         <div className="max-w-4xl mx-auto bg-amber-50 border border-amber-200 rounded-2xl p-8">
           <h3 className="text-xl font-bold text-amber-800 mb-4 flex items-center gap-2">
             <Icons.shield className="h-6 w-6" aria-hidden="true" />
-            {lang === "zh" ? "重要提示" : "Important Notice"}
+            {lang === "zh" ? "重要提示" : lang === "ru" ? "Важное уведомление" : "Important Notice"}
           </h3>
           <p className="text-amber-700 leading-relaxed">{text}</p>
         </div>
@@ -797,15 +812,24 @@ function CtaSection({
 export function ImmunotherapyProjectPage({
   config,
   zhConfig,
+  ruConfig,
 }: {
   config: ImmunotherapyProjectConfig;
   /** Chinese variant of the same config. When the site language is zh, this
    *  is rendered instead of the English config. The aria-label stays English
    *  on both locales (matches the source site's zh pages). */
   zhConfig?: ImmunotherapyProjectConfig;
+  /** Russian variant of the same config. When the site language is ru, this
+   *  is rendered instead of the English config. */
+  ruConfig?: ImmunotherapyProjectConfig;
 }) {
   const { lang } = useLanguage();
-  const c = lang === "zh" && zhConfig ? zhConfig : config;
+  const c =
+    lang === "ru" && ruConfig
+      ? ruConfig
+      : lang === "zh" && zhConfig
+        ? zhConfig
+        : config;
   return (
     <main
       role="main"

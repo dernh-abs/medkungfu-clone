@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/sites/www-medkungfu-com-363c9bc1/shared
 import { ProjectDetailPage } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/arthritis/ProjectDetailPage";
 import { mfatTcmPage } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/arthritis/data/mfat-tcm";
 import { mfatTcmPageZh } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/arthritis/data/mfat-tcm-zh";
+import { mfatTcmPageRu } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/arthritis/data/mfat-tcm-ru";
 
 export const metadata: Metadata = {
   title: "MFAT Joint Regeneration Therapy",
@@ -17,7 +18,7 @@ export default function MfatTcmPage() {
     <>
       <SiteHeader />
       <main className="flex-grow pt-[72px]">
-        <ProjectDetailPage data={mfatTcmPage} zhConfig={mfatTcmPageZh} />
+        <ProjectDetailPage data={mfatTcmPage} zhConfig={mfatTcmPageZh} ruConfig={mfatTcmPageRu} />
       </main>
       <SiteFooter />
     </>

@@ -61,6 +61,34 @@ const coreAdvantagesZh = [
       "除了肺功能改善，患者还报告咳嗽频率减少、痰量降低、呼吸困难减轻、运动耐力提升。长期随访显示，治疗组患者的疾病进展速度明显放缓，部分患者甚至出现影像学上的结构性改善。",
   },
 ];
+const coreAdvantagesRu = [
+  {
+    title: "Первый в мире - Ремонт базальных стволовых клеток дыхательных путей",
+    icon: Icons.globe,
+    description:
+      "Бронхоэктаз – хроническое респираторное заболевание, характеризующееся постоянным расширением бронхов и рецидивирующими инфекциями. Традиционные методы лечения контролируют только симптомы без восстановления поврежденных структур дыхательных путей. Базальные стволовые клетки дыхательных путей (BSC) используют собственные базальные стволовые клетки дыхательных путей пациентов для непосредственного восстановления поврежденного бронхиального эпителия благодаря их уникальной регенеративной способности, улучшая состояние от его первопричины.",
+  },
+  {
+    title: "Клинически подтвержденная - снижение частоты острого обострения",
+    icon: Icons.trendingUp,
+    description:
+      "Клинические исследования показывают, что пациенты, получающие терапию базальными стволовыми клетками дыхательных путей, испытывали значительно сниженную частоту острых обострений, меньшее количество госпитализаций и снижение использования антибиотиков. Показатели функции легких пациентов (FEV1, FVC) стабилизировались или улучшились, что значительно улучшило качество жизни.",
+  },
+  {
+    title: "Точная мишень - восстановленная мукоцилиарная очистка",
+    icon: Icons.microscope,
+    description:
+      "Основным патологическим механизмом бронхоэктазии является нарушение слизистой оболочки, приводящее к накоплению слизи и рецидивирующим инфекциям. Базальные стволовые клетки дыхательных путей могут дифференцироваться в функциональные ресничные клетки, восстанавливая способность дыхательных путей к самоочищению и разрывая порочный круг «повреждения от инфекции и воспаления».",
+  },
+  {
+    title: "Комплексные преимущества - многомерное улучшение",
+    icon: Icons.heartPulse,
+    description:
+      "Помимо улучшения функции легких, пациенты сообщили о снижении частоты кашля, уменьшении производства мокроты, меньшем количестве одышки и улучшении толерантности к физическим упражнениям. Долгосрочное наблюдение показало значительно более медленное прогрессирование заболевания в группе лечения, а у некоторых пациентов даже наблюдались структурные улучшения при визуализации.",
+  },
+];
+
+
 
 const processSteps = [
   {
@@ -127,6 +155,40 @@ const processStepsZh = [
       "定期随访评估疗效，包括肺功能复查、影像学检查、生活质量评估等。配合呼吸康复训练，最大化治疗效果。",
   },
 ];
+const processStepsRu = [
+  {
+    num: "01",
+    title: "Комплексная оценка и скрининг",
+    description:
+      "В том числе КТ с высоким разрешением, тесты функции легких, культуры мокроты, анализы крови и т. Д., Чтобы подтвердить диагноз и оценить тяжесть заболевания. Исключают активные инфекции и другие противопоказания.",
+  },
+  {
+    num: "02",
+    title: "Сбор и подготовка стволовых клеток",
+    description:
+      "Получите образцы базальных стволовых клеток дыхательных путей пациента с помощью бронхоскопии, затем изолируйте, культивируйте и расширяйте их в лабораториях стандарта GMP для обеспечения качества и безопасности клеток.",
+  },
+  {
+    num: "03",
+    title: "Персонализированный план лечения",
+    description:
+      "Развивайте персонализированную дозировку клеток, маршрут введения и цикл лечения, основанный на возрасте пациента, тяжести заболевания, сопутствующих заболеваниях и других факторах.",
+  },
+  {
+    num: "04",
+    title: "Трансплантация стволовых клеток",
+    description:
+      "Доставить подготовленные базальные стволовые клетки дыхательных путей в пораженные области с помощью ингаляции небулизации или точной доставки с помощью бронхоскопии, достигая высокой местной концентрации.",
+  },
+  {
+    num: "05",
+    title: "Мониторинг и реабилитация после лечения",
+    description:
+      "Регулярное наблюдение для оценки эффективности, включая повторное обследование легочной функции, исследования изображений, оценку качества жизни и т. Д. В сочетании с респираторной реабилитацией, чтобы максимизировать эффект лечения.",
+  },
+];
+
+
 
 const comparisonRows: { aspect: string; traditional: string; stemCell: string }[] = [
   {
@@ -183,6 +245,35 @@ const comparisonRowsZh: { aspect: string; traditional: string; stemCell: string 
     stemCell: "进展放缓，部分逆转",
   },
 ];
+const comparisonRowsRu: { aspect: string; traditional: string; stemCell: string }[] = [
+  {
+    aspect: "Принцип лечения",
+    traditional: "Контроль симптомов, не может восстановить структуру",
+    stemCell: "Регенеративный ремонт, фундаментальное улучшение",
+  },
+  {
+    aspect: "Острая частота обострения",
+    traditional: "Частые эпизоды, трудно контролируемые",
+    stemCell: "Значительно снижен, тренд стабилен",
+  },
+  {
+    aspect: "Функция легких меняется",
+    traditional: "Непрерывное снижение",
+    stemCell: "Стабилизированный или улучшенный",
+  },
+  {
+    aspect: "Качество жизни",
+    traditional: "Постепенно ухудшается",
+    stemCell: "Значительно улучшилось",
+  },
+  {
+    aspect: "Долгосрочный прогноз",
+    traditional: "Болезнь продолжает прогрессировать",
+    stemCell: "Замедленная прогрессия, частичная разворот",
+  },
+];
+
+
 
 const faqs = [
   {
@@ -229,15 +320,40 @@ const faqsZh = [
     a: "适合轻中度支气管扩张症患者，特别是那些尽管接受标准治疗仍频繁急性加重、生活质量受影响的患者。需要经过全面评估，排除活动性感染、严重心肺功能不全等禁忌症。具体适应症需由专业医生评估确定。",
   },
 ];
+const faqsRu = [
+  {
+    q: "Что такое бронхоэктаз?",
+    a: "Бронхоэктаз — хроническое респираторное заболевание, характеризующееся постоянным аномальным расширением бронхов, приводящее к нарушению клиренса слизи, рецидивирующим респираторным инфекциям и хроническому воспалению. Общие симптомы включают хронический кашель, чрезмерное производство мокроты, рецидивирующие инфекции легких и одышку.",
+  },
+  {
+    q: "Чем терапия базальных стволовых клеток дыхательных путей отличается от традиционного лечения?",
+    a: "Традиционные методы лечения в основном направлены на контроль симптомов (таких как антибиотики, отхаркивающие средства, бронходилататоры) и не могут восстановить поврежденные структуры дыхательных путей. Терапия базальных стволовых клеток дыхательных путей использует собственную регенеративную способность стволовых клеток пациента для непосредственного восстановления поврежденного бронхиального эпителия и цилиарных структур, что в корне улучшает состояние и нарушает порочный круг прогрессирования заболевания.",
+  },
+  {
+    q: "Безопасен ли процесс лечения?",
+    a: "Да. Лечение использует собственные клетки пациента, избегая реакций иммунного отторжения. Все процедуры проводятся под строгим контролем качества, отвечающим стандартам GMP. Клинические испытания и реальные данные применения показывают, что этот метод лечения имеет хорошую безопасность и переносимость, с легкими и контролируемыми побочными реакциями.",
+  },
+  {
+    q: "Как долго можно ждать результатов после лечения?",
+    a: "Большинство пациентов начинают чувствовать значительные улучшения в течение 3-6 месяцев после лечения, включая снижение кашля, уменьшение мокроты и уменьшение одышки. Объективные показатели функции легких (такие как FEV1, DLCO) обычно достигают оптимального улучшения через 6-12 месяцев. Долгосрочное наблюдение показывает, что преимущества могут длиться в течение нескольких лет.",
+  },
+  {
+    q: "Какие пациенты подходят для такого лечения?",
+    a: "Подходит для пациентов с легким и умеренным бронхоэктазом, особенно тех, кто испытывает частые острые обострения, несмотря на стандартное лечение и влияет на качество жизни. Требует комплексной оценки для исключения противопоказаний, таких как активная инфекция и тяжелая сердечно-легочная недостаточность. Конкретные показания должны определяться профессиональными врачами.",
+  },
+];
+
+
 
 export default function BronchiectasisStemCellContent() {
   const { lang } = useLanguage();
   const isZh = lang === "zh";
+  const isRu = lang === "ru";
 
-  const advs = isZh ? coreAdvantagesZh : coreAdvantages;
-  const steps = isZh ? processStepsZh : processSteps;
-  const rows = isZh ? comparisonRowsZh : comparisonRows;
-  const faqList = isZh ? faqsZh : faqs;
+  const advs = isZh ? coreAdvantagesZh : isRu ? coreAdvantagesRu : coreAdvantages;
+  const steps = isZh ? processStepsZh : isRu ? processStepsRu : processSteps;
+  const rows = isZh ? comparisonRowsZh : isRu ? comparisonRowsRu : comparisonRows;
+  const faqList = isZh ? faqsZh : isRu ? faqsRu : faqs;
 
   return (
     <main
@@ -256,31 +372,31 @@ export default function BronchiectasisStemCellContent() {
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full mb-6">
               <Icons.wind className="h-5 w-5" />
               <span className="text-sm font-medium">
-                {isZh ? "再生医学突破" : "Regenerative Medicine Breakthrough"}
+                {isZh ? "再生医学突破" : isRu ? "Прорыв в регенеративной медицине" : "Regenerative Medicine Breakthrough"}
               </span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
               {isZh
                 ? "支气管扩张症的气道基底层干细胞治疗"
-                : "Airway Basal Stem Cell Therapy for Bronchiectasis"}
+                : isRu ? "Базальная терапия стволовых клеток дыхательных путей для бронхиэктазии" : "Airway Basal Stem Cell Therapy for Bronchiectasis"}
             </h1>
             <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
               {isZh
                 ? "利用患者自身的气道基底层干细胞，从根源修复受损的支气管结构，打破\"感染-炎症-损伤\"的恶性循环，为支气管扩张症患者带来全新的治疗希望。"
-                : "Utilizing patients' own airway basal stem cells to fundamentally repair damaged bronchial structures, breaking the vicious cycle of \"infection-inflammation-damage,\" bringing new therapeutic hope to bronchiectasis patients."}
+                : isRu ? "Использование базальных стволовых клеток дыхательных путей пациентов для фундаментального восстановления поврежденных бронхиальных структур, разрыв порочного круга «повреждения инфекции-воспаления», принося новую терапевтическую надежду пациентам с бронхоэктазом." : "Utilizing patients' own airway basal stem cells to fundamentally repair damaged bronchial structures, breaking the vicious cycle of \"infection-inflammation-damage,\" bringing new therapeutic hope to bronchiectasis patients."}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href="/contact"
                 className="px-8 py-3 bg-white text-[#1B4D3E] font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-lg"
               >
-                {isZh ? "咨询专家" : "Consult Expert"}
+                {isZh ? "咨询专家" : isRu ? "Получить консультацию специалиста" : "Consult Expert"}
               </Link>
               <a
                 href="#advantages"
                 className="px-8 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
               >
-                {isZh ? "了解详情" : "Learn More"}
+                {isZh ? "了解详情" : isRu ? "Узнать больше" : "Learn More"}
               </a>
             </div>
           </div>
@@ -292,12 +408,12 @@ export default function BronchiectasisStemCellContent() {
         <div className="container-custom">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
-              {isZh ? "核心优势" : "Core Advantages"}
+              {isZh ? "核心优势" : isRu ? "Основные преимущества" : "Core Advantages"}
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               {isZh
                 ? "为什么选择气道基底层干细胞治疗支气管扩张症"
-                : "Why choose airway basal stem cell therapy for bronchiectasis"}
+                : isRu ? "Почему выбирают терапию базальных стволовых клеток дыхательных путей для бронхоэктазии" : "Why choose airway basal stem cell therapy for bronchiectasis"}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -337,12 +453,12 @@ export default function BronchiectasisStemCellContent() {
           <Reveal y={20}>
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
-                {isZh ? "治疗流程" : "Treatment Process"}
+                {isZh ? "治疗流程" : isRu ? "Процесс лечения" : "Treatment Process"}
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
                 {isZh
                   ? "标准化、个性化的五步治疗方案"
-                  : "Standardized, personalized five-step treatment protocol"}
+                  : isRu ? "Стандартизированный, персонализированный пятиэтапный протокол лечения" : "Standardized, personalized five-step treatment protocol"}
               </p>
             </div>
           </Reveal>
@@ -377,12 +493,12 @@ export default function BronchiectasisStemCellContent() {
           <Reveal y={20}>
             <div className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
-                {isZh ? "治疗对比" : "Treatment Comparison"}
+                {isZh ? "治疗对比" : isRu ? "Сравнение лечения" : "Treatment Comparison"}
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
                 {isZh
                   ? "传统治疗 vs 气道基底层干细胞治疗"
-                  : "Traditional Treatment vs Airway Basal Stem Cell Therapy"}
+                  : isRu ? "Традиционное лечение против базальной клеточной терапии дыхательных путей" : "Traditional Treatment vs Airway Basal Stem Cell Therapy"}
               </p>
             </div>
           </Reveal>
@@ -391,13 +507,13 @@ export default function BronchiectasisStemCellContent() {
               <thead>
                 <tr className="bg-[#1B4D3E] text-white">
                   <th className="px-6 py-4 text-left">
-                    {isZh ? "对比维度" : "Aspect"}
+                    {isZh ? "对比维度" : isRu ? "Аспект" : "Aspect"}
                   </th>
                   <th className="px-6 py-4 text-left">
-                    {isZh ? "传统治疗" : "Traditional Treatment"}
+                    {isZh ? "传统治疗" : isRu ? "Традиционное лечение" : "Traditional Treatment"}
                   </th>
                   <th className="px-6 py-4 text-left">
-                    {isZh ? "干细胞治疗" : "Stem Cell Therapy"}
+                    {isZh ? "干细胞治疗" : isRu ? "Терапия стволовыми клетками" : "Stem Cell Therapy"}
                   </th>
                 </tr>
               </thead>
@@ -432,7 +548,7 @@ export default function BronchiectasisStemCellContent() {
               <p className="text-gray-600 max-w-2xl mx-auto">
                 {isZh
                   ? "关于气道基底层干细胞治疗的常见疑问"
-                  : "Common questions about airway basal stem cell therapy"}
+                  : isRu ? "Общие вопросы о терапии базальных стволовых клеток дыхательных путей" : "Common questions about airway basal stem cell therapy"}
               </p>
             </div>
           </Reveal>
@@ -460,25 +576,25 @@ export default function BronchiectasisStemCellContent() {
         <div className="container-custom text-center">
           <Reveal y={20}>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              {isZh ? "开启您的康复之旅" : "Start Your Recovery Journey"}
+              {isZh ? "开启您的康复之旅" : isRu ? "Начните свое путешествие к восстановлению" : "Start Your Recovery Journey"}
             </h2>
             <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
               {isZh
                 ? "我们的专家团队将为您制定个性化的治疗方案，帮助您重获健康呼吸"
-                : "Our expert team will create a personalized treatment plan to help you regain healthy breathing"}
+                : isRu ? "Наша команда экспертов создаст индивидуальный план лечения, который поможет вам восстановить здоровое дыхание." : "Our expert team will create a personalized treatment plan to help you regain healthy breathing"}
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link
                 href="/contact"
                 className="px-8 py-3 bg-white text-[#1B4D3E] font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-lg"
               >
-                {isZh ? "立即咨询" : "Consult Now"}
+                {isZh ? "立即咨询" : isRu ? "Получить консультацию" : "Consult Now"}
               </Link>
               <Link
                 href="/projects"
                 className="px-8 py-3 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
               >
-                {isZh ? "查看更多项目" : "View More Projects"}
+                {isZh ? "查看更多项目" : isRu ? "Посмотреть другие программы" : "View More Projects"}
               </Link>
             </div>
           </Reveal>

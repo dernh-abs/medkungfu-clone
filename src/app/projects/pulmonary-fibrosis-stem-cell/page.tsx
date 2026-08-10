@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { StemCellDetailPage } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/stem-cell/StemCellDetailPage";
 import { pulmonaryFibrosis } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/stem-cell/pulmonaryFibrosis";
 import { pulmonaryFibrosisZh } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/stem-cell/pulmonaryFibrosisZh";
+import { pulmonaryFibrosisRu } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/stem-cell/pulmonaryFibrosisRu";
 import { SiteFooter } from "@/components/sites/www-medkungfu-com-363c9bc1/shared/SiteFooter";
 import { SiteHeader } from "@/components/sites/www-medkungfu-com-363c9bc1/shared/SiteHeader";
 
@@ -17,7 +18,7 @@ export default function Page() {
     <>
       <SiteHeader />
       <main className="flex-grow pt-[72px]">
-        <StemCellDetailPage data={pulmonaryFibrosis} zhConfig={pulmonaryFibrosisZh} />
+        <StemCellDetailPage data={pulmonaryFibrosis} zhConfig={pulmonaryFibrosisZh} ruConfig={pulmonaryFibrosisRu} />
       </main>
       <SiteFooter />
     </>

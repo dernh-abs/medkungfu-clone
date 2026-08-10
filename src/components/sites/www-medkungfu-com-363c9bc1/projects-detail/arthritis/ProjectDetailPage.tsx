@@ -30,6 +30,8 @@ import type {
 // Hero
 // ---------------------------------------------------------------------------
 function HeroSection({ hero }: { hero: HeroData }) {
+  const { lang } = useLanguage();
+  const isRu = lang === "ru";
   return (
     <section
       className={`relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br ${hero.gradientClass}`}
@@ -58,13 +60,13 @@ function HeroSection({ hero }: { hero: HeroData }) {
               href="#contact"
               className={`px-8 py-4 ${hero.buttonClass} text-white font-semibold rounded-lg transition-colors`}
             >
-              Consult Now
+              {isRu ? "Получить консультацию" : "Consult Now"}
             </a>
             <a
               href="#intro"
               className="px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
             >
-              Learn More
+              {isRu ? "Узнать больше" : "Learn More"}
             </a>
           </div>
         </div>
@@ -819,6 +821,8 @@ function PricingCheck({ className }: { className: string }) {
 }
 
 function PricingPackages({ pricing }: { pricing: Extract<PricingSection, { variant: "packages" }> }) {
+  const { lang } = useLanguage();
+  const isRu = lang === "ru";
   return (
     <section id="pricing" className="py-20 lg:py-32 bg-slate-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -841,7 +845,7 @@ function PricingPackages({ pricing }: { pricing: Extract<PricingSection, { varia
             >
               {pkg.recommended && (
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-teal-500 text-white px-4 py-1 rounded-full text-sm font-semibold">
-                  Recommended
+                  {isRu ? "Рекомендуемый" : "Recommended"}
                 </div>
               )}
               <h3 className="text-xl font-bold text-[#1A1A2E] mb-4">{pkg.name}</h3>
@@ -993,15 +997,24 @@ function ContactSection({ contact }: { contact: ContactSectionData }) {
 export function ProjectDetailPage({
   data,
   zhConfig,
+  ruConfig,
 }: {
   data: PageData;
   /** Chinese variant of the same data. When the site language is zh, this is
    *  rendered instead of the English `data`. The aria-label stays English on
    *  both locales (matches the source site's zh pages). */
   zhConfig?: PageData;
+  /** Russian variant of the same data. When the site language is ru, this is
+   *  rendered instead of the English `data`. */
+  ruConfig?: PageData;
 }) {
   const { lang } = useLanguage();
-  const c = lang === "zh" && zhConfig ? zhConfig : data;
+  const c =
+    lang === "ru" && ruConfig
+      ? ruConfig
+      : lang === "zh" && zhConfig
+        ? zhConfig
+        : data;
   return (
     <main role="main" aria-label={data.mainAriaLabel} className="min-h-screen bg-white">
       <HeroSection hero={c.hero} />

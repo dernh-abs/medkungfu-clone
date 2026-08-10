@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/sites/www-medkungfu-com-363c9bc1/shared
 import { ProjectDetailPage } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/arthritis/ProjectDetailPage";
 import { microfractureTcmPage } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/arthritis/data/microfracture-tcm";
 import { microfractureTcmPageZh } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/arthritis/data/microfracture-tcm-zh";
+import { microfractureTcmPageRu } from "@/components/sites/www-medkungfu-com-363c9bc1/projects-detail/arthritis/data/microfracture-tcm-ru";
 
 export const metadata: Metadata = {
   title: "Microfracture-TCM Cartilage Regeneration",
@@ -17,7 +18,7 @@ export default function MicrofractureTcmPage() {
     <>
       <SiteHeader />
       <main className="flex-grow pt-[72px]">
-        <ProjectDetailPage data={microfractureTcmPage} zhConfig={microfractureTcmPageZh} />
+        <ProjectDetailPage data={microfractureTcmPage} zhConfig={microfractureTcmPageZh} ruConfig={microfractureTcmPageRu} />
       </main>
       <SiteFooter />
     </>

@@ -19,6 +19,13 @@ const statsZh = [
   { value: "15%", label: "复发率（远低于国际平均）" },
   { value: "30-40%", label: "愈合时间缩短" },
 ];
+const statsRu = [
+  { value: "80%", label: "Скорость заживления анальной свищи Крона" },
+  { value: "15%", label: "Частота рецидивов (намного ниже среднего международного уровня)" },
+  { value: "30-40%", label: "Сокращение времени исцеления" },
+];
+
+
 
 const conditions: { title: string; description: string }[] = [
   {
@@ -45,6 +52,20 @@ const conditionsZh: { title: string; description: string }[] = [
       "痔疮是肛管内血管垫异常增大。混合痔同时涉及内痔和外痔成分。慢性或长期出血可能导致贫血。",
   },
 ];
+const conditionsRu: { title: string; description: string }[] = [
+  {
+    title: "Комплекс Анальная фистула / связанная с Кроном фистула",
+    description:
+      "Анальная свищ представляет собой аномальный туннель между анальным каналом и окружающей кожей, обычно возникающий из перианального абсцесса. Сложные свищи имеют многоветвящиеся тракты, проходящие через или вблизи мышцы сфинктера. Свищи, связанные с болезнью Крона, очень склонны к рецидиву и признаны на международном уровне как одно из самых сложных аноректальных состояний для лечения.",
+  },
+  {
+    title: "Геморрой (смешанный / окружной)",
+    description:
+      "Геморрой — это аномально увеличенные сосудистые подушки в анальном канале. Смешанный геморрой включает как внутренние, так и внешние компоненты одновременно. Хроническое или длительное кровотечение может привести к анемии.",
+  },
+];
+
+
 
 const clinicalAdvantages: { title: string; description: string }[] = [
   {
@@ -101,6 +122,35 @@ const clinicalAdvantagesZh: { title: string; description: string }[] = [
       "对于混合痔，结合硬化剂注射、套扎和微创手术——与传统Milligan-Morgan痔切除术相比显著减轻术后疼痛。患者通常可在24-48小时内恢复日常活动。",
   },
 ];
+const clinicalAdvantagesRu: { title: string; description: string }[] = [
+  {
+    title: "Сфинктер-сохранение · Функция первая",
+    description:
+      "Обычная фистулотомия рискует частичным повреждением сфинктера и недержанием. Терапия сетчатки и травяной нити достигает постепенного закрытия свища путем поэтапного разрезания и локализованной доставки лекарств — максимально сохраняя послеоперационный контроль сфинктера и воздержание.",
+  },
+  {
+    title: "Собственные формулы · Ускоренное исцеление",
+    description:
+      "Собственные составы — мазь Цзиньхуан (снижает отек), мазь Бай Ю (регенерация тканей), мазь красного масла (осуждение и заживление) и оральные способствующие исцелению гранулы — образуют полную послеоперационную систему ухода за ранами. Клинические данные показывают 30-40-процентное сокращение времени заживления и значительно меньшее образование рубцов.",
+  },
+  {
+    title: "Международные минимально инвазивные методы",
+    description:
+      "Полностью владеющий видеоассистированным лечением анальной свищи (VAAFT), флеш-металлическим флэш-наростом и лазерным закрытием свища (FiLaC) — расширение вариантов лечения для пациентов, непригодных для обычной хирургии.",
+  },
+  {
+    title: "Холистическое кондиционирование ТКМ · Долгосрочная профилактика рецидивов",
+    description:
+      "Помимо местного лечения, персонализированное кондиционирование ТКМ — ци-тонирующие травяные рецепты, диетическое руководство и советы по улучшению кишечника — для устранения коренных причин рецидива, а не просто лечения текущего эпизода.",
+  },
+  {
+    title: "Минимально инвазивный · Быстрое восстановление (геморрой)",
+    description:
+      "Для смешанного геморроя сочетается склеротерапия, бандирование и минимально инвазивная хирургия — значительно уменьшая послеоперационную боль по сравнению с традиционной геморроидэктомией Миллигана-Моргана. Пациенты могут возобновить повседневную деятельность в течение 24-48 часов.",
+  },
+];
+
+
 
 const suitableCandidates = [
   "Complex or recurrent anal fistula, including Crohn's disease-related fistula or post-multiple-surgery recurrence",
@@ -117,6 +167,15 @@ const suitableCandidatesZh = [
   "寻求中西医结合护理以降低长期复发风险的患者",
   "在海外治疗效果不佳，寻求第二诊疗意见的患者",
 ];
+const suitableCandidatesRu = [
+  "Сложная или рецидивирующая анальная фистула, включая связанную с болезнью Крона фистулу или рецидив после нескольких операций",
+  "Смешанный геморрой (включая окружной), стремящийся к уменьшению послеоперационной боли и более быстрому восстановлению",
+  "Постперианальный абсцесс, требующий продвинутого управления раной",
+  "Пациенты, нуждающиеся в комплексной помощи ТКМ, чтобы снизить риск рецидива в долгосрочной перспективе",
+  "Пациенты, которые лечились за границей с неудовлетворительными результатами, ищут второе мнение",
+];
+
+
 
 const contraindications = [
   "Coagulation disorders or current anticoagulant medication",
@@ -133,6 +192,15 @@ const contraindicationsZh = [
   "孕妇（某些手术推迟至产后）",
   "影响伤口愈合的糖尿病控制不佳",
 ];
+const contraindicationsRu = [
+  "Нарушения свертывания или текущие антикоагулянтные препараты",
+  "Активная вспышка воспалительного заболевания кишечника (болезнь Крона / язвенный колит)",
+  "Тяжелая местная инфекция или активный сепсис",
+  "Беременные женщины (некоторые процедуры отложены до послеродового периода)",
+  "Плохо контролируемый диабет, влияющий на заживление ран",
+];
+
+
 
 const processSteps: {
   num: string;
@@ -233,6 +301,57 @@ const processStepsZh: {
       "完成主要治疗阶段后，医生提供双语书面总结：居家创面护理说明；饮食指导；复发预警信号和管理；长期随访计划。患者回国后，MedKungfu继续协调远程随访。",
   },
 ];
+const processStepsRu: {
+  num: string;
+  title: string;
+  duration: string;
+  description: string;
+}[] = [
+  {
+    num: "1",
+    title: "Онлайн-запрос и оценка симптомов",
+    duration: "1-3 дня",
+    description:
+      "Свяжитесь с MedKungfu по электронной почте — краткое описание ваших симптомов и истории болезни — это все, что нужно для начала. Предварительные медицинские записи, история операции или визуализация (МРТ, КТ) полезны, но не требуются. MedKungfu проведет предварительную дистанционную оценку с проктологами.",
+  },
+  {
+    num: "2",
+    title: "Путешествие и планирование маршрута",
+    duration: "3-7 дней",
+    description:
+      "После подтверждения намерения лечения MedKungfu помогает с визовой документацией (включая пригласительные письма в больницу), размещением рядом с больницей, договоренностями о трансфере из аэропорта и рекомендуемой продолжительностью пребывания на основании запланированной процедуры и требований госпитализации.",
+  },
+  {
+    num: "3",
+    title: "Предварительная оценка специалиста в больнице",
+    duration: "День 1",
+    description:
+      "По прибытии вас сопровождает двуязычный эскорт. Специалист проводит комплексную оценку: анализ конституции ТКМ; местное обследование на поражение (включая фистулоскопию и обзор изображений); составление индивидуального плана лечения и планирование процедуры.",
+  },
+  {
+    num: "4",
+    title: "Процедура и лечение",
+    duration: "День процедуры",
+    description:
+      "В зависимости от состояния: сложные свищи лечат сетонной/травяной терапией нитями или VAAFT/FiLaC; геморрой с лигацией, склеротерапией или минимально инвазивной хирургией. MedKungfu обеспечивает интерпретацию в больницах.",
+  },
+  {
+    num: "5",
+    title: "Послеоперационный уход за ранами и последующее наблюдение",
+    duration: "На протяжении всего пребывания",
+    description:
+      "Врачи проводят стандартизированные изменения повязки с использованием запатентованных составов, регулярно оценивают прогресс заживления ран и корректируют напряжение или составы сетонов по мере необходимости. MedKungfu координирует транспорт и сопровождение всех последующих визитов.",
+  },
+  {
+    num: "6",
+    title: "Предварительное резюме и руководство по уходу на дому",
+    duration: "Перед отъездом",
+    description:
+      "После завершения основного этапа лечения врач предоставляет двуязычное письменное резюме: инструкции по уходу за домашними ранами; диетическое руководство; предупреждающие знаки и управление рецидивами; долгосрочный план наблюдения. MedKungfu продолжает координировать дистанционное наблюдение после возвращения пациента домой.",
+  },
+];
+
+
 
 const fullSupports: { title: string; description: string }[] = [
   {
@@ -279,18 +398,43 @@ const fullSupportsZh: { title: string; description: string }[] = [
       "支持医疗签证邀请函、抵达指导和患者及陪同家属的住宿安排。",
   },
 ];
+const fullSupportsRu: { title: string; description: string }[] = [
+  {
+    title: "Двуязычное толкование",
+    description:
+      "Выделенный эскорт с полным медицинским переводом при каждом назначении. Все записи, отчеты и планы лечения предоставляются в двуязычном формате для связи с нулевым барьером.",
+  },
+  {
+    title: "Транспорт и эскорт",
+    description:
+      "Трансфер из аэропорта и сопровождение на каждое посещение — нет необходимости самостоятельно перемещаться по больнице.",
+  },
+  {
+    title: "Посвященному координатору",
+    description:
+      "Персональный координатор управляет всеми назначениями, отслеживанием прогресса, механизмами ухода и немедицинскими потребностями на протяжении всего пребывания.",
+  },
+  {
+    title: "Виза и поддержка путешествий",
+    description:
+      "Поддержка с медицинскими письмами-приглашениями, руководством по прибытию и условиями размещения для пациентов и сопровождающих их семей.",
+  },
+];
+
+
 
 export default function TcmProctologyContent() {
   const { lang } = useLanguage();
   const isZh = lang === "zh";
+  const isRu = lang === "ru";
 
-  const statList = isZh ? statsZh : stats;
-  const conditionList = isZh ? conditionsZh : conditions;
-  const advantageList = isZh ? clinicalAdvantagesZh : clinicalAdvantages;
-  const candidateList = isZh ? suitableCandidatesZh : suitableCandidates;
-  const contraindicationList = isZh ? contraindicationsZh : contraindications;
-  const steps = isZh ? processStepsZh : processSteps;
-  const supportList = isZh ? fullSupportsZh : fullSupports;
+  const statList = isZh ? statsZh : isRu ? statsRu : stats;
+  const conditionList = isZh ? conditionsZh : isRu ? conditionsRu : conditions;
+  const advantageList = isZh ? clinicalAdvantagesZh : isRu ? clinicalAdvantagesRu : clinicalAdvantages;
+  const candidateList = isZh ? suitableCandidatesZh : isRu ? suitableCandidatesRu : suitableCandidates;
+  const contraindicationList = isZh ? contraindicationsZh : isRu ? contraindicationsRu : contraindications;
+  const steps = isZh ? processStepsZh : isRu ? processStepsRu : processSteps;
+  const supportList = isZh ? fullSupportsZh : isRu ? fullSupportsRu : fullSupports;
 
   return (
     <main
@@ -313,12 +457,12 @@ export default function TcmProctologyContent() {
               <p className="text-xl md:text-2xl text-emerald-200 mb-4">
                 {isZh
                   ? "中西医结合微创治疗"
-                  : "TCM-Integrated Minimally Invasive Treatment"}
+                  : isRu ? "ТКМ-интегрированное минимально инвазивное лечение" : "TCM-Integrated Minimally Invasive Treatment"}
               </p>
               <p className="text-lg text-gray-300 max-w-3xl mx-auto mb-8">
                 {isZh
                   ? "顾氏外科传承 · 中西医结合 · 微创治疗 · 标本兼治"
-                  : "Gu's Surgical Heritage · TCM-Western Integration · Minimally Invasive · Root & Symptom Treatment"}
+                  : isRu ? "Хирургическое наследие Гу · ТКМ-западная интеграция · минимально инвазивная · корневая и симптомная обработка" : "Gu's Surgical Heritage · TCM-Western Integration · Minimally Invasive · Root & Symptom Treatment"}
               </p>
               <div className="flex flex-wrap justify-center gap-4 mb-8">
                 <span className="px-4 py-2 bg-white/10 rounded-full text-sm">
@@ -339,7 +483,7 @@ export default function TcmProctologyContent() {
                   href="mailto:contact@medkungfu.com"
                   className="px-8 py-4 bg-emerald-500 text-white font-semibold rounded-lg hover:bg-emerald-600 transition-colors"
                 >
-                  {isZh ? "邮件咨询" : "Email Consultation"}
+                  {isZh ? "邮件咨询" : isRu ? "Консультация по электронной почте" : "Email Consultation"}
                 </a>
                 <a
                   href="#intro"
@@ -381,23 +525,23 @@ export default function TcmProctologyContent() {
                 <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-6">
                   {isZh
                     ? "顾氏外科传承 · 百年肛肠专科"
-                    : "Gu's Surgical Heritage · Century-old Anorectal Specialty"}
+                    : isRu ? "Хирургическое наследие Гу · Столетняя аноректальная специальность" : "Gu's Surgical Heritage · Century-old Anorectal Specialty"}
                 </h2>
                 <p className="text-gray-600 text-lg mb-6">
                   {isZh
                     ? "传承百年\"顾氏外科\"学术积淀，将传统中医精髓与现代先进技术无缝融合，为复杂性肛瘘、混合痔等肛肠疾病患者提供精准、个性化的治疗方案。"
-                    : "Inheriting the century-old academic accumulation of \"Gu's Surgery\", seamlessly integrating traditional Chinese medicine essence with modern advanced technology, providing precise and personalized treatment plans for patients with complex anorectal diseases such as complex anal fistulas and mixed hemorrhoids."}
+                    : isRu ? "Наследовать вековое академическое накопление «хирургии Гу», органично интегрируя сущность традиционной китайской медицины с современными передовыми технологиями, предоставляя точные и персонализированные планы лечения для пациентов со сложными аноректальными заболеваниями, такими как сложные анальные свищи и смешанный геморрой." : "Inheriting the century-old academic accumulation of \"Gu's Surgery\", seamlessly integrating traditional Chinese medicine essence with modern advanced technology, providing precise and personalized treatment plans for patients with complex anorectal diseases such as complex anal fistulas and mixed hemorrhoids."}
                 </p>
                 <p className="text-gray-600 mb-6">
                   {isZh
                     ? "标准西方手术治疗复杂性或克罗恩病相关肛瘘存在显著的括约肌损伤风险和高复发率。我们采用挂线疗法、药线疗法结合国际先进的VAAFT视频辅助肛瘘治疗技术和FiLaC激光闭合技术，在临床括约肌保护率和复发率降低方面获得公认疗效。"
-                    : "Standard Western surgical treatment for complex or Crohn's disease-related anal fistulas carries significant risk of sphincter damage and high recurrence rates. We adopt seton therapy, herbal thread therapy combined with internationally advanced VAAFT video-assisted anal fistula treatment and FiLaC laser closure technology, achieving recognized clinical efficacy in sphincter preservation and recurrence reduction."}
+                    : isRu ? "Стандартное западное хирургическое лечение сложных или связанных с болезнью Крона анальных свищей несет значительный риск повреждения сфинктера и высоких частот рецидивов. Мы применяем сетоновую терапию, терапию травяными нитями в сочетании с передовой на международном уровне видео-ассистированной терапией свищей анального действия VAAFT и технологией закрытия лазера FiLaC, достигая признанной клинической эффективности в сохранении сфинктера и уменьшении рецидивов." : "Standard Western surgical treatment for complex or Crohn's disease-related anal fistulas carries significant risk of sphincter damage and high recurrence rates. We adopt seton therapy, herbal thread therapy combined with internationally advanced VAAFT video-assisted anal fistula treatment and FiLaC laser closure technology, achieving recognized clinical efficacy in sphincter preservation and recurrence reduction."}
                 </p>
                 <div className="bg-emerald-50 rounded-xl p-6">
                   <p className="text-emerald-700 font-medium">
                     {isZh
                       ? "院内制剂——金黄膏、红油膏、生肌散等——进一步加速创面愈合，减少瘢痕形成。"
-                      : "Proprietary formulations — Jin Huang Ointment, Hong You Ointment, Sheng Ji San, etc. — further accelerate wound healing and reduce scar formation."}
+                      : isRu ? "Собственные составы — мазь Цзиньхуан, мазь Хонг Ю, мазь Шэн Цзи Сан и др. — еще больше ускоряют заживление ран и уменьшают образование рубцов." : "Proprietary formulations — Jin Huang Ointment, Hong You Ointment, Sheng Ji San, etc. — further accelerate wound healing and reduce scar formation."}
                   </p>
                 </div>
               </Reveal>
@@ -418,12 +562,12 @@ export default function TcmProctologyContent() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <Reveal className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
-                {isZh ? "两大肛肠疑难病症" : "Two Complex Anorectal Conditions"}
+                {isZh ? "两大肛肠疑难病症" : isRu ? "Два сложных аноректальных состояния" : "Two Complex Anorectal Conditions"}
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
                 {isZh
                   ? "我们专注治疗的两种复杂肛肠疾病"
-                  : "The two complex anorectal diseases we specialize in treating"}
+                  : isRu ? "Два сложных аноректальных заболевания, которые мы специализируемся на лечении" : "The two complex anorectal diseases we specialize in treating"}
               </p>
             </Reveal>
             <div className="grid lg:grid-cols-2 gap-8">
@@ -446,7 +590,7 @@ export default function TcmProctologyContent() {
               <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
                 {isZh
                   ? "五大不可替代的临床优势"
-                  : "Five Irreplaceable Clinical Advantages"}
+                  : isRu ? "Пять незаменимых клинических преимуществ" : "Five Irreplaceable Clinical Advantages"}
               </h2>
             </Reveal>
             <div className="space-y-8">
@@ -479,7 +623,7 @@ export default function TcmProctologyContent() {
             <div className="grid lg:grid-cols-2 gap-12">
               <Reveal x={-30}>
                 <h2 className="text-3xl font-bold mb-8">
-                  {isZh ? "适用人群" : "Suitable Candidates"}
+                  {isZh ? "适用人群" : isRu ? "Подходящие кандидаты" : "Suitable Candidates"}
                 </h2>
                 <div className="space-y-4">
                   {candidateList.map((item) => (
@@ -492,12 +636,12 @@ export default function TcmProctologyContent() {
               </Reveal>
               <Reveal x={30}>
                 <h2 className="text-3xl font-bold mb-8">
-                  {isZh ? "禁忌症" : "Contraindications"}
+                  {isZh ? "禁忌症" : isRu ? "Противопоказания" : "Contraindications"}
                 </h2>
                 <p className="text-gray-400 mb-6">
                   {isZh
                     ? "请在咨询时向医生如实告知以下情况——适用性需个体化评估"
-                    : "Please inform your doctor truthfully about the following conditions during consultation — suitability requires individualized assessment"}
+                    : isRu ? "Пожалуйста, сообщите своему врачу правдиво о следующих условиях во время консультации - пригодность требует индивидуальной оценки." : "Please inform your doctor truthfully about the following conditions during consultation — suitability requires individualized assessment"}
                 </p>
                 <div className="space-y-4">
                   {contraindicationList.map((item) => (
@@ -510,7 +654,7 @@ export default function TcmProctologyContent() {
                 <p className="text-gray-500 text-sm mt-6 pt-4 border-t border-slate-700">
                   {isZh
                     ? "所有患者将在治疗前由专科医生评估，确认适用性并制定个体化方案。"
-                    : "All patients will be assessed by specialists before treatment to confirm suitability and develop individualized plans."}
+                    : isRu ? "Все пациенты будут оцениваться специалистами перед лечением, чтобы подтвердить пригодность и разработать индивидуальные планы." : "All patients will be assessed by specialists before treatment to confirm suitability and develop individualized plans."}
                 </p>
               </Reveal>
             </div>
@@ -524,12 +668,12 @@ export default function TcmProctologyContent() {
               <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
                 {isZh
                   ? "一站式全程陪诊服务"
-                  : "One-stop Full-process Accompaniment Service"}
+                  : isRu ? "Полноценный сервис полного цикла" : "One-stop Full-process Accompaniment Service"}
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
                 {isZh
                   ? "从在线咨询到返程随访，MedKungfu为每一位海外患者提供全程管家式服务"
-                  : "From online inquiry to return follow-up, MedKungfu provides full butler-style service for every overseas patient"}
+                  : isRu ? "От онлайн-запроса до обратного наблюдения, MedKungfu предоставляет полный сервис в стиле дворецкого для каждого зарубежного пациента." : "From online inquiry to return follow-up, MedKungfu provides full butler-style service for every overseas patient"}
               </p>
             </Reveal>
             <div className="space-y-6">
@@ -562,7 +706,7 @@ export default function TcmProctologyContent() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <Reveal className="text-center mb-16">
               <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
-                {isZh ? "超越医疗的全程支持" : "Beyond Medical — Full Support"}
+                {isZh ? "超越医疗的全程支持" : isRu ? "Помимо медицинской помощи – полная поддержка" : "Beyond Medical — Full Support"}
               </h2>
             </Reveal>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -589,24 +733,24 @@ export default function TcmProctologyContent() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <Reveal className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold text-[#1A1A2E] mb-4">
-                {isZh ? "参考治疗费用" : "Reference Treatment Cost"}
+                {isZh ? "参考治疗费用" : isRu ? "Стоимость справочного лечения" : "Reference Treatment Cost"}
               </h2>
               <p className="text-gray-600 max-w-2xl mx-auto">
                 {isZh
                   ? "透明定价，全球价格优势无与伦比"
-                  : "Transparent pricing, unparalleled global price advantage"}
+                  : isRu ? "Прозрачное ценообразование, беспрецедентное глобальное ценовое преимущество" : "Transparent pricing, unparalleled global price advantage"}
               </p>
             </Reveal>
             <Reveal className="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl p-8 md:p-12 text-white text-center">
               <div className="text-5xl md:text-6xl font-bold mb-4">
                 {isZh
                   ? "约$7,000（含中医康复）"
-                  : "Approx. $7,000 (including TCM rehabilitation)"}
+                  : isRu ? "7000 долларов США (включая реабилитацию ТКМ)" : "Approx. $7,000 (including TCM rehabilitation)"}
               </div>
               <p className="text-emerald-100 text-lg mb-6">
                 {isZh
                   ? "具体费用以医院最终评估为准。"
-                  : "Specific costs subject to final hospital assessment."}
+                  : isRu ? "Конкретные расходы, подлежащие окончательной оценке в больнице." : "Specific costs subject to final hospital assessment."}
               </p>
               <div className="flex flex-wrap justify-center gap-4 text-sm">
                 <span className="px-4 py-2 bg-white/20 rounded-full">
@@ -630,30 +774,30 @@ export default function TcmProctologyContent() {
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 {isZh
                   ? "开启您的肛肠治疗之旅"
-                  : "Start Your Anorectal Treatment Journey"}
+                  : isRu ? "Начните свое путешествие по аноректальному лечению" : "Start Your Anorectal Treatment Journey"}
               </h2>
               <p className="text-emerald-200 mb-4">
                 {isZh
                   ? "联系我们进行免费初步评估"
-                  : "Contact us for a free preliminary assessment"}
+                  : isRu ? "Свяжитесь с нами для бесплатной предварительной оценки" : "Contact us for a free preliminary assessment"}
               </p>
               <p className="text-emerald-300 mb-8">
                 {isZh
                   ? "医学顾问团队将在一小时内回复，并为您安排专业双语咨询服务"
-                  : "Our medical advisory team will respond within one hour and arrange professional bilingual consultation for you"}
+                  : isRu ? "Наша медицинская консультативная группа ответит в течение часа и организует для вас профессиональную двуязычную консультацию." : "Our medical advisory team will respond within one hour and arrange professional bilingual consultation for you"}
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <a
                   href="mailto:contact@medkungfu.com"
                   className="px-8 py-4 bg-white text-emerald-900 font-semibold rounded-lg hover:bg-emerald-50 transition-colors"
                 >
-                  {isZh ? "邮件咨询" : "Email Consultation"}
+                  {isZh ? "邮件咨询" : isRu ? "Консультация по электронной почте" : "Email Consultation"}
                 </a>
                 <Link
                   href="/contact"
                   className="px-8 py-4 border-2 border-white text-white font-semibold rounded-lg hover:bg-white/10 transition-colors"
                 >
-                  {isZh ? "在线留言" : "Online Inquiry"}
+                  {isZh ? "在线留言" : isRu ? "Онлайн-запрос" : "Online Inquiry"}
                 </Link>
               </div>
             </Reveal>
