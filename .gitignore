@@ -48,5 +48,8 @@ next-env.d.ts
 # Local temp files
 temp/
 
+# Site comparison scratch (page text snapshots + diff scripts, one-off)
+compare/
+
 # builder worktrees (duplicates — never commit)
 .claude/worktrees/
