@@ -11,6 +11,8 @@ interface RevealProps {
   children: ReactNode;
   /** Vertical slide distance in px (default 20). Set 0 for no slide. */
   y?: number;
+  /** Horizontal slide distance in px (default 0). */
+  x?: number;
   /** Optional scale-down start (e.g. 0.9). */
   scale?: number;
   className?: string;
@@ -18,7 +20,14 @@ interface RevealProps {
   delay?: number;
 }
 
-export function Reveal({ children, y = 20, scale, className, delay = 0 }: RevealProps) {
+export function Reveal({
+  children,
+  y,
+  x = 0,
+  scale,
+  className,
+  delay = 0,
+}: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
@@ -38,9 +47,13 @@ export function Reveal({ children, y = 20, scale, className, delay = 0 }: Reveal
     return () => observer.disconnect();
   }, []);
 
+  // When a horizontal offset (x) is given without an explicit y, default y to 0
+  // so the element slides purely horizontally (matching captured translateX transforms).
+  const resolvedY = y ?? (x !== 0 ? 0 : 20);
+
   const hidden: CSSProperties = {
     opacity: 0,
-    transform: scale != null ? `scale(${scale})` : `translateY(${y}px)`,
+    transform: scale != null ? `scale(${scale})` : `translate(${x}px, ${resolvedY}px)`,
   };
   const shown: CSSProperties = { opacity: 1, transform: "none" };
 
