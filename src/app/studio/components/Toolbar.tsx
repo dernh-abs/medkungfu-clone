@@ -1,5 +1,18 @@
 "use client";
 
+// Toolbar — Studio top bar.
+//
+// Left:  Page name | version | unsaved indicator
+// Right: Undo | Redo | Discard | History | Save Draft | Submit Review | Publish
+//
+// Workflow buttons (Save Draft / Submit Review / Publish) are conditionally
+// shown based on draftStatus:
+//   editing → [Save Draft] visible
+//   draft   → [Submit Review] visible
+//   review  → [Publish] visible
+//   published → none
+//   none     → [Save Draft] visible (creates first draft)
+
 import type { DraftStatus } from "@/lib/executor/draft-store";
 import type { ReactNode } from "react";
 
@@ -42,6 +55,7 @@ export function Toolbar({
 
   return (
     <header className="flex items-center justify-between px-4 py-2 bg-white border-b border-gray-200 shrink-0">
+      {/* Left: page + version + status */}
       <div className="flex items-center gap-3">
         <span className="text-sm font-semibold text-gray-900 capitalize">
           {page}
@@ -55,7 +69,9 @@ export function Toolbar({
         )}
       </div>
 
+      {/* Right: actions */}
       <div className="flex items-center gap-2">
+        {/* Version control */}
         {children}
 
         <button
@@ -91,6 +107,7 @@ export function Toolbar({
           History
         </button>
 
+        {/* Quick save (direct patch) */}
         <button
           type="button"
           onClick={onSave}
@@ -101,8 +118,10 @@ export function Toolbar({
           Save
         </button>
 
+        {/* Divider */}
         <span className="w-px h-6 bg-gray-200 mx-1" />
 
+        {/* Workflow buttons — conditionally shown by draftStatus */}
         {(draftStatus === "editing" || draftStatus === "none") && (
           <button
             type="button"
