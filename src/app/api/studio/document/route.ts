@@ -1,7 +1,12 @@
 // Studio API — GET /api/studio/document
 //
 // Returns the current UCD document. Loads from .content/ on first access.
-// Query param ?page=home returns only that page's data (for efficiency).
+// Query param ?page=home returns the full UCD as `document` (the StudioEditor
+// needs the complete document for diff/patch operations) plus the page name.
+//
+// Stage F fix: previously returned { data: pageData } for ?page= queries, but
+// the StudioEditor expected { document: fullUCD }. Now both branches return
+// `document` consistently.
 
 import { NextRequest, NextResponse } from "next/server";
 
@@ -39,7 +44,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       success: true,
       page,
-      data: pageData,
+      document: doc as UnifiedContentDocument,
       version: doc.meta.version,
     });
   }
