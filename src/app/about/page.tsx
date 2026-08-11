@@ -1,14 +1,6 @@
 import type { Metadata } from "next";
 
-import { SiteHeader } from "@/components/sites/www-medkungfu-com-363c9bc1/shared/SiteHeader";
-import { SiteFooter } from "@/components/sites/www-medkungfu-com-363c9bc1/shared/SiteFooter";
-import {
-  AboutHeader,
-  AboutIntro,
-  MissionSection,
-  ValuesSection,
-  TeamSection,
-} from "@/components/sites/www-medkungfu-com-363c9bc1/about-979bddc4/AboutSections";
+import PublicPage from "@/components/sites/www-medkungfu-com-363c9bc1/shared/PublicPage";
 
 export const metadata: Metadata = {
   title: "About MedKungfu 康福来 | Cross-Border Healthcare Concierge",
@@ -17,27 +9,5 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  return (
-    <>
-      <SiteHeader />
-      <main className="flex-grow pt-[72px]">
-        <main
-          role="main"
-          aria-label="About MedKungFu"
-          className="min-h-screen bg-[#F5F7FA] pt-10 pb-20"
-        >
-          <div className="container-custom">
-            <div className="text-center mb-16">
-              <AboutHeader />
-              <AboutIntro />
-            </div>
-            <MissionSection />
-            <ValuesSection />
-            <TeamSection />
-          </div>
-        </main>
-      </main>
-      <SiteFooter />
-    </>
-  );
+  return <PublicPage slug="about" />;
 }

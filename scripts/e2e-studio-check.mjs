@@ -95,6 +95,25 @@ try {
     result.pageErrors.push(`Home header should resolve a real title, got: ${homeHeader}`);
   await page.screenshot({ path: `${OUT_DIR}/03-home.png` });
 
+  // ── public /projects: content-driven render via PublicPage ──
+  log("goto-public-projects", { url: `${BASE}/projects` });
+  await page.goto(`${BASE}/projects`, { waitUntil: "domcontentloaded", timeout: 60000 });
+  await page.waitForTimeout(500);
+  const pubText = await page.evaluate(() => document.body.innerText);
+  const pubHtml = await page.content();
+  const pubOk =
+    pubText.includes("Medical Projects") &&
+    pubText.includes("Start Your Assessment") &&
+    pubHtml.includes("bg-[#1B4D3E]");
+  log("public-projects", {
+    includesTitle: pubText.includes("Medical Projects"),
+    includesCta: pubText.includes("Start Your Assessment"),
+    includesHeroBg: pubHtml.includes("bg-[#1B4D3E]"),
+  });
+  if (!pubOk)
+    result.pageErrors.push("Public /projects did not render pageSection content via PublicPage");
+  await page.screenshot({ path: `${OUT_DIR}/04-public-projects.png` });
+
   const a = result.details.assertions;
   a.cardCount = cardCount;
   a.hasProjects = hasProjects === 1;
@@ -103,6 +122,7 @@ try {
   a.projectsHeaderShowsTitle = headerShowsTitle;
   a.homeHeaderResolved = homeHeaderResolved;
   a.homeShowsHeroKey = showsHeroKey;
+  a.publicProjectsRenders = pubOk;
 
   result.success = result.pageErrors.length === 0;
 } catch (err) {
