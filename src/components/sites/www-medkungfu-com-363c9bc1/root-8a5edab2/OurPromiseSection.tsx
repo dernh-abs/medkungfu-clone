@@ -6,40 +6,19 @@
 // Bilingual via home.ourPromise / values.* / home.valueDesc* keys.
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
-import { Icons, type LucideIcon } from "../shared/icons";
+import type { OurPromiseSection } from "@/lib/content/content-schema";
+import { HOME_PAGE_SEED } from "@/lib/content/seed-data";
+import { useSectionData } from "@/lib/executor/use-content-runtime";
+
+import { resolveIcon } from "../shared/icons";
 import { Reveal } from "../shared/Reveal";
 
-interface PromiseValue {
-  icon: LucideIcon;
-  titleKey: string;
-  descKey: string;
-}
-
-const VALUES: PromiseValue[] = [
-  {
-    icon: Icons.shield,
-    titleKey: "values.direct",
-    descKey: "home.valueDescDirect",
-  },
-  {
-    icon: Icons.zap,
-    titleKey: "values.speed",
-    descKey: "home.valueDescSpeed",
-  },
-  {
-    icon: Icons.userCheck,
-    titleKey: "values.custom",
-    descKey: "home.valueDescCustom",
-  },
-  {
-    icon: Icons.fileText,
-    titleKey: "values.transparent",
-    descKey: "home.valueDescTransparent",
-  },
-];
+const FALLBACK: OurPromiseSection = HOME_PAGE_SEED.sections.ourPromise;
 
 export function OurPromiseSection() {
   const { t } = useLanguage();
+  const section = useSectionData("home", "ourPromise", FALLBACK);
+  const items = section.items;
 
   return (
     <section
@@ -51,11 +30,11 @@ export function OurPromiseSection() {
           id="core-values-heading"
           className="text-3xl font-bold text-center mb-12 text-[#1A1A2E] font-montserrat"
         >
-          {t("home.ourPromise")}
+          {t(section.headingKey)}
         </h2>
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 list-none">
-          {VALUES.map((v) => {
-            const Icon = v.icon;
+          {items.map((v) => {
+            const Icon = resolveIcon(v.icon);
             return (
               <Reveal key={v.titleKey} scale={0.9} className="flex">
                 <li className="bg-white p-8 rounded-xl shadow-sm card-hover text-center w-full">

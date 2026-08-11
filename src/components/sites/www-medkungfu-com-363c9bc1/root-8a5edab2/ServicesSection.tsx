@@ -3,49 +3,34 @@
 // Services section (white) matching MedKungFu's homepage.
 // "How MedKungFu Helps You" heading, 3 service cards with icon tiles,
 // and a "View All Services" call-to-action. Bilingual via home.* keys.
+//
+// Stage D 改造：items / linkHref / viewAllKey 从 ContentRuntime 读取，
+// doc === null 时回退到 HOME_PAGE_SEED。bg/color 为表现层属性，保留在组件内。
 import Link from "next/link";
 
-import { type LucideIcon } from "lucide-react";
-
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import { useSectionData } from "@/lib/executor/use-content-runtime";
+import { HOME_PAGE_SEED } from "@/lib/content/seed-data";
+import type { ServicesSection as ServicesSectionData } from "@/lib/content/content-schema";
 
-import { Icons } from "../shared/icons";
+import { Icons, resolveIcon } from "../shared/icons";
 import { Reveal } from "../shared/Reveal";
 
-interface Service {
-  icon: LucideIcon;
-  bg: string;
-  color: string;
-  titleKey: string;
-  descKey: string;
-}
+const FALLBACK: ServicesSectionData = HOME_PAGE_SEED.sections.services;
 
-const SERVICES: Service[] = [
-  {
-    icon: Icons.building,
-    bg: "rgba(27,77,62,0.082)",
-    color: "#1B4D3E",
-    titleKey: "home.service1Title",
-    descKey: "home.service1Desc",
-  },
-  {
-    icon: Icons.languages,
-    bg: "rgba(46,125,90,0.082)",
-    color: "#2E7D5A",
-    titleKey: "home.service2Title",
-    descKey: "home.service2Desc",
-  },
-  {
-    icon: Icons.users,
-    bg: "rgba(124,179,66,0.082)",
-    color: "#7CB342",
-    titleKey: "home.service3Title",
-    descKey: "home.service3Desc",
-  },
+// Presentation-only styling (not content, stays in component).
+const SERVICE_STYLES = [
+  { bg: "rgba(27,77,62,0.082)", color: "#1B4D3E" },
+  { bg: "rgba(46,125,90,0.082)", color: "#2E7D5A" },
+  { bg: "rgba(124,179,66,0.082)", color: "#7CB342" },
 ];
 
 export function ServicesSection() {
   const { t } = useLanguage();
+  const section = useSectionData("home", "services", FALLBACK);
+  const items = section.items;
+  const linkHref = section.linkHref;
+  const viewAllKey = section.viewAllKey;
 
   return (
     <section aria-labelledby="services-heading" className="py-20 bg-white">
@@ -64,19 +49,20 @@ export function ServicesSection() {
           </div>
         </Reveal>
         <ul className="grid grid-cols-1 md:grid-cols-3 gap-8 list-none">
-          {SERVICES.map((svc, i) => {
-            const Icon = svc.icon;
+          {items.map((svc, i) => {
+            const Icon = resolveIcon(svc.icon);
+            const style = SERVICE_STYLES[i] ?? SERVICE_STYLES[0];
             return (
               <Reveal key={svc.titleKey} y={12} delay={i * 0}>
                 <li className="group relative">
                   <Link
-                    href="/services"
+                    href={linkHref}
                     aria-label={`Learn more about ${t(svc.titleKey)}`}
                     className="block h-full rounded-2xl p-8 border border-gray-100 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-[#1B4D3E]/30 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-[#7CB342]/25"
                   >
                     <div
                       className="w-16 h-16 rounded-xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-105"
-                      style={{ backgroundColor: svc.bg, color: svc.color }}
+                      style={{ backgroundColor: style.bg, color: style.color }}
                     >
                       <Icon className="h-8 w-8" />
                     </div>
@@ -99,10 +85,10 @@ export function ServicesSection() {
         <Reveal y={20}>
           <nav className="text-center mt-12">
             <Link
-              href="/services"
+              href={linkHref}
               className="inline-flex items-center gap-2 bg-[#1B4D3E] text-white px-8 py-4 rounded-lg font-medium hover:bg-[#143D30] transition-all duration-300 shadow-lg hover:shadow-xl"
             >
-              {t("home.viewAllServices")}
+              {t(viewAllKey)}
               <Icons.arrowRight className="h-5 w-5" />
             </Link>
           </nav>

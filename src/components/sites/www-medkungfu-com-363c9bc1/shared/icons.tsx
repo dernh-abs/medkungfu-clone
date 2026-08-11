@@ -129,7 +129,7 @@ export function InstagramIcon({ size, className }: BrandIconProps) {
   return (
     <BrandSvg size={size} className={className}>
       <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 1 1 16 11.37z" />
       <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
     </BrandSvg>
   );
@@ -201,3 +201,15 @@ export const Icons = {
 } as const;
 
 export type IconName = keyof typeof Icons;
+
+/**
+ * Resolve a kebab-case icon name from the UCD (e.g. "map-pin") to the
+ * corresponding LucideIcon component from the Icons map ("mapPin").
+ * Falls back to AlertCircle if the name is not recognised.
+ */
+export function resolveIcon(name: string): LucideIcon {
+  const camelKey = name.replace(/-([a-z])/g, (_, c: string) =>
+    c.toUpperCase()
+  ) as IconName;
+  return Icons[camelKey] ?? AlertCircle;
+}

@@ -7,50 +7,28 @@ import Link from "next/link";
 
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
-import { Icons, type LucideIcon } from "../shared/icons";
+import type { MedicalProjectsSection } from "@/lib/content/content-schema";
+import { HOME_PAGE_SEED } from "@/lib/content/seed-data";
+import { useSectionData } from "@/lib/executor/use-content-runtime";
+
+import { resolveIcon } from "../shared/icons";
 import { Reveal } from "../shared/Reveal";
 
-interface Project {
-  icon: LucideIcon;
-  iconBg: string;
-  iconColor: string;
-  titleKey: string;
-  subtitle: string;
-}
+const FALLBACK: MedicalProjectsSection = HOME_PAGE_SEED.sections.medicalProjects;
 
-const PROJECTS: Project[] = [
-  {
-    icon: Icons.activity,
-    iconBg: "bg-red-50",
-    iconColor: "text-red-600",
-    titleKey: "projects.oncology",
-    subtitle: "Heavy Ion & CAR-T Therapy",
-  },
-  {
-    icon: Icons.dna,
-    iconBg: "bg-purple-50",
-    iconColor: "text-purple-600",
-    titleKey: "projects.regenerative",
-    subtitle: "Stem Cell Treatment",
-  },
-  {
-    icon: Icons.leaf,
-    iconBg: "bg-green-50",
-    iconColor: "text-green-600",
-    titleKey: "projects.integrative",
-    subtitle: "TCM & Western Medicine",
-  },
-  {
-    icon: Icons.stethoscope,
-    iconBg: "bg-blue-50",
-    iconColor: "text-blue-600",
-    titleKey: "projects.specialties",
-    subtitle: "Cardiology, Orthopedics & More",
-  },
+// Presentation-only styles (icon background + color) — kept as local constants
+// since they are visual treatment, not editable content.
+const PROJECT_STYLES = [
+  { iconBg: "bg-red-50", iconColor: "text-red-600" },
+  { iconBg: "bg-purple-50", iconColor: "text-purple-600" },
+  { iconBg: "bg-green-50", iconColor: "text-green-600" },
+  { iconBg: "bg-blue-50", iconColor: "text-blue-600" },
 ];
 
 export function MedicalProjectsSection() {
   const { t, lang } = useLanguage();
+  const section = useSectionData("home", "medicalProjects", FALLBACK);
+  const items = section.items;
 
   return (
     <section
@@ -64,11 +42,12 @@ export function MedicalProjectsSection() {
         >
           {/* The source keeps this heading in English in zh mode, but
               translates it to Russian in ru mode. */}
-          {lang === "ru" ? "Выгодные медицинские проекты" : "Advantageous Medical Projects"}
+          {lang === "ru" ? "Выгодные медицинские проекты" : section.heading}
         </h2>
         <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 list-none">
-          {PROJECTS.map((p) => {
-            const Icon = p.icon;
+          {items.map((p, i) => {
+            const Icon = resolveIcon(p.icon);
+            const { iconBg, iconColor } = PROJECT_STYLES[i];
             return (
               <Reveal key={p.titleKey} y={12} className="flex">
                 <li className="group w-full">
@@ -78,7 +57,7 @@ export function MedicalProjectsSection() {
                     className="block h-full rounded-xl border border-gray-100 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[#1B4D3E]/30 hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-[#7CB342]/25"
                   >
                     <div
-                      className={`w-14 h-14 rounded-lg ${p.iconBg} ${p.iconColor} flex items-center justify-center mb-4`}
+                      className={`w-14 h-14 rounded-lg ${iconBg} ${iconColor} flex items-center justify-center mb-4`}
                     >
                       <Icon className="h-8 w-8" />
                     </div>

@@ -1,9 +1,10 @@
 "use client";
 
-// Language context matching the source site's i18n: persisted in
-// localStorage["medkungfu-language"], defaults to "en". zh uses the nested
-// translation dictionary; ru resolves the English text and looks it up in the
-// merged Russian map (ru-translations/*.json), falling back to English.
+// Language context — Stage D 改造后从 ContentRuntime 获取翻译数据。
+//
+// t() 委托给 useContentRuntime().translate(lang, key)。当 UCD 未加载
+// (doc === null) 时，compat-adapter 透明回退到原始 TRANSLATIONS / RU 模块，
+// 确保改造前后渲染结果完全一致。localStorage 持久化逻辑保持不变。
 import {
   createContext,
   useCallback,
@@ -14,8 +15,8 @@ import {
   type ReactNode,
 } from "react";
 
-import { TRANSLATIONS, type SupportedLanguage } from "./translations";
-import { RU } from "./ru";
+import { type SupportedLanguage } from "./translations";
+import { useContentRuntime } from "@/lib/executor/use-content-runtime";
 
 const STORAGE_KEY = "medkungfu-language";
 
@@ -29,25 +30,9 @@ interface LanguageContextValue {
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
-function lookup(obj: unknown, key: string): string | undefined {
-  const value = (obj as Record<string, unknown>)[key];
-  if (typeof value === "string") return value;
-  return undefined;
-}
-
-/** Resolve a dotted path ("nav.home") against a language's translation dict. */
-function resolve(translation: Record<string, unknown>, path: string): string | undefined {
-  const parts = path.split(".");
-  let cur: unknown = translation;
-  for (const part of parts) {
-    if (cur == null || typeof cur !== "object") return undefined;
-    cur = (cur as Record<string, unknown>)[part];
-  }
-  return typeof cur === "string" ? cur : undefined;
-}
-
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<SupportedLanguage>("en");
+  const { translate } = useContentRuntime();
 
   useEffect(() => {
     // Read the persisted language once after hydration. This setState is
@@ -72,23 +57,12 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     document.documentElement.lang = next === "zh" ? "zh-CN" : next;
   }, []);
 
+  // t() delegates to ContentRuntime.translate. When doc === null the
+  // compat-adapter falls back to the original TRANSLATIONS/RU modules,
+  // producing identical output to the pre-migration implementation.
   const t = useCallback<TranslateFn>(
-    (key: string) => {
-      const enDict = TRANSLATIONS.en?.translation ?? {};
-      const enText = lookup(enDict, key) ?? resolve(enDict, key) ?? key;
-      // Russian: resolve the English text, then look it up in the RU map.
-      if (lang === "ru") {
-        return RU[enText] ?? enText;
-      }
-      // zh / en use the nested dictionary.
-      const dict = TRANSLATIONS[lang]?.translation ?? {};
-      const direct = lookup(dict, key);
-      if (direct !== undefined) return direct;
-      const nested = resolve(dict, key);
-      if (nested !== undefined) return nested;
-      return enText;
-    },
-    [lang]
+    (key: string) => translate(lang, key),
+    [lang, translate]
   );
 
   const value = useMemo(() => ({ lang, setLang, t }), [lang, setLang, t]);

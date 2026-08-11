@@ -5,23 +5,19 @@
 // Bilingual via trust.* keys.
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
-import { Icons, type LucideIcon } from "../shared/icons";
+import type { TrustStatsSection } from "@/lib/content/content-schema";
+import { HOME_PAGE_SEED } from "@/lib/content/seed-data";
+import { useSectionData } from "@/lib/executor/use-content-runtime";
+
+import { resolveIcon } from "../shared/icons";
 import { Reveal } from "../shared/Reveal";
 
-interface Stat {
-  icon: LucideIcon;
-  key: string;
-}
-
-const STATS: Stat[] = [
-  { icon: Icons.building, key: "trust.hospitals" },
-  { icon: Icons.mapPin, key: "trust.cities" },
-  { icon: Icons.messageCircle, key: "trust.patients" },
-  { icon: Icons.clock, key: "trust.response" },
-];
+const FALLBACK: TrustStatsSection = HOME_PAGE_SEED.sections.trustStats;
 
 export function TrustStatsSection() {
   const { t } = useLanguage();
+  const section = useSectionData("home", "trustStats", FALLBACK);
+  const items = section.items;
 
   return (
     <section
@@ -30,8 +26,8 @@ export function TrustStatsSection() {
     >
       <div className="container-custom">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {STATS.map((s) => {
-            const Icon = s.icon;
+          {items.map((s) => {
+            const Icon = resolveIcon(s.icon);
             return (
               <Reveal
                 key={s.key}

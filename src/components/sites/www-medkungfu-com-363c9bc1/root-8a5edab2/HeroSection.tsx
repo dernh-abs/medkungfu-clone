@@ -4,17 +4,28 @@
 // Big green-tinted hero: trust badge, headline, copy, stat bullets, dual CTAs,
 // and a floating doctor image card with partner-hospital figcaption.
 // Bilingual via the site translation dictionary (hero.* keys).
+//
+// Stage D 改造：statKeys / image / imageAlt / ctaLinks 从 ContentRuntime 读取，
+// doc === null 时回退到 HOME_PAGE_SEED（与原硬编码值一致）。
 import Link from "next/link";
 
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
+import { useSectionData } from "@/lib/executor/use-content-runtime";
+import { HOME_PAGE_SEED } from "@/lib/content/seed-data";
 
 import { Icons } from "../shared/icons";
 import { Reveal } from "../shared/Reveal";
 
-const STAT_KEYS = ["hero.trustPoint1", "hero.trustPoint2", "hero.trustPoint3"];
+const FALLBACK = HOME_PAGE_SEED.sections.hero;
 
 export function HeroSection() {
   const { t } = useLanguage();
+  const section = useSectionData("home", "hero", FALLBACK);
+  const statKeys = section.statKeys;
+  const image = section.image;
+  const imageAlt = section.imageAlt;
+  const exploreHref = section.ctaLinks.explore;
+  const bookHref = section.ctaLinks.book;
 
   return (
     <header
@@ -53,7 +64,7 @@ export function HeroSection() {
             </Reveal>
             <Reveal y={20}>
               <ul className="flex flex-wrap gap-4 mb-10 list-none">
-                {STAT_KEYS.map((key) => (
+                {statKeys.map((key) => (
                   <li
                     key={key}
                     className="flex items-center gap-2 text-sm text-gray-600"
@@ -67,14 +78,14 @@ export function HeroSection() {
             <Reveal y={20}>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
-                  href="/projects"
+                  href={exploreHref}
                   className="inline-flex items-center justify-center gap-2 bg-[#1B4D3E] text-white px-8 py-4 rounded-lg text-lg font-medium shadow-md hover:bg-[#143D30] transition-all duration-300"
                 >
                   {t("hero.explore")}
                   <Icons.arrowRight className="h-5 w-5" />
                 </Link>
                 <Link
-                  href="/contact"
+                  href={bookHref}
                   className="inline-flex items-center justify-center gap-2 bg-white text-[#1B4D3E] border-2 border-[#1B4D3E] px-8 py-4 rounded-lg text-lg font-medium hover:bg-[#1B4D3E]/5 transition-all duration-300"
                 >
                   {t("hero.book")}
@@ -90,8 +101,8 @@ export function HeroSection() {
                 <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
                   {/* eslint-disable-next-line @next/next/no-img-element -- static hero asset, intentional */}
                   <img
-                    src="/sites/www-medkungfu-com-363c9bc1/root-8a5edab2/images/medkungfu-doctor-hero.jpg"
-                    alt="Professional Chinese female doctor providing medical consultation"
+                    src={image}
+                    alt={imageAlt}
                     className="w-full h-[500px] object-cover object-top"
                     width={904}
                     height={1200}

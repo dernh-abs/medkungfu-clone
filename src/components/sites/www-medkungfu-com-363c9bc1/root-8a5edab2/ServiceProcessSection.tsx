@@ -7,57 +7,19 @@
 // Bilingual via process.* keys.
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
-import { Icons, type LucideIcon } from "../shared/icons";
+import type { ServiceProcessSection } from "@/lib/content/content-schema";
+import { HOME_PAGE_SEED } from "@/lib/content/seed-data";
+import { useSectionData } from "@/lib/executor/use-content-runtime";
+
+import { resolveIcon } from "../shared/icons";
 import { Reveal } from "../shared/Reveal";
 
-interface Step {
-  icon: LucideIcon;
-  number: string;
-  titleKey: string;
-  progress: number;
-}
-
-const STEPS: Step[] = [
-  {
-    icon: Icons.clipboardCheck,
-    number: "01",
-    titleKey: "process.step1",
-    progress: 22,
-  },
-  {
-    icon: Icons.stethoscope,
-    number: "02",
-    titleKey: "process.step2",
-    progress: 32,
-  },
-  {
-    icon: Icons.fileText,
-    number: "03",
-    titleKey: "process.step3",
-    progress: 48,
-  },
-  {
-    icon: Icons.plane,
-    number: "04",
-    titleKey: "process.step4",
-    progress: 64,
-  },
-  {
-    icon: Icons.mapPin,
-    number: "05",
-    titleKey: "process.step5",
-    progress: 80,
-  },
-  {
-    icon: Icons.building,
-    number: "06",
-    titleKey: "process.step6",
-    progress: 96,
-  },
-];
+const FALLBACK: ServiceProcessSection = HOME_PAGE_SEED.sections.serviceProcess;
 
 export function ServiceProcessSection() {
   const { t } = useLanguage();
+  const section = useSectionData("home", "serviceProcess", FALLBACK);
+  const items = section.items;
 
   return (
     <section
@@ -69,11 +31,11 @@ export function ServiceProcessSection() {
           id="service-process-heading"
           className="text-3xl font-bold text-center mb-16 text-[#1A1A2E] font-montserrat"
         >
-          {t("process.title")}
+          {t(section.headingKey)}
         </h2>
         <ol className="grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-6 list-none">
-          {STEPS.map((step, i) => {
-            const Icon = step.icon;
+          {items.map((step, i) => {
+            const Icon = resolveIcon(step.icon);
             return (
               <Reveal key={step.titleKey} y={12} className="flex">
                 <li className="relative w-full">
@@ -97,7 +59,7 @@ export function ServiceProcessSection() {
                     </div>
                   </div>
                   {/* Connector between steps (omit on last) */}
-                  {i < STEPS.length - 1 && (
+                  {i < items.length - 1 && (
                     <div
                       className="pointer-events-none absolute left-1/2 top-full h-5 w-px bg-[#1B4D3E]/20 md:left-full md:top-1/2 md:h-px md:w-5 lg:w-6"
                       aria-hidden="true"

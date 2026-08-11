@@ -8,11 +8,18 @@ import { useState, type FormEvent } from "react";
 
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
+import type { CtaSection } from "@/lib/content/content-schema";
+import { HOME_PAGE_SEED } from "@/lib/content/seed-data";
+import { useSectionData } from "@/lib/executor/use-content-runtime";
+
 import { Reveal } from "../shared/Reveal";
+
+const FALLBACK: CtaSection = HOME_PAGE_SEED.sections.cta;
 
 export function CTASection() {
   const { t } = useLanguage();
   const [submitting, setSubmitting] = useState(false);
+  const section = useSectionData("home", "cta", FALLBACK);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -83,12 +90,11 @@ export function CTASection() {
                   <option value="" disabled>
                     {t("cta.interest")}
                   </option>
-                  <option value="oncology">Oncology</option>
-                  <option value="cardiology">Cardiology</option>
-                  <option value="orthopedics">Orthopedics</option>
-                  <option value="regenerative">Regenerative Medicine</option>
-                  <option value="integrative">Integrative Medicine</option>
-                  <option value="others">Others</option>
+                  {section.interestOptions.map((opt) => (
+                    <option key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </option>
+                  ))}
                 </select>
               </div>
               <div>
@@ -99,7 +105,7 @@ export function CTASection() {
                   id="message"
                   name="message"
                   rows={4}
-                  placeholder="Please describe your medical needs or questions in detail..."
+                  placeholder={section.messagePlaceholder}
                   className="px-6 py-4 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:border-white w-full resize-none"
                 />
               </div>
