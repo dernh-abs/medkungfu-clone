@@ -40,7 +40,10 @@ export function ucdToPuck(
   return {
     content: pageData.order.map((sectionId: string) => ({
       type: sectionId,
-      props: (pageData.sections![sectionId] as Record<string, unknown>) ?? {},
+      props: {
+        id: sectionId, // Puck requires a unique id per content item
+        ...(pageData.sections![sectionId] as Record<string, unknown> ?? {}),
+      },
     })),
     root: {},
   };
@@ -66,7 +69,9 @@ export function puckToUcd(
   pageData.order = puckData.content.map((item) => item.type) as typeof pageData.order;
   pageData.sections = puckData.content.reduce(
     (acc: Record<string, unknown>, item) => {
-      acc[item.type] = item.props;
+      // Strip Puck's internal id field before writing back to UCD.
+      const { id: _id, ...sectionData } = item.props;
+      acc[item.type] = sectionData;
       return acc;
     },
     {}

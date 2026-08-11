@@ -38,6 +38,7 @@ function studioWrap(children: React.ReactNode) {
 export const puckConfig: Config = {
   components: {
     hero: {
+      label: "Hero",
       fields: {
         image: { type: "text", label: "Image URL" },
         imageAlt: { type: "text", label: "Image Alt Text" },
@@ -61,6 +62,7 @@ export const puckConfig: Config = {
     },
 
     cityStrip: {
+      label: "City Strip",
       fields: {
         heading: { type: "text", label: "Heading" },
         cities: { type: "textarea", label: "Cities (JSON)" },
@@ -73,6 +75,7 @@ export const puckConfig: Config = {
     },
 
     services: {
+      label: "Services",
       fields: {
         linkHref: { type: "text", label: "Link URL" },
         viewAllKey: { type: "text", label: "View All Key" },
@@ -87,6 +90,7 @@ export const puckConfig: Config = {
     },
 
     trustStats: {
+      label: "Trust Stats",
       fields: {
         items: { type: "textarea", label: "Trust Stats (JSON)" },
       },
@@ -95,6 +99,7 @@ export const puckConfig: Config = {
     },
 
     ourPromise: {
+      label: "Our Promise",
       fields: {
         headingKey: { type: "text", label: "Heading Key" },
         items: { type: "textarea", label: "Promise Items (JSON)" },
@@ -104,6 +109,7 @@ export const puckConfig: Config = {
     },
 
     medicalProjects: {
+      label: "Medical Projects",
       fields: {
         heading: { type: "text", label: "Heading" },
         linkHref: { type: "text", label: "Link URL" },
@@ -114,6 +120,7 @@ export const puckConfig: Config = {
     },
 
     serviceProcess: {
+      label: "Service Process",
       fields: {
         headingKey: { type: "text", label: "Heading Key" },
         items: { type: "textarea", label: "Process Steps (JSON)" },
@@ -123,6 +130,7 @@ export const puckConfig: Config = {
     },
 
     patientStories: {
+      label: "Patient Stories",
       fields: {
         heading: { type: "text", label: "Heading" },
         items: { type: "textarea", label: "Story Items (JSON)" },
@@ -132,6 +140,7 @@ export const puckConfig: Config = {
     },
 
     featuredFaq: {
+      label: "Featured FAQ",
       fields: {
         heading: { type: "text", label: "Heading" },
         subtitle: { type: "text", label: "Subtitle" },
@@ -150,6 +159,7 @@ export const puckConfig: Config = {
     },
 
     cta: {
+      label: "CTA",
       fields: {
         messagePlaceholder: { type: "text", label: "Message Placeholder" },
         interestOptions: { type: "textarea", label: "Interest Options (JSON)" },
