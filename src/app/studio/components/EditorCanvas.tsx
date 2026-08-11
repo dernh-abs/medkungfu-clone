@@ -9,6 +9,8 @@
 //
 // Each section renders as a card showing the section id, type, and a brief
 // summary of its content. Clicking a card selects it for the PropertyPanel.
+//
+// Enhanced (batch 1): hover toolbar with move up/down/top/bottom + delete.
 
 import {
   DndContext,
@@ -36,6 +38,7 @@ interface EditorCanvasProps {
   selectedSection: string | null;
   onSelectSection: (id: string | null) => void;
   onReorder: (newOrder: string[]) => void;
+  onDeleteSection: (id: string) => void;
 }
 
 /** Produce a short text summary of a section for the card display. */
@@ -58,15 +61,27 @@ function summarizeSection(id: string, data: unknown): string {
 function SortableSection({
   id,
   index,
+  total,
   isSelected,
   onSelect,
   summary,
+  onMoveUp,
+  onMoveDown,
+  onMoveTop,
+  onMoveBottom,
+  onDelete,
 }: {
   id: string;
   index: number;
+  total: number;
   isSelected: boolean;
   onSelect: () => void;
   summary: string;
+  onMoveUp: () => void;
+  onMoveDown: () => void;
+  onMoveTop: () => void;
+  onMoveBottom: () => void;
+  onDelete: () => void;
 }) {
   const {
     attributes,
@@ -87,7 +102,7 @@ function SortableSection({
     <div
       ref={setNodeRef}
       style={style}
-      className={`flex items-center gap-3 p-3 mb-2 rounded-lg border cursor-pointer transition-all ${
+      className={`group flex items-center gap-3 p-3 mb-2 rounded-lg border cursor-pointer transition-all ${
         isSelected
           ? "border-[#1B4D3E] bg-[#1B4D3E]/5 shadow-sm"
           : "border-gray-200 bg-white hover:border-gray-300"
@@ -111,8 +126,63 @@ function SortableSection({
           <p className="text-xs text-gray-500 truncate">{summary}</p>
         )}
       </div>
+
+      {/* Hover toolbar — always visible on selected, visible on hover otherwise */}
+      <div
+        className={`flex items-center gap-0.5 transition-opacity ${
+          isSelected ? "opacity-100" : "opacity-0 group-hover:opacity-100"
+        }`}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          type="button"
+          onClick={onMoveTop}
+          disabled={index === 0}
+          className="px-1.5 py-1 text-xs text-gray-500 rounded hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed"
+          title="Move to top"
+        >
+          ⤒
+        </button>
+        <button
+          type="button"
+          onClick={onMoveUp}
+          disabled={index === 0}
+          className="px-1.5 py-1 text-xs text-gray-500 rounded hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed"
+          title="Move up"
+        >
+          ↑
+        </button>
+        <button
+          type="button"
+          onClick={onMoveDown}
+          disabled={index === total - 1}
+          className="px-1.5 py-1 text-xs text-gray-500 rounded hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed"
+          title="Move down"
+        >
+          ↓
+        </button>
+        <button
+          type="button"
+          onClick={onMoveBottom}
+          disabled={index === total - 1}
+          className="px-1.5 py-1 text-xs text-gray-500 rounded hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed"
+          title="Move to bottom"
+        >
+          ⤓
+        </button>
+        <span className="w-px h-4 bg-gray-200 mx-0.5" />
+        <button
+          type="button"
+          onClick={onDelete}
+          className="px-1.5 py-1 text-xs text-red-500 rounded hover:bg-red-50"
+          title="Delete section"
+        >
+          ✕
+        </button>
+      </div>
+
       {isSelected && (
-        <span className="text-xs text-[#1B4D3E] font-medium">editing</span>
+        <span className="text-xs text-[#1B4D3E] font-medium ml-1">editing</span>
       )}
     </div>
   );
@@ -124,6 +194,7 @@ export function EditorCanvas({
   selectedSection,
   onSelectSection,
   onReorder,
+  onDeleteSection,
 }: EditorCanvasProps) {
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 5 } }),
@@ -162,11 +233,17 @@ export function EditorCanvas({
                 key={id}
                 id={id}
                 index={index}
+                total={order.length}
                 isSelected={selectedSection === id}
                 onSelect={() =>
                   onSelectSection(selectedSection === id ? null : id)
                 }
                 summary={summarizeSection(id, sections[id as keyof typeof sections])}
+                onMoveUp={() => index > 0 && onReorder(arrayMove(order, index, index - 1))}
+                onMoveDown={() => index < order.length - 1 && onReorder(arrayMove(order, index, index + 1))}
+                onMoveTop={() => index > 0 && onReorder(arrayMove(order, index, 0))}
+                onMoveBottom={() => index < order.length - 1 && onReorder(arrayMove(order, index, order.length - 1))}
+                onDelete={() => onDeleteSection(id)}
               />
             ))}
           </SortableContext>

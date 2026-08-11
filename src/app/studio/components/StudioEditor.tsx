@@ -4,28 +4,27 @@
 //
 // Data flow:
 //   1. On mount, fetches UCD from /api/studio/document?page=X
-//   2. Keeps originalDoc (server state) and a draft (editable copy)
-//   3. User edits (PropertyPanel, EditorCanvas) modify the draft
-//   4. generateDiff(originalDoc, draft) computes pending JSON Patch ops
-//   5. On Save, POSTs the ops to /api/studio/patch
-//   6. Undo/Redo calls /api/studio/undo with action:"undo"|"redo"
-//   7. On 409 Conflict, shows "document has changed — please reload"
+//   2. Also checks for an active draft via /api/studio/draft?page=X
+//   3. Keeps originalDoc (server state) and a draft (editable copy)
+//   4. User edits (PropertyPanel, EditorCanvas) modify the draft
+//   5. generateDiff(originalDoc, draft) computes pending JSON Patch ops
+//   6. On Save, POSTs the ops to /api/studio/patch (direct version commit)
+//   7. On Save Draft, POSTs full UCD to /api/studio/draft (draft box)
+//   8. On Submit Review, POSTs to /api/studio/review (draft → review)
+//   9. On Publish, POSTs to /api/studio/publish (review → published via executor)
+//  10. Undo/Redo calls /api/studio/undo with action:"undo"|"redo"
+//  11. On 409 Conflict, shows "document has changed — please reload"
 //
-// Stage F adds:
-//   - redoStack: version numbers available for redo (from Undo responses)
-//   - handleRedo(): calls /api/studio/undo { action: "redo", version }
-//   - on Undo success: push undoneVersion onto redoStack
-//   - on any non-Undo/non-Redo mutation (Save / Rollback): clear redoStack
-//   - conflict handling in Save / Undo / Redo: show 409 banner
-//   - VersionHistory onRollback(targetVersion): calls /api/studio/rollback
+// Workflow states: editing → draft → review → published
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { produce } from "immer";
 
 import type { JsonPatchOperation } from "@/lib/executor/patch-types";
 import type { HomePageData } from "@/lib/content/content-schema";
-import { generateDiff } from "@/lib/executor/diff-generator";
 import type { UnifiedContentDocument } from "@/lib/content/content-schema";
+import type { DraftStatus } from "@/lib/executor/draft-store";
+import { generateDiff } from "@/lib/executor/diff-generator";
 
 import { Toolbar } from "./Toolbar";
 import { EditorCanvas } from "./EditorCanvas";
@@ -33,6 +32,8 @@ import { PropertyPanel } from "./PropertyPanel";
 import { PatchPreview } from "./PatchPreview";
 import { VersionHistory } from "./VersionHistory";
 import { ComponentLibrary } from "./ComponentLibrary";
+import { StatusBar } from "./StatusBar";
+import { DraftStatus as DraftStatusBanner } from "./DraftStatus";
 
 interface StudioEditorProps {
   page: string;
@@ -43,6 +44,18 @@ interface DocumentResponse {
   document?: UnifiedContentDocument;
   version?: number;
   error?: string;
+}
+
+interface DraftLoadResponse {
+  success: boolean;
+  exists: boolean;
+  draft?: {
+    id: string;
+    status: DraftStatus;
+    document: UnifiedContentDocument;
+    submittedAt?: string;
+    reviewNote?: string;
+  };
 }
 
 export function StudioEditor({ page }: StudioEditorProps) {
@@ -58,7 +71,14 @@ export function StudioEditor({ page }: StudioEditorProps) {
   const [lastSavedOps, setLastSavedOps] = useState<JsonPatchOperation[]>([]);
   const [redoStack, setRedoStack] = useState<number[]>([]);
 
-  // Fetch the document on mount.
+  // Workflow state
+  const [draftStatus, setDraftStatus] = useState<DraftStatus | "none">("none");
+  const [draftId, setDraftId] = useState<string | null>(null);
+  const [draftSubmittedAt, setDraftSubmittedAt] = useState<string | null>(null);
+  const [draftReviewNote, setDraftReviewNote] = useState<string | null>(null);
+  const [lastActionTime, setLastActionTime] = useState<string | null>(null);
+
+  // Fetch the document + check for active draft on mount.
   useEffect(() => {
     let cancelled = false;
     (async () => {
@@ -66,6 +86,7 @@ export function StudioEditor({ page }: StudioEditorProps) {
       setError(null);
       setConflict(false);
       try {
+        // 1. Load the live document.
         const res = await fetch(`/api/studio/document?page=${encodeURIComponent(page)}`);
         const data: DocumentResponse = await res.json();
         if (cancelled) return;
@@ -76,8 +97,28 @@ export function StudioEditor({ page }: StudioEditorProps) {
         }
         setOriginalDoc(data.document);
         setDraft(data.document.pages[page] as HomePageData);
-        setVersion(data.version ?? 0);
+        setVersion(data.version ?? data.document.meta.version);
         setRedoStack([]);
+
+        // 2. Check for an active draft for this page.
+        const draftRes = await fetch("/api/studio/draft", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "load", page }),
+        });
+        const draftData: DraftLoadResponse = await draftRes.json();
+        if (cancelled) return;
+        if (draftData.success && draftData.exists && draftData.draft) {
+          // Load draft document instead of live.
+          setDraft(draftData.draft.document.pages[page] as HomePageData);
+          setOriginalDoc(draftData.draft.document); // diff base is the draft's snapshot
+          setDraftStatus(draftData.draft.status);
+          setDraftId(draftData.draft.id);
+          setDraftSubmittedAt(draftData.draft.submittedAt ?? null);
+          setDraftReviewNote(draftData.draft.reviewNote ?? null);
+        } else {
+          setDraftStatus("editing");
+        }
       } catch (err) {
         if (!cancelled) setError((err as Error).message);
       } finally {
@@ -129,6 +170,18 @@ export function StudioEditor({ page }: StudioEditorProps) {
     });
   }, []);
 
+  // Delete a section: remove from order + sections.
+  const deleteSection = useCallback((sectionId: string) => {
+    setDraft((prev) => {
+      if (!prev) return prev;
+      return produce(prev, (d) => {
+        d.order = d.order.filter((id) => id !== sectionId) as HomePageData["order"];
+        delete (d.sections as Record<string, unknown>)[sectionId];
+      });
+    });
+    setSelectedSection((prev) => (prev === sectionId ? null : prev));
+  }, []);
+
   // --- Shared helper: refresh document + update version ---
   const refreshDocument = useCallback(async (): Promise<void> => {
     const docRes = await fetch(`/api/studio/document?page=${encodeURIComponent(page)}`);
@@ -153,7 +206,13 @@ export function StudioEditor({ page }: StudioEditorProps) {
     return false;
   }, []);
 
-  // Save: submit pending operations to the executor.
+  /** Helper: build full UCD from current draft state. */
+  const buildFullUcd = useCallback((): UnifiedContentDocument | null => {
+    if (!originalDoc || !draft) return null;
+    return { ...originalDoc, pages: { ...originalDoc.pages, [page]: draft } };
+  }, [originalDoc, draft, page]);
+
+  // --- Save (direct patch, creates new version) ---
   const handleSave = useCallback(async () => {
     if (!hasPendingChanges || !originalDoc) return;
     setSaving(true);
@@ -177,7 +236,8 @@ export function StudioEditor({ page }: StudioEditorProps) {
       setLastSavedOps(pendingOps);
       setVersion(data.newVersion);
       setConflict(false);
-      setRedoStack([]); // New commit clears redo history.
+      setRedoStack([]);
+      setLastActionTime(new Date().toLocaleTimeString());
       await refreshDocument();
     } catch (err) {
       setError((err as Error).message);
@@ -185,6 +245,103 @@ export function StudioEditor({ page }: StudioEditorProps) {
       setSaving(false);
     }
   }, [hasPendingChanges, originalDoc, pendingOps, handleConflictResponse, refreshDocument]);
+
+  // --- Save Draft (saves to draft box, no version change) ---
+  const handleSaveDraft = useCallback(async () => {
+    const fullUcd = buildFullUcd();
+    if (!fullUcd) return;
+    setSaving(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/studio/draft", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          action: "save",
+          page,
+          document: fullUcd,
+          draftId: draftId ?? undefined,
+        }),
+      });
+      const data = await res.json();
+      if (!data.success) {
+        setError(data.error ?? "Save draft failed");
+        return;
+      }
+      setDraftId(data.draftId);
+      setDraftStatus(data.status ?? "draft");
+      setLastActionTime(new Date().toLocaleTimeString());
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setSaving(false);
+    }
+  }, [buildFullUcd, page, draftId]);
+
+  // --- Submit Review (draft → review) ---
+  const handleSubmitReview = useCallback(async () => {
+    if (!draftId) {
+      // Save first, then submit.
+      await handleSaveDraft();
+    }
+    const idToUse = draftId;
+    if (!idToUse) {
+      setError("Cannot submit review: no draft to submit");
+      return;
+    }
+    setSaving(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/studio/review", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "submit", draftId: idToUse }),
+      });
+      const data = await res.json();
+      if (!data.success) {
+        setError(data.error ?? "Submit review failed");
+        return;
+      }
+      setDraftStatus(data.status ?? "review");
+      setLastActionTime(new Date().toLocaleTimeString());
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setSaving(false);
+    }
+  }, [draftId, handleSaveDraft]);
+
+  // --- Publish (review → published via executor) ---
+  const handlePublish = useCallback(async () => {
+    if (!draftId) {
+      setError("Cannot publish: no draft in review");
+      return;
+    }
+    setSaving(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/studio/publish", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ draftId }),
+      });
+      const data = await res.json();
+      if (!data.success) {
+        setError(data.error ?? "Publish failed");
+        return;
+      }
+      setDraftStatus("published");
+      setVersion(data.newVersion ?? version);
+      setRedoStack([]);
+      setLastActionTime(new Date().toLocaleTimeString());
+      // Refresh to get the newly published version.
+      await refreshDocument();
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setSaving(false);
+    }
+  }, [draftId, version, refreshDocument]);
 
   // Undo: call the undo API, then refresh; push undoneVersion onto redoStack.
   const handleUndo = useCallback(async () => {
@@ -206,6 +363,7 @@ export function StudioEditor({ page }: StudioEditorProps) {
       setVersion(data.newVersion);
       setConflict(false);
       setRedoStack((stack) => [...stack, data.undoneVersion as number]);
+      setLastActionTime(new Date().toLocaleTimeString());
       await refreshDocument();
     } catch (err) {
       setError((err as Error).message);
@@ -236,6 +394,7 @@ export function StudioEditor({ page }: StudioEditorProps) {
       setVersion(data.newVersion);
       setConflict(false);
       setRedoStack((stack) => stack.slice(0, -1));
+      setLastActionTime(new Date().toLocaleTimeString());
       await refreshDocument();
     } catch (err) {
       setError((err as Error).message);
@@ -271,6 +430,7 @@ export function StudioEditor({ page }: StudioEditorProps) {
       setConflict(false);
       setRedoStack([]);
       setShowVersionHistory(false);
+      setLastActionTime(new Date().toLocaleTimeString());
       await refreshDocument();
     } catch (err) {
       setError((err as Error).message);
@@ -311,11 +471,21 @@ export function StudioEditor({ page }: StudioEditorProps) {
         hasPendingChanges={hasPendingChanges}
         saving={saving}
         redoCount={redoStack.length}
+        draftStatus={draftStatus}
         onSave={handleSave}
         onUndo={handleUndo}
         onRedo={handleRedo}
         onDiscard={handleDiscard}
         onToggleHistory={() => setShowVersionHistory((v) => !v)}
+        onSaveDraft={handleSaveDraft}
+        onSubmitReview={handleSubmitReview}
+        onPublish={handlePublish}
+      />
+      <DraftStatusBanner
+        status={draftStatus}
+        draftId={draftId}
+        submittedAt={draftSubmittedAt}
+        reviewNote={draftReviewNote}
       />
       {error && (
         <div className={`px-4 py-2 text-sm border-b ${
@@ -343,6 +513,7 @@ export function StudioEditor({ page }: StudioEditorProps) {
           selectedSection={selectedSection}
           onSelectSection={setSelectedSection}
           onReorder={reorderSections}
+          onDeleteSection={deleteSection}
         />
         <PropertyPanel
           sectionId={selectedSection}
@@ -353,6 +524,12 @@ export function StudioEditor({ page }: StudioEditorProps) {
       <PatchPreview
         pendingOps={pendingOps}
         lastSavedOps={lastSavedOps}
+      />
+      <StatusBar
+        pendingChanges={pendingOps.length}
+        draftStatus={draftStatus}
+        version={version}
+        lastActionTime={lastActionTime}
       />
       {showVersionHistory && (
         <VersionHistory
