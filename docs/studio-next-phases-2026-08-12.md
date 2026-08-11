@@ -75,6 +75,18 @@
 
 **风险 4-A**：`update_text` 等靠 `target` 字符串定位，rule 解析默认可能不带 page 前缀。需读 `path-resolver.ts` / `rule-matcher.ts` 确认 target 格式，必要时在 route 层统一加前缀。执行时第一步先打 dryRun 看 operations 路径。
 
+### Phase 4 状态（2026-08-12 晚，已本地提交 `51391a4`，未 push）
+- [x] 代码改动已落地并通过 `npm run typecheck`：
+  - `path-resolver.ts`：非 home 页 `<sectionId>.<field>` → `/pages/<page>/sections/<sectionId>/<field>`；`resolveTranslationAllLangs` 加 page 形参。
+  - `plan-generator.ts`：`planUpdateText` / `planUpdateLink` 尊重 `intent.page`；非 home 页文本走 section-data 单 op（不再误当翻译键）。
+  - `rule-matcher.ts`：`matchRule(command, page)` 透传 page；图片规则产出 `/pages/<page>/...` 路径。
+  - `intent-parser.ts`：`parseIntent(command, context, page)` 转发 page。
+  - `route.ts`：请求体 `options.page`；解析后注入 intent.page；query "structure" 读 `pages[page]`。
+  - `useAgentCommand.ts` / `NLCommandBar.tsx` / `PuckEditor.tsx`：当前页 page 透传到 agent API（dryRun / apply / apply-from-preview 三处均带 page）。
+  - `e2e-studio-check.mjs`：新增 per-page NL dryRun 断言（operations[0].path 含 `/pages/projects/`）。
+- [ ] **待办（下次启动先做）**：`npm run dev` 起服务后跑 `node scripts/e2e-studio-check.mjs` 验证新增断言全绿；随后把 `51391a4` 与更早的 `18ac0ba` / `06dea1b` 一起 push（GCM 凭据过期曾阻塞 push，需用户先重认证或手动 `git -c http.sslVerify=false push origin master`）。
+- 备注：Phase 4 只解决「按页定向」，文本编辑仍依赖指令中带区块名（如「把 hero 标题改成…」）；纯「把标题改成…」不带区块名在非 home 页无法唯一定位（已知限制，留待后续或 Phase 2 时再补）。
+
 ---
 
 ## Phase 2 — pageSection 组件丰富化
