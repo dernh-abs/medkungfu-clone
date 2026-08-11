@@ -6,7 +6,7 @@
 // and the production UCD. Each operation is displayed with color coding:
 //   add (green) | remove (red) | replace (yellow) | move (blue)
 
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { generateDiff } from "@/lib/executor/diff-generator";
 import type { UnifiedContentDocument } from "@/lib/content/content-schema";
 import type { JsonPatchOperation } from "@/lib/executor/patch-types";
@@ -40,14 +40,12 @@ export function ReviewPanel({
   onReject,
   onClose,
 }: ReviewPanelProps) {
-  const [diffOps, setDiffOps] = useState<JsonPatchOperation[]>([]);
+  const diffOps = useMemo<JsonPatchOperation[]>(
+    () => generateDiff(productionDocument, draftDocument),
+    [productionDocument, draftDocument]
+  );
   const [rejectNote, setRejectNote] = useState("");
   const [showRejectInput, setShowRejectInput] = useState(false);
-
-  useEffect(() => {
-    const ops = generateDiff(productionDocument, draftDocument);
-    setDiffOps(ops);
-  }, [draftDocument, productionDocument]);
 
   const addCount = diffOps.filter((o) => o.op === "add").length;
   const removeCount = diffOps.filter((o) => o.op === "remove").length;
