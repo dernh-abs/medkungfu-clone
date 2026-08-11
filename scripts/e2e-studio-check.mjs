@@ -86,10 +86,15 @@ try {
   const heroIdx = heroClicked ? 0 : -2;
   await page.waitForTimeout(1200);
   const afterHero = await page.evaluate(() => document.body.innerText);
+  // NOTE: the `[TranslationEditor] selected:` console log was intentionally
+  // removed during cleanup, so we no longer assert on it. The DOM is the source
+  // of truth: a real selection makes the empty-state disappear and renders that
+  // section's translation keys.
   const heroSelected = result.consoleLogs.some((l) => l.includes("[TranslationEditor] selected: hero"));
   const showsHeroKey = afterHero.includes("hero.title");
   const emptyStateGone = !afterHero.includes("在画布上点击任意组件以编辑其文本内容。");
-  log("after-hero", { heroIdx, heroSelected, showsHeroKey, emptyStateGone });
+  const heroSelectionWorks = showsHeroKey && emptyStateGone;
+  log("after-hero", { heroIdx, heroSelected, heroSelectionWorks, showsHeroKey, emptyStateGone });
   await page.screenshot({ path: `${OUT_DIR}/02-after-hero.png` });
 
   // ── Select Services (verify switching) ────────────────────────
@@ -99,16 +104,25 @@ try {
   const afterSvc = await page.evaluate(() => document.body.innerText);
   const svcSelected = result.consoleLogs.some((l) => l.includes("[TranslationEditor] selected: services"));
   const heroKeyGone = !afterSvc.includes("hero.title");
-  log("after-services", { svcIdx, svcSelected, heroKeyGone });
+  // A section must still be selected (empty state absent) after switching, so
+  // that `heroKeyGone` proves a *switch* to Services rather than deselection.
+  const svcEmptyStateGone = !afterSvc.includes("在画布上点击任意组件以编辑其文本内容。");
+  const svcSwitched = heroKeyGone && svcEmptyStateGone;
+  log("after-services", { svcIdx, svcSelected, svcSwitched, heroKeyGone, svcEmptyStateGone });
   await page.screenshot({ path: `${OUT_DIR}/03-after-services.png` });
 
   const a = result.details.assertions;
-  a.heroSelected = heroSelected;
+  a.heroSelected = heroSelected; // informational (debug log removed in cleanup)
+  a.heroSelectionWorks = heroSelectionWorks;
   a.showsHeroKey = showsHeroKey;
   a.emptyStateGone = emptyStateGone;
-  a.svcSelected = svcSelected;
+  a.svcSelected = svcSelected; // informational (debug log removed in cleanup)
+  a.svcSwitched = svcSwitched;
   a.heroKeyGone = heroKeyGone;
-  result.success = heroSelected && showsHeroKey && emptyStateGone && svcSelected;
+  a.svcEmptyStateGone = svcEmptyStateGone;
+  // Functional success is proven entirely by DOM behaviour, independent of the
+  // (now-removed) debug console log.
+  result.success = heroSelectionWorks && svcSwitched;
 } catch (err) {
   result.pageErrors.push("SCRIPT_ERROR: " + (err && err.stack ? err.stack : String(err)));
   console.log("SCRIPT ERROR:", err);
