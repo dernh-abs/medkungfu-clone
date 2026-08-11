@@ -298,6 +298,294 @@
           "messagePlaceholder": "Please describe your medical needs or questions in detail..."
         }
       }
+    },
+    "projects": {
+      "order": [
+        "hero",
+        "content",
+        "cta"
+      ],
+      "sections": {
+        "hero": {
+          "type": "pageSection",
+          "kind": "hero",
+          "title": "Medical Projects",
+          "body": "Explore China's leading medical programs across oncology, regenerative medicine, and integrative care.",
+          "image": "",
+          "linkHref": "",
+          "linkLabel": ""
+        },
+        "content": {
+          "type": "pageSection",
+          "kind": "content",
+          "title": "Featured Programs",
+          "body": "Detailed program descriptions and hospital partnerships will be edited here.",
+          "image": "",
+          "linkHref": "",
+          "linkLabel": ""
+        },
+        "cta": {
+          "type": "pageSection",
+          "kind": "cta",
+          "title": "Start Your Assessment",
+          "body": "Tell us about your medical needs and we will match the right hospital and specialist.",
+          "image": "",
+          "linkHref": "/contact",
+          "linkLabel": "Contact Us"
+        }
+      }
+    },
+    "services": {
+      "order": [
+        "hero",
+        "content",
+        "cta"
+      ],
+      "sections": {
+        "hero": {
+          "type": "pageSection",
+          "kind": "hero",
+          "title": "Our Services",
+          "body": "Cross-border medical coordination: records, translation, hospital matching, and follow-up.",
+          "image": "",
+          "linkHref": "",
+          "linkLabel": ""
+        },
+        "content": {
+          "type": "pageSection",
+          "kind": "content",
+          "title": "Service Packages",
+          "body": "Light, standard, advanced, and VIP packages are described here.",
+          "image": "",
+          "linkHref": "",
+          "linkLabel": ""
+        },
+        "cta": {
+          "type": "pageSection",
+          "kind": "cta",
+          "title": "Talk to a Coordinator",
+          "body": "Our team helps you prepare records and plan your China medical journey.",
+          "image": "",
+          "linkHref": "/contact",
+          "linkLabel": "Contact Us"
+        }
+      }
+    },
+    "hospitals": {
+      "order": [
+        "hero",
+        "content",
+        "cta"
+      ],
+      "sections": {
+        "hero": {
+          "type": "pageSection",
+          "kind": "hero",
+          "title": "Partner Hospitals",
+          "body": "A trusted network of renowned Chinese hospitals and specialist institutions.",
+          "image": "",
+          "linkHref": "",
+          "linkLabel": ""
+        },
+        "content": {
+          "type": "pageSection",
+          "kind": "content",
+          "title": "Hospital Network",
+          "body": "Partner profiles, specialties, and accreditation details are edited here.",
+          "image": "",
+          "linkHref": "",
+          "linkLabel": ""
+        },
+        "cta": {
+          "type": "pageSection",
+          "kind": "cta",
+          "title": "Request a Match",
+          "body": "We match your condition to the most suitable hospital and specialist.",
+          "image": "",
+          "linkHref": "/contact",
+          "linkLabel": "Contact Us"
+        }
+      }
+    },
+    "stories": {
+      "order": [
+        "hero",
+        "content",
+        "cta"
+      ],
+      "sections": {
+        "hero": {
+          "type": "pageSection",
+          "kind": "hero",
+          "title": "Patient Stories",
+          "body": "Real outcomes from international patients who came to China for care.",
+          "image": "",
+          "linkHref": "",
+          "linkLabel": ""
+        },
+        "content": {
+          "type": "pageSection",
+          "kind": "content",
+          "title": "Outcomes & Testimonials",
+          "body": "Patient stories, with consent, are presented here.",
+          "image": "",
+          "linkHref": "",
+          "linkLabel": ""
+        },
+        "cta": {
+          "type": "pageSection",
+          "kind": "cta",
+          "title": "Share Your Story",
+          "body": "If you have completed treatment, we would love to hear from you.",
+          "image": "",
+          "linkHref": "/contact",
+          "linkLabel": "Contact Us"
+        }
+      }
+    },
+    "about": {
+      "order": [
+        "hero",
+        "content",
+        "cta"
+      ],
+      "sections": {
+        "hero": {
+          "type": "pageSection",
+          "kind": "hero",
+          "title": "About MedKungfu",
+          "body": "We connect international patients with China's best medical resources.",
+          "image": "",
+          "linkHref": "",
+          "linkLabel": ""
+        },
+        "content": {
+          "type": "pageSection",
+          "kind": "content",
+          "title": "Who We Are",
+          "body": "Mission, team, and history are edited here.",
+          "image": "",
+          "linkHref": "",
+          "linkLabel": ""
+        },
+        "cta": {
+          "type": "pageSection",
+          "kind": "cta",
+          "title": "Work With Us",
+          "body": "Hospitals and partners are welcome to collaborate.",
+          "image": "",
+          "linkHref": "/contact",
+          "linkLabel": "Contact Us"
+        }
+      }
+    },
+    "faq": {
+      "order": [
+        "hero",
+        "content",
+        "cta"
+      ],
+      "sections": {
+        "hero": {
+          "type": "pageSection",
+          "kind": "hero",
+          "title": "Frequently Asked Questions",
+          "body": "Answers to the questions international patients ask before traveling to China.",
+          "image": "",
+          "linkHref": "",
+          "linkLabel": ""
+        },
+        "content": {
+          "type": "pageSection",
+          "kind": "content",
+          "title": "Common Questions",
+          "body": "The full FAQ library is managed here.",
+          "image": "",
+          "linkHref": "",
+          "linkLabel": ""
+        },
+        "cta": {
+          "type": "pageSection",
+          "kind": "cta",
+          "title": "Browse All FAQs",
+          "body": "Find detailed guidance on costs, timelines, and preparation.",
+          "image": "",
+          "linkHref": "/faq",
+          "linkLabel": "Read More"
+        }
+      }
+    },
+    "contact": {
+      "order": [
+        "hero",
+        "content",
+        "cta"
+      ],
+      "sections": {
+        "hero": {
+          "type": "pageSection",
+          "kind": "hero",
+          "title": "Contact Us",
+          "body": "Reach our coordination team for an initial assessment.",
+          "image": "",
+          "linkHref": "",
+          "linkLabel": ""
+        },
+        "content": {
+          "type": "pageSection",
+          "kind": "content",
+          "title": "Get in Touch",
+          "body": "Phone, email, and office details are edited here.",
+          "image": "",
+          "linkHref": "",
+          "linkLabel": ""
+        },
+        "cta": {
+          "type": "pageSection",
+          "kind": "cta",
+          "title": "Submit an Inquiry",
+          "body": "Send your medical needs and we will respond within one business day.",
+          "image": "",
+          "linkHref": "/contact",
+          "linkLabel": "Contact Us"
+        }
+      }
+    },
+    "why-china": {
+      "order": [
+        "hero",
+        "content",
+        "cta"
+      ],
+      "sections": {
+        "hero": {
+          "type": "pageSection",
+          "kind": "hero",
+          "title": "Why China Medical",
+          "body": "World-class care, advanced technology, and cost-effective treatment.",
+          "image": "",
+          "linkHref": "",
+          "linkLabel": ""
+        },
+        "content": {
+          "type": "pageSection",
+          "kind": "content",
+          "title": "The China Advantage",
+          "body": "Quality, access, and value are explained here.",
+          "image": "",
+          "linkHref": "",
+          "linkLabel": ""
+        },
+        "cta": {
+          "type": "pageSection",
+          "kind": "cta",
+          "title": "Compare Your Options",
+          "body": "See how China medical care compares for your condition.",
+          "image": "",
+          "linkHref": "/contact",
+          "linkLabel": "Contact Us"
+        }
+      }
     }
   },
   "navigation": {

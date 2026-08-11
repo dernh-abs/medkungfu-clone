@@ -26,6 +26,7 @@ import { ServiceProcessSection } from "@/components/sites/www-medkungfu-com-363c
 import { PatientStoriesSection } from "@/components/sites/www-medkungfu-com-363c9bc1/root-8a5edab2/PatientStoriesSection";
 import { FeaturedFAQSection } from "@/components/sites/www-medkungfu-com-363c9bc1/root-8a5edab2/FeaturedFAQSection";
 import { CTASection } from "@/components/sites/www-medkungfu-com-363c9bc1/root-8a5edab2/CTASection";
+import { PageSection, type PageSectionProps } from "./PageSection";
 
 import type { ListFieldDefItemField } from "./custom-field-types";
 
@@ -304,6 +305,37 @@ const rawConfig: any = {
         messagePlaceholder: "Your message",
       },
       render: () => studioWrap(<CTASection />),
+    },
+
+    // Generic, self-contained section for non-home pages (placeholder/fallback
+    // content). No i18n translation keys — content is edited via plain props.
+    pageSection: {
+      label: "Page Section",
+      fields: {
+        kind: {
+          type: "select",
+          label: "类型",
+          options: [
+            { label: "Hero（绿底标题）", value: "hero" },
+            { label: "Content（正文）", value: "content" },
+            { label: "CTA（行动号召）", value: "cta" },
+          ],
+        },
+        title: { type: "text", label: "标题" },
+        body: { type: "textarea", label: "正文" },
+        image: { type: "image" as any, label: "图片", metadata: {} as ImageFieldMetadata },
+        linkHref: { type: "text", label: "链接地址" },
+        linkLabel: { type: "text", label: "链接文字" },
+      },
+      defaultProps: {
+        kind: "content",
+        title: "",
+        body: "",
+        image: "",
+        linkHref: "",
+        linkLabel: "",
+      } satisfies PageSectionProps,
+      render: (props: any) => studioWrap(<PageSection {...(props as PageSectionProps)} />),
     },
   },
 };

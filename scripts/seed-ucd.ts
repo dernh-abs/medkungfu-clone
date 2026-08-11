@@ -14,7 +14,12 @@ import path from "node:path";
 
 import { TRANSLATIONS } from "../src/lib/i18n/translations";
 import { RU } from "../src/lib/i18n/ru";
-import { HOME_PAGE_SEED, NAVIGATION_SEED, SITE_KEY } from "../src/lib/content/seed-data";
+import {
+  HOME_PAGE_SEED,
+  NAVIGATION_SEED,
+  SITE_KEY,
+  PLACEHOLDER_PAGES,
+} from "../src/lib/content/seed-data";
 import type {
   UnifiedContentDocument,
   Translations,
@@ -110,7 +115,7 @@ async function writeExtractionMap(): Promise<void> {
     _comment:
       "Auto-generated from src/lib/content/seed-data.ts by scripts/seed-ucd.ts. " +
       "Edit seed-data.ts and re-run `npm run seed`.",
-    pages: { home: HOME_PAGE_SEED },
+    pages: { home: HOME_PAGE_SEED, ...PLACEHOLDER_PAGES },
     navigation: NAVIGATION_SEED,
   };
   await fsAsync.mkdir(path.dirname(EXTRACTION_MAP_FILE), { recursive: true });
@@ -195,6 +200,9 @@ async function main(): Promise<void> {
 
   await writeJson("translations.json", translations);
   await writeJson("pages/home.json", HOME_PAGE_SEED);
+  for (const [slug, page] of Object.entries(PLACEHOLDER_PAGES)) {
+    await writeJson(`pages/${slug}.json`, page);
+  }
   await writeJson("navigation.json", NAVIGATION_SEED);
   await writeJson("meta.json", meta);
   await writeExtractionMap();
@@ -202,6 +210,9 @@ async function main(): Promise<void> {
   console.log("[seed-ucd] Wrote:");
   console.log("  .content/translations.json");
   console.log("  .content/pages/home.json");
+  for (const slug of Object.keys(PLACEHOLDER_PAGES)) {
+    console.log(`  .content/pages/${slug}.json`);
+  }
   console.log("  .content/navigation.json");
   console.log("  .content/meta.json");
   console.log("  src/lib/content/extraction-map.json");

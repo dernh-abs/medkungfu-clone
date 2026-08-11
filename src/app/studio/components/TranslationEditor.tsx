@@ -27,6 +27,7 @@ import {
   getSectionTranslationKeys,
   getTranslationKeyMeta,
 } from "@/lib/puck/section-translation-map";
+import { resolveBlockTitle } from "@/lib/puck/block-title";
 
 // ─── Context (provided by PuckEditor) ──────────────────────────────────
 
@@ -195,6 +196,10 @@ export function TranslationEditor({
 
   const translationKeys = getSectionTranslationKeys(sectionType, sectionProps);
 
+  // Context header label: resolve the block's real title (translation value for
+  // home components, self-contained `title` prop for `pageSection`).
+  const blockTitle = resolveBlockTitle(sectionType, sectionProps, ctx.ucd);
+
   if (isLoading) {
     return (
       <div className="p-4 text-sm text-gray-500">
@@ -213,6 +218,21 @@ export function TranslationEditor({
 
   return (
     <div className="flex flex-col h-full">
+      {/* Context header — shows the selected block's title + type. */}
+      <div
+        className="px-3 py-2 bg-[#1B4D3E] text-white shrink-0"
+        data-studio-block-header
+      >
+        <div className="text-xs font-semibold truncate" title={blockTitle}>
+          {blockTitle}
+        </div>
+        {sectionType && (
+          <div className="text-[10px] opacity-80 font-mono mt-0.5">
+            {sectionType}
+          </div>
+        )}
+      </div>
+
       {/* Translation text editing */}
       {translationKeys.length > 0 && (
         <div className="border-b border-gray-200">

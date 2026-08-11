@@ -1,16 +1,17 @@
 "use client";
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Puck } from "@measured/puck";
+import { Puck, useGetPuck } from "@measured/puck";
 import "@measured/puck/puck.css";
 
-import { useState, useEffect, useCallback, useRef, useMemo } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo, useContext } from "react";
 
 import type { UnifiedContentDocument } from "@/lib/content/content-schema";
 import type { DraftStatus } from "@/lib/executor/draft-store";
 import { commitDocument, getDocument } from "@/lib/executor/content-runtime";
 import { puckConfig } from "@/lib/puck/puck-config";
 import { ucdToPuck, puckToUcd, type PuckData } from "@/lib/puck/puck-adapter";
+import { resolveBlockTitle } from "@/lib/puck/block-title";
 import {
   ImageField,
   ListField,
@@ -72,6 +73,75 @@ function setNestedTranslation(
   if (cur != null && typeof cur === "object") {
     (cur as Record<string, unknown>)[parts[parts.length - 1]] = value;
   }
+}
+
+// ─── StudioOutline (custom Puck outline override) ───────────────────────
+//
+// Replaces Puck's default outline so each canvas block shows a resolved,
+// human-readable title instead of the bare component label ("Hero" / "Services").
+// Home components resolve their translation key to the actual copy; `pageSection`
+// reads its self-contained `title` prop.
+//
+// Selection is driven through Puck's real store (`useGetPuck`) + `getSelectorForId`
+// + `dispatch({ type: "setUi" })` — the same mechanism Puck's own outline uses,
+// so the right-side TranslationEditor (keyed off `itemSelector`) stays in sync.
+
+type OutlineItem = { type: string; props?: Record<string, unknown> };
+
+function StudioOutline() {
+  const getPuck = useGetPuck();
+  const { ucd } = useContext(TranslationEditorContext);
+  const store = getPuck();
+  const appState = store.appState;
+  const content = (appState?.data?.content ?? []) as OutlineItem[];
+  const selected = (appState?.ui?.itemSelector ?? null) as {
+    index?: number;
+    zone?: string;
+  } | null;
+  const { dispatch, getSelectorForId } = store;
+
+  return (
+    <div className="puck-studio-outline" data-studio-outline>
+      {content.length === 0 ? (
+        <div className="p-3 text-xs text-gray-400">画布暂无区块</div>
+      ) : (
+        content.map((item) => {
+          const props = item.props ?? {};
+          const id =
+            typeof props.id === "string" && props.id ? props.id : item.type;
+          const title = resolveBlockTitle(item.type, props, ucd);
+          const sel = getSelectorForId(id);
+          const isSelected =
+            !!sel &&
+            !!selected &&
+            sel.index === selected.index &&
+            (sel.zone ?? undefined) === (selected.zone ?? undefined);
+          return (
+            <button
+              key={id}
+              type="button"
+              data-studio-outline-item
+              data-block-type={item.type}
+              title={title}
+              onClick={() => {
+                if (sel) dispatch({ type: "setUi", ui: { itemSelector: sel } });
+              }}
+              className={`w-full text-left px-3 py-2 text-sm border-b border-gray-100 flex items-center gap-2 ${
+                isSelected
+                  ? "bg-[#1B4D3E]/10 text-[#1B4D3E] font-medium"
+                  : "text-gray-700 hover:bg-gray-50"
+              }`}
+            >
+              <span className="truncate flex-1">{title}</span>
+              <span className="text-[10px] font-mono text-gray-400 shrink-0">
+                {item.type}
+              </span>
+            </button>
+          );
+        })
+      )}
+    </div>
+  );
 }
 
 export function PuckEditor({ page }: PuckEditorProps) {
@@ -413,6 +483,7 @@ export function PuckEditor({ page }: PuckEditorProps) {
   const puckOverrides = useMemo(
     () => ({
       fieldTypes: { image: ImageField as any, list: ListField as any },
+      outline: () => <StudioOutline />,
       fields: (fieldsProps: any) => (
         <TranslationEditor
           isLoading={fieldsProps.isLoading}

@@ -24,7 +24,16 @@ export interface PuckData {
   };
 }
 
-/** Convert UCD → Puck data for a given page. */
+/**
+ * Convert UCD → Puck data for a given page.
+ *
+ * Each stored section has a unique `id` (the key in `sections`) and an
+ * optional `type`. For home, `type` is omitted and equals the id (the
+ * component name). For generic pages a section may be a `pageSection`
+ * whose `id` differs from its `type`, so we read `type` when present and
+ * fall back to the id. Puck requires a unique id per content item, which
+ * we satisfy via `props.id`.
+ */
 export function ucdToPuck(
   ucd: UnifiedContentDocument,
   page: string = "home"
@@ -38,13 +47,19 @@ export function ucdToPuck(
   }
 
   return {
-    content: pageData.order.map((sectionId: string) => ({
-      type: sectionId,
-      props: {
-        id: sectionId, // Puck requires a unique id per content item
-        ...(pageData.sections![sectionId] as Record<string, unknown> ?? {}),
-      },
-    })),
+    content: pageData.order.map((sectionId: string) => {
+      const section = (pageData.sections![sectionId] ?? {}) as Record<string, unknown>;
+      const type =
+        typeof section.type === "string" && section.type ? section.type : sectionId;
+      const { type: _type, ...rest } = section;
+      return {
+        type,
+        props: {
+          id: sectionId, // Puck requires a unique id per content item
+          ...rest,
+        },
+      };
+    }),
     root: {},
   };
 }
@@ -59,23 +74,31 @@ export function puckToUcd(
   const newUcd: UnifiedContentDocument = JSON.parse(JSON.stringify(currentUcd));
 
   const pageData = newUcd.pages[page as keyof typeof newUcd.pages] as {
-    order: string[];
-    sections: Record<string, unknown>;
+    order?: string[];
+    sections?: Record<string, unknown>;
   };
 
   if (!pageData) return newUcd;
 
-  // Rebuild order and sections from Puck content array.
-  pageData.order = puckData.content.map((item) => item.type) as typeof pageData.order;
-  pageData.sections = puckData.content.reduce(
-    (acc: Record<string, unknown>, item) => {
-      // Strip Puck's internal id field before writing back to UCD.
-      const { id: _id, ...sectionData } = item.props;
-      acc[item.type] = sectionData;
-      return acc;
-    },
-    {}
-  );
+  // Rebuild order and sections from Puck content array. Key sections by their
+  // unique `id` (not `type`) so multiple instances of the same component
+  // (e.g. three `pageSection`s) don't collapse into one. Store `type` only
+  // when it differs from the id (keeps home.json byte-identical on re-seed).
+  const sections: Record<string, unknown> = {};
+  const order: string[] = [];
+  for (const item of puckData.content) {
+    const props = (item.props ?? {}) as Record<string, unknown>;
+    const id = typeof props.id === "string" && props.id ? props.id : String(item.type);
+    const type = item.type;
+    const { id: _id, type: _type, ...sectionData } = props;
+    const section: Record<string, unknown> = { ...sectionData };
+    if (type && type !== id) section.type = type;
+    sections[id] = section;
+    order.push(id);
+  }
+
+  pageData.order = order;
+  pageData.sections = sections;
 
   return newUcd;
 }

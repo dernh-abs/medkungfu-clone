@@ -68,18 +68,52 @@ export async function loadMeta(): Promise<ContentMeta | null> {
   return readJsonFile<ContentMeta>("meta.json");
 }
 
+/** List every UCD page slug that has a physical `pages/<slug>.json` file. */
+export async function listPageSlugs(): Promise<string[]> {
+  try {
+    const dir = abs("pages");
+    const files = await fs.readdir(dir);
+    return files
+      .filter((f) => f.endsWith(".json"))
+      .map((f) => f.slice(0, -".json".length))
+      .sort();
+  } catch {
+    return [];
+  }
+}
+
+/** Load a single page's UCD data (`{ order, sections }`). */
+export async function loadPage(
+  slug: string
+): Promise<{ order?: string[]; sections?: Record<string, unknown> } | null> {
+  return readJsonFile<{ order?: string[]; sections?: Record<string, unknown> }>(
+    `pages/${slug}.json`
+  );
+}
+
 /** Load and aggregate every physical file into one virtual UCD. */
 export async function loadFullDocument(): Promise<UnifiedContentDocument | null> {
-  const [translations, home, navigation, meta] = await Promise.all([
+  const [translations, navigation, meta] = await Promise.all([
     loadTranslations(),
-    loadHomePage(),
     loadNavigation(),
     loadMeta(),
   ]);
-  if (!translations || !home || !navigation || !meta) return null;
+  if (!translations || !navigation || !meta) return null;
+
+  // Load every page that has a physical `pages/<slug>.json` file. The
+  // multi-page Studio edits any of these, so they must all be present in the
+  // assembled document (not just `home`).
+  const slugs = await listPageSlugs();
+  const pages: Record<string, unknown> = {};
+  for (const slug of slugs) {
+    const page = await readJsonFile<unknown>(`pages/${slug}.json`);
+    if (page) pages[slug] = page;
+  }
+  if (Object.keys(pages).length === 0) return null;
+
   return {
     translations,
-    pages: { home },
+    pages,
     navigation,
     meta,
   } as UnifiedContentDocument;

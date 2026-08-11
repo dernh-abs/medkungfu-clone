@@ -236,3 +236,176 @@ export const NAVIGATION_SEED: Navigation = {
 };
 
 export const SITE_KEY = "www-medkungfu-com-363c9bc1";
+
+// ─── Placeholder pages (non-home) ───────────────────────────────────────
+//
+// These are seed-only scaffold pages so the Studio can edit pages other than
+// `home`. Each is three self-contained `pageSection`s (hero / content / cta).
+// They carry plain English placeholder copy that editors replace later. No
+// i18n translation keys — see PageSection for the rationale.
+
+export const PLACEHOLDER_PAGE_SLUGS = [
+  "projects",
+  "services",
+  "hospitals",
+  "stories",
+  "about",
+  "faq",
+  "contact",
+  "why-china",
+] as const;
+
+type PlaceholderSection = {
+  type: "pageSection";
+  kind: "hero" | "content" | "cta";
+  title: string;
+  body: string;
+  image: string;
+  linkHref: string;
+  linkLabel: string;
+};
+
+export type PlaceholderPage = {
+  order: string[];
+  sections: Record<string, PlaceholderSection>;
+};
+
+function ph(
+  heroTitle: string,
+  heroBody: string,
+  contentTitle: string,
+  contentBody: string,
+  ctaTitle: string,
+  ctaBody: string,
+  ctaHref: string,
+  ctaLabel: string
+): PlaceholderPage {
+  return {
+    order: ["hero", "content", "cta"],
+    sections: {
+      hero: {
+        type: "pageSection",
+        kind: "hero",
+        title: heroTitle,
+        body: heroBody,
+        image: "",
+        linkHref: "",
+        linkLabel: "",
+      },
+      content: {
+        type: "pageSection",
+        kind: "content",
+        title: contentTitle,
+        body: contentBody,
+        image: "",
+        linkHref: "",
+        linkLabel: "",
+      },
+      cta: {
+        type: "pageSection",
+        kind: "cta",
+        title: ctaTitle,
+        body: ctaBody,
+        image: "",
+        linkHref: ctaHref,
+        linkLabel: ctaLabel,
+      },
+    },
+  };
+}
+
+export const PLACEHOLDER_PAGES: Record<string, PlaceholderPage> = {
+  projects: ph(
+    "Medical Projects",
+    "Explore China's leading medical programs across oncology, regenerative medicine, and integrative care.",
+    "Featured Programs",
+    "Detailed program descriptions and hospital partnerships will be edited here.",
+    "Start Your Assessment",
+    "Tell us about your medical needs and we will match the right hospital and specialist.",
+    "/contact",
+    "Contact Us"
+  ),
+  services: ph(
+    "Our Services",
+    "Cross-border medical coordination: records, translation, hospital matching, and follow-up.",
+    "Service Packages",
+    "Light, standard, advanced, and VIP packages are described here.",
+    "Talk to a Coordinator",
+    "Our team helps you prepare records and plan your China medical journey.",
+    "/contact",
+    "Contact Us"
+  ),
+  hospitals: ph(
+    "Partner Hospitals",
+    "A trusted network of renowned Chinese hospitals and specialist institutions.",
+    "Hospital Network",
+    "Partner profiles, specialties, and accreditation details are edited here.",
+    "Request a Match",
+    "We match your condition to the most suitable hospital and specialist.",
+    "/contact",
+    "Contact Us"
+  ),
+  stories: ph(
+    "Patient Stories",
+    "Real outcomes from international patients who came to China for care.",
+    "Outcomes & Testimonials",
+    "Patient stories, with consent, are presented here.",
+    "Share Your Story",
+    "If you have completed treatment, we would love to hear from you.",
+    "/contact",
+    "Contact Us"
+  ),
+  about: ph(
+    "About MedKungfu",
+    "We connect international patients with China's best medical resources.",
+    "Who We Are",
+    "Mission, team, and history are edited here.",
+    "Work With Us",
+    "Hospitals and partners are welcome to collaborate.",
+    "/contact",
+    "Contact Us"
+  ),
+  faq: ph(
+    "Frequently Asked Questions",
+    "Answers to the questions international patients ask before traveling to China.",
+    "Common Questions",
+    "The full FAQ library is managed here.",
+    "Browse All FAQs",
+    "Find detailed guidance on costs, timelines, and preparation.",
+    "/faq",
+    "Read More"
+  ),
+  contact: ph(
+    "Contact Us",
+    "Reach our coordination team for an initial assessment.",
+    "Get in Touch",
+    "Phone, email, and office details are edited here.",
+    "Submit an Inquiry",
+    "Send your medical needs and we will respond within one business day.",
+    "/contact",
+    "Contact Us"
+  ),
+  "why-china": ph(
+    "Why China Medical",
+    "World-class care, advanced technology, and cost-effective treatment.",
+    "The China Advantage",
+    "Quality, access, and value are explained here.",
+    "Compare Your Options",
+    "See how China medical care compares for your condition.",
+    "/contact",
+    "Contact Us"
+  ),
+};
+
+/** Short descriptions used by the /studio page-listing cards. */
+export const PAGE_DESCRIPTIONS: Record<string, string> = {
+  home: "Hero, services, trust stats, patient stories, FAQ, CTA",
+  projects: "Medical projects overview and program listings",
+  services: "Cross-border medical service packages",
+  hospitals: "Partner hospital network and specialties",
+  stories: "Patient stories and outcomes",
+  about: "About MedKungfu and our mission",
+  faq: "Frequently asked questions",
+  contact: "Contact and inquiry information",
+  "why-china": "Why choose China for medical care",
+};
