@@ -141,8 +141,8 @@ async function main() {
   for (const leaf of collectLeaves(zhSource)) zhMap.set(leaf.path.join("."), leaf.value);
 
   const committed = await readMetaFile();
-  let enMeta: Meta = JSON.parse(JSON.stringify(committed.en ?? {}));
-  let zhMeta: Meta = JSON.parse(JSON.stringify(committed.zh ?? {}));
+  const enMeta: Meta = JSON.parse(JSON.stringify(committed.en ?? {}));
+  const zhMeta: Meta = JSON.parse(JSON.stringify(committed.zh ?? {}));
 
   let touched = 0;
   let zhUpdated = 0;

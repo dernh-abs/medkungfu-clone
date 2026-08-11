@@ -37,7 +37,7 @@ interface ListFieldMetadata {
 }
 
 /** Custom metadata shape for "image" fields. (Reserved; currently unused.) */
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface ImageFieldMetadata {}
 
 /** Studio wrapper — adds hover outline for visual feedback in the canvas. */
