@@ -22,6 +22,10 @@ import type { DraftStatus } from "@/lib/executor/draft-store";
 import { commitDocument } from "@/lib/executor/content-runtime";
 import { puckConfig } from "@/lib/puck/puck-config";
 import { ucdToPuck, puckToUcd, type PuckData } from "@/lib/puck/puck-adapter";
+import {
+  ImageField,
+  ListField,
+} from "@/lib/puck/custom-field-types";
 
 import { Toolbar } from "../components/Toolbar";
 import { StatusBar } from "../components/StatusBar";
@@ -352,6 +356,8 @@ export function PuckEditor({ page }: PuckEditorProps) {
           data={puckData}
           onChange={handleChange}
           onPublish={handlePublish}
+          // @ts-expect-error — fieldTypes accepts a flexible record matching FieldRenderFunctions
+          overrides={{ fieldTypes: { image: ImageField, list: ListField } }}
         />
       </div>
       <StatusBar

@@ -1,16 +1,18 @@
 // Puck component configuration — registers all 10 home page sections.
 //
-// Each component's `render` function wraps the actual site component in a
-// studio-mode div. The components self-fetch their data via useSectionData()
-// from ContentRuntime, so no props need to be passed — the data flow goes:
-//   Puck onChange → puckToUcd → commitDocument → useSectionData re-renders
+// Stage H upgrade:
+//   - Image fields (image, story item images, etc.) use type "image" (custom
+//     ImageField) instead of plain text so the right-side panel shows an
+//     uploader + library picker rather than a URL string box.
+//   - Array fields (cities, items, etc.) use type "list" (custom ListField)
+//     with an explicit itemFields schema so the right-side panel shows a
+//     card editor instead of a raw JSON textarea.
+//   - Custom list field options (addLabel, emptyText, itemFields) are stored
+//     in each list field's `metadata` (Puck supports `metadata?: unknown`) so
+//     the ListField component can read them via `field.metadata`.
 //
-// Fields are defined to match each section's UCD schema, enabling the Puck
-// property panel to edit section data.
-//
-// NOTE: For complex nested types (arrays of objects), we use textarea with
-// JSON editing. This is a pragmatic choice — the fields can be refined later
-// with custom Puck field components for better UX.
+// Other fields remain Puck built-ins (text / object) for now — they will
+// be replaced by the semantic editors in stage I.
 
 import type { Config } from "@measured/puck";
 
@@ -25,6 +27,19 @@ import { PatientStoriesSection } from "@/components/sites/www-medkungfu-com-363c
 import { FeaturedFAQSection } from "@/components/sites/www-medkungfu-com-363c9bc1/root-8a5edab2/FeaturedFAQSection";
 import { CTASection } from "@/components/sites/www-medkungfu-com-363c9bc1/root-8a5edab2/CTASection";
 
+import type { ListFieldDefItemField } from "./custom-field-types";
+
+/** Custom metadata shape for "list" fields — read by ListField at runtime. */
+interface ListFieldMetadata {
+  addLabel?: string;
+  emptyText?: string;
+  itemFields: ListFieldDefItemField[];
+}
+
+/** Custom metadata shape for "image" fields. (Reserved; currently unused.) */
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface ImageFieldMetadata {}
+
 /** Studio wrapper — adds hover outline for visual feedback in the canvas. */
 function studioWrap(children: React.ReactNode) {
   return (
@@ -35,25 +50,40 @@ function studioWrap(children: React.ReactNode) {
   );
 }
 
-export const puckConfig: Config = {
+// The Config type in Puck v0.20.x doesn't know about our custom "image" /
+// "list" field types, so we build the config as an untyped object and cast
+// it at the end. Runtime correctness is enforced by the custom fieldTypes
+// override plus the ListFieldMetadata type on metadata properties.
+/* eslint-disable @typescript-eslint/no-explicit-any */
+const rawConfig: any = {
   components: {
     hero: {
       label: "Hero",
       fields: {
-        image: { type: "text", label: "Image URL" },
-        imageAlt: { type: "text", label: "Image Alt Text" },
-        statKeys: { type: "textarea", label: "Stat Keys (one per line)" },
+        image: { type: "image" as any, label: "主图", metadata: {} as ImageFieldMetadata },
+        imageAlt: { type: "text", label: "主图 Alt 文本" },
+        statKeys: {
+          type: "list" as any,
+          label: "信任点 Key 列表",
+          metadata: {
+            addLabel: "添加信任点 Key",
+            emptyText: "未添加信任点",
+            itemFields: [
+              { key: "value", label: "翻译 Key（如 hero.trustPoint1）", placeholder: "hero.trustPoint1" },
+            ] satisfies ListFieldDefItemField[],
+          } satisfies ListFieldMetadata,
+        },
         ctaLinks: {
           type: "object",
-          label: "CTA Links",
+          label: "CTA 链接",
           objectFields: {
-            explore: { type: "text", label: "Explore Link" },
-            book: { type: "text", label: "Book Link" },
+            explore: { type: "text", label: "了解项目链接" },
+            book: { type: "text", label: "立即预约链接" },
           },
         },
       },
       defaultProps: {
-        statKeys: "hero.trustPoint1\nhero.trustPoint2\nhero.trustPoint3",
+        statKeys: '[{"value":"hero.trustPoint1"},{"value":"hero.trustPoint2"},{"value":"hero.trustPoint3"}]',
         image: "/sites/www-medkungfu-com-363c9bc1/medkungfu-doctor-hero.jpg",
         imageAlt: "Doctor hero image",
         ctaLinks: { explore: "/projects", book: "/contact" },
@@ -64,8 +94,26 @@ export const puckConfig: Config = {
     cityStrip: {
       label: "City Strip",
       fields: {
-        heading: { type: "text", label: "Heading" },
-        cities: { type: "textarea", label: "Cities (JSON)" },
+        heading: { type: "text", label: "城市条标题" },
+        cities: {
+          type: "list" as any,
+          label: "城市列表",
+          metadata: {
+            addLabel: "添加城市",
+            itemFields: [
+              { key: "name", label: "城市名称", placeholder: "Beijing" },
+              {
+                key: "dimmed",
+                label: "是否淡化",
+                type: "select",
+                options: [
+                  { label: "正常显示", value: "false" },
+                  { label: "淡化显示", value: "true" },
+                ],
+              },
+            ] satisfies ListFieldDefItemField[],
+          } satisfies ListFieldMetadata,
+        },
       },
       defaultProps: {
         heading: "Serving patients across",
@@ -77,9 +125,20 @@ export const puckConfig: Config = {
     services: {
       label: "Services",
       fields: {
-        linkHref: { type: "text", label: "Link URL" },
-        viewAllKey: { type: "text", label: "View All Key" },
-        items: { type: "textarea", label: "Service Items (JSON)" },
+        linkHref: { type: "text", label: "全部服务链接" },
+        viewAllKey: { type: "text", label: "查看全部翻译 Key" },
+        items: {
+          type: "list" as any,
+          label: "服务项目",
+          metadata: {
+            addLabel: "添加服务项目",
+            itemFields: [
+              { key: "icon", label: "图标名 (lucide)", placeholder: "stethoscope" },
+              { key: "titleKey", label: "标题翻译 Key", placeholder: "home.service1Title" },
+              { key: "descKey", label: "描述翻译 Key", placeholder: "home.service1Desc" },
+            ] satisfies ListFieldDefItemField[],
+          } satisfies ListFieldMetadata,
+        },
       },
       defaultProps: {
         items: "[]",
@@ -92,7 +151,17 @@ export const puckConfig: Config = {
     trustStats: {
       label: "Trust Stats",
       fields: {
-        items: { type: "textarea", label: "Trust Stats (JSON)" },
+        items: {
+          type: "list" as any,
+          label: "信任数据项",
+          metadata: {
+            addLabel: "添加数据项",
+            itemFields: [
+              { key: "icon", label: "图标名 (lucide)", placeholder: "hospital" },
+              { key: "key", label: "数值翻译 Key", placeholder: "trust.hospitals" },
+            ] satisfies ListFieldDefItemField[],
+          } satisfies ListFieldMetadata,
+        },
       },
       defaultProps: { items: "[]" },
       render: () => studioWrap(<TrustStatsSection />),
@@ -101,8 +170,19 @@ export const puckConfig: Config = {
     ourPromise: {
       label: "Our Promise",
       fields: {
-        headingKey: { type: "text", label: "Heading Key" },
-        items: { type: "textarea", label: "Promise Items (JSON)" },
+        headingKey: { type: "text", label: "标题翻译 Key" },
+        items: {
+          type: "list" as any,
+          label: "承诺项",
+          metadata: {
+            addLabel: "添加承诺项",
+            itemFields: [
+              { key: "icon", label: "图标名 (lucide)", placeholder: "shield-check" },
+              { key: "titleKey", label: "标题翻译 Key", placeholder: "values.direct" },
+              { key: "descKey", label: "描述翻译 Key", placeholder: "home.valueDescDirect" },
+            ] satisfies ListFieldDefItemField[],
+          } satisfies ListFieldMetadata,
+        },
       },
       defaultProps: { headingKey: "promise.heading", items: "[]" },
       render: () => studioWrap(<OurPromiseSection />),
@@ -111,9 +191,20 @@ export const puckConfig: Config = {
     medicalProjects: {
       label: "Medical Projects",
       fields: {
-        heading: { type: "text", label: "Heading" },
-        linkHref: { type: "text", label: "Link URL" },
-        items: { type: "textarea", label: "Project Items (JSON)" },
+        heading: { type: "text", label: "项目标题" },
+        linkHref: { type: "text", label: "项目页链接" },
+        items: {
+          type: "list" as any,
+          label: "项目列表",
+          metadata: {
+            addLabel: "添加项目",
+            itemFields: [
+              { key: "icon", label: "图标名 (lucide)", placeholder: "dna" },
+              { key: "titleKey", label: "标题翻译 Key", placeholder: "projects.oncology" },
+              { key: "subtitle", label: "副标题描述", placeholder: "肿瘤精准治疗的介绍" },
+            ] satisfies ListFieldDefItemField[],
+          } satisfies ListFieldMetadata,
+        },
       },
       defaultProps: { heading: "", linkHref: "/projects", items: "[]" },
       render: () => studioWrap(<MedicalProjectsSection />),
@@ -122,8 +213,20 @@ export const puckConfig: Config = {
     serviceProcess: {
       label: "Service Process",
       fields: {
-        headingKey: { type: "text", label: "Heading Key" },
-        items: { type: "textarea", label: "Process Steps (JSON)" },
+        headingKey: { type: "text", label: "流程标题翻译 Key" },
+        items: {
+          type: "list" as any,
+          label: "流程步骤",
+          metadata: {
+            addLabel: "添加步骤",
+            itemFields: [
+              { key: "icon", label: "图标名 (lucide)", placeholder: "1" },
+              { key: "number", label: "步骤编号展示", placeholder: "01" },
+              { key: "titleKey", label: "步骤标题翻译 Key", placeholder: "process.step1" },
+              { key: "progress", label: "进度条百分比", type: "number" },
+            ] satisfies ListFieldDefItemField[],
+          } satisfies ListFieldMetadata,
+        },
       },
       defaultProps: { headingKey: "process.heading", items: "[]" },
       render: () => studioWrap(<ServiceProcessSection />),
@@ -132,8 +235,19 @@ export const puckConfig: Config = {
     patientStories: {
       label: "Patient Stories",
       fields: {
-        heading: { type: "text", label: "Heading" },
-        items: { type: "textarea", label: "Story Items (JSON)" },
+        heading: { type: "text", label: "故事区标题" },
+        items: {
+          type: "list" as any,
+          label: "患者故事",
+          metadata: {
+            addLabel: "添加故事",
+            itemFields: [
+              { key: "quote", label: "引言/引用文字", type: "textarea" },
+              { key: "image", label: "患者照片", type: "image" },
+              { key: "name", label: "患者姓名" },
+            ] satisfies ListFieldDefItemField[],
+          } satisfies ListFieldMetadata,
+        },
       },
       defaultProps: { heading: "", items: "[]" },
       render: () => studioWrap(<PatientStoriesSection />),
@@ -142,11 +256,22 @@ export const puckConfig: Config = {
     featuredFaq: {
       label: "Featured FAQ",
       fields: {
-        heading: { type: "text", label: "Heading" },
-        subtitle: { type: "text", label: "Subtitle" },
-        linkText: { type: "text", label: "Link Text" },
-        linkHref: { type: "text", label: "Link URL" },
-        items: { type: "textarea", label: "FAQ Items (JSON)" },
+        heading: { type: "text", label: "FAQ 标题" },
+        subtitle: { type: "text", label: "FAQ 副标题" },
+        linkText: { type: "text", label: "全部 FAQ 链接文字" },
+        linkHref: { type: "text", label: "全部 FAQ 链接地址" },
+        items: {
+          type: "list" as any,
+          label: "FAQ 条目",
+          metadata: {
+            addLabel: "添加 FAQ",
+            itemFields: [
+              { key: "question", label: "问题", type: "text" },
+              { key: "answer", label: "回答", type: "textarea" },
+              { key: "href", label: "跳转链接（可选）", placeholder: "/faq#xxx" },
+            ] satisfies ListFieldDefItemField[],
+          } satisfies ListFieldMetadata,
+        },
       },
       defaultProps: {
         heading: "",
@@ -161,8 +286,18 @@ export const puckConfig: Config = {
     cta: {
       label: "CTA",
       fields: {
-        messagePlaceholder: { type: "text", label: "Message Placeholder" },
-        interestOptions: { type: "textarea", label: "Interest Options (JSON)" },
+        messagePlaceholder: { type: "text", label: "留言框占位文字" },
+        interestOptions: {
+          type: "list" as any,
+          label: "关注领域下拉选项",
+          metadata: {
+            addLabel: "添加选项",
+            itemFields: [
+              { key: "value", label: "选项值", placeholder: "oncology" },
+              { key: "label", label: "选项显示名", placeholder: "肿瘤精准治疗" },
+            ] satisfies ListFieldDefItemField[],
+          } satisfies ListFieldMetadata,
+        },
       },
       defaultProps: {
         interestOptions: "[]",
@@ -172,3 +307,6 @@ export const puckConfig: Config = {
     },
   },
 };
+/* eslint-enable @typescript-eslint/no-explicit-any */
+
+export const puckConfig = rawConfig as Config;
