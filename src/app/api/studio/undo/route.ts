@@ -10,6 +10,8 @@
 //
 // Both operations go through the single executor so the version chain
 // and ContentRuntime stay consistent.
+//
+// Stage F: on optimistic-lock conflict, return HTTP 409 with conflict:true.
 
 import { NextRequest, NextResponse } from "next/server";
 
@@ -40,6 +42,23 @@ async function ensureDocumentLoaded(): Promise<UnifiedContentDocument> {
     current = loaded;
   }
   return current;
+}
+
+/** Wrap execute result with conflict handling → response with status. */
+function conflictAware(result: Awaited<ReturnType<typeof execute>>) {
+  if (!result.success && result.conflict) {
+    return NextResponse.json(
+      {
+        success: false,
+        conflict: true,
+        expectedVersion: result.expectedVersion,
+        actualVersion: result.actualVersion,
+        error: result.error,
+      },
+      { status: 409 }
+    );
+  }
+  return null;
 }
 
 export async function POST(request: NextRequest) {
@@ -83,10 +102,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // The inverse is computed against the document state BEFORE the patch
-    // was applied, which is the parent version. But generateInverse needs
-    // the document at the patch's application point (the parent). We use
-    // the parent version's stored document.
     const parentEntry = await versionStore.get(latest.parentVersion);
     if (!parentEntry) {
       return NextResponse.json(
@@ -111,6 +126,9 @@ export async function POST(request: NextRequest) {
 
     const contentStore = createContentStore();
     const result = await execute(patch, currentDoc, { contentStore, versionStore });
+
+    const conflictResp = conflictAware(result);
+    if (conflictResp) return conflictResp;
 
     if (!result.success) {
       return NextResponse.json(
@@ -157,6 +175,9 @@ export async function POST(request: NextRequest) {
 
   const contentStore = createContentStore();
   const result = await execute(patch, currentDoc, { contentStore, versionStore });
+
+  const conflictResp = conflictAware(result);
+  if (conflictResp) return conflictResp;
 
   if (!result.success) {
     return NextResponse.json(

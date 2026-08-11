@@ -8,6 +8,7 @@
 // Success:  { success: true, intent, operations, newVersion }
 // Dry-run:  { success: true, dryRun: true, intent, operations, preview }
 // Validate: { success: false, stage: "validation", errors: [{rule, message}] }
+// Conflict: { success: false, stage: "conflict", conflict: true, expectedVersion, actualVersion, error } [409]
 // LLM off:  { success: false, stage: "parse", error, suggestion }
 // Clarify:  { success: false, stage: "clarification", message, options }
 
@@ -176,15 +177,19 @@ export async function POST(request: NextRequest) {
   const result = await execute(patch, currentDoc, { contentStore, versionStore });
 
   if (!result.success) {
+    const status = result.conflict ? 409 : 500;
     return NextResponse.json(
       {
         success: false,
-        stage: "execute",
+        stage: result.conflict ? "conflict" : "execute",
+        conflict: result.conflict,
+        expectedVersion: result.expectedVersion,
+        actualVersion: result.actualVersion,
         error: result.error,
         intent,
         operations,
       },
-      { status: 500 }
+      { status }
     );
   }
 
@@ -205,7 +210,7 @@ export async function GET() {
     method: "POST",
     schema: {
       request: { command: "string", options: { dryRun: "boolean?", lang: "en|zh|ru?" } },
-      responses: ["success", "dryRun", "validation", "parse", "clarification", "execute"],
+      responses: ["success", "dryRun", "validation", "parse", "clarification", "conflict", "execute"],
     },
     llmEnabled: process.env.ENABLE_LLM === "true",
     contentMode: process.env.CONTENT_MODE ?? "local",

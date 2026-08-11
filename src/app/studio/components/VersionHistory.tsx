@@ -4,6 +4,9 @@
 // Fetches version entries from /api/studio/versions and displays them
 // as a list. Each entry shows version number, timestamp, description,
 // source (agent/studio), and operation count.
+//
+// Stage F: adds a "回滚到此版本" (Rollback) action for each non-current
+// past version; onRollback(targetVersion) calls /api/studio/rollback.
 
 import { useEffect, useState } from "react";
 
@@ -19,12 +22,18 @@ interface VersionEntry {
 interface VersionHistoryProps {
   onClose: () => void;
   currentVersion: number;
+  onRollback?: (targetVersion: number) => void | Promise<void>;
 }
 
-export function VersionHistory({ onClose, currentVersion }: VersionHistoryProps) {
+export function VersionHistory({
+  onClose,
+  currentVersion,
+  onRollback,
+}: VersionHistoryProps) {
   const [versions, setVersions] = useState<VersionEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [rollingBack, setRollingBack] = useState<number | null>(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -48,6 +57,17 @@ export function VersionHistory({ onClose, currentVersion }: VersionHistoryProps)
       cancelled = true;
     };
   }, []);
+
+  const handleRollbackClick = async (target: number) => {
+    if (!onRollback) return;
+    if (!window.confirm(`确定要回滚到 v${target} 吗？此操作会创建一个新版本。`)) return;
+    setRollingBack(target);
+    try {
+      await onRollback(target);
+    } finally {
+      setRollingBack(null);
+    }
+  };
 
   return (
     <div
@@ -89,59 +109,69 @@ export function VersionHistory({ onClose, currentVersion }: VersionHistoryProps)
           )}
           {!loading && !error && versions.length > 0 && (
             <ul className="list-none">
-              {[...versions].reverse().map((v) => (
-                <li
-                  key={v.version}
-                  className={`flex items-center gap-3 px-4 py-3 border-b border-gray-100 ${
-                    v.version === currentVersion
-                      ? "bg-[#1B4D3E]/5"
-                      : "hover:bg-gray-50"
-                  }`}
-                >
-                  <div className="w-10 text-center">
-                    <span
-                      className={`text-sm font-bold ${
-                        v.version === currentVersion
-                          ? "text-[#1B4D3E]"
-                          : "text-gray-700"
-                      }`}
-                    >
-                      v{v.version}
-                    </span>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-sm text-gray-900 truncate">
-                      {v.description}
-                    </p>
-                    <p className="text-xs text-gray-500">
-                      {new Date(v.timestamp).toLocaleString()} ·{" "}
+              {[...versions].reverse().map((v) => {
+                const isCurrent = v.version === currentVersion;
+                const canRollback = !isCurrent && v.version < currentVersion && onRollback !== undefined;
+                return (
+                  <li
+                    key={v.version}
+                    className={`flex items-center gap-3 px-4 py-3 border-b border-gray-100 ${
+                      isCurrent ? "bg-[#1B4D3E]/5" : "hover:bg-gray-50"
+                    }`}
+                  >
+                    <div className="w-10 text-center">
                       <span
-                        className={
-                          v.source === "agent"
-                            ? "text-blue-600"
-                            : "text-purple-600"
-                        }
+                        className={`text-sm font-bold ${
+                          isCurrent ? "text-[#1B4D3E]" : "text-gray-700"
+                        }`}
                       >
-                        {v.source}
-                      </span>{" "}
-                      · {v.opsCount} ops
-                    </p>
-                  </div>
-                  {v.version === currentVersion && (
-                    <span className="text-xs text-[#1B4D3E] font-medium">
-                      current
-                    </span>
-                  )}
-                </li>
-              ))}
+                        v{v.version}
+                      </span>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-sm text-gray-900 truncate">
+                        {v.description}
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        {new Date(v.timestamp).toLocaleString()} ·{" "}
+                        <span
+                          className={
+                            v.source === "agent"
+                              ? "text-blue-600"
+                              : "text-purple-600"
+                          }
+                        >
+                          {v.source}
+                        </span>{" "}
+                        · {v.opsCount} ops
+                      </p>
+                    </div>
+                    <div className="shrink-0">
+                      {isCurrent ? (
+                        <span className="text-xs text-[#1B4D3E] font-medium">
+                          current
+                        </span>
+                      ) : canRollback ? (
+                        <button
+                          type="button"
+                          disabled={rollingBack === v.version}
+                          onClick={() => handleRollbackClick(v.version)}
+                          className="text-xs px-2.5 py-1 rounded-md border border-gray-300 text-gray-700 hover:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                          {rollingBack === v.version ? "回滚中…" : "回滚到此版本"}
+                        </button>
+                      ) : null}
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           )}
         </div>
 
         <div className="px-4 py-2 border-t border-gray-200">
           <p className="text-xs text-gray-400">
-            Undo reverts the latest version. Rollback to a specific version is
-            available in Stage F.
+            回滚会基于目标版本生成一个新的差异补丁版本；使用 Undo/Redo 在最近操作间切换。
           </p>
         </div>
       </div>

@@ -109,6 +109,19 @@ export async function POST(request: NextRequest) {
   const result = await execute(patch, currentDoc, { contentStore, versionStore });
 
   if (!result.success) {
+    if (result.conflict) {
+      return NextResponse.json(
+        {
+          success: false,
+          stage: "conflict",
+          conflict: true,
+          expectedVersion: result.expectedVersion,
+          actualVersion: result.actualVersion,
+          error: result.error,
+        },
+        { status: 409 }
+      );
+    }
     return NextResponse.json(
       { success: false, error: result.error },
       { status: 500 }

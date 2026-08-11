@@ -1,15 +1,20 @@
 "use client";
 
 // Toolbar — Studio top bar.
-// Page name | Undo | Discard | Save | Version history toggle | Version badge.
+// Page name | Undo | Redo | Discard | Save | Version history toggle | Version badge.
+//
+// Stage F adds Redo support (redoCount enables the button; when >0 a badge
+// shows the count). Undo is disabled at v1; Redo is disabled when empty.
 
 interface ToolbarProps {
   page: string;
   version: number;
   hasPendingChanges: boolean;
   saving: boolean;
+  redoCount: number;
   onSave: () => void;
   onUndo: () => void;
+  onRedo: () => void;
   onDiscard: () => void;
   onToggleHistory: () => void;
 }
@@ -19,8 +24,10 @@ export function Toolbar({
   version,
   hasPendingChanges,
   saving,
+  redoCount,
   onSave,
   onUndo,
+  onRedo,
   onDiscard,
   onToggleHistory,
 }: ToolbarProps) {
@@ -47,6 +54,15 @@ export function Toolbar({
           className="px-3 py-1.5 text-sm text-gray-700 rounded-md hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed"
         >
           Undo
+        </button>
+        <button
+          type="button"
+          onClick={onRedo}
+          disabled={saving || redoCount === 0}
+          className="px-3 py-1.5 text-sm text-gray-700 rounded-md hover:bg-gray-100 disabled:opacity-40 disabled:cursor-not-allowed"
+          title={redoCount > 0 ? `${redoCount} change${redoCount > 1 ? "s" : ""} to redo` : undefined}
+        >
+          Redo{redoCount > 0 ? ` (${redoCount})` : ""}
         </button>
         <button
           type="button"

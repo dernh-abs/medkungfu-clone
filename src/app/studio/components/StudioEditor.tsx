@@ -1,17 +1,23 @@
 "use client";
 
-// StudioEditor — the main orchestrator for the WYSIWYG Studio editor.
+// StudioEditor — main orchestrator for the WYSIWYG Studio editor.
 //
 // Data flow:
-//   1. On mount, fetches the UCD document from /api/studio/document?page=X
-//   2. Keeps an originalDoc (server state) and a draft (editable copy)
+//   1. On mount, fetches UCD from /api/studio/document?page=X
+//   2. Keeps originalDoc (server state) and a draft (editable copy)
 //   3. User edits (PropertyPanel, EditorCanvas) modify the draft
 //   4. generateDiff(originalDoc, draft) computes pending JSON Patch ops
 //   5. On Save, POSTs the ops to /api/studio/patch
-//   6. Undo/Redo calls /api/studio/undo directly
+//   6. Undo/Redo calls /api/studio/undo with action:"undo"|"redo"
+//   7. On 409 Conflict, shows "document has changed — please reload"
 //
-// The draft is a deep clone of the page data. Edits use Immer produce()
-// for immutable updates so React re-renders correctly.
+// Stage F adds:
+//   - redoStack: version numbers available for redo (from Undo responses)
+//   - handleRedo(): calls /api/studio/undo { action: "redo", version }
+//   - on Undo success: push undoneVersion onto redoStack
+//   - on any non-Undo/non-Redo mutation (Save / Rollback): clear redoStack
+//   - conflict handling in Save / Undo / Redo: show 409 banner
+//   - VersionHistory onRollback(targetVersion): calls /api/studio/rollback
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { produce } from "immer";
@@ -45,10 +51,12 @@ export function StudioEditor({ page }: StudioEditorProps) {
   const [version, setVersion] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [conflict, setConflict] = useState(false);
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [showVersionHistory, setShowVersionHistory] = useState(false);
   const [lastSavedOps, setLastSavedOps] = useState<JsonPatchOperation[]>([]);
+  const [redoStack, setRedoStack] = useState<number[]>([]);
 
   // Fetch the document on mount.
   useEffect(() => {
@@ -56,6 +64,7 @@ export function StudioEditor({ page }: StudioEditorProps) {
     (async () => {
       setLoading(true);
       setError(null);
+      setConflict(false);
       try {
         const res = await fetch(`/api/studio/document?page=${encodeURIComponent(page)}`);
         const data: DocumentResponse = await res.json();
@@ -68,6 +77,7 @@ export function StudioEditor({ page }: StudioEditorProps) {
         setOriginalDoc(data.document);
         setDraft(data.document.pages[page] as HomePageData);
         setVersion(data.version ?? 0);
+        setRedoStack([]);
       } catch (err) {
         if (!cancelled) setError((err as Error).message);
       } finally {
@@ -119,6 +129,30 @@ export function StudioEditor({ page }: StudioEditorProps) {
     });
   }, []);
 
+  // --- Shared helper: refresh document + update version ---
+  const refreshDocument = useCallback(async (): Promise<void> => {
+    const docRes = await fetch(`/api/studio/document?page=${encodeURIComponent(page)}`);
+    const docData: DocumentResponse = await docRes.json();
+    if (docData.success && docData.document) {
+      setOriginalDoc(docData.document);
+      setDraft(docData.document.pages[page] as HomePageData);
+      setVersion(docData.version ?? docData.document.meta.version);
+    }
+  }, [page]);
+
+  /** Handle 409 conflict response from any mutation endpoint. */
+  const handleConflictResponse = useCallback((data: { conflict?: boolean; expectedVersion?: number; actualVersion?: number; error?: string }) => {
+    if (data.conflict) {
+      setConflict(true);
+      setError(
+        data.error ??
+        `版本冲突：文档已被更新到 v${data.actualVersion ?? "?"}，请刷新后重试。`
+      );
+      return true;
+    }
+    return false;
+  }, []);
+
   // Save: submit pending operations to the executor.
   const handleSave = useCallback(async () => {
     if (!hasPendingChanges || !originalDoc) return;
@@ -135,26 +169,24 @@ export function StudioEditor({ page }: StudioEditorProps) {
       });
       const data = await res.json();
       if (!data.success) {
-        setError(data.error ?? "Save failed");
+        if (!handleConflictResponse(data)) {
+          setError(data.error ?? "Save failed");
+        }
         return;
       }
       setLastSavedOps(pendingOps);
       setVersion(data.newVersion);
-      // Refresh the document from the server to stay in sync.
-      const docRes = await fetch(`/api/studio/document?page=${encodeURIComponent(page)}`);
-      const docData: DocumentResponse = await docRes.json();
-      if (docData.success && docData.document) {
-        setOriginalDoc(docData.document);
-        setDraft(docData.document.pages[page] as HomePageData);
-      }
+      setConflict(false);
+      setRedoStack([]); // New commit clears redo history.
+      await refreshDocument();
     } catch (err) {
       setError((err as Error).message);
     } finally {
       setSaving(false);
     }
-  }, [hasPendingChanges, originalDoc, pendingOps, page]);
+  }, [hasPendingChanges, originalDoc, pendingOps, handleConflictResponse, refreshDocument]);
 
-  // Undo: call the undo API, then refresh.
+  // Undo: call the undo API, then refresh; push undoneVersion onto redoStack.
   const handleUndo = useCallback(async () => {
     setSaving(true);
     setError(null);
@@ -166,28 +198,86 @@ export function StudioEditor({ page }: StudioEditorProps) {
       });
       const data = await res.json();
       if (!data.success) {
-        setError(data.error ?? "Undo failed");
+        if (!handleConflictResponse(data)) {
+          setError(data.error ?? "Undo failed");
+        }
         return;
       }
       setVersion(data.newVersion);
-      const docRes = await fetch(`/api/studio/document?page=${encodeURIComponent(page)}`);
-      const docData: DocumentResponse = await docRes.json();
-      if (docData.success && docData.document) {
-        setOriginalDoc(docData.document);
-        setDraft(docData.document.pages[page] as HomePageData);
-      }
+      setConflict(false);
+      setRedoStack((stack) => [...stack, data.undoneVersion as number]);
+      await refreshDocument();
     } catch (err) {
       setError((err as Error).message);
     } finally {
       setSaving(false);
     }
-  }, [page]);
+  }, [handleConflictResponse, refreshDocument]);
+
+  // Redo: call /api/studio/undo with action:"redo" and the version popped from the stack.
+  const handleRedo = useCallback(async () => {
+    if (redoStack.length === 0) return;
+    const target = redoStack[redoStack.length - 1];
+    setSaving(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/studio/undo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "redo", version: target }),
+      });
+      const data = await res.json();
+      if (!data.success) {
+        if (!handleConflictResponse(data)) {
+          setError(data.error ?? "Redo failed");
+        }
+        return;
+      }
+      setVersion(data.newVersion);
+      setConflict(false);
+      setRedoStack((stack) => stack.slice(0, -1));
+      await refreshDocument();
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setSaving(false);
+    }
+  }, [redoStack, handleConflictResponse, refreshDocument]);
 
   // Discard: reset draft to original.
   const handleDiscard = useCallback(() => {
     if (!originalDoc) return;
     setDraft(originalDoc.pages[page] as HomePageData);
   }, [originalDoc, page]);
+
+  // Rollback: delegate to /api/studio/rollback and clear redoStack.
+  const handleRollback = useCallback(async (targetVersion: number) => {
+    setSaving(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/studio/rollback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ targetVersion }),
+      });
+      const data = await res.json();
+      if (!data.success) {
+        if (!handleConflictResponse(data)) {
+          setError(data.error ?? `Rollback to v${targetVersion} failed`);
+        }
+        return;
+      }
+      setVersion(data.newVersion);
+      setConflict(false);
+      setRedoStack([]);
+      setShowVersionHistory(false);
+      await refreshDocument();
+    } catch (err) {
+      setError((err as Error).message);
+    } finally {
+      setSaving(false);
+    }
+  }, [handleConflictResponse, refreshDocument]);
 
   if (loading) {
     return (
@@ -220,14 +310,29 @@ export function StudioEditor({ page }: StudioEditorProps) {
         version={version}
         hasPendingChanges={hasPendingChanges}
         saving={saving}
+        redoCount={redoStack.length}
         onSave={handleSave}
         onUndo={handleUndo}
+        onRedo={handleRedo}
         onDiscard={handleDiscard}
         onToggleHistory={() => setShowVersionHistory((v) => !v)}
       />
       {error && (
-        <div className="px-4 py-2 bg-red-50 text-red-700 text-sm border-b border-red-200">
+        <div className={`px-4 py-2 text-sm border-b ${
+          conflict
+            ? "bg-amber-50 text-amber-800 border-amber-200"
+            : "bg-red-50 text-red-700 border-red-200"
+        }`}>
           {error}
+          {conflict && (
+            <button
+              type="button"
+              onClick={refreshDocument}
+              className="ml-3 px-2 py-0.5 text-xs font-medium rounded bg-amber-100 hover:bg-amber-200 text-amber-900"
+            >
+              Reload document
+            </button>
+          )}
         </div>
       )}
       <div className="flex-1 flex overflow-hidden">
@@ -253,6 +358,7 @@ export function StudioEditor({ page }: StudioEditorProps) {
         <VersionHistory
           onClose={() => setShowVersionHistory(false)}
           currentVersion={version}
+          onRollback={handleRollback}
         />
       )}
     </>

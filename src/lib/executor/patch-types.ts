@@ -3,6 +3,9 @@
 // Both entries (Agent API + Studio) produce PatchPackage objects that the
 // single executor applies. We use `fast-json-patch`'s Operation type for
 // interoperability with its `compare()` diff generator.
+//
+// Stage F: adds ExecutorResult.conflict/expectedVersion/actualVersion so
+// API endpoints can return 409 Conflict + version info.
 
 import type { Operation } from "fast-json-patch";
 import type { UnifiedContentDocument } from "@/lib/content/content-schema";
@@ -51,4 +54,10 @@ export interface ExecutorResult {
   newVersion: number;
   appliedOps: JsonPatchOperation[];
   error?: string;
+  /** When true, the patch's baseVersion did not match current.meta.version. */
+  conflict?: boolean;
+  /** The baseVersion the patch was authored against (set on conflict). */
+  expectedVersion?: number;
+  /** The actual current.meta.version at the time of execution (set on conflict). */
+  actualVersion?: number;
 }
