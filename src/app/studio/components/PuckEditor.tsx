@@ -9,6 +9,12 @@
 //   4. Puck onChange: convert Puck → UCD → commitDocument() (live preview) + debounced save draft
 //   5. Puck onPublish: convert Puck → UCD → /api/studio/publish (creates new version)
 //
+// Stage K: the right-side panel is replaced by TranslationEditor (via
+// overrides.fields). TranslationEditor reads the selected section's
+// translation keys and renders EN/ZH bilingual edit fields. Edits flow back
+// through handleTranslationChange → update UCD translations → commitDocument
+// → debounced save.
+//
 // Workflow buttons (Save Draft / Submit Review / Publish) are in the Toolbar,
 // which calls back to this component's handlers.
 
@@ -30,6 +36,7 @@ import {
 import { Toolbar } from "../components/Toolbar";
 import { StatusBar } from "../components/StatusBar";
 import { DraftStatus as DraftStatusBanner } from "../components/DraftStatus";
+import { TranslationEditor, TranslationEditorContext } from "../components/TranslationEditor";
 import { useDebouncedSave } from "../hooks/useDebouncedSave";
 
 interface PuckEditorProps {
@@ -53,6 +60,28 @@ interface DraftLoadResponse {
     submittedAt?: string;
     reviewNote?: string;
   };
+}
+
+/** Set a nested value in a translation dict by dotted path (mutates in place). */
+function setNestedTranslation(
+  dict: unknown,
+  path: string,
+  value: string
+): void {
+  const parts = path.split(".");
+  let cur: unknown = dict;
+  for (let i = 0; i < parts.length - 1; i++) {
+    if (cur == null || typeof cur !== "object") return;
+    const next = (cur as Record<string, unknown>)[parts[i]];
+    if (next == null || typeof next !== "object") {
+      // Auto-create intermediate objects.
+      (cur as Record<string, unknown>)[parts[i]] = {};
+    }
+    cur = (cur as Record<string, unknown>)[parts[i]];
+  }
+  if (cur != null && typeof cur === "object") {
+    (cur as Record<string, unknown>)[parts[parts.length - 1]] = value;
+  }
 }
 
 export function PuckEditor({ page }: PuckEditorProps) {
@@ -181,6 +210,29 @@ export function PuckEditor({ page }: PuckEditorProps) {
       }
     },
     [ucd, page, debouncedSave]
+  );
+
+  // --- Stage K: Translation text change handler ---
+  // Updates a single translation value in the UCD, triggers live preview
+  // and debounced save. The Puck data itself doesn't change (translation
+  // values live outside sections), so we only update the UCD.
+  const handleTranslationChange = useCallback(
+    (key: string, lang: "en" | "zh", value: string) => {
+      if (!ucd || !puckData) return;
+
+      // Deep clone UCD and update the nested translation value.
+      const newUcd: UnifiedContentDocument = JSON.parse(JSON.stringify(ucd));
+      setNestedTranslation(newUcd.translations[lang], key, value);
+
+      // Update ContentRuntime for live preview.
+      commitDocument(newUcd);
+      setUcd(newUcd);
+
+      // Mark pending changes and trigger debounced save.
+      setHasPendingChanges(true);
+      debouncedSave(puckData);
+    },
+    [ucd, puckData, debouncedSave]
   );
 
   // --- Puck onPublish: publish via executor ---
@@ -322,50 +374,59 @@ export function PuckEditor({ page }: PuckEditorProps) {
   if (!puckData) return null;
 
   return (
-    <div className="flex flex-col h-screen">
-      <Toolbar
-        page={page}
-        version={version}
-        hasPendingChanges={hasPendingChanges}
-        saving={saving}
-        redoCount={0}
-        draftStatus={draftStatus}
-        onSave={() => handleSaveDraft()}
-        onUndo={handleUndo}
-        onRedo={handleRedo}
-        onDiscard={handleDiscard}
-        onToggleHistory={() => {}}
-        onSaveDraft={handleSaveDraft}
-        onSubmitReview={handleSubmitReview}
-        onPublish={handlePublish}
-      />
-      <DraftStatusBanner
-        status={draftStatus}
-        draftId={draftId}
-        submittedAt={draftSubmittedAt}
-        reviewNote={draftReviewNote}
-      />
-      {error && (
-        <div className="px-4 py-2 text-sm border-b bg-red-50 text-red-700 border-red-200">
-          {error}
-        </div>
-      )}
-      <div className="flex-1 overflow-hidden">
-        <Puck
-          config={puckConfig}
-          data={puckData}
-          onChange={handleChange}
+    <TranslationEditorContext.Provider
+      value={{ ucd, onTranslationChange: handleTranslationChange }}
+    >
+      <div className="flex flex-col h-screen">
+        <Toolbar
+          page={page}
+          version={version}
+          hasPendingChanges={hasPendingChanges}
+          saving={saving}
+          redoCount={0}
+          draftStatus={draftStatus}
+          onSave={() => handleSaveDraft()}
+          onUndo={handleUndo}
+          onRedo={handleRedo}
+          onDiscard={handleDiscard}
+          onToggleHistory={() => {}}
+          onSaveDraft={handleSaveDraft}
+          onSubmitReview={handleSubmitReview}
           onPublish={handlePublish}
-          // @ts-expect-error — fieldTypes accepts a flexible record matching FieldRenderFunctions
-          overrides={{ fieldTypes: { image: ImageField, list: ListField } }}
+        />
+        <DraftStatusBanner
+          status={draftStatus}
+          draftId={draftId}
+          submittedAt={draftSubmittedAt}
+          reviewNote={draftReviewNote}
+        />
+        {error && (
+          <div className="px-4 py-2 text-sm border-b bg-red-50 text-red-700 border-red-200">
+            {error}
+          </div>
+        )}
+        <div className="flex-1 overflow-hidden">
+          <Puck
+            config={puckConfig}
+            data={puckData}
+            onChange={handleChange}
+            onPublish={handlePublish}
+            overrides={{
+              // @ts-expect-error — fieldTypes accepts a flexible record matching FieldRenderFunctions
+              fieldTypes: { image: ImageField, list: ListField },
+              fields: ({ children, isLoading }) => (
+                <TranslationEditor isLoading={isLoading}>{children}</TranslationEditor>
+              ),
+            }}
+          />
+        </div>
+        <StatusBar
+          pendingChanges={hasPendingChanges ? 1 : 0}
+          draftStatus={draftStatus}
+          version={version}
+          lastActionTime={lastActionTime}
         />
       </div>
-      <StatusBar
-        pendingChanges={hasPendingChanges ? 1 : 0}
-        draftStatus={draftStatus}
-        version={version}
-        lastActionTime={lastActionTime}
-      />
-    </div>
+    </TranslationEditorContext.Provider>
   );
 }
