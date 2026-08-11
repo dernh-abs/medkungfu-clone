@@ -53,3 +53,7 @@ compare/
 
 # builder worktrees (duplicates — never commit)
 .claude/worktrees/
+
+# UCD content + version history (runtime-generated, not committed)
+.content/
+versions/
