@@ -47,11 +47,43 @@ async function readIfExists(full: string): Promise<string | null> {
 }
 
 async function buildTranslations(): Promise<Translations> {
-  return {
-    en: TRANSLATIONS.en?.translation ?? {},
-    zh: TRANSLATIONS.zh?.translation ?? {},
-    ru: RU,
+  type MetaRecord = Record<string, unknown>;
+  const isRecord = (v: unknown): v is MetaRecord =>
+    typeof v === "object" && v !== null && !Array.isArray(v);
+
+  const base: Translations = {
+    en: (TRANSLATIONS.en?.translation ?? {}) as MetaRecord,
+    zh: (TRANSLATIONS.zh?.translation ?? {}) as MetaRecord,
+    ru: RU as MetaRecord,
   };
+
+  // Attach hand-authored `_meta` subtrees from the COMMITTED source file
+  // `src/lib/i18n/translation-meta.json` so the runtime-consumed
+  // `.content/translations.json` carries label/type/maxLength for every key.
+  // Keeping metadata in the committed JSON (not the generated .content/)
+  // means edits survive re-seeds and .gitignore keeps excluding `.content/`.
+  const metaPath = path.join(
+    process.cwd(),
+    "src",
+    "lib",
+    "i18n",
+    "translation-meta.json"
+  );
+  const metaRaw = await readIfExists(metaPath);
+  if (metaRaw) {
+    try {
+      const parsed = JSON.parse(metaRaw) as Partial<Record<"en" | "zh", unknown>>;
+      for (const lang of ["en", "zh"] as const) {
+        const langMeta = parsed[lang];
+        if (isRecord(langMeta)) {
+          (base[lang] as MetaRecord)._meta = langMeta;
+        }
+      }
+    } catch {
+      // translation-meta.json malformed; seed without _meta — CI will catch.
+    }
+  }
+  return base;
 }
 
 async function buildMeta(): Promise<UnifiedContentDocument["meta"]> {

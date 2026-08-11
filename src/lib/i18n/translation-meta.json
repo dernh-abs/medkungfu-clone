@@ -1,0 +1,3472 @@
+{
+  "en": {
+    "nav": {
+      "home": {
+        "label": "首页",
+        "type": "string",
+        "maxLength": 26
+      },
+      "whyChina": {
+        "label": "为什么选择中国医疗",
+        "type": "string",
+        "maxLength": 46
+      },
+      "projects": {
+        "label": "优势项目",
+        "type": "string",
+        "maxLength": 44
+      },
+      "services": {
+        "label": "康福来服务",
+        "type": "string",
+        "maxLength": 32
+      },
+      "hospitals": {
+        "label": "合作医院",
+        "type": "string",
+        "maxLength": 34
+      },
+      "stories": {
+        "label": "患者故事",
+        "type": "string",
+        "maxLength": 43
+      },
+      "resources": {
+        "label": "资源中心",
+        "type": "string",
+        "maxLength": 34
+      },
+      "about": {
+        "label": "关于我们",
+        "type": "string",
+        "maxLength": 32
+      },
+      "contact": {
+        "label": "联系我们",
+        "type": "string",
+        "maxLength": 31
+      },
+      "consult": {
+        "label": "预约咨询",
+        "type": "string",
+        "maxLength": 46
+      },
+      "pricing": {
+        "label": "费用支付",
+        "type": "string",
+        "maxLength": 31
+      },
+      "faq": {
+        "label": "FAQ",
+        "type": "string",
+        "maxLength": 25
+      }
+    },
+    "hero": {
+      "title": {
+        "label": "世界前沿医疗，触手可及",
+        "type": "string",
+        "maxLength": 74
+      },
+      "subtitle": {
+        "label": "MedKungFu — 为您…",
+        "type": "string",
+        "maxLength": 115
+      },
+      "explore": {
+        "label": "探索优势项目",
+        "type": "string",
+        "maxLength": 56
+      },
+      "book": {
+        "label": "预约专家咨询",
+        "type": "string",
+        "maxLength": 46
+      },
+      "trustBadge": {
+        "label": "深受在华外籍人士信赖",
+        "type": "string",
+        "maxLength": 65
+      },
+      "headline1": {
+        "label": "您在中国的",
+        "type": "string",
+        "maxLength": 40
+      },
+      "headline2": {
+        "label": "私人医疗向导",
+        "type": "string",
+        "maxLength": 44
+      },
+      "headline3": {
+        "label": "in China",
+        "type": "string",
+        "maxLength": 32
+      },
+      "subheadline": {
+        "label": "我们像您一样关心您的健康。通…",
+        "type": "textarea",
+        "maxLength": 250
+      },
+      "trustPoint1": {
+        "label": "深受在华外籍人士信赖",
+        "type": "string",
+        "maxLength": 65
+      },
+      "trustPoint2": {
+        "label": "100+ 家涉外友好医院",
+        "type": "string",
+        "maxLength": 70
+      },
+      "trustPoint3": {
+        "label": "覆盖六大城市",
+        "type": "string",
+        "maxLength": 55
+      },
+      "partnerHospitals": {
+        "label": "合作医院",
+        "type": "string",
+        "maxLength": 46
+      },
+      "acrossCities": {
+        "label": "覆盖六大城市",
+        "type": "string",
+        "maxLength": 52
+      }
+    },
+    "trust": {
+      "hospitals": {
+        "label": "数十家顶尖医院",
+        "type": "string",
+        "maxLength": 70
+      },
+      "cities": {
+        "label": "覆盖六大城市",
+        "type": "string",
+        "maxLength": 43
+      },
+      "patients": {
+        "label": "全球服务患者",
+        "type": "string",
+        "maxLength": 49
+      },
+      "response": {
+        "label": "48小时快速响应",
+        "type": "string",
+        "maxLength": 49
+      }
+    },
+    "values": {
+      "direct": {
+        "label": "医院直联无加价",
+        "type": "string",
+        "maxLength": 53
+      },
+      "speed": {
+        "label": "极速响应高效排期",
+        "type": "string",
+        "maxLength": 41
+      },
+      "custom": {
+        "label": "全程定制个性化",
+        "type": "string",
+        "maxLength": 44
+      },
+      "transparent": {
+        "label": "透明安心有保障",
+        "type": "string",
+        "maxLength": 50
+      }
+    },
+    "projects": {
+      "oncology": {
+        "label": "肿瘤精准治疗",
+        "type": "string",
+        "maxLength": 47
+      },
+      "regenerative": {
+        "label": "再生医学",
+        "type": "string",
+        "maxLength": 52
+      },
+      "integrative": {
+        "label": "中西医结合",
+        "type": "string",
+        "maxLength": 50
+      },
+      "specialties": {
+        "label": "更多专科",
+        "type": "string",
+        "maxLength": 44
+      },
+      "details": {
+        "label": "了解详情 →",
+        "type": "string",
+        "maxLength": 38
+      },
+      "pageTitle": {
+        "label": "优势医疗项目",
+        "type": "string",
+        "maxLength": 64
+      },
+      "pageDesc": {
+        "label": "获取中国最先进的医疗技术和专…",
+        "type": "string",
+        "maxLength": 140
+      },
+      "viewDetails": {
+        "label": "查看详情",
+        "type": "string",
+        "maxLength": 38
+      },
+      "treatmentHighlights": {
+        "label": "治疗亮点",
+        "type": "string",
+        "maxLength": 50
+      }
+    },
+    "process": {
+      "title": {
+        "label": "康福来定制服务流程",
+        "type": "string",
+        "maxLength": 49
+      },
+      "step1": {
+        "label": "咨询与审核",
+        "type": "string",
+        "maxLength": 52
+      },
+      "step2": {
+        "label": "签约",
+        "type": "string",
+        "maxLength": 44
+      },
+      "step3": {
+        "label": "匹配与远程评估",
+        "type": "string",
+        "maxLength": 53
+      },
+      "step4": {
+        "label": "行前准备",
+        "type": "string",
+        "maxLength": 40
+      },
+      "step5": {
+        "label": "来华治疗",
+        "type": "string",
+        "maxLength": 47
+      },
+      "step6": {
+        "label": "行后随访",
+        "type": "string",
+        "maxLength": 49
+      }
+    },
+    "cta": {
+      "title": {
+        "label": "开启您的中国医疗之旅",
+        "type": "string",
+        "maxLength": 59
+      },
+      "name": {
+        "label": "姓名",
+        "type": "string",
+        "maxLength": 26
+      },
+      "contact": {
+        "label": "邮箱/WhatsApp",
+        "type": "string",
+        "maxLength": 44
+      },
+      "interest": {
+        "label": "关注领域",
+        "type": "string",
+        "maxLength": 44
+      },
+      "upload": {
+        "label": "上传病历",
+        "type": "string",
+        "maxLength": 41
+      },
+      "submit": {
+        "label": "提交咨询",
+        "type": "string",
+        "maxLength": 41
+      }
+    },
+    "footer": {
+      "rights": {
+        "label": "© 2026 MedKung…",
+        "type": "string",
+        "maxLength": 77
+      }
+    },
+    "whyChina": {
+      "title": {
+        "label": "为什么选择中国医疗？",
+        "type": "string",
+        "maxLength": 58
+      },
+      "subtitle": {
+        "label": "体验世界一流的医疗技术、卓越…",
+        "type": "textarea",
+        "maxLength": 295
+      },
+      "coreAdvantages": {
+        "label": "核心优势",
+        "type": "string",
+        "maxLength": 43
+      },
+      "advantage1Title": {
+        "label": "世界一流的医疗技术",
+        "type": "string",
+        "maxLength": 65
+      },
+      "advantage1Desc": {
+        "label": "中国在先进治疗领域全球领先，…",
+        "type": "textarea",
+        "maxLength": 349
+      },
+      "advantage2Title": {
+        "label": "卓越的效率",
+        "type": "string",
+        "maxLength": 53
+      },
+      "advantage2Desc": {
+        "label": "无需漫长等待。关节置换手术可…",
+        "type": "textarea",
+        "maxLength": 221
+      },
+      "advantage3Title": {
+        "label": "全面的护理体系",
+        "type": "string",
+        "maxLength": 58
+      },
+      "advantage3Desc": {
+        "label": "全球唯一的完整整合医学体系，…",
+        "type": "textarea",
+        "maxLength": 239
+      },
+      "advantage4Title": {
+        "label": "尖端创新",
+        "type": "string",
+        "maxLength": 55
+      },
+      "advantage4Desc": {
+        "label": "干细胞治疗领域领先，拥有10…",
+        "type": "string",
+        "maxLength": 196
+      },
+      "advantage5Title": {
+        "label": "国际标准",
+        "type": "string",
+        "maxLength": 55
+      },
+      "advantage5Desc": {
+        "label": "数十家国际医疗服务医院获得J…",
+        "type": "textarea",
+        "maxLength": 224
+      },
+      "advantage6Title": {
+        "label": "医疗旅游友好",
+        "type": "string",
+        "maxLength": 56
+      },
+      "advantage6Desc": {
+        "label": "海南提供医疗免签入境，允许停…",
+        "type": "textarea",
+        "maxLength": 215
+      },
+      "distinctiveFeatures": {
+        "label": "中国医疗的独特优势",
+        "type": "string",
+        "maxLength": 92
+      },
+      "feature1Title": {
+        "label": "专家团队",
+        "type": "string",
+        "maxLength": 50
+      },
+      "feature1Desc": {
+        "label": "在国内外机构接受培训的高技能医生",
+        "type": "string",
+        "maxLength": 137
+      },
+      "feature2Title": {
+        "label": "现代化设施",
+        "type": "string",
+        "maxLength": 46
+      },
+      "feature2Desc": {
+        "label": "配备最新医疗技术的先进医院",
+        "type": "string",
+        "maxLength": 125
+      },
+      "feature3Title": {
+        "label": "整体方法",
+        "type": "string",
+        "maxLength": 46
+      },
+      "feature3Desc": {
+        "label": "中西医结合综合治疗",
+        "type": "string",
+        "maxLength": 121
+      },
+      "feature4Title": {
+        "label": "快速创新",
+        "type": "string",
+        "maxLength": 44
+      },
+      "feature4Desc": {
+        "label": "快速采用突破性治疗和医疗技术",
+        "type": "string",
+        "maxLength": 118
+      },
+      "ctaTitle": {
+        "label": "准备好体验世界一流的医疗服务…",
+        "type": "string",
+        "maxLength": 85
+      },
+      "ctaDesc": {
+        "label": "让我们通过个性化的礼宾服务，…",
+        "type": "textarea",
+        "maxLength": 226
+      },
+      "ctaButton": {
+        "label": "开启您的医疗之旅",
+        "type": "string",
+        "maxLength": 59
+      }
+    },
+    "services": {
+      "title": {
+        "label": "康福来服务",
+        "type": "string",
+        "maxLength": 47
+      },
+      "subtitle": {
+        "label": "一套全面的服务，旨在让您的医…",
+        "type": "string",
+        "maxLength": 166
+      },
+      "processTitle": {
+        "label": "康福来定制服务流程",
+        "type": "string",
+        "maxLength": 49
+      },
+      "processSubtitle": {
+        "label": "从初步咨询到治疗后随访的七个…",
+        "type": "string",
+        "maxLength": 190
+      },
+      "processPhase1": {
+        "label": "第一阶段",
+        "type": "string",
+        "maxLength": 31
+      },
+      "processPhase2": {
+        "label": "第二阶段",
+        "type": "string",
+        "maxLength": 31
+      },
+      "processPhase3": {
+        "label": "第三阶段",
+        "type": "string",
+        "maxLength": 31
+      },
+      "processPhase4": {
+        "label": "第四阶段",
+        "type": "string",
+        "maxLength": 31
+      },
+      "processPhase5": {
+        "label": "第五阶段",
+        "type": "string",
+        "maxLength": 31
+      },
+      "processPhase6": {
+        "label": "第六阶段",
+        "type": "string",
+        "maxLength": 31
+      },
+      "processPhase7": {
+        "label": "第七阶段",
+        "type": "string",
+        "maxLength": 31
+      },
+      "processTitle1": {
+        "label": "需求提出与初步对接",
+        "type": "string",
+        "maxLength": 65
+      },
+      "processTitle2": {
+        "label": "医疗资源匹配与远程评估",
+        "type": "string",
+        "maxLength": 88
+      },
+      "processTitle3": {
+        "label": "服务协议与预约安排",
+        "type": "string",
+        "maxLength": 83
+      },
+      "processTitle4": {
+        "label": "赴华前准备",
+        "type": "string",
+        "maxLength": 58
+      },
+      "processTitle5": {
+        "label": "抵达中国并入院",
+        "type": "string",
+        "maxLength": 76
+      },
+      "processTitle6": {
+        "label": "检查与治疗",
+        "type": "string",
+        "maxLength": 55
+      },
+      "processTitle7": {
+        "label": "出院与后续管理",
+        "type": "string",
+        "maxLength": 68
+      },
+      "process1Item1": {
+        "label": "远程咨询",
+        "type": "string",
+        "maxLength": 49
+      },
+      "process1Desc1": {
+        "label": "通过电话、邮件或视频通话初步…",
+        "type": "string",
+        "maxLength": 140
+      },
+      "process1Item2": {
+        "label": "病历收集与翻译",
+        "type": "string",
+        "maxLength": 80
+      },
+      "process1Desc2": {
+        "label": "收集并专业翻译您的病史和诊断报告",
+        "type": "string",
+        "maxLength": 139
+      },
+      "process2Item1": {
+        "label": "精准匹配医院",
+        "type": "string",
+        "maxLength": 61
+      },
+      "process2Desc1": {
+        "label": "根据您的病情匹配最适合的医院…",
+        "type": "string",
+        "maxLength": 143
+      },
+      "process2Item2": {
+        "label": "专家远程视频评估",
+        "type": "string",
+        "maxLength": 65
+      },
+      "process2Desc2": {
+        "label": "与顶尖专家进行视频会诊，评估…",
+        "type": "string",
+        "maxLength": 130
+      },
+      "process2Item3": {
+        "label": "出具书面诊疗建议报告",
+        "type": "string",
+        "maxLength": 79
+      },
+      "process2Desc3": {
+        "label": "收到详细的医疗评估和个性化治…",
+        "type": "string",
+        "maxLength": 124
+      },
+      "process3Item1": {
+        "label": "签订服务协议",
+        "type": "string",
+        "maxLength": 58
+      },
+      "process3Desc1": {
+        "label": "正式合同明确服务内容、费用和…",
+        "type": "string",
+        "maxLength": 124
+      },
+      "process3Item2": {
+        "label": "医院优先预约",
+        "type": "string",
+        "maxLength": 64
+      },
+      "process3Desc2": {
+        "label": "通过绿色通道确保优先排期",
+        "type": "string",
+        "maxLength": 109
+      },
+      "process4Item1": {
+        "label": "签证申请协助",
+        "type": "string",
+        "maxLength": 61
+      },
+      "process4Desc1": {
+        "label": "提供医疗签证申请流程的指导和支持",
+        "type": "string",
+        "maxLength": 106
+      },
+      "process4Item2": {
+        "label": "行程安排",
+        "type": "string",
+        "maxLength": 49
+      },
+      "process4Desc2": {
+        "label": "机票预订、医院附近住宿和行程规划",
+        "type": "string",
+        "maxLength": 121
+      },
+      "process5Item1": {
+        "label": "抵华接机服务",
+        "type": "string",
+        "maxLength": 53
+      },
+      "process5Desc1": {
+        "label": "专业人员在机场迎接并送往住宿地点",
+        "type": "string",
+        "maxLength": 125
+      },
+      "process5Item2": {
+        "label": "入院专属通道",
+        "type": "string",
+        "maxLength": 74
+      },
+      "process5Desc2": {
+        "label": "优先办理入院手续，无需排队等候",
+        "type": "string",
+        "maxLength": 118
+      },
+      "process6Item1": {
+        "label": "前期检查",
+        "type": "string",
+        "maxLength": 59
+      },
+      "process6Desc1": {
+        "label": "全面的诊断测试和健康评估",
+        "type": "string",
+        "maxLength": 100
+      },
+      "process6Item2": {
+        "label": "治疗实施",
+        "type": "string",
+        "maxLength": 56
+      },
+      "process6Desc2": {
+        "label": "由专业医疗团队执行个性化治疗方案",
+        "type": "string",
+        "maxLength": 122
+      },
+      "process6Item3": {
+        "label": "住院期间个性化支持",
+        "type": "string",
+        "maxLength": 85
+      },
+      "process6Desc3": {
+        "label": "专属护理协调员、翻译服务和日…",
+        "type": "string",
+        "maxLength": 125
+      },
+      "process7Item1": {
+        "label": "出院回程",
+        "type": "string",
+        "maxLength": 59
+      },
+      "process7Desc1": {
+        "label": "医疗总结、用药指导和返程安排",
+        "type": "string",
+        "maxLength": 119
+      },
+      "process7Item2": {
+        "label": "远程随访",
+        "type": "string",
+        "maxLength": 44
+      },
+      "process7Desc2": {
+        "label": "持续的医疗咨询、康复监测和本…",
+        "type": "string",
+        "maxLength": 130
+      },
+      "service1Title": {
+        "label": "专家视频咨询",
+        "type": "string",
+        "maxLength": 58
+      },
+      "service1Desc": {
+        "label": "在出行前远程连接顶尖专家。",
+        "type": "string",
+        "maxLength": 103
+      },
+      "service2Title": {
+        "label": "全程管家服务",
+        "type": "string",
+        "maxLength": 49
+      },
+      "service2Desc": {
+        "label": "从预约到出院的端到端协调。",
+        "type": "string",
+        "maxLength": 101
+      },
+      "service3Title": {
+        "label": "签证与旅行",
+        "type": "string",
+        "maxLength": 40
+      },
+      "service3Desc": {
+        "label": "协助办理医疗签证和航班安排。",
+        "type": "string",
+        "maxLength": 101
+      },
+      "service4Title": {
+        "label": "翻译与陪同",
+        "type": "string",
+        "maxLength": 50
+      },
+      "service4Desc": {
+        "label": "专业医疗翻译全程陪同。",
+        "type": "string",
+        "maxLength": 95
+      },
+      "service5Title": {
+        "label": "住宿安排",
+        "type": "string",
+        "maxLength": 40
+      },
+      "service5Desc": {
+        "label": "合作医院附近的舒适住宿。",
+        "type": "string",
+        "maxLength": 82
+      },
+      "service6Title": {
+        "label": "康复随访",
+        "type": "string",
+        "maxLength": 56
+      },
+      "service6Desc": {
+        "label": "回国后持续护理。",
+        "type": "string",
+        "maxLength": 77
+      },
+      "whyChooseUs": {
+        "label": "为什么选择我们？",
+        "type": "string",
+        "maxLength": 41
+      },
+      "adv1Title": {
+        "label": "合规运营",
+        "type": "string",
+        "maxLength": 50
+      },
+      "adv1Desc": {
+        "label": "公司直接签约收款，确保合同合…",
+        "type": "string",
+        "maxLength": 158
+      },
+      "adv2Title": {
+        "label": "医院直联",
+        "type": "string",
+        "maxLength": 59
+      },
+      "adv2Desc": {
+        "label": "与顶级医院正式合作，无中间加…",
+        "type": "string",
+        "maxLength": 172
+      },
+      "adv3Title": {
+        "label": "服务分层",
+        "type": "string",
+        "maxLength": 53
+      },
+      "adv3Desc": {
+        "label": "从标准到全包VIP服务，满足…",
+        "type": "string",
+        "maxLength": 146
+      },
+      "adv4Title": {
+        "label": "全程双语支持",
+        "type": "string",
+        "maxLength": 53
+      },
+      "adv4Desc": {
+        "label": "所有沟通、病历和合同均提供双…",
+        "type": "string",
+        "maxLength": 142
+      },
+      "adv5Title": {
+        "label": "极速排期",
+        "type": "string",
+        "maxLength": 58
+      },
+      "adv5Desc": {
+        "label": "绿色通道优先安排，把握治疗窗口",
+        "type": "string",
+        "maxLength": 110
+      },
+      "adv6Title": {
+        "label": "严格质检",
+        "type": "string",
+        "maxLength": 58
+      },
+      "adv6Desc": {
+        "label": "所有服务人员经过严格筛选和质…",
+        "type": "string",
+        "maxLength": 128
+      },
+      "adv7Title": {
+        "label": "价格透明",
+        "type": "string",
+        "maxLength": 49
+      },
+      "adv7Desc": {
+        "label": "服务费明码标价，7种情况可退…",
+        "type": "string",
+        "maxLength": 145
+      },
+      "adv8Title": {
+        "label": "风险透明",
+        "type": "string",
+        "maxLength": 46
+      },
+      "adv8Desc": {
+        "label": "治疗前签署知情同意书，明确告…",
+        "type": "string",
+        "maxLength": 172
+      },
+      "adv9Title": {
+        "label": "长期随访",
+        "type": "string",
+        "maxLength": 49
+      },
+      "adv9Desc": {
+        "label": "长期随访体系，回国后本地医疗协调",
+        "type": "string",
+        "maxLength": 131
+      },
+      "refundPolicy": {
+        "label": "退款政策",
+        "type": "string",
+        "maxLength": 40
+      },
+      "refund1Condition": {
+        "label": "无法在约定时间内匹配合适医院",
+        "type": "string",
+        "maxLength": 106
+      },
+      "refund1Amount": {
+        "label": "服务费全额退款",
+        "type": "string",
+        "maxLength": 59
+      },
+      "refund2Condition": {
+        "label": "经前期远程评估，不符合治疗可行性",
+        "type": "string",
+        "maxLength": 86
+      },
+      "refund2Amount": {
+        "label": "服务费全额退款",
+        "type": "string",
+        "maxLength": 59
+      },
+      "refund3Condition": {
+        "label": "签证被拒（资料完整，非患者原因）",
+        "type": "string",
+        "maxLength": 100
+      },
+      "refund3Amount": {
+        "label": "服务费全额退款",
+        "type": "string",
+        "maxLength": 59
+      },
+      "refund4Condition": {
+        "label": "患者自愿退出（不同阶段）",
+        "type": "string",
+        "maxLength": 92
+      },
+      "refund4Amount": {
+        "label": "按进度比例退款",
+        "type": "string",
+        "maxLength": 76
+      },
+      "refund5Condition": {
+        "label": "医生建议停止治疗",
+        "type": "string",
+        "maxLength": 80
+      },
+      "refund5Amount": {
+        "label": "按进度比例退款",
+        "type": "string",
+        "maxLength": 76
+      },
+      "paymentMethods": {
+        "label": "支付方式",
+        "type": "string",
+        "maxLength": 43
+      },
+      "payment1Name": {
+        "label": "国际信用卡",
+        "type": "string",
+        "maxLength": 58
+      },
+      "payment1Desc": {
+        "label": "Visa / Masterc…",
+        "type": "string",
+        "maxLength": 46
+      },
+      "payment2Name": {
+        "label": "银行转账",
+        "type": "string",
+        "maxLength": 40
+      },
+      "payment2Desc": {
+        "label": "电汇至香港账户",
+        "type": "string",
+        "maxLength": 61
+      },
+      "payment3Name": {
+        "label": "安全支付",
+        "type": "string",
+        "maxLength": 41
+      },
+      "payment3Desc": {
+        "label": "加密交易保障",
+        "type": "string",
+        "maxLength": 53
+      }
+    },
+    "about": {
+      "title": {
+        "label": "关于康福来",
+        "type": "string",
+        "maxLength": 43
+      },
+      "whoWeAre": {
+        "label": "我们是谁",
+        "type": "string",
+        "maxLength": 35
+      },
+      "whoWeAreDesc": {
+        "label": "康福来（MedKungFu…",
+        "type": "textarea",
+        "maxLength": 410
+      },
+      "ourCommitment": {
+        "label": "我们的承诺",
+        "type": "string",
+        "maxLength": 41
+      },
+      "ourCommitmentDesc": {
+        "label": "从签证协助到治疗后的康复照护…",
+        "type": "textarea",
+        "maxLength": 950
+      },
+      "ourMission": {
+        "label": "我们的使命",
+        "type": "string",
+        "maxLength": 37
+      },
+      "ourMissionDesc": {
+        "label": "与世界分享中国前沿的医疗成果…",
+        "type": "string",
+        "maxLength": 199
+      },
+      "coreServices": {
+        "label": "核心服务",
+        "type": "string",
+        "maxLength": 40
+      },
+      "service1": {
+        "label": "国际精准转诊：为您匹配最合适…",
+        "type": "string",
+        "maxLength": 163
+      },
+      "service2": {
+        "label": "远程医疗第二意见：足不出户获…",
+        "type": "string",
+        "maxLength": 164
+      },
+      "service3": {
+        "label": "一站式医疗陪同：从落地到出院…",
+        "type": "string",
+        "maxLength": 152
+      },
+      "service4": {
+        "label": "全周期健康管理：覆盖治疗前、…",
+        "type": "string",
+        "maxLength": 179
+      },
+      "ourValues": {
+        "label": "我们的价值观",
+        "type": "string",
+        "maxLength": 35
+      },
+      "value1Title": {
+        "label": "透明",
+        "type": "string",
+        "maxLength": 38
+      },
+      "value1Desc": {
+        "label": "价格清晰，沟通诚实。",
+        "type": "string",
+        "maxLength": 79
+      },
+      "value2Title": {
+        "label": "专业",
+        "type": "string",
+        "maxLength": 43
+      },
+      "value2Desc": {
+        "label": "具有全球标准的专家团队。",
+        "type": "string",
+        "maxLength": 85
+      },
+      "value3Title": {
+        "label": "关怀",
+        "type": "string",
+        "maxLength": 35
+      },
+      "value3Desc": {
+        "label": "以温暖和关怀对待每位患者。",
+        "type": "string",
+        "maxLength": 86
+      },
+      "value4Title": {
+        "label": "责任",
+        "type": "string",
+        "maxLength": 41
+      },
+      "value4Desc": {
+        "label": "跨越国界，共创更好健康结果。",
+        "type": "string",
+        "maxLength": 86
+      },
+      "expertTeam": {
+        "label": "我们的专家团队",
+        "type": "string",
+        "maxLength": 43
+      },
+      "team1Title": {
+        "label": "医疗顾问",
+        "type": "string",
+        "maxLength": 44
+      },
+      "team1Desc": {
+        "label": "来自中国顶级医院的专家",
+        "type": "string",
+        "maxLength": 79
+      },
+      "team2Title": {
+        "label": "运营团队",
+        "type": "string",
+        "maxLength": 43
+      },
+      "team2Desc": {
+        "label": "丰富的跨境医疗经验",
+        "type": "string",
+        "maxLength": 83
+      },
+      "team3Title": {
+        "label": "多语言支持",
+        "type": "string",
+        "maxLength": 50
+      },
+      "team3Desc": {
+        "label": "专业医疗翻译",
+        "type": "string",
+        "maxLength": 68
+      }
+    },
+    "contact": {
+      "title": {
+        "label": "联系我们",
+        "type": "string",
+        "maxLength": 35
+      },
+      "subtitle": {
+        "label": "准备好开始您的旅程了吗？联系…",
+        "type": "string",
+        "maxLength": 124
+      },
+      "email": {
+        "label": "邮箱",
+        "type": "string",
+        "maxLength": 28
+      },
+      "emailValue": {
+        "label": "contact@medkun…",
+        "type": "string",
+        "maxLength": 52
+      },
+      "whatsapp": {
+        "label": "WhatsApp",
+        "type": "string",
+        "maxLength": 32
+      },
+      "whatsappValue": {
+        "label": "+1- 646-296-8491",
+        "type": "string",
+        "maxLength": 44
+      },
+      "headquarters": {
+        "label": "总部",
+        "type": "string",
+        "maxLength": 38
+      },
+      "headquartersValue": {
+        "label": "中国上海",
+        "type": "string",
+        "maxLength": 43
+      },
+      "workingHours": {
+        "label": "工作时间",
+        "type": "string",
+        "maxLength": 40
+      },
+      "workingHoursValue": {
+        "label": "周一至周日：上午9:00 -…",
+        "type": "string",
+        "maxLength": 82
+      },
+      "sendMessage": {
+        "label": "给我们留言",
+        "type": "string",
+        "maxLength": 46
+      },
+      "fullName": {
+        "label": "姓名",
+        "type": "string",
+        "maxLength": 34
+      },
+      "emailAddress": {
+        "label": "邮箱地址",
+        "type": "string",
+        "maxLength": 40
+      },
+      "subject": {
+        "label": "主题",
+        "type": "string",
+        "maxLength": 31
+      },
+      "message": {
+        "label": "留言内容",
+        "type": "string",
+        "maxLength": 31
+      },
+      "sending": {
+        "label": "发送中...",
+        "type": "string",
+        "maxLength": 35
+      },
+      "sendButton": {
+        "label": "发送留言",
+        "type": "string",
+        "maxLength": 38
+      },
+      "successTitle": {
+        "label": "留言已发送！",
+        "type": "string",
+        "maxLength": 40
+      },
+      "successDesc": {
+        "label": "感谢您的联系，我们将尽快回复您。",
+        "type": "string",
+        "maxLength": 107
+      },
+      "optionGeneral": {
+        "label": "一般咨询",
+        "type": "string",
+        "maxLength": 43
+      },
+      "optionTreatment": {
+        "label": "治疗咨询",
+        "type": "string",
+        "maxLength": 53
+      },
+      "optionAppointment": {
+        "label": "医院预约",
+        "type": "string",
+        "maxLength": 50
+      },
+      "pageAriaLabel": {
+        "label": "联系我们",
+        "type": "string",
+        "maxLength": 35
+      },
+      "informationAriaLabel": {
+        "label": "联系信息",
+        "type": "string",
+        "maxLength": 49
+      },
+      "formAriaLabel": {
+        "label": "联系表单",
+        "type": "string",
+        "maxLength": 38
+      },
+      "personalInformation": {
+        "label": "个人信息",
+        "type": "string",
+        "maxLength": 50
+      },
+      "nameHelp": {
+        "label": "请填写您的姓名",
+        "type": "string",
+        "maxLength": 59
+      },
+      "contactHelp": {
+        "label": "请填写您的邮箱或电话号码",
+        "type": "string",
+        "maxLength": 77
+      },
+      "interestHelp": {
+        "label": "请选择一个或多个关注领域",
+        "type": "string",
+        "maxLength": 74
+      },
+      "interestRequired": {
+        "label": "请至少选择一个关注领域。",
+        "type": "string",
+        "maxLength": 86
+      },
+      "interestCheckup": {
+        "label": "体检",
+        "type": "string",
+        "maxLength": 41
+      },
+      "interestTcm": {
+        "label": "中医",
+        "type": "string",
+        "maxLength": 62
+      },
+      "interestDentistry": {
+        "label": "牙科",
+        "type": "string",
+        "maxLength": 34
+      },
+      "interestOrthopedics": {
+        "label": "骨科",
+        "type": "string",
+        "maxLength": 37
+      },
+      "interestOncology": {
+        "label": "肿瘤",
+        "type": "string",
+        "maxLength": 32
+      },
+      "interestEnt": {
+        "label": "五官科",
+        "type": "string",
+        "maxLength": 25
+      },
+      "interestOther": {
+        "label": "其他",
+        "type": "string",
+        "maxLength": 28
+      },
+      "needsLabel": {
+        "label": "你的需求/问题",
+        "type": "string",
+        "maxLength": 53
+      },
+      "needsPlaceholder": {
+        "label": "请描述你的需求或问题...",
+        "type": "string",
+        "maxLength": 83
+      },
+      "needsHelp": {
+        "label": "请描述你的需求或问题",
+        "type": "string",
+        "maxLength": 68
+      },
+      "submitError": {
+        "label": "提交失败，请稍后重试。",
+        "type": "string",
+        "maxLength": 74
+      },
+      "successEmail": {
+        "label": "邮件已发送至 contact…",
+        "type": "string",
+        "maxLength": 73
+      }
+    },
+    "home": {
+      "ourPromise": {
+        "label": "我们的承诺",
+        "type": "string",
+        "maxLength": 37
+      },
+      "howWeHelp": {
+        "label": "康福来如何帮助您",
+        "type": "string",
+        "maxLength": 55
+      },
+      "howWeHelpDesc": {
+        "label": "为在华外籍人士设计的全面医疗…",
+        "type": "string",
+        "maxLength": 128
+      },
+      "service1Title": {
+        "label": "医院转诊",
+        "type": "string",
+        "maxLength": 46
+      },
+      "service1Desc": {
+        "label": "直接对接中国50+家顶级医院…",
+        "type": "textarea",
+        "maxLength": 206
+      },
+      "service2Title": {
+        "label": "医疗翻译",
+        "type": "string",
+        "maxLength": 49
+      },
+      "service2Desc": {
+        "label": "精通中英文的专业医疗翻译，确…",
+        "type": "textarea",
+        "maxLength": 214
+      },
+      "service3Title": {
+        "label": "全程陪同",
+        "type": "string",
+        "maxLength": 44
+      },
+      "service3Desc": {
+        "label": "专属医疗管家陪同您就诊，处理…",
+        "type": "string",
+        "maxLength": 200
+      },
+      "learnMore": {
+        "label": "了解更多",
+        "type": "string",
+        "maxLength": 35
+      },
+      "viewAllServices": {
+        "label": "查看全部服务",
+        "type": "string",
+        "maxLength": 46
+      },
+      "valueDescDirect": {
+        "label": "医院直联，无中间商",
+        "type": "string",
+        "maxLength": 88
+      },
+      "valueDescSpeed": {
+        "label": "高效排期，快速响应",
+        "type": "string",
+        "maxLength": 79
+      },
+      "valueDescCustom": {
+        "label": "为每位患者定制服务方案",
+        "type": "string",
+        "maxLength": 86
+      },
+      "valueDescTransparent": {
+        "label": "价格透明，退款保障",
+        "type": "string",
+        "maxLength": 76
+      }
+    },
+    "tcmProctology": {
+      "heroSubtitle": {
+        "label": "中西医结合微创治疗",
+        "type": "string",
+        "maxLength": 85
+      },
+      "heroDesc": {
+        "label": "顾氏外科传承 · 中西医结合…",
+        "type": "string",
+        "maxLength": 164
+      },
+      "stat1Label": {
+        "label": "克罗恩病肛瘘愈合率",
+        "type": "string",
+        "maxLength": 70
+      },
+      "stat2Label": {
+        "label": "复发率（远低于国际平均）",
+        "type": "string",
+        "maxLength": 94
+      },
+      "stat3Label": {
+        "label": "愈合时间缩短",
+        "type": "string",
+        "maxLength": 58
+      },
+      "introTitle": {
+        "label": "顾氏外科传承 · 百年肛肠专科",
+        "type": "string",
+        "maxLength": 104
+      },
+      "introDesc1": {
+        "label": "传承百年\"顾氏外科\"学术积淀…",
+        "type": "textarea",
+        "maxLength": 484
+      },
+      "introDesc2": {
+        "label": "标准西方手术治疗复杂性或克罗…",
+        "type": "textarea",
+        "maxLength": 644
+      },
+      "proprietaryNote": {
+        "label": "院内制剂——金黄膏、红油膏、…",
+        "type": "textarea",
+        "maxLength": 239
+      },
+      "conditionsTitle": {
+        "label": "两大肛肠疑难病症",
+        "type": "string",
+        "maxLength": 68
+      },
+      "conditionsSubtitle": {
+        "label": "我们专注治疗的两种复杂肛肠疾病",
+        "type": "string",
+        "maxLength": 110
+      },
+      "condition1Title": {
+        "label": "复杂性肛瘘/克罗恩病相关肛瘘",
+        "type": "string",
+        "maxLength": 89
+      },
+      "condition1Desc": {
+        "label": "肛瘘是肛管与周围皮肤之间的异…",
+        "type": "textarea",
+        "maxLength": 586
+      },
+      "condition2Title": {
+        "label": "混合痔（环状）",
+        "type": "string",
+        "maxLength": 76
+      },
+      "condition2Desc": {
+        "label": "痔疮是肛管内血管垫异常增大。…",
+        "type": "textarea",
+        "maxLength": 325
+      },
+      "symptomsTitle": {
+        "label": "主要症状",
+        "type": "string",
+        "maxLength": 40
+      },
+      "advantagesTitle": {
+        "label": "五大不可替代的临床优势",
+        "type": "string",
+        "maxLength": 77
+      },
+      "adv1Title": {
+        "label": "保括约肌·功能优先",
+        "type": "string",
+        "maxLength": 76
+      },
+      "adv1Desc": {
+        "label": "传统瘘管切开术存在部分括约肌…",
+        "type": "textarea",
+        "maxLength": 421
+      },
+      "adv2Title": {
+        "label": "院内制剂·加速愈合",
+        "type": "string",
+        "maxLength": 89
+      },
+      "adv2Desc": {
+        "label": "院内制剂——金黄膏（消肿）、…",
+        "type": "textarea",
+        "maxLength": 509
+      },
+      "adv3Title": {
+        "label": "国际微创技术",
+        "type": "string",
+        "maxLength": 85
+      },
+      "adv3Desc": {
+        "label": "熟练掌握VAAFT视频辅助肛…",
+        "type": "textarea",
+        "maxLength": 326
+      },
+      "adv4Title": {
+        "label": "中医整体调理·长期防复发",
+        "type": "string",
+        "maxLength": 109
+      },
+      "adv4Desc": {
+        "label": "除局部治疗外，个性化中医调理…",
+        "type": "textarea",
+        "maxLength": 371
+      },
+      "adv5Title": {
+        "label": "微创·快速恢复（痔疮）",
+        "type": "string",
+        "maxLength": 94
+      },
+      "adv5Desc": {
+        "label": "对于混合痔，结合硬化剂注射、…",
+        "type": "textarea",
+        "maxLength": 401
+      },
+      "indicationsTitle": {
+        "label": "适用人群",
+        "type": "string",
+        "maxLength": 49
+      },
+      "indication1": {
+        "label": "复杂性或复发性肛瘘，包括克罗…",
+        "type": "string",
+        "maxLength": 188
+      },
+      "indication2": {
+        "label": "混合痔（包括环状）寻求减轻术…",
+        "type": "string",
+        "maxLength": 170
+      },
+      "indication3": {
+        "label": "肛周脓肿手术后需要先进创面管理",
+        "type": "string",
+        "maxLength": 118
+      },
+      "indication4": {
+        "label": "寻求中西医结合护理以降低长期…",
+        "type": "string",
+        "maxLength": 128
+      },
+      "indication5": {
+        "label": "在海外治疗效果不佳，寻求第二…",
+        "type": "string",
+        "maxLength": 140
+      },
+      "contraindicationsTitle": {
+        "label": "禁忌症",
+        "type": "string",
+        "maxLength": 46
+      },
+      "contraindicationsNote": {
+        "label": "请在咨询时向医生如实告知以下…",
+        "type": "textarea",
+        "maxLength": 224
+      },
+      "contra1": {
+        "label": "凝血功能障碍或正在服用抗凝药物",
+        "type": "string",
+        "maxLength": 106
+      },
+      "contra2": {
+        "label": "炎症性肠病（克罗恩病/溃疡性…",
+        "type": "string",
+        "maxLength": 142
+      },
+      "contra3": {
+        "label": "严重局部感染或活动性败血症",
+        "type": "string",
+        "maxLength": 79
+      },
+      "contra4": {
+        "label": "孕妇（某些手术推迟至产后）",
+        "type": "string",
+        "maxLength": 109
+      },
+      "contra5": {
+        "label": "影响伤口愈合的糖尿病控制不佳",
+        "type": "string",
+        "maxLength": 95
+      },
+      "contraindicationsFooter": {
+        "label": "所有患者将在治疗前由专科医生…",
+        "type": "string",
+        "maxLength": 197
+      },
+      "processTitle": {
+        "label": "一站式全程陪诊服务",
+        "type": "string",
+        "maxLength": 85
+      },
+      "processSubtitle": {
+        "label": "从在线咨询到返程随访，Med…",
+        "type": "string",
+        "maxLength": 188
+      },
+      "step1Title": {
+        "label": "在线咨询与症状评估",
+        "type": "string",
+        "maxLength": 73
+      },
+      "step1Desc": {
+        "label": "通过电子邮件联系MedKun…",
+        "type": "textarea",
+        "maxLength": 455
+      },
+      "step2Title": {
+        "label": "行程规划",
+        "type": "string",
+        "maxLength": 61
+      },
+      "step2Desc": {
+        "label": "确认治疗意向后，MedKun…",
+        "type": "textarea",
+        "maxLength": 439
+      },
+      "step3Title": {
+        "label": "入院前专家评估",
+        "type": "string",
+        "maxLength": 91
+      },
+      "step3Desc": {
+        "label": "抵达后，双语陪同人员陪同您前…",
+        "type": "textarea",
+        "maxLength": 440
+      },
+      "step4Title": {
+        "label": "手术与治疗",
+        "type": "string",
+        "maxLength": 52
+      },
+      "step4Desc": {
+        "label": "根据病情：复杂性肛瘘采用挂线…",
+        "type": "textarea",
+        "maxLength": 373
+      },
+      "step5Title": {
+        "label": "术后创面护理与随访",
+        "type": "string",
+        "maxLength": 76
+      },
+      "step5Desc": {
+        "label": "医生使用院内制剂进行标准化换…",
+        "type": "textarea",
+        "maxLength": 394
+      },
+      "step6Title": {
+        "label": "离院总结与居家护理指导",
+        "type": "string",
+        "maxLength": 83
+      },
+      "step6Desc": {
+        "label": "完成主要治疗阶段后，医生提供…",
+        "type": "textarea",
+        "maxLength": 457
+      },
+      "servicesTitle": {
+        "label": "超越医疗的全程支持",
+        "type": "string",
+        "maxLength": 64
+      },
+      "service1Title": {
+        "label": "双语翻译",
+        "type": "string",
+        "maxLength": 56
+      },
+      "service1Desc": {
+        "label": "每次就诊都有专属陪同和完整医…",
+        "type": "textarea",
+        "maxLength": 280
+      },
+      "service2Title": {
+        "label": "交通与陪同",
+        "type": "string",
+        "maxLength": 47
+      },
+      "service2Desc": {
+        "label": "机场接送和每次就诊的专属陪同…",
+        "type": "string",
+        "maxLength": 182
+      },
+      "service3Title": {
+        "label": "专属协调员",
+        "type": "string",
+        "maxLength": 52
+      },
+      "service3Desc": {
+        "label": "个人协调员管理所有预约、进度…",
+        "type": "textarea",
+        "maxLength": 209
+      },
+      "service4Title": {
+        "label": "签证与旅行支持",
+        "type": "string",
+        "maxLength": 52
+      },
+      "service4Desc": {
+        "label": "支持医疗签证邀请函、抵达指导…",
+        "type": "textarea",
+        "maxLength": 215
+      },
+      "pricingTitle": {
+        "label": "参考治疗费用",
+        "type": "string",
+        "maxLength": 56
+      },
+      "pricingSubtitle": {
+        "label": "透明定价，全球价格优势无与伦比",
+        "type": "string",
+        "maxLength": 104
+      },
+      "pricingAmount": {
+        "label": "约$7,000（含中医康复）",
+        "type": "string",
+        "maxLength": 88
+      },
+      "pricingNote": {
+        "label": "具体费用以医院最终评估为准。",
+        "type": "string",
+        "maxLength": 98
+      },
+      "ctaTitle": {
+        "label": "开启您的肛肠治疗之旅",
+        "type": "string",
+        "maxLength": 77
+      },
+      "ctaSubtitle": {
+        "label": "联系我们进行免费初步评估",
+        "type": "string",
+        "maxLength": 86
+      },
+      "ctaDesc": {
+        "label": "医学顾问团队将在一小时内回复…",
+        "type": "string",
+        "maxLength": 185
+      },
+      "consultButton": {
+        "label": "邮件咨询",
+        "type": "string",
+        "maxLength": 47
+      },
+      "contactButton": {
+        "label": "在线留言",
+        "type": "string",
+        "maxLength": 41
+      }
+    }
+  },
+  "zh": {
+    "nav": {
+      "home": {
+        "label": "首页",
+        "type": "string",
+        "maxLength": 23
+      },
+      "whyChina": {
+        "label": "为什么选择中国医疗",
+        "type": "string",
+        "maxLength": 34
+      },
+      "projects": {
+        "label": "优势项目",
+        "type": "string",
+        "maxLength": 26
+      },
+      "services": {
+        "label": "康福来服务",
+        "type": "string",
+        "maxLength": 28
+      },
+      "hospitals": {
+        "label": "合作医院",
+        "type": "string",
+        "maxLength": 26
+      },
+      "stories": {
+        "label": "患者故事",
+        "type": "string",
+        "maxLength": 26
+      },
+      "resources": {
+        "label": "资源中心",
+        "type": "string",
+        "maxLength": 26
+      },
+      "about": {
+        "label": "关于我们",
+        "type": "string",
+        "maxLength": 26
+      },
+      "contact": {
+        "label": "联系我们",
+        "type": "string",
+        "maxLength": 26
+      },
+      "consult": {
+        "label": "预约咨询",
+        "type": "string",
+        "maxLength": 26
+      },
+      "pricing": {
+        "label": "费用支付",
+        "type": "string",
+        "maxLength": 26
+      },
+      "faq": {
+        "label": "FAQ",
+        "type": "string",
+        "maxLength": 25
+      }
+    },
+    "hero": {
+      "title": {
+        "label": "世界前沿医疗，触手可及",
+        "type": "string",
+        "maxLength": 37
+      },
+      "subtitle": {
+        "label": "MedKungFu — 为您…",
+        "type": "string",
+        "maxLength": 56
+      },
+      "explore": {
+        "label": "探索优势项目",
+        "type": "string",
+        "maxLength": 29
+      },
+      "book": {
+        "label": "预约专家咨询",
+        "type": "string",
+        "maxLength": 29
+      },
+      "trustBadge": {
+        "label": "深受在华外籍人士信赖",
+        "type": "string",
+        "maxLength": 35
+      },
+      "headline1": {
+        "label": "您在中国的",
+        "type": "string",
+        "maxLength": 28
+      },
+      "headline2": {
+        "label": "私人医疗向导",
+        "type": "string",
+        "maxLength": 29
+      },
+      "headline3": {
+        "label": "in China",
+        "type": "string",
+        "maxLength": 20
+      },
+      "subheadline": {
+        "label": "我们像您一样关心您的健康。通…",
+        "type": "string",
+        "maxLength": 86
+      },
+      "trustPoint1": {
+        "label": "深受在华外籍人士信赖",
+        "type": "string",
+        "maxLength": 35
+      },
+      "trustPoint2": {
+        "label": "100+ 家涉外友好医院",
+        "type": "string",
+        "maxLength": 38
+      },
+      "trustPoint3": {
+        "label": "覆盖六大城市",
+        "type": "string",
+        "maxLength": 29
+      },
+      "partnerHospitals": {
+        "label": "合作医院",
+        "type": "string",
+        "maxLength": 26
+      },
+      "acrossCities": {
+        "label": "覆盖六大城市",
+        "type": "string",
+        "maxLength": 29
+      }
+    },
+    "trust": {
+      "hospitals": {
+        "label": "数十家顶尖医院",
+        "type": "string",
+        "maxLength": 31
+      },
+      "cities": {
+        "label": "覆盖六大城市",
+        "type": "string",
+        "maxLength": 29
+      },
+      "patients": {
+        "label": "全球服务患者",
+        "type": "string",
+        "maxLength": 29
+      },
+      "response": {
+        "label": "48小时快速响应",
+        "type": "string",
+        "maxLength": 32
+      }
+    },
+    "values": {
+      "direct": {
+        "label": "医院直联无加价",
+        "type": "string",
+        "maxLength": 31
+      },
+      "speed": {
+        "label": "极速响应高效排期",
+        "type": "string",
+        "maxLength": 32
+      },
+      "custom": {
+        "label": "全程定制个性化",
+        "type": "string",
+        "maxLength": 31
+      },
+      "transparent": {
+        "label": "透明安心有保障",
+        "type": "string",
+        "maxLength": 31
+      }
+    },
+    "projects": {
+      "oncology": {
+        "label": "肿瘤精准治疗",
+        "type": "string",
+        "maxLength": 29
+      },
+      "regenerative": {
+        "label": "再生医学",
+        "type": "string",
+        "maxLength": 26
+      },
+      "integrative": {
+        "label": "中西医结合",
+        "type": "string",
+        "maxLength": 28
+      },
+      "specialties": {
+        "label": "更多专科",
+        "type": "string",
+        "maxLength": 26
+      },
+      "details": {
+        "label": "了解详情 →",
+        "type": "string",
+        "maxLength": 29
+      },
+      "pageTitle": {
+        "label": "优势医疗项目",
+        "type": "string",
+        "maxLength": 29
+      },
+      "pageDesc": {
+        "label": "获取中国最先进的医疗技术和专…",
+        "type": "string",
+        "maxLength": 47
+      },
+      "viewDetails": {
+        "label": "查看详情",
+        "type": "string",
+        "maxLength": 26
+      },
+      "treatmentHighlights": {
+        "label": "治疗亮点",
+        "type": "string",
+        "maxLength": 26
+      }
+    },
+    "process": {
+      "title": {
+        "label": "康福来定制服务流程",
+        "type": "string",
+        "maxLength": 34
+      },
+      "step1": {
+        "label": "咨询与审核",
+        "type": "string",
+        "maxLength": 28
+      },
+      "step2": {
+        "label": "签约",
+        "type": "string",
+        "maxLength": 23
+      },
+      "step3": {
+        "label": "匹配与远程评估",
+        "type": "string",
+        "maxLength": 31
+      },
+      "step4": {
+        "label": "行前准备",
+        "type": "string",
+        "maxLength": 26
+      },
+      "step5": {
+        "label": "来华治疗",
+        "type": "string",
+        "maxLength": 26
+      },
+      "step6": {
+        "label": "行后随访",
+        "type": "string",
+        "maxLength": 26
+      }
+    },
+    "cta": {
+      "title": {
+        "label": "开启您的中国医疗之旅",
+        "type": "string",
+        "maxLength": 35
+      },
+      "name": {
+        "label": "姓名",
+        "type": "string",
+        "maxLength": 23
+      },
+      "contact": {
+        "label": "邮箱/WhatsApp",
+        "type": "string",
+        "maxLength": 37
+      },
+      "interest": {
+        "label": "关注领域",
+        "type": "string",
+        "maxLength": 26
+      },
+      "upload": {
+        "label": "上传病历",
+        "type": "string",
+        "maxLength": 26
+      },
+      "submit": {
+        "label": "提交咨询",
+        "type": "string",
+        "maxLength": 26
+      }
+    },
+    "footer": {
+      "rights": {
+        "label": "© 2026 MedKung…",
+        "type": "string",
+        "maxLength": 58
+      }
+    },
+    "whyChina": {
+      "title": {
+        "label": "为什么选择中国医疗？",
+        "type": "string",
+        "maxLength": 35
+      },
+      "subtitle": {
+        "label": "体验世界一流的医疗技术、卓越…",
+        "type": "string",
+        "maxLength": 86
+      },
+      "coreAdvantages": {
+        "label": "核心优势",
+        "type": "string",
+        "maxLength": 26
+      },
+      "advantage1Title": {
+        "label": "世界一流的医疗技术",
+        "type": "string",
+        "maxLength": 34
+      },
+      "advantage1Desc": {
+        "label": "中国在先进治疗领域全球领先，…",
+        "type": "textarea",
+        "maxLength": 137
+      },
+      "advantage2Title": {
+        "label": "卓越的效率",
+        "type": "string",
+        "maxLength": 28
+      },
+      "advantage2Desc": {
+        "label": "无需漫长等待。关节置换手术可…",
+        "type": "string",
+        "maxLength": 79
+      },
+      "advantage3Title": {
+        "label": "全面的护理体系",
+        "type": "string",
+        "maxLength": 31
+      },
+      "advantage3Desc": {
+        "label": "全球唯一的完整整合医学体系，…",
+        "type": "string",
+        "maxLength": 76
+      },
+      "advantage4Title": {
+        "label": "尖端创新",
+        "type": "string",
+        "maxLength": 26
+      },
+      "advantage4Desc": {
+        "label": "干细胞治疗领域领先，拥有10…",
+        "type": "string",
+        "maxLength": 73
+      },
+      "advantage5Title": {
+        "label": "国际标准",
+        "type": "string",
+        "maxLength": 26
+      },
+      "advantage5Desc": {
+        "label": "数十家国际医疗服务医院获得J…",
+        "type": "string",
+        "maxLength": 70
+      },
+      "advantage6Title": {
+        "label": "医疗旅游友好",
+        "type": "string",
+        "maxLength": 29
+      },
+      "advantage6Desc": {
+        "label": "海南提供医疗免签入境，允许停…",
+        "type": "string",
+        "maxLength": 64
+      },
+      "distinctiveFeatures": {
+        "label": "中国医疗的独特优势",
+        "type": "string",
+        "maxLength": 34
+      },
+      "feature1Title": {
+        "label": "专家团队",
+        "type": "string",
+        "maxLength": 26
+      },
+      "feature1Desc": {
+        "label": "在国内外机构接受培训的高技能医生",
+        "type": "string",
+        "maxLength": 44
+      },
+      "feature2Title": {
+        "label": "现代化设施",
+        "type": "string",
+        "maxLength": 28
+      },
+      "feature2Desc": {
+        "label": "配备最新医疗技术的先进医院",
+        "type": "string",
+        "maxLength": 40
+      },
+      "feature3Title": {
+        "label": "整体方法",
+        "type": "string",
+        "maxLength": 26
+      },
+      "feature3Desc": {
+        "label": "中西医结合综合治疗",
+        "type": "string",
+        "maxLength": 34
+      },
+      "feature4Title": {
+        "label": "快速创新",
+        "type": "string",
+        "maxLength": 26
+      },
+      "feature4Desc": {
+        "label": "快速采用突破性治疗和医疗技术",
+        "type": "string",
+        "maxLength": 41
+      },
+      "ctaTitle": {
+        "label": "准备好体验世界一流的医疗服务…",
+        "type": "string",
+        "maxLength": 46
+      },
+      "ctaDesc": {
+        "label": "让我们通过个性化的礼宾服务，…",
+        "type": "string",
+        "maxLength": 80
+      },
+      "ctaButton": {
+        "label": "开启您的医疗之旅",
+        "type": "string",
+        "maxLength": 32
+      }
+    },
+    "services": {
+      "title": {
+        "label": "康福来服务",
+        "type": "string",
+        "maxLength": 28
+      },
+      "subtitle": {
+        "label": "一套全面的服务，旨在让您的医…",
+        "type": "string",
+        "maxLength": 56
+      },
+      "processTitle": {
+        "label": "康福来定制服务流程",
+        "type": "string",
+        "maxLength": 34
+      },
+      "processSubtitle": {
+        "label": "从初步咨询到治疗后随访的七个…",
+        "type": "string",
+        "maxLength": 68
+      },
+      "processPhase1": {
+        "label": "第一阶段",
+        "type": "string",
+        "maxLength": 26
+      },
+      "processPhase2": {
+        "label": "第二阶段",
+        "type": "string",
+        "maxLength": 26
+      },
+      "processPhase3": {
+        "label": "第三阶段",
+        "type": "string",
+        "maxLength": 26
+      },
+      "processPhase4": {
+        "label": "第四阶段",
+        "type": "string",
+        "maxLength": 26
+      },
+      "processPhase5": {
+        "label": "第五阶段",
+        "type": "string",
+        "maxLength": 26
+      },
+      "processPhase6": {
+        "label": "第六阶段",
+        "type": "string",
+        "maxLength": 26
+      },
+      "processPhase7": {
+        "label": "第七阶段",
+        "type": "string",
+        "maxLength": 26
+      },
+      "processTitle1": {
+        "label": "需求提出与初步对接",
+        "type": "string",
+        "maxLength": 34
+      },
+      "processTitle2": {
+        "label": "医疗资源匹配与远程评估",
+        "type": "string",
+        "maxLength": 37
+      },
+      "processTitle3": {
+        "label": "服务协议与预约安排",
+        "type": "string",
+        "maxLength": 34
+      },
+      "processTitle4": {
+        "label": "赴华前准备",
+        "type": "string",
+        "maxLength": 28
+      },
+      "processTitle5": {
+        "label": "抵达中国并入院",
+        "type": "string",
+        "maxLength": 31
+      },
+      "processTitle6": {
+        "label": "检查与治疗",
+        "type": "string",
+        "maxLength": 28
+      },
+      "processTitle7": {
+        "label": "出院与后续管理",
+        "type": "string",
+        "maxLength": 31
+      },
+      "process1Item1": {
+        "label": "远程咨询",
+        "type": "string",
+        "maxLength": 26
+      },
+      "process1Desc1": {
+        "label": "通过电话、邮件或视频通话初步…",
+        "type": "string",
+        "maxLength": 53
+      },
+      "process1Item2": {
+        "label": "病历收集与翻译",
+        "type": "string",
+        "maxLength": 31
+      },
+      "process1Desc2": {
+        "label": "收集并专业翻译您的病史和诊断报告",
+        "type": "string",
+        "maxLength": 44
+      },
+      "process2Item1": {
+        "label": "精准匹配医院",
+        "type": "string",
+        "maxLength": 29
+      },
+      "process2Desc1": {
+        "label": "根据您的病情匹配最适合的医院…",
+        "type": "string",
+        "maxLength": 46
+      },
+      "process2Item2": {
+        "label": "专家远程视频评估",
+        "type": "string",
+        "maxLength": 32
+      },
+      "process2Desc2": {
+        "label": "与顶尖专家进行视频会诊，评估…",
+        "type": "string",
+        "maxLength": 49
+      },
+      "process2Item3": {
+        "label": "出具书面诊疗建议报告",
+        "type": "string",
+        "maxLength": 35
+      },
+      "process2Desc3": {
+        "label": "收到详细的医疗评估和个性化治…",
+        "type": "string",
+        "maxLength": 46
+      },
+      "process3Item1": {
+        "label": "签订服务协议",
+        "type": "string",
+        "maxLength": 29
+      },
+      "process3Desc1": {
+        "label": "正式合同明确服务内容、费用和…",
+        "type": "string",
+        "maxLength": 47
+      },
+      "process3Item2": {
+        "label": "医院优先预约",
+        "type": "string",
+        "maxLength": 29
+      },
+      "process3Desc2": {
+        "label": "通过绿色通道确保优先排期",
+        "type": "string",
+        "maxLength": 38
+      },
+      "process4Item1": {
+        "label": "签证申请协助",
+        "type": "string",
+        "maxLength": 29
+      },
+      "process4Desc1": {
+        "label": "提供医疗签证申请流程的指导和支持",
+        "type": "string",
+        "maxLength": 44
+      },
+      "process4Item2": {
+        "label": "行程安排",
+        "type": "string",
+        "maxLength": 26
+      },
+      "process4Desc2": {
+        "label": "机票预订、医院附近住宿和行程规划",
+        "type": "string",
+        "maxLength": 44
+      },
+      "process5Item1": {
+        "label": "抵华接机服务",
+        "type": "string",
+        "maxLength": 29
+      },
+      "process5Desc1": {
+        "label": "专业人员在机场迎接并送往住宿地点",
+        "type": "string",
+        "maxLength": 44
+      },
+      "process5Item2": {
+        "label": "入院专属通道",
+        "type": "string",
+        "maxLength": 29
+      },
+      "process5Desc2": {
+        "label": "优先办理入院手续，无需排队等候",
+        "type": "string",
+        "maxLength": 43
+      },
+      "process6Item1": {
+        "label": "前期检查",
+        "type": "string",
+        "maxLength": 26
+      },
+      "process6Desc1": {
+        "label": "全面的诊断测试和健康评估",
+        "type": "string",
+        "maxLength": 38
+      },
+      "process6Item2": {
+        "label": "治疗实施",
+        "type": "string",
+        "maxLength": 26
+      },
+      "process6Desc2": {
+        "label": "由专业医疗团队执行个性化治疗方案",
+        "type": "string",
+        "maxLength": 44
+      },
+      "process6Item3": {
+        "label": "住院期间个性化支持",
+        "type": "string",
+        "maxLength": 34
+      },
+      "process6Desc3": {
+        "label": "专属护理协调员、翻译服务和日…",
+        "type": "string",
+        "maxLength": 46
+      },
+      "process7Item1": {
+        "label": "出院回程",
+        "type": "string",
+        "maxLength": 26
+      },
+      "process7Desc1": {
+        "label": "医疗总结、用药指导和返程安排",
+        "type": "string",
+        "maxLength": 41
+      },
+      "process7Item2": {
+        "label": "远程随访",
+        "type": "string",
+        "maxLength": 26
+      },
+      "process7Desc2": {
+        "label": "持续的医疗咨询、康复监测和本…",
+        "type": "string",
+        "maxLength": 46
+      },
+      "service1Title": {
+        "label": "专家视频咨询",
+        "type": "string",
+        "maxLength": 29
+      },
+      "service1Desc": {
+        "label": "在出行前远程连接顶尖专家。",
+        "type": "string",
+        "maxLength": 40
+      },
+      "service2Title": {
+        "label": "全程管家服务",
+        "type": "string",
+        "maxLength": 29
+      },
+      "service2Desc": {
+        "label": "从预约到出院的端到端协调。",
+        "type": "string",
+        "maxLength": 40
+      },
+      "service3Title": {
+        "label": "签证与旅行",
+        "type": "string",
+        "maxLength": 28
+      },
+      "service3Desc": {
+        "label": "协助办理医疗签证和航班安排。",
+        "type": "string",
+        "maxLength": 41
+      },
+      "service4Title": {
+        "label": "翻译与陪同",
+        "type": "string",
+        "maxLength": 28
+      },
+      "service4Desc": {
+        "label": "专业医疗翻译全程陪同。",
+        "type": "string",
+        "maxLength": 37
+      },
+      "service5Title": {
+        "label": "住宿安排",
+        "type": "string",
+        "maxLength": 26
+      },
+      "service5Desc": {
+        "label": "合作医院附近的舒适住宿。",
+        "type": "string",
+        "maxLength": 38
+      },
+      "service6Title": {
+        "label": "康复随访",
+        "type": "string",
+        "maxLength": 26
+      },
+      "service6Desc": {
+        "label": "回国后持续护理。",
+        "type": "string",
+        "maxLength": 32
+      },
+      "whyChooseUs": {
+        "label": "为什么选择我们？",
+        "type": "string",
+        "maxLength": 32
+      },
+      "adv1Title": {
+        "label": "合规运营",
+        "type": "string",
+        "maxLength": 26
+      },
+      "adv1Desc": {
+        "label": "公司直接签约收款，确保合同合…",
+        "type": "string",
+        "maxLength": 50
+      },
+      "adv2Title": {
+        "label": "医院直联",
+        "type": "string",
+        "maxLength": 26
+      },
+      "adv2Desc": {
+        "label": "与顶级医院正式合作，无中间加…",
+        "type": "string",
+        "maxLength": 55
+      },
+      "adv3Title": {
+        "label": "服务分层",
+        "type": "string",
+        "maxLength": 26
+      },
+      "adv3Desc": {
+        "label": "从标准到全包VIP服务，满足…",
+        "type": "string",
+        "maxLength": 52
+      },
+      "adv4Title": {
+        "label": "全程双语支持",
+        "type": "string",
+        "maxLength": 29
+      },
+      "adv4Desc": {
+        "label": "所有沟通、病历和合同均提供双…",
+        "type": "string",
+        "maxLength": 46
+      },
+      "adv5Title": {
+        "label": "极速排期",
+        "type": "string",
+        "maxLength": 26
+      },
+      "adv5Desc": {
+        "label": "绿色通道优先安排，把握治疗窗口",
+        "type": "string",
+        "maxLength": 43
+      },
+      "adv6Title": {
+        "label": "严格质检",
+        "type": "string",
+        "maxLength": 26
+      },
+      "adv6Desc": {
+        "label": "所有服务人员经过严格筛选和质…",
+        "type": "string",
+        "maxLength": 46
+      },
+      "adv7Title": {
+        "label": "价格透明",
+        "type": "string",
+        "maxLength": 26
+      },
+      "adv7Desc": {
+        "label": "服务费明码标价，7种情况可退…",
+        "type": "string",
+        "maxLength": 53
+      },
+      "adv8Title": {
+        "label": "风险透明",
+        "type": "string",
+        "maxLength": 26
+      },
+      "adv8Desc": {
+        "label": "治疗前签署知情同意书，明确告…",
+        "type": "string",
+        "maxLength": 59
+      },
+      "adv9Title": {
+        "label": "长期随访",
+        "type": "string",
+        "maxLength": 26
+      },
+      "adv9Desc": {
+        "label": "长期随访体系，回国后本地医疗协调",
+        "type": "string",
+        "maxLength": 44
+      },
+      "refundPolicy": {
+        "label": "退款政策",
+        "type": "string",
+        "maxLength": 26
+      },
+      "refund1Condition": {
+        "label": "无法在约定时间内匹配合适医院",
+        "type": "string",
+        "maxLength": 41
+      },
+      "refund1Amount": {
+        "label": "服务费全额退款",
+        "type": "string",
+        "maxLength": 31
+      },
+      "refund2Condition": {
+        "label": "经前期远程评估，不符合治疗可行性",
+        "type": "string",
+        "maxLength": 44
+      },
+      "refund2Amount": {
+        "label": "服务费全额退款",
+        "type": "string",
+        "maxLength": 31
+      },
+      "refund3Condition": {
+        "label": "签证被拒（资料完整，非患者原因）",
+        "type": "string",
+        "maxLength": 44
+      },
+      "refund3Amount": {
+        "label": "服务费全额退款",
+        "type": "string",
+        "maxLength": 31
+      },
+      "refund4Condition": {
+        "label": "患者自愿退出（不同阶段）",
+        "type": "string",
+        "maxLength": 38
+      },
+      "refund4Amount": {
+        "label": "按进度比例退款",
+        "type": "string",
+        "maxLength": 31
+      },
+      "refund5Condition": {
+        "label": "医生建议停止治疗",
+        "type": "string",
+        "maxLength": 32
+      },
+      "refund5Amount": {
+        "label": "按进度比例退款",
+        "type": "string",
+        "maxLength": 31
+      },
+      "paymentMethods": {
+        "label": "支付方式",
+        "type": "string",
+        "maxLength": 26
+      },
+      "payment1Name": {
+        "label": "国际信用卡",
+        "type": "string",
+        "maxLength": 28
+      },
+      "payment1Desc": {
+        "label": "Visa / Masterc…",
+        "type": "string",
+        "maxLength": 46
+      },
+      "payment2Name": {
+        "label": "银行转账",
+        "type": "string",
+        "maxLength": 26
+      },
+      "payment2Desc": {
+        "label": "电汇至香港账户",
+        "type": "string",
+        "maxLength": 31
+      },
+      "payment3Name": {
+        "label": "安全支付",
+        "type": "string",
+        "maxLength": 26
+      },
+      "payment3Desc": {
+        "label": "加密交易保障",
+        "type": "string",
+        "maxLength": 29
+      }
+    },
+    "about": {
+      "title": {
+        "label": "关于康福来",
+        "type": "string",
+        "maxLength": 28
+      },
+      "whoWeAre": {
+        "label": "我们是谁",
+        "type": "string",
+        "maxLength": 26
+      },
+      "whoWeAreDesc": {
+        "label": "康福来（MedKungFu…",
+        "type": "textarea",
+        "maxLength": 154
+      },
+      "ourCommitment": {
+        "label": "我们的承诺",
+        "type": "string",
+        "maxLength": 28
+      },
+      "ourCommitmentDesc": {
+        "label": "从签证协助到治疗后的康复照护…",
+        "type": "textarea",
+        "maxLength": 271
+      },
+      "ourMission": {
+        "label": "我们的使命",
+        "type": "string",
+        "maxLength": 28
+      },
+      "ourMissionDesc": {
+        "label": "与世界分享中国前沿的医疗成果…",
+        "type": "string",
+        "maxLength": 68
+      },
+      "coreServices": {
+        "label": "核心服务",
+        "type": "string",
+        "maxLength": 26
+      },
+      "service1": {
+        "label": "国际精准转诊：为您匹配最合适…",
+        "type": "string",
+        "maxLength": 50
+      },
+      "service2": {
+        "label": "远程医疗第二意见：足不出户获…",
+        "type": "string",
+        "maxLength": 55
+      },
+      "service3": {
+        "label": "一站式医疗陪同：从落地到出院…",
+        "type": "string",
+        "maxLength": 56
+      },
+      "service4": {
+        "label": "全周期健康管理：覆盖治疗前、…",
+        "type": "string",
+        "maxLength": 59
+      },
+      "ourValues": {
+        "label": "我们的价值观",
+        "type": "string",
+        "maxLength": 29
+      },
+      "value1Title": {
+        "label": "透明",
+        "type": "string",
+        "maxLength": 23
+      },
+      "value1Desc": {
+        "label": "价格清晰，沟通诚实。",
+        "type": "string",
+        "maxLength": 35
+      },
+      "value2Title": {
+        "label": "专业",
+        "type": "string",
+        "maxLength": 23
+      },
+      "value2Desc": {
+        "label": "具有全球标准的专家团队。",
+        "type": "string",
+        "maxLength": 38
+      },
+      "value3Title": {
+        "label": "关怀",
+        "type": "string",
+        "maxLength": 23
+      },
+      "value3Desc": {
+        "label": "以温暖和关怀对待每位患者。",
+        "type": "string",
+        "maxLength": 40
+      },
+      "value4Title": {
+        "label": "责任",
+        "type": "string",
+        "maxLength": 23
+      },
+      "value4Desc": {
+        "label": "跨越国界，共创更好健康结果。",
+        "type": "string",
+        "maxLength": 41
+      },
+      "expertTeam": {
+        "label": "我们的专家团队",
+        "type": "string",
+        "maxLength": 31
+      },
+      "team1Title": {
+        "label": "医疗顾问",
+        "type": "string",
+        "maxLength": 26
+      },
+      "team1Desc": {
+        "label": "来自中国顶级医院的专家",
+        "type": "string",
+        "maxLength": 37
+      },
+      "team2Title": {
+        "label": "运营团队",
+        "type": "string",
+        "maxLength": 26
+      },
+      "team2Desc": {
+        "label": "丰富的跨境医疗经验",
+        "type": "string",
+        "maxLength": 34
+      },
+      "team3Title": {
+        "label": "多语言支持",
+        "type": "string",
+        "maxLength": 28
+      },
+      "team3Desc": {
+        "label": "专业医疗翻译",
+        "type": "string",
+        "maxLength": 29
+      }
+    },
+    "contact": {
+      "title": {
+        "label": "联系我们",
+        "type": "string",
+        "maxLength": 26
+      },
+      "subtitle": {
+        "label": "准备好开始您的旅程了吗？联系…",
+        "type": "string",
+        "maxLength": 55
+      },
+      "email": {
+        "label": "邮箱",
+        "type": "string",
+        "maxLength": 23
+      },
+      "emailValue": {
+        "label": "contact@medkun…",
+        "type": "string",
+        "maxLength": 52
+      },
+      "whatsapp": {
+        "label": "WhatsApp",
+        "type": "string",
+        "maxLength": 32
+      },
+      "whatsappValue": {
+        "label": "+1- 646-296-8491",
+        "type": "string",
+        "maxLength": 44
+      },
+      "headquarters": {
+        "label": "总部",
+        "type": "string",
+        "maxLength": 23
+      },
+      "headquartersValue": {
+        "label": "中国上海",
+        "type": "string",
+        "maxLength": 26
+      },
+      "workingHours": {
+        "label": "工作时间",
+        "type": "string",
+        "maxLength": 26
+      },
+      "workingHoursValue": {
+        "label": "周一至周日：上午9:00 -…",
+        "type": "string",
+        "maxLength": 61
+      },
+      "sendMessage": {
+        "label": "给我们留言",
+        "type": "string",
+        "maxLength": 28
+      },
+      "fullName": {
+        "label": "姓名",
+        "type": "string",
+        "maxLength": 23
+      },
+      "emailAddress": {
+        "label": "邮箱地址",
+        "type": "string",
+        "maxLength": 26
+      },
+      "subject": {
+        "label": "主题",
+        "type": "string",
+        "maxLength": 23
+      },
+      "message": {
+        "label": "留言内容",
+        "type": "string",
+        "maxLength": 26
+      },
+      "sending": {
+        "label": "发送中...",
+        "type": "string",
+        "maxLength": 29
+      },
+      "sendButton": {
+        "label": "发送留言",
+        "type": "string",
+        "maxLength": 26
+      },
+      "successTitle": {
+        "label": "留言已发送！",
+        "type": "string",
+        "maxLength": 29
+      },
+      "successDesc": {
+        "label": "感谢您的联系，我们将尽快回复您。",
+        "type": "string",
+        "maxLength": 44
+      },
+      "optionGeneral": {
+        "label": "一般咨询",
+        "type": "string",
+        "maxLength": 26
+      },
+      "optionTreatment": {
+        "label": "治疗咨询",
+        "type": "string",
+        "maxLength": 26
+      },
+      "optionAppointment": {
+        "label": "医院预约",
+        "type": "string",
+        "maxLength": 26
+      },
+      "pageAriaLabel": {
+        "label": "联系我们",
+        "type": "string",
+        "maxLength": 26
+      },
+      "informationAriaLabel": {
+        "label": "联系信息",
+        "type": "string",
+        "maxLength": 26
+      },
+      "formAriaLabel": {
+        "label": "联系表单",
+        "type": "string",
+        "maxLength": 26
+      },
+      "personalInformation": {
+        "label": "个人信息",
+        "type": "string",
+        "maxLength": 26
+      },
+      "nameHelp": {
+        "label": "请填写您的姓名",
+        "type": "string",
+        "maxLength": 31
+      },
+      "contactHelp": {
+        "label": "请填写您的邮箱或电话号码",
+        "type": "string",
+        "maxLength": 38
+      },
+      "interestHelp": {
+        "label": "请选择一个或多个关注领域",
+        "type": "string",
+        "maxLength": 38
+      },
+      "interestRequired": {
+        "label": "请至少选择一个关注领域。",
+        "type": "string",
+        "maxLength": 38
+      },
+      "interestCheckup": {
+        "label": "体检",
+        "type": "string",
+        "maxLength": 23
+      },
+      "interestTcm": {
+        "label": "中医",
+        "type": "string",
+        "maxLength": 23
+      },
+      "interestDentistry": {
+        "label": "牙科",
+        "type": "string",
+        "maxLength": 23
+      },
+      "interestOrthopedics": {
+        "label": "骨科",
+        "type": "string",
+        "maxLength": 23
+      },
+      "interestOncology": {
+        "label": "肿瘤",
+        "type": "string",
+        "maxLength": 23
+      },
+      "interestEnt": {
+        "label": "五官科",
+        "type": "string",
+        "maxLength": 25
+      },
+      "interestOther": {
+        "label": "其他",
+        "type": "string",
+        "maxLength": 23
+      },
+      "needsLabel": {
+        "label": "你的需求/问题",
+        "type": "string",
+        "maxLength": 31
+      },
+      "needsPlaceholder": {
+        "label": "请描述你的需求或问题...",
+        "type": "string",
+        "maxLength": 40
+      },
+      "needsHelp": {
+        "label": "请描述你的需求或问题",
+        "type": "string",
+        "maxLength": 35
+      },
+      "submitError": {
+        "label": "提交失败，请稍后重试。",
+        "type": "string",
+        "maxLength": 37
+      },
+      "successEmail": {
+        "label": "邮件已发送至 contact…",
+        "type": "string",
+        "maxLength": 62
+      }
+    },
+    "home": {
+      "ourPromise": {
+        "label": "我们的承诺",
+        "type": "string",
+        "maxLength": 28
+      },
+      "howWeHelp": {
+        "label": "康福来如何帮助您",
+        "type": "string",
+        "maxLength": 32
+      },
+      "howWeHelpDesc": {
+        "label": "为在华外籍人士设计的全面医疗…",
+        "type": "string",
+        "maxLength": 47
+      },
+      "service1Title": {
+        "label": "医院转诊",
+        "type": "string",
+        "maxLength": 26
+      },
+      "service1Desc": {
+        "label": "直接对接中国50+家顶级医院…",
+        "type": "string",
+        "maxLength": 74
+      },
+      "service2Title": {
+        "label": "医疗翻译",
+        "type": "string",
+        "maxLength": 26
+      },
+      "service2Desc": {
+        "label": "精通中英文的专业医疗翻译，确…",
+        "type": "string",
+        "maxLength": 61
+      },
+      "service3Title": {
+        "label": "全程陪同",
+        "type": "string",
+        "maxLength": 26
+      },
+      "service3Desc": {
+        "label": "专属医疗管家陪同您就诊，处理…",
+        "type": "string",
+        "maxLength": 61
+      },
+      "learnMore": {
+        "label": "了解更多",
+        "type": "string",
+        "maxLength": 26
+      },
+      "viewAllServices": {
+        "label": "查看全部服务",
+        "type": "string",
+        "maxLength": 29
+      },
+      "valueDescDirect": {
+        "label": "医院直联，无中间商",
+        "type": "string",
+        "maxLength": 34
+      },
+      "valueDescSpeed": {
+        "label": "高效排期，快速响应",
+        "type": "string",
+        "maxLength": 34
+      },
+      "valueDescCustom": {
+        "label": "为每位患者定制服务方案",
+        "type": "string",
+        "maxLength": 37
+      },
+      "valueDescTransparent": {
+        "label": "价格透明，退款保障",
+        "type": "string",
+        "maxLength": 34
+      }
+    },
+    "tcmProctology": {
+      "heroSubtitle": {
+        "label": "中西医结合微创治疗",
+        "type": "string",
+        "maxLength": 34
+      },
+      "heroDesc": {
+        "label": "顾氏外科传承 · 中西医结合…",
+        "type": "string",
+        "maxLength": 62
+      },
+      "stat1Label": {
+        "label": "克罗恩病肛瘘愈合率",
+        "type": "string",
+        "maxLength": 34
+      },
+      "stat2Label": {
+        "label": "复发率（远低于国际平均）",
+        "type": "string",
+        "maxLength": 38
+      },
+      "stat3Label": {
+        "label": "愈合时间缩短",
+        "type": "string",
+        "maxLength": 29
+      },
+      "introTitle": {
+        "label": "顾氏外科传承 · 百年肛肠专科",
+        "type": "string",
+        "maxLength": 43
+      },
+      "introDesc1": {
+        "label": "传承百年\"顾氏外科\"学术积淀…",
+        "type": "textarea",
+        "maxLength": 118
+      },
+      "introDesc2": {
+        "label": "标准西方手术治疗复杂性或克罗…",
+        "type": "textarea",
+        "maxLength": 185
+      },
+      "proprietaryNote": {
+        "label": "院内制剂——金黄膏、红油膏、…",
+        "type": "string",
+        "maxLength": 76
+      },
+      "conditionsTitle": {
+        "label": "两大肛肠疑难病症",
+        "type": "string",
+        "maxLength": 32
+      },
+      "conditionsSubtitle": {
+        "label": "我们专注治疗的两种复杂肛肠疾病",
+        "type": "string",
+        "maxLength": 43
+      },
+      "condition1Title": {
+        "label": "复杂性肛瘘/克罗恩病相关肛瘘",
+        "type": "string",
+        "maxLength": 41
+      },
+      "condition1Desc": {
+        "label": "肛瘘是肛管与周围皮肤之间的异…",
+        "type": "textarea",
+        "maxLength": 142
+      },
+      "condition2Title": {
+        "label": "混合痔（环状）",
+        "type": "string",
+        "maxLength": 31
+      },
+      "condition2Desc": {
+        "label": "痔疮是肛管内血管垫异常增大。…",
+        "type": "string",
+        "maxLength": 85
+      },
+      "symptomsTitle": {
+        "label": "主要症状",
+        "type": "string",
+        "maxLength": 26
+      },
+      "advantagesTitle": {
+        "label": "五大不可替代的临床优势",
+        "type": "string",
+        "maxLength": 37
+      },
+      "adv1Title": {
+        "label": "保括约肌·功能优先",
+        "type": "string",
+        "maxLength": 34
+      },
+      "adv1Desc": {
+        "label": "传统瘘管切开术存在部分括约肌…",
+        "type": "textarea",
+        "maxLength": 128
+      },
+      "adv2Title": {
+        "label": "院内制剂·加速愈合",
+        "type": "string",
+        "maxLength": 34
+      },
+      "adv2Desc": {
+        "label": "院内制剂——金黄膏（消肿）、…",
+        "type": "textarea",
+        "maxLength": 146
+      },
+      "adv3Title": {
+        "label": "国际微创技术",
+        "type": "string",
+        "maxLength": 29
+      },
+      "adv3Desc": {
+        "label": "熟练掌握VAAFT视频辅助肛…",
+        "type": "string",
+        "maxLength": 103
+      },
+      "adv4Title": {
+        "label": "中医整体调理·长期防复发",
+        "type": "string",
+        "maxLength": 38
+      },
+      "adv4Desc": {
+        "label": "除局部治疗外，个性化中医调理…",
+        "type": "string",
+        "maxLength": 107
+      },
+      "adv5Title": {
+        "label": "微创·快速恢复（痔疮）",
+        "type": "string",
+        "maxLength": 37
+      },
+      "adv5Desc": {
+        "label": "对于混合痔，结合硬化剂注射、…",
+        "type": "textarea",
+        "maxLength": 136
+      },
+      "indicationsTitle": {
+        "label": "适用人群",
+        "type": "string",
+        "maxLength": 26
+      },
+      "indication1": {
+        "label": "复杂性或复发性肛瘘，包括克罗…",
+        "type": "string",
+        "maxLength": 62
+      },
+      "indication2": {
+        "label": "混合痔（包括环状）寻求减轻术…",
+        "type": "string",
+        "maxLength": 53
+      },
+      "indication3": {
+        "label": "肛周脓肿手术后需要先进创面管理",
+        "type": "string",
+        "maxLength": 43
+      },
+      "indication4": {
+        "label": "寻求中西医结合护理以降低长期…",
+        "type": "string",
+        "maxLength": 52
+      },
+      "indication5": {
+        "label": "在海外治疗效果不佳，寻求第二…",
+        "type": "string",
+        "maxLength": 52
+      },
+      "contraindicationsTitle": {
+        "label": "禁忌症",
+        "type": "string",
+        "maxLength": 25
+      },
+      "contraindicationsNote": {
+        "label": "请在咨询时向医生如实告知以下…",
+        "type": "string",
+        "maxLength": 61
+      },
+      "contra1": {
+        "label": "凝血功能障碍或正在服用抗凝药物",
+        "type": "string",
+        "maxLength": 43
+      },
+      "contra2": {
+        "label": "炎症性肠病（克罗恩病/溃疡性…",
+        "type": "string",
+        "maxLength": 52
+      },
+      "contra3": {
+        "label": "严重局部感染或活动性败血症",
+        "type": "string",
+        "maxLength": 40
+      },
+      "contra4": {
+        "label": "孕妇（某些手术推迟至产后）",
+        "type": "string",
+        "maxLength": 40
+      },
+      "contra5": {
+        "label": "影响伤口愈合的糖尿病控制不佳",
+        "type": "string",
+        "maxLength": 41
+      },
+      "contraindicationsFooter": {
+        "label": "所有患者将在治疗前由专科医生…",
+        "type": "string",
+        "maxLength": 67
+      },
+      "processTitle": {
+        "label": "一站式全程陪诊服务",
+        "type": "string",
+        "maxLength": 34
+      },
+      "processSubtitle": {
+        "label": "从在线咨询到返程随访，Med…",
+        "type": "string",
+        "maxLength": 76
+      },
+      "step1Title": {
+        "label": "在线咨询与症状评估",
+        "type": "string",
+        "maxLength": 34
+      },
+      "step1Desc": {
+        "label": "通过电子邮件联系MedKun…",
+        "type": "textarea",
+        "maxLength": 154
+      },
+      "step2Title": {
+        "label": "行程规划",
+        "type": "string",
+        "maxLength": 26
+      },
+      "step2Desc": {
+        "label": "确认治疗意向后，MedKun…",
+        "type": "textarea",
+        "maxLength": 124
+      },
+      "step3Title": {
+        "label": "入院前专家评估",
+        "type": "string",
+        "maxLength": 31
+      },
+      "step3Desc": {
+        "label": "抵达后，双语陪同人员陪同您前…",
+        "type": "textarea",
+        "maxLength": 122
+      },
+      "step4Title": {
+        "label": "手术与治疗",
+        "type": "string",
+        "maxLength": 28
+      },
+      "step4Desc": {
+        "label": "根据病情：复杂性肛瘘采用挂线…",
+        "type": "textarea",
+        "maxLength": 122
+      },
+      "step5Title": {
+        "label": "术后创面护理与随访",
+        "type": "string",
+        "maxLength": 34
+      },
+      "step5Desc": {
+        "label": "医生使用院内制剂进行标准化换…",
+        "type": "textarea",
+        "maxLength": 119
+      },
+      "step6Title": {
+        "label": "离院总结与居家护理指导",
+        "type": "string",
+        "maxLength": 37
+      },
+      "step6Desc": {
+        "label": "完成主要治疗阶段后，医生提供…",
+        "type": "textarea",
+        "maxLength": 134
+      },
+      "servicesTitle": {
+        "label": "超越医疗的全程支持",
+        "type": "string",
+        "maxLength": 34
+      },
+      "service1Title": {
+        "label": "双语翻译",
+        "type": "string",
+        "maxLength": 26
+      },
+      "service1Desc": {
+        "label": "每次就诊都有专属陪同和完整医…",
+        "type": "string",
+        "maxLength": 89
+      },
+      "service2Title": {
+        "label": "交通与陪同",
+        "type": "string",
+        "maxLength": 28
+      },
+      "service2Desc": {
+        "label": "机场接送和每次就诊的专属陪同…",
+        "type": "string",
+        "maxLength": 59
+      },
+      "service3Title": {
+        "label": "专属协调员",
+        "type": "string",
+        "maxLength": 28
+      },
+      "service3Desc": {
+        "label": "个人协调员管理所有预约、进度…",
+        "type": "string",
+        "maxLength": 70
+      },
+      "service4Title": {
+        "label": "签证与旅行支持",
+        "type": "string",
+        "maxLength": 31
+      },
+      "service4Desc": {
+        "label": "支持医疗签证邀请函、抵达指导…",
+        "type": "string",
+        "maxLength": 62
+      },
+      "pricingTitle": {
+        "label": "参考治疗费用",
+        "type": "string",
+        "maxLength": 29
+      },
+      "pricingSubtitle": {
+        "label": "透明定价，全球价格优势无与伦比",
+        "type": "string",
+        "maxLength": 43
+      },
+      "pricingAmount": {
+        "label": "约$7,000（含中医康复）",
+        "type": "string",
+        "maxLength": 41
+      },
+      "pricingNote": {
+        "label": "具体费用以医院最终评估为准。",
+        "type": "string",
+        "maxLength": 41
+      },
+      "ctaTitle": {
+        "label": "开启您的肛肠治疗之旅",
+        "type": "string",
+        "maxLength": 35
+      },
+      "ctaSubtitle": {
+        "label": "联系我们进行免费初步评估",
+        "type": "string",
+        "maxLength": 38
+      },
+      "ctaDesc": {
+        "label": "医学顾问团队将在一小时内回复…",
+        "type": "string",
+        "maxLength": 62
+      },
+      "consultButton": {
+        "label": "邮件咨询",
+        "type": "string",
+        "maxLength": 26
+      },
+      "contactButton": {
+        "label": "在线留言",
+        "type": "string",
+        "maxLength": 26
+      }
+    }
+  }
+}
