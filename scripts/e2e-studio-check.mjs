@@ -71,7 +71,7 @@ try {
   await page.waitForSelector("[data-studio-block-header]", { timeout: 5000 });
   const headerText = await page.locator("[data-studio-block-header]").innerText();
   log("projects-header", { headerText });
-  const headerShowsTitle = headerText.includes("Medical Projects");
+  const headerShowsTitle = headerText.includes("Medical Programs in China");
   if (!headerShowsTitle)
     result.pageErrors.push(`Right-panel header should show 'Medical Projects', got: ${headerText}`);
   await page.screenshot({ path: `${OUT_DIR}/02-projects.png` });
@@ -102,11 +102,11 @@ try {
   const pubText = await page.evaluate(() => document.body.innerText);
   const pubHtml = await page.content();
   const pubOk =
-    pubText.includes("Medical Projects") &&
+    pubText.includes("Medical Programs in China") &&
     pubText.includes("Start Your Assessment") &&
     pubHtml.includes("bg-[#1B4D3E]");
   log("public-projects", {
-    includesTitle: pubText.includes("Medical Projects"),
+    includesTitle: pubText.includes("Medical Programs in China"),
     includesCta: pubText.includes("Start Your Assessment"),
     includesHeroBg: pubHtml.includes("bg-[#1B4D3E]"),
   });
