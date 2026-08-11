@@ -1,7 +1,7 @@
-// Studio page editor — renders the StudioEditor client component for the
+// Studio page editor — renders the PuckEditor client component for the
 // selected page. The page param selects which UCD page to edit.
 
-import { StudioEditor } from "../components/StudioEditor";
+import { PuckEditor } from "../components/PuckEditor";
 
 interface PageProps {
   params: Promise<{ page: string }>;
@@ -9,5 +9,5 @@ interface PageProps {
 
 export default async function StudioPageEditor({ params }: PageProps) {
   const { page } = await params;
-  return <StudioEditor page={page} />;
+  return <PuckEditor page={page} />;
 }
