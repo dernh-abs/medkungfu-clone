@@ -1,22 +1,5 @@
 "use client";
-
-// PuckEditor — client component integrating Puck visual editor with the UCD.
-//
-// Data flow:
-//   1. On mount: fetch UCD from /api/studio/document + check for active draft
-//   2. Convert UCD → Puck data via ucdToPuck()
-//   3. Initialize ContentRuntime with commitDocument() so section components render
-//   4. Puck onChange: convert Puck → UCD → commitDocument() (live preview) + debounced save draft
-//   5. Puck onPublish: convert Puck → UCD → /api/studio/publish (creates new version)
-//
-// Stage K: the right-side panel is replaced by TranslationEditor (via
-// overrides.fields). TranslationEditor reads the selected section's
-// translation keys and renders EN/ZH bilingual edit fields. Edits flow back
-// through handleTranslationChange → update UCD translations → commitDocument
-// → debounced save.
-//
-// Workflow buttons (Save Draft / Submit Review / Publish) are in the Toolbar,
-// which calls back to this component's handlers.
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { Puck } from "@measured/puck";
 import "@measured/puck/puck.css";
@@ -25,7 +8,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 
 import type { UnifiedContentDocument } from "@/lib/content/content-schema";
 import type { DraftStatus } from "@/lib/executor/draft-store";
-import { commitDocument } from "@/lib/executor/content-runtime";
+import { commitDocument, getDocument } from "@/lib/executor/content-runtime";
 import { puckConfig } from "@/lib/puck/puck-config";
 import { ucdToPuck, puckToUcd, type PuckData } from "@/lib/puck/puck-adapter";
 import {
@@ -37,6 +20,8 @@ import { Toolbar } from "../components/Toolbar";
 import { StatusBar } from "../components/StatusBar";
 import { DraftStatus as DraftStatusBanner } from "../components/DraftStatus";
 import { TranslationEditor, TranslationEditorContext } from "../components/TranslationEditor";
+import { NLCommandBar } from "../components/NLCommandBar";
+import { IntentPreview } from "../components/IntentPreview";
 import { useDebouncedSave } from "../hooks/useDebouncedSave";
 
 interface PuckEditorProps {
@@ -62,7 +47,13 @@ interface DraftLoadResponse {
   };
 }
 
-/** Set a nested value in a translation dict by dotted path (mutates in place). */
+interface PendingPreview {
+  intent: any;
+  operations: any[];
+  preview?: any;
+  command: string;
+}
+
 function setNestedTranslation(
   dict: unknown,
   path: string,
@@ -74,7 +65,6 @@ function setNestedTranslation(
     if (cur == null || typeof cur !== "object") return;
     const next = (cur as Record<string, unknown>)[parts[i]];
     if (next == null || typeof next !== "object") {
-      // Auto-create intermediate objects.
       (cur as Record<string, unknown>)[parts[i]] = {};
     }
     cur = (cur as Record<string, unknown>)[parts[i]];
@@ -93,24 +83,42 @@ export function PuckEditor({ page }: PuckEditorProps) {
   const [saving, setSaving] = useState(false);
   const [hasPendingChanges, setHasPendingChanges] = useState(false);
 
-  // Workflow state
   const [draftStatus, setDraftStatus] = useState<DraftStatus | "none">("none");
   const [draftId, setDraftId] = useState<string | null>(null);
   const [draftSubmittedAt, setDraftSubmittedAt] = useState<string | null>(null);
   const [draftReviewNote, setDraftReviewNote] = useState<string | null>(null);
   const [lastActionTime, setLastActionTime] = useState<string | null>(null);
 
-  // Track the last saved Puck data to detect changes.
+  const [pendingPreview, setPendingPreview] = useState<PendingPreview | null>(null);
+  const [applyingAgent, setApplyingAgent] = useState(false);
+  const [previewError, setPreviewError] = useState<string | null>(null);
+  const [previewSuggestions, setPreviewSuggestions] = useState<string[]>([]);
+
   const lastSavedDataRef = useRef<string>("");
 
-  // --- Load document + draft on mount ---
+  const refreshDocument = useCallback(async () => {
+    try {
+      const res = await fetch(`/api/studio/document?page=${encodeURIComponent(page)}`);
+      const data: DocumentResponse = await res.json();
+      if (data.success && data.document) {
+        const doc = data.document;
+        commitDocument(doc);
+        setUcd(doc);
+        setPuckData(ucdToPuck(doc, page));
+        setVersion(doc.meta.version);
+        lastSavedDataRef.current = JSON.stringify(ucdToPuck(doc, page));
+      }
+    } catch (err) {
+      console.warn("refreshDocument failed", err);
+    }
+  }, [page]);
+
   useEffect(() => {
     let cancelled = false;
     (async () => {
       setLoading(true);
       setError(null);
       try {
-        // 1. Load live document.
         const res = await fetch(`/api/studio/document?page=${encodeURIComponent(page)}`);
         const data: DocumentResponse = await res.json();
         if (cancelled) return;
@@ -122,7 +130,6 @@ export function PuckEditor({ page }: PuckEditorProps) {
 
         let docToUse = data.document;
 
-        // 2. Check for active draft.
         const draftRes = await fetch("/api/studio/draft", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -140,7 +147,6 @@ export function PuckEditor({ page }: PuckEditorProps) {
           setDraftStatus("editing");
         }
 
-        // 3. Initialize ContentRuntime so section components can render.
         commitDocument(docToUse);
         setUcd(docToUse);
         setPuckData(ucdToPuck(docToUse, page));
@@ -157,7 +163,6 @@ export function PuckEditor({ page }: PuckEditorProps) {
     };
   }, [page]);
 
-  // --- Save draft to API ---
   const saveDraft = useCallback(
     async (currentPuckData: PuckData) => {
       if (!ucd) return;
@@ -188,60 +193,46 @@ export function PuckEditor({ page }: PuckEditorProps) {
     [ucd, page, draftId]
   );
 
-  // --- Debounced save ---
   const debouncedSave = useDebouncedSave(saveDraft, 1000);
 
-  // --- Puck onChange: live preview + debounced save ---
   const handleChange = useCallback(
     (newPuckData: PuckData) => {
       if (!ucd) return;
 
-      // Update ContentRuntime for live preview.
       const newUcd = puckToUcd(newPuckData, ucd, page);
       commitDocument(newUcd);
       setPuckData(newPuckData);
 
-      // Detect changes vs last saved state.
       const serialized = JSON.stringify(newPuckData);
       if (serialized !== lastSavedDataRef.current) {
         setHasPendingChanges(true);
-        // Debounced auto-save.
         debouncedSave(newPuckData);
       }
     },
     [ucd, page, debouncedSave]
   );
 
-  // --- Stage K: Translation text change handler ---
-  // Updates a single translation value in the UCD, triggers live preview
-  // and debounced save. The Puck data itself doesn't change (translation
-  // values live outside sections), so we only update the UCD.
   const handleTranslationChange = useCallback(
     (key: string, lang: "en" | "zh", value: string) => {
       if (!ucd || !puckData) return;
 
-      // Deep clone UCD and update the nested translation value.
       const newUcd: UnifiedContentDocument = JSON.parse(JSON.stringify(ucd));
       setNestedTranslation(newUcd.translations[lang], key, value);
 
-      // Update ContentRuntime for live preview.
       commitDocument(newUcd);
       setUcd(newUcd);
 
-      // Mark pending changes and trigger debounced save.
       setHasPendingChanges(true);
       debouncedSave(puckData);
     },
     [ucd, puckData, debouncedSave]
   );
 
-  // --- Puck onPublish: publish via executor ---
   const handlePublish = useCallback(async () => {
     if (!puckData || !ucd) return;
     setSaving(true);
     setError(null);
     try {
-      // Save draft first (ensure latest changes are persisted).
       const newUcd = puckToUcd(puckData, ucd, page);
       const saveRes = await fetch("/api/studio/draft", {
         method: "POST",
@@ -261,7 +252,6 @@ export function PuckEditor({ page }: PuckEditorProps) {
       }
       const savedDraftId = saveData.draftId;
 
-      // Submit for review.
       const reviewRes = await fetch("/api/studio/review", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -273,7 +263,6 @@ export function PuckEditor({ page }: PuckEditorProps) {
         return;
       }
 
-      // Publish.
       const pubRes = await fetch("/api/studio/publish", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -297,7 +286,6 @@ export function PuckEditor({ page }: PuckEditorProps) {
     }
   }, [puckData, ucd, page, draftId, version]);
 
-  // --- Save Draft button handler ---
   const handleSaveDraft = useCallback(async () => {
     if (!puckData) return;
     setSaving(true);
@@ -306,10 +294,8 @@ export function PuckEditor({ page }: PuckEditorProps) {
     setSaving(false);
   }, [puckData, saveDraft]);
 
-  // --- Submit Review button handler ---
   const handleSubmitReview = useCallback(async () => {
     if (!puckData || !draftId) {
-      // Save first, then submit.
       await handleSaveDraft();
       return;
     }
@@ -335,12 +321,9 @@ export function PuckEditor({ page }: PuckEditorProps) {
     }
   }, [puckData, draftId, handleSaveDraft]);
 
-  // --- Undo/Redo/History stubs (Puck has its own undo) ---
   const handleUndo = useCallback(() => {
-    // Puck has built-in undo via its toolbar
   }, []);
   const handleRedo = useCallback(() => {
-    // Puck has built-in redo via its toolbar
   }, []);
   const handleDiscard = useCallback(() => {
     if (!ucd) return;
@@ -348,6 +331,84 @@ export function PuckEditor({ page }: PuckEditorProps) {
     commitDocument(ucd);
     setHasPendingChanges(false);
   }, [ucd, page]);
+
+  const handleAgentPreview = useCallback((pv: PendingPreview) => {
+    setPendingPreview(pv);
+    setPreviewError(null);
+    setPreviewSuggestions([]);
+  }, []);
+
+  const handleAgentApply = useCallback(async () => {
+    if (!pendingPreview) return;
+    setApplyingAgent(true);
+    setPreviewError(null);
+    try {
+      const intent = pendingPreview.intent;
+
+      if (intent?.type === "undo") {
+        const undoRes = await fetch("/api/studio/undo", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "undo" }),
+        });
+        const undoData = await undoRes.json();
+        if (!undoData.success) {
+          setPreviewError(undoData.error ?? "撤销失败");
+          return;
+        }
+        await refreshDocument();
+        setPendingPreview(null);
+        return;
+      }
+      if (intent?.type === "redo") {
+        const curVer = (getDocument() as UnifiedContentDocument | null)?.meta.version;
+        const redoRes = await fetch("/api/studio/undo", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ action: "redo", version: curVer ? curVer + 1 : undefined }),
+        });
+        const redoData = await redoRes.json();
+        if (!redoData.success) {
+          setPreviewError(redoData.error ?? "重做失败");
+          return;
+        }
+        await refreshDocument();
+        setPendingPreview(null);
+        return;
+      }
+
+      const res = await fetch("/api/agent/command", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ command: pendingPreview.command, options: { dryRun: false } }),
+      });
+      const data = await res.json();
+      if (!data.success) {
+        setPreviewError(data.error ?? data.message ?? "应用失败");
+        if (data.stage === "parse" || data.stage === "plan") {
+          setPreviewSuggestions(data.templates ?? []);
+        }
+        return;
+      }
+      await refreshDocument();
+      setPendingPreview(null);
+    } catch (err) {
+      setPreviewError((err as Error).message);
+    } finally {
+      setApplyingAgent(false);
+    }
+  }, [pendingPreview, refreshDocument]);
+
+  const handleAgentCancel = useCallback(() => {
+    setPendingPreview(null);
+    setPreviewError(null);
+    setPreviewSuggestions([]);
+  }, []);
+
+  const handleAgentResult = useCallback((result: any) => {
+    void result;
+    refreshDocument();
+  }, [refreshDocument]);
 
   if (loading) {
     return (
@@ -373,11 +434,13 @@ export function PuckEditor({ page }: PuckEditorProps) {
 
   if (!puckData) return null;
 
+  const preview = pendingPreview;
+
   return (
     <TranslationEditorContext.Provider
       value={{ ucd, onTranslationChange: handleTranslationChange }}
     >
-      <div className="flex flex-col h-screen">
+      <div className="flex flex-col h-screen relative">
         <Toolbar
           page={page}
           version={version}
@@ -393,7 +456,12 @@ export function PuckEditor({ page }: PuckEditorProps) {
           onSaveDraft={handleSaveDraft}
           onSubmitReview={handleSubmitReview}
           onPublish={handlePublish}
-        />
+        >
+          <NLCommandBar
+            onPreview={handleAgentPreview}
+            onResult={handleAgentResult}
+          />
+        </Toolbar>
         <DraftStatusBanner
           status={draftStatus}
           draftId={draftId}
@@ -426,6 +494,22 @@ export function PuckEditor({ page }: PuckEditorProps) {
           version={version}
           lastActionTime={lastActionTime}
         />
+
+        {preview && (
+          <div className="fixed top-14 right-4 z-50">
+            <IntentPreview
+              command={preview.command}
+              intent={preview.intent}
+              operations={preview.operations}
+              preview={preview.preview}
+              onApply={handleAgentApply}
+              onCancel={handleAgentCancel}
+              applying={applyingAgent}
+              suggestions={previewSuggestions.length > 0 ? previewSuggestions : undefined}
+              error={previewError ?? undefined}
+            />
+          </div>
+        )}
       </div>
     </TranslationEditorContext.Provider>
   );

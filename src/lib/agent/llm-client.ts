@@ -1,15 +1,3 @@
-// LLM API client — only invoked for the ~20% of commands the rule matcher
-// cannot resolve.
-//
-// Gated by the `ENABLE_LLM` env var (default false). When disabled, callers
-// should never reach this module; intent-parser checks the flag first and
-// throws LLMDisabledError. When enabled, this module calls the configured LLM
-// provider's structured-output endpoint to turn a free-form command into a
-// typed Intent.
-//
-// The provider is selected via `LLM_PROVIDER` (openai | anthropic | mock).
-// `mock` is used in tests and returns canned intents without network access.
-
 import type { Intent } from "./types";
 import { LLMDisabledError } from "./types";
 import type { SupportedLanguage } from "@/lib/i18n/translations";
@@ -22,9 +10,7 @@ export interface LLMConfig {
 }
 
 export interface ParseContext {
-  /** The page section ids that currently exist (for path disambiguation). */
   knownSections?: string[];
-  /** The translation keys that currently exist (for target resolution). */
   knownKeys?: string[];
 }
 
@@ -42,7 +28,6 @@ function isLlmEnabled(): boolean {
   return process.env.ENABLE_LLM === "true";
 }
 
-/** Guard: throw early if LLM is not enabled, so callers never block on network. */
 export function assertLlmEnabled(): void {
   if (!isLlmEnabled()) {
     throw new LLMDisabledError(
@@ -51,10 +36,6 @@ export function assertLlmEnabled(): void {
   }
 }
 
-/**
- * Ask the LLM to parse a free-form command into a typed Intent.
- * Throws LLMDisabledError if ENABLE_LLM != "true".
- */
 export async function parseIntentWithLLM(
   command: string,
   context?: ParseContext
@@ -74,7 +55,6 @@ export async function parseIntentWithLLM(
   }
 }
 
-/** Ask the LLM to translate a string. Throws LLMDisabledError if disabled. */
 export async function translateWithLLM(
   text: string,
   sourceLang: SupportedLanguage,
@@ -88,24 +68,29 @@ export async function translateWithLLM(
       return `[${targetLang}] ${text}`;
     case "openai":
     case "anthropic":
-      // Both providers implement the same simple translate prompt.
       return providerTranslate(text, sourceLang, targetLang, config);
     default:
       throw new Error(`Unknown LLM provider: ${config.provider}`);
   }
 }
 
-/* -------------------------------------------------------------------------- */
-/* Mock provider (no network)                                                */
-/* -------------------------------------------------------------------------- */
-
 async function mockParse(
   command: string,
   _context?: ParseContext
 ): Promise<Intent> {
-  // The mock provider is intentionally dumb: it returns a bulk_update with a
-  // single update_text intent echoing the command. Tests should mock this
-  // module rather than rely on the mock provider for realistic behaviour.
+  const lower = command.toLowerCase();
+  if (lower.includes("撤销") || lower === "undo") {
+    return { type: "undo" };
+  }
+  if (lower.includes("重做") || lower === "redo") {
+    return { type: "redo" };
+  }
+  if (lower.includes("帮助") || lower === "help" || lower === "?") {
+    return { type: "query", question: "capability" };
+  }
+  if (lower.includes("区段") && (lower.includes("结构") || lower.includes("哪些"))) {
+    return { type: "query", question: "structure" };
+  }
   return {
     type: "bulk_update",
     operations: [
@@ -114,20 +99,20 @@ async function mockParse(
   };
 }
 
-/* -------------------------------------------------------------------------- */
-/* Real providers (openai / anthropic)                                       */
-/* -------------------------------------------------------------------------- */
-
 const SYSTEM_PROMPT = `你是一个网站内容编辑助手。将用户的自然语言指令解析为结构化的 Intent JSON。
 支持的 Intent 类型：
 - update_text: { type, target, value, lang? }
 - translate: { type, source, targetLang, sourceLang? }
 - reorder_sections: { type, page, newOrder }
 - add_section: { type, page, sectionType, position }
+- duplicate_section: { type, page, sectionId, newSectionId? }
 - remove_section: { type, page, sectionId }
 - update_image: { type, target, newSrc, alt? }
 - update_link: { type, target, newHref }
 - bulk_update: { type, operations: Intent[] }
+- undo: { type: "undo" }
+- redo: { type: "redo" }
+- query: { type: "query", question: "capability" | "structure" | "version" }
 
 只返回一个 JSON 对象，不要有其他文字。`;
 
@@ -198,7 +183,6 @@ async function providerTranslate(
   targetLang: SupportedLanguage,
   config: LLMConfig
 ): Promise<string> {
-  // Minimal translate prompt; both providers handle it via the chat endpoint.
   const prompt = `将以下${sourceLang}文本翻译成${targetLang}，只返回翻译结果：\n${text}`;
   if (config.provider === "anthropic") {
     const model = config.model ?? "claude-3-5-sonnet-20241022";
@@ -220,7 +204,6 @@ async function providerTranslate(
     const data = (await res.json()) as { content: { text: string }[] };
     return data.content[0]?.text?.trim() ?? text;
   }
-  // openai
   const model = config.model ?? "gpt-4o-mini";
   const baseUrl = config.baseUrl ?? "https://api.openai.com/v1";
   const res = await fetch(`${baseUrl}/chat/completions`, {

@@ -1,14 +1,3 @@
-// Stage 2: Plan generator — converts a structured Intent into an RFC 6902
-// JSON Patch operation sequence.
-//
-// Each Intent type maps to one or more `JsonPatchOperation`s. The path
-// resolver turns human-friendly targets ("hero.title") into UCD JSON Pointers
-// ("/translations/en/hero/title").
-//
-// Multi-language sync: `update_text` without a `lang` field updates both en
-// and zh by default. A `translate` intent calls translate-service and patches
-// the target language only.
-
 import type { SupportedLanguage } from "@/lib/i18n/translations";
 import type { UnifiedContentDocument } from "@/lib/content/content-schema";
 import type { JsonPatchOperation } from "@/lib/executor/patch-types";
@@ -16,13 +5,6 @@ import type { Intent } from "./types";
 import { resolveTarget, resolveTranslationAllLangs, fuzzyResolveSection } from "./path-resolver";
 import { translate } from "./translate-service";
 
-/**
- * Generate the JSON Patch operations for an Intent.
- *
- * @param intent     the parsed intent
- * @param currentDoc the current UCD (needed for translate + reorder)
- * @returns          ordered list of patch operations
- */
 export async function generatePlan(
   intent: Intent,
   currentDoc?: UnifiedContentDocument
@@ -30,34 +12,31 @@ export async function generatePlan(
   switch (intent.type) {
     case "update_text":
       return planUpdateText(intent);
-
     case "translate":
       return await planTranslate(intent, currentDoc);
-
     case "reorder_sections":
       return planReorderSections(intent, currentDoc);
-
     case "add_section":
-      return planAddSection(intent);
-
+      return planAddSection(intent, currentDoc);
+    case "duplicate_section":
+      return planDuplicateSection(intent, currentDoc);
     case "remove_section":
       return planRemoveSection(intent);
-
     case "update_image":
       return planUpdateImage(intent);
-
     case "update_link":
       return planUpdateLink(intent);
-
     case "bulk_update": {
-      // Flatten: recursively plan each sub-intent, preserve order.
       const ops: JsonPatchOperation[] = [];
       for (const sub of intent.operations) {
         ops.push(...(await generatePlan(sub, currentDoc)));
       }
       return ops;
     }
-
+    case "undo":
+    case "redo":
+    case "query":
+      return [];
     default: {
       const _exhaustive: never = intent;
       void _exhaustive;
@@ -66,22 +45,16 @@ export async function generatePlan(
   }
 }
 
-/* -------------------------------------------------------------------------- */
-/* Per-intent planners                                                        */
-/* -------------------------------------------------------------------------- */
-
 function planUpdateText(
   intent: Extract<Intent, { type: "update_text" }>
 ): JsonPatchOperation[] {
   if (intent.lang) {
-    // Single-language update
     const resolved = resolveTarget(intent.target, intent.lang);
     if (!resolved) {
       throw new Error(`Cannot resolve target: ${intent.target}`);
     }
     return [{ op: "replace", path: resolved.pointer, value: intent.value }];
   }
-  // Default: update en + zh (ru is translated separately)
   const resolved = resolveTranslationAllLangs(intent.target, ["en", "zh"]);
   return resolved.map((r) => ({
     op: "replace" as const,
@@ -98,7 +71,6 @@ async function planTranslate(
     throw new Error("translate intent requires currentDoc to read source text");
   }
   const sourceLang = intent.sourceLang ?? "en";
-  // Read the source text from the UCD
   const sourceText = readTranslationValue(currentDoc, intent.source, sourceLang);
   if (sourceText == null) {
     throw new Error(`Source key not found in UCD: ${intent.source} (${sourceLang})`);
@@ -132,10 +104,6 @@ function planReorderSections(
     throw new Error(`No section order found for page: ${intent.page}`);
   }
 
-  // Two forms of newOrder:
-  //   1. Absolute: newOrder is the full desired order -> replace /pages/{p}/order
-  //   2. Relative (from rule-matcher): [movedSection, anchorSection, position]
-  //      where position ∈ {前面, 后面, 之前, 之后, 前, 后}
   let finalOrder: string[];
   if (
     intent.newOrder.length === 3 &&
@@ -146,7 +114,6 @@ function planReorderSections(
     finalOrder = intent.newOrder;
   }
 
-  // Validate: finalOrder must be a permutation of currentOrder
   const currentSet = new Set(currentOrder);
   const finalSet = new Set(finalOrder);
   if (currentSet.size !== finalSet.size || ![...currentSet].every((s) => finalSet.has(s))) {
@@ -183,20 +150,118 @@ function applyRelativeMove(
 }
 
 function planAddSection(
-  intent: Extract<Intent, { type: "add_section" }>
+  intent: Extract<Intent, { type: "add_section" }>,
+  currentDoc?: UnifiedContentDocument
 ): JsonPatchOperation[] {
   const sectionId = fuzzyResolveSection(intent.sectionType) ?? intent.sectionType;
   const section = createDefaultSection(sectionId);
-  return [
+  const ops: JsonPatchOperation[] = [
     { op: "add", path: `/pages/${intent.page}/sections/${sectionId}`, value: section },
   ];
+
+  if (typeof intent.position === "object") {
+    const { anchor, side } = intent.position;
+    const pageData = currentDoc?.pages?.[intent.page] as
+      | { order?: string[] }
+      | undefined;
+    const order = pageData?.order ? [...pageData.order] : [];
+    const without = order.filter((s) => s !== sectionId);
+    if (side === "end") {
+      without.push(sectionId);
+    } else if (side === "start") {
+      without.unshift(sectionId);
+    } else {
+      const anchorId = fuzzyResolveSection(anchor) ?? anchor;
+      const idx = without.indexOf(anchorId);
+      if (idx === -1) {
+        without.push(sectionId);
+      } else {
+        const insertAt = side === "before" ? idx : idx + 1;
+        without.splice(insertAt, 0, sectionId);
+      }
+    }
+    ops.push({
+      op: "replace",
+      path: `/pages/${intent.page}/order`,
+      value: without,
+    });
+  }
+
+  return ops;
+}
+
+function planDuplicateSection(
+  intent: Extract<Intent, { type: "duplicate_section" }>,
+  currentDoc?: UnifiedContentDocument
+): JsonPatchOperation[] {
+  const srcId = fuzzyResolveSection(intent.sectionId) ?? intent.sectionId;
+  let newId = intent.newSectionId;
+  if (!newId) {
+    const pageData = currentDoc?.pages?.[intent.page] as
+      | { sections?: Record<string, unknown>; order?: string[] }
+      | undefined;
+    const existingSections = new Set<string>([
+      ...Object.keys(pageData?.sections ?? {}),
+      ...(pageData?.order ?? []),
+    ]);
+    for (let i = 2; i <= 99; i += 1) {
+      const candidate = `${srcId}${i}`;
+      if (!existingSections.has(candidate)) {
+        newId = candidate;
+        break;
+      }
+    }
+    if (!newId) throw new Error(`Cannot generate a new id for duplicate of ${srcId}`);
+  }
+
+  const pageData = currentDoc?.pages?.[intent.page] as
+    | { sections?: Record<string, Record<string, unknown>>; order?: string[] }
+    | undefined;
+  const srcSection = pageData?.sections?.[srcId];
+  if (!srcSection) {
+    throw new Error(`Cannot duplicate section: source ${srcId} not found in sections`);
+  }
+  const cloned = JSON.parse(JSON.stringify(srcSection));
+
+  const ops: JsonPatchOperation[] = [
+    { op: "add", path: `/pages/${intent.page}/sections/${newId}`, value: cloned },
+  ];
+  const order = pageData?.order ? [...pageData.order] : [];
+  const srcIdx = order.indexOf(srcId);
+  if (srcIdx === -1) {
+    order.push(newId);
+  } else {
+    order.splice(srcIdx + 1, 0, newId);
+  }
+  ops.push({
+    op: "replace",
+    path: `/pages/${intent.page}/order`,
+    value: order,
+  });
+  return ops;
 }
 
 function planRemoveSection(
-  intent: Extract<Intent, { type: "remove_section" }>
+  intent: Extract<Intent, { type: "remove_section" }>,
+  currentDoc?: UnifiedContentDocument
 ): JsonPatchOperation[] {
   const sectionId = fuzzyResolveSection(intent.sectionId) ?? intent.sectionId;
-  return [{ op: "remove", path: `/pages/${intent.page}/sections/${sectionId}` }];
+  const ops: JsonPatchOperation[] = [
+    { op: "remove", path: `/pages/${intent.page}/sections/${sectionId}` },
+  ];
+  const pageData = currentDoc?.pages?.[intent.page] as
+    | { order?: string[] }
+    | undefined;
+  const order = pageData?.order;
+  if (order && order.includes(sectionId)) {
+    const next = order.filter((s) => s !== sectionId);
+    ops.push({
+      op: "replace",
+      path: `/pages/${intent.page}/order`,
+      value: next,
+    });
+  }
+  return ops;
 }
 
 function planUpdateImage(
@@ -206,7 +271,6 @@ function planUpdateImage(
     { op: "replace", path: intent.target, value: intent.newSrc },
   ];
   if (intent.alt) {
-    // Derive the alt field path from the image path (sibling field).
     const altPath = intent.target.replace(/\/image$/, "/imageAlt");
     ops.push({ op: "replace", path: altPath, value: intent.alt });
   }
@@ -216,8 +280,6 @@ function planUpdateImage(
 function planUpdateLink(
   intent: Extract<Intent, { type: "update_link" }>
 ): JsonPatchOperation[] {
-  // `target` may be a section id + link hint, e.g. "hero.explore" or a raw
-  // path. resolveTarget handles both.
   const resolved = resolveTarget(intent.target, "en");
   if (!resolved) {
     throw new Error(`Cannot resolve link target: ${intent.target}`);
@@ -225,11 +287,6 @@ function planUpdateLink(
   return [{ op: "replace", path: resolved.pointer, value: intent.newHref }];
 }
 
-/* -------------------------------------------------------------------------- */
-/* Helpers                                                                    */
-/* -------------------------------------------------------------------------- */
-
-/** Read a dotted translation key from the UCD (e.g. "hero.title" from en). */
 function readTranslationValue(
   doc: UnifiedContentDocument,
   key: string,
@@ -245,10 +302,7 @@ function readTranslationValue(
   return typeof cur === "string" ? cur : null;
 }
 
-/** Minimal default section factory — enough to satisfy the schema. */
 function createDefaultSection(sectionId: string): Record<string, unknown> {
-  // Every section has at least a heading or items array; the caller can edit
-  // afterwards via the Studio editor. We return a sparse placeholder.
   switch (sectionId) {
     case "hero":
       return { statKeys: [], image: "", imageAlt: "", ctaLinks: { explore: "/", book: "/" } };

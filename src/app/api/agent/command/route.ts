@@ -1,17 +1,3 @@
-// Entry 1: Agent API — POST /api/agent/command
-//
-// Receives a natural-language command, runs it through the four-stage Agent
-// hub pipeline (rule match -> LLM -> plan -> validate), then hands the
-// validated JSON Patch to the executor.
-//
-// Request:  { command: string, options?: { dryRun?: boolean, lang?: "en"|"zh"|"ru" } }
-// Success:  { success: true, intent, operations, newVersion }
-// Dry-run:  { success: true, dryRun: true, intent, operations, preview }
-// Validate: { success: false, stage: "validation", errors: [{rule, message}] }
-// Conflict: { success: false, stage: "conflict", conflict: true, expectedVersion, actualVersion, error } [409]
-// LLM off:  { success: false, stage: "parse", error, suggestion }
-// Clarify:  { success: false, stage: "clarification", message, options }
-
 import { NextRequest, NextResponse } from "next/server";
 
 import { parseIntent } from "@/lib/agent/intent-parser";
@@ -24,6 +10,7 @@ import { createContentStore, createVersionStore } from "@/lib/contracts/factory"
 import type { PatchPackage } from "@/lib/executor/patch-types";
 import type { UnifiedContentDocument } from "@/lib/content/content-schema";
 import { LLMDisabledError, ClarificationError } from "@/lib/agent/types";
+import { getRuleSuggestionTemplates } from "@/lib/agent/rule-matcher";
 
 export const runtime = "nodejs";
 
@@ -37,7 +24,6 @@ interface AgentRequestBody {
   options?: AgentOptions;
 }
 
-/** Ensure the in-memory UCD is loaded; returns the current document. */
 async function ensureDocumentLoaded(): Promise<UnifiedContentDocument> {
   let current = getDocument();
   if (!current) {
@@ -72,7 +58,6 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // --- Stage 0+1: parse intent ---
   let parsed;
   try {
     parsed = await parseIntent(command);
@@ -85,6 +70,7 @@ export async function POST(request: NextRequest) {
           error: err.message,
           suggestion:
             "请使用确定性指令格式（如「把 hero 标题改成 XXX」），或设置 ENABLE_LLM=true 开启 LLM 解析。",
+          templates: getRuleSuggestionTemplates(),
         },
         { status: 422 }
       );
@@ -108,7 +94,6 @@ export async function POST(request: NextRequest) {
 
   const { intent } = parsed;
 
-  // --- Load current UCD ---
   let currentDoc: UnifiedContentDocument;
   try {
     currentDoc = await ensureDocumentLoaded();
@@ -119,18 +104,76 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // --- Stage 2: generate plan ---
+  if (intent.type === "undo") {
+    return NextResponse.json({
+      success: true,
+      stage: "undo",
+      intent,
+      operations: [],
+      undo: true,
+      hint: "请点击工具栏撤销按钮或直接通过 Studio undo 接口调用。前端应用修改时请 POST /api/studio/undo { action: 'undo' }。",
+    });
+  }
+
+  if (intent.type === "redo") {
+    return NextResponse.json({
+      success: true,
+      stage: "redo",
+      intent,
+      operations: [],
+      redo: true,
+      hint: "前端应用修改时请 POST /api/studio/undo { action: 'redo', version: N }。",
+    });
+  }
+
+  if (intent.type === "query") {
+    const pageData = currentDoc.pages?.home as unknown as
+      | { order?: string[]; sections?: Record<string, unknown> }
+      | undefined;
+    const order = pageData?.order ?? [];
+    let answer = "";
+    let templates: string[] | undefined;
+    switch (intent.question) {
+      case "capability":
+        answer =
+          "我能帮你做以下操作：\n- 修改文本、图片、链接\n- 新增/删除/复制/移动区段\n- 撤销与重做\n- 查询当前区段结构与版本。\n\n输入 帮助 查看指令示例。";
+        templates = getRuleSuggestionTemplates();
+        break;
+      case "structure":
+        answer = `首页当前区段顺序：${order.join(", ") || "(empty)"}。`;
+        break;
+      case "version":
+        answer = `当前文档版本 v${currentDoc.meta.version}，最后修改：${currentDoc.meta.lastModified}`;
+        break;
+      default:
+        answer = `未知查询类型：${intent.question}`;
+    }
+    return NextResponse.json({
+      success: true,
+      query: true,
+      intent,
+      operations: [],
+      answer,
+      templates,
+    });
+  }
+
   let operations;
   try {
     operations = await generatePlan(intent, currentDoc);
   } catch (err) {
     return NextResponse.json(
-      { success: false, stage: "plan", error: (err as Error).message, intent },
+      {
+        success: false,
+        stage: "plan",
+        error: (err as Error).message,
+        intent,
+        templates: getRuleSuggestionTemplates(),
+      },
       { status: 422 }
     );
   }
 
-  // --- Stage 3: validate ---
   const validation = validate(operations, currentDoc);
   if (!validation.valid) {
     return NextResponse.json(
@@ -146,7 +189,6 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // --- Dry-run: return preview without executing ---
   if (options.dryRun) {
     return NextResponse.json({
       success: true,
@@ -158,7 +200,6 @@ export async function POST(request: NextRequest) {
     });
   }
 
-  // --- Execute ---
   const patch: PatchPackage = {
     id: crypto.randomUUID(),
     source: "agent",
@@ -203,7 +244,6 @@ export async function POST(request: NextRequest) {
   });
 }
 
-/** GET — health check / capability discovery for the Agent API. */
 export async function GET() {
   return NextResponse.json({
     endpoint: "/api/agent/command",

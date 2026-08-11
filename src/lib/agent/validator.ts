@@ -1,18 +1,3 @@
-// Stage 3: Validator — safety-checks a patch BEFORE the executor applies it.
-//
-// Seven rules (per the plan §4.3 stage 3):
-//   1. Path existence       — replace/remove/move/copy/test paths must exist
-//   2. Type consistency     — replace value must match the original type
-//   3. Path whitelist       — only known UCD roots are writable
-//   4. Required-field guard — required fields cannot be removed
-//   5. Array bounds         — add/move array indices must not overflow
-//   6. Sandbox              — meta is read-only; no filesystem-style paths
-//   7. Dry-run              — apply to a deep clone; must not throw
-//
-// The validator never mutates the input document. It builds a preview by
-// applying the ops to an Immer draft (reusing the executor's applyOpToDraft)
-// so the caller can show a dry-run result without committing.
-
 import { produce } from "immer";
 
 import type { UnifiedContentDocument } from "@/lib/content/content-schema";
@@ -24,10 +9,8 @@ import type {
 } from "@/lib/executor/patch-types";
 import { applyOpToDraft } from "@/lib/executor/executor";
 
-/** UCD root prefixes that patches are allowed to touch. */
 const WRITABLE_ROOTS = ["/translations/", "/pages/", "/navigation/"];
 
-/** Fields that must never be removed (the document would become invalid). */
 const REQUIRED_FIELDS = new Set([
   "/meta",
   "/meta/version",
@@ -47,12 +30,10 @@ const REQUIRED_FIELDS = new Set([
   "/navigation/footer",
 ]);
 
-/** Check whether a JSON Pointer path is inside a writable root. */
 function isWritable(pointer: string): boolean {
   return WRITABLE_ROOTS.some((root) => pointer.startsWith(root));
 }
 
-/** Navigate a JSON Pointer on a plain object (read-only). */
 function getValueByPointer(doc: unknown, pointer: string): unknown {
   if (pointer === "" || pointer === "/") return doc;
   const parts = pointer.split("/").filter(Boolean);
@@ -75,12 +56,6 @@ function typeOf(v: unknown): string {
   return typeof v;
 }
 
-/**
- * Validate a patch against the current document.
- *
- * @returns a ValidationResult with errors (blocking), warnings (non-blocking),
- *          and a `preview` document (the result if the patch were applied).
- */
 export function validate(
   operations: JsonPatchOperation[],
   currentDoc: UnifiedContentDocument
@@ -89,7 +64,6 @@ export function validate(
   const warnings: ValidationWarning[] = [];
 
   for (const op of operations) {
-    // Rule 3: path whitelist
     if (!isWritable(op.path)) {
       errors.push({
         rule: "path-whitelist",
@@ -99,7 +73,6 @@ export function validate(
       continue;
     }
 
-    // Rule 6: sandbox — meta is read-only
     if (op.path.startsWith("/meta")) {
       errors.push({
         rule: "sandbox-meta",
@@ -113,7 +86,6 @@ export function validate(
 
     switch (op.op) {
       case "replace": {
-        // Rule 1: path must exist
         if (existing === undefined) {
           errors.push({
             rule: "path-existence",
@@ -121,7 +93,6 @@ export function validate(
             path: op.path,
           });
         }
-        // Rule 2: type consistency
         else if (existing !== null && typeOf(existing) !== typeOf(op.value)) {
           errors.push({
             rule: "type-consistency",
@@ -131,9 +102,7 @@ export function validate(
         }
         break;
       }
-
       case "remove": {
-        // Rule 4: required-field guard
         if (REQUIRED_FIELDS.has(op.path)) {
           errors.push({
             rule: "required-field",
@@ -141,7 +110,6 @@ export function validate(
             path: op.path,
           });
         }
-        // Rule 1: path must exist
         if (existing === undefined) {
           warnings.push({
             rule: "path-existence",
@@ -151,14 +119,11 @@ export function validate(
         }
         break;
       }
-
       case "add": {
-        // Rule 5: array bounds (when adding to an array index)
         const parent = getValueByPointer(currentDoc, op.path.split("/").slice(0, -1).join("/"));
         if (Array.isArray(parent)) {
           const idxStr = op.path.split("/").pop() ?? "";
           const idx = Number(idxStr);
-          // Allow append (idx === parent.length) but not beyond
           if (Number.isInteger(idx) && idx > parent.length) {
             errors.push({
               rule: "array-bounds",
@@ -169,7 +134,6 @@ export function validate(
         }
         break;
       }
-
       case "move":
       case "copy": {
         if (!op.from) {
@@ -180,7 +144,6 @@ export function validate(
           });
           break;
         }
-        // Rule 1: from-path must exist
         const fromValue = getValueByPointer(currentDoc, op.from);
         if (fromValue === undefined) {
           errors.push({
@@ -191,9 +154,7 @@ export function validate(
         }
         break;
       }
-
       case "test": {
-        // Rule 1: path must exist
         if (existing === undefined) {
           errors.push({
             rule: "path-existence",
@@ -209,16 +170,13 @@ export function validate(
         }
         break;
       }
-
       case "_get":
-        // Read-only op, always valid (but has no effect in the executor)
         warnings.push({
           rule: "no-op",
           message: `'_get' op has no effect in the executor: ${op.path}`,
           path: op.path,
         });
         break;
-
       default: {
         const _exhaustive: never = op;
         void _exhaustive;
@@ -231,7 +189,6 @@ export function validate(
     }
   }
 
-  // Rule 7: dry-run — try applying to an Immer draft
   let preview: UnifiedContentDocument;
   try {
     preview = produce(currentDoc, (draft: UnifiedContentDocument) => {
@@ -250,7 +207,6 @@ export function validate(
         },
       ],
       warnings,
-      // Return the original doc as preview on failure (no partial state)
       preview: currentDoc,
     };
   }
