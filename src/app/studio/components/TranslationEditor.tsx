@@ -1,9 +1,12 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 // TranslationEditor — replaces Puck's default right-side field panel.
 //
 // When a section is selected on the canvas, this component:
-//   1. Reads the selected item via `usePuck()`.
+//   1. Reads the selected item via a top-level `createUsePuck()` hook with
+//      three scalar-only selectors (string / null / stable function ref)
+//      so snapshot caching is safe.
 //   2. Computes which translation keys belong to that section (static
 //      namespaces + dynamic key refs from the section's props).
 //   3. Renders EN/ZH bilingual edit fields for each key, using metadata
@@ -16,8 +19,8 @@
 // provided by PuckEditor. Edits trigger `commitDocument()` for live preview
 // and a debounced save.
 
-import { usePuck } from "@measured/puck";
-import { createContext, useContext, useMemo, type ReactNode } from "react";
+import { useGetPuck } from "@measured/puck";
+import { createContext, useContext, type ReactNode } from "react";
 
 import type { UnifiedContentDocument } from "@/lib/content/content-schema";
 import {
@@ -155,31 +158,52 @@ function TranslationKeyEditor({
 export function TranslationEditor({
   children,
   isLoading,
+  itemSelector,
 }: {
   children?: ReactNode;
   isLoading?: boolean;
+  itemSelector?: { index?: number; zone?: string; root?: boolean } | null;
 }) {
-  const puck = usePuck();
   const ctx = useContext(TranslationEditorContext);
 
-  const selectedItem = puck.selectedItem;
-  const sectionType = selectedItem?.type ?? "";
-  const sectionProps = (selectedItem?.props ?? {}) as Record<string, unknown>;
+  // Resolve the currently-selected section from Puck's `itemSelector` prop,
+  // which Puck passes to the `fields` override on every selection change.
+  // We deliberately avoid `usePuck().selectedItem`: in Puck v0.20 the
+  // `selectedItem` mirror proved unreliable inside the override (it kept
+  // returning null). `getItemBySelector` reads live app state, and this
+  // component re-renders whenever Puck re-passes `itemSelector`, so the
+  // displayed section is always in sync with the canvas selection.
+  const getPuck = useGetPuck();
+  // Puck's `ItemSelector.index` is typed as a required number, but a root
+  // selection arrives with `index: undefined`. Normalize defensively so we
+  // don't pass an invalid selector into `getItemBySelector`.
+  const normalizedSelector = itemSelector
+    ? itemSelector.root
+      ? { root: true }
+      : { index: itemSelector.index, zone: itemSelector.zone }
+    : null;
+  const picked = normalizedSelector ? getPuck().getItemBySelector(normalizedSelector as any) : null;
+  const selectedItem: { type?: string; props?: Record<string, unknown> } | null =
+    picked && picked.type ? { type: picked.type, props: picked.props ?? {} } : null;
 
-  // Recompute when section type or props change. JSON.stringify gives us a
-  // stable dependency key without deep-comparing the object each render.
-  const propsKey = JSON.stringify(sectionProps);
-  const translationKeys = useMemo(
-    () => getSectionTranslationKeys(sectionType, sectionProps),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [sectionType, propsKey]
-  );
+  const sectionType: string = selectedItem?.type ?? "";
+  const sectionProps: Record<string, unknown> = selectedItem?.props ?? {};
+
+  const resolvedSelectedItem: { type: string; props: Record<string, unknown> } | null = sectionType
+    ? { type: sectionType, props: sectionProps }
+    : null;
+
+  const translationKeys = getSectionTranslationKeys(sectionType, sectionProps);
 
   if (isLoading) {
-    return <div className="p-4 text-sm text-gray-500">加载中…</div>;
+    return (
+      <div className="p-4 text-sm text-gray-500">
+        加载中…
+      </div>
+    );
   }
 
-  if (!selectedItem) {
+  if (!resolvedSelectedItem) {
     return (
       <div className="p-4 text-sm text-gray-500">
         在画布上点击任意组件以编辑其文本内容。

@@ -4,7 +4,7 @@
 import { Puck } from "@measured/puck";
 import "@measured/puck/puck.css";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 
 import type { UnifiedContentDocument } from "@/lib/content/content-schema";
 import type { DraftStatus } from "@/lib/executor/draft-store";
@@ -410,6 +410,21 @@ export function PuckEditor({ page }: PuckEditorProps) {
     refreshDocument();
   }, [refreshDocument]);
 
+  const puckOverrides = useMemo(
+    () => ({
+      fieldTypes: { image: ImageField as any, list: ListField as any },
+      fields: (fieldsProps: any) => (
+        <TranslationEditor
+          isLoading={fieldsProps.isLoading}
+          itemSelector={fieldsProps.itemSelector ?? null}
+        >
+          {fieldsProps.children}
+        </TranslationEditor>
+      ),
+    }),
+    []
+  );
+
   if (loading) {
     return (
       <div className="flex-1 flex items-center justify-center">
@@ -479,13 +494,7 @@ export function PuckEditor({ page }: PuckEditorProps) {
             data={puckData}
             onChange={handleChange}
             onPublish={handlePublish}
-            overrides={{
-              // @ts-expect-error — fieldTypes accepts a flexible record matching FieldRenderFunctions
-              fieldTypes: { image: ImageField, list: ListField },
-              fields: ({ children, isLoading }) => (
-                <TranslationEditor isLoading={isLoading}>{children}</TranslationEditor>
-              ),
-            }}
+            overrides={puckOverrides}
           />
         </div>
         <StatusBar
