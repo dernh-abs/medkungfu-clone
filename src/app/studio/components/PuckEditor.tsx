@@ -450,7 +450,7 @@ export function PuckEditor({ page }: PuckEditorProps) {
       const res = await fetch("/api/agent/command", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ command: pendingPreview.command, options: { dryRun: false } }),
+        body: JSON.stringify({ command: pendingPreview.command, options: { dryRun: false, page } }),
       });
       const data = await res.json();
       if (!data.success) {
@@ -544,6 +544,7 @@ export function PuckEditor({ page }: PuckEditorProps) {
           onPublish={handlePublish}
         >
           <NLCommandBar
+            page={page}
             onPreview={handleAgentPreview}
             onResult={handleAgentResult}
           />

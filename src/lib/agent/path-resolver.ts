@@ -44,6 +44,19 @@ export function resolveTarget(
     };
   }
 
+  // For non-home pages, a `<sectionId>.<field>` target maps directly to that
+  // page's section data. pageSection components are self-contained (own
+  // title/body/link fields), so there is no shared translation key to resolve.
+  // This must run before the translation-key fallback below.
+  if (page !== "home" && /^[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+$/.test(t)) {
+    const [sectionId, field] = t.split(".");
+    return {
+      pointer: `/pages/${page}/sections/${sectionId}/${field}`,
+      physicalFile: `pages/${page}.json`,
+      kind: "section-data",
+    };
+  }
+
   if (SECTION_FIELD_ALIASES[t]) {
     const sectionId = t.split(".")[0];
     const field = SECTION_FIELD_ALIASES[t];
@@ -79,9 +92,10 @@ export function resolveTarget(
 
 export function resolveTranslationAllLangs(
   target: string,
-  langs: SupportedLanguage[] = ["en", "zh"]
+  langs: SupportedLanguage[] = ["en", "zh"],
+  page: string = "home"
 ): ResolvedPath[] {
-  return langs.map((l) => resolveTarget(target, l)!).filter(Boolean);
+  return langs.map((l) => resolveTarget(target, l, page)!).filter(Boolean);
 }
 
 const SECTION_NAME_ALIASES: Record<string, string> = {

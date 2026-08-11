@@ -101,7 +101,7 @@ export function useAgentCommand(page: string) {
         const res = await fetch("/api/agent/command", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ command, options: { dryRun: true } }),
+          body: JSON.stringify({ command, options: { dryRun: true, page } }),
         });
         const data = await res.json();
         if (data.success) {
@@ -172,7 +172,7 @@ export function useAgentCommand(page: string) {
       const res = await fetch("/api/agent/command", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ command, options: { dryRun: false } }),
+        body: JSON.stringify({ command, options: { dryRun: false, page } }),
       });
       const data: AgentResult & { success: boolean } = await res.json();
       if (data.success) {
@@ -232,10 +232,6 @@ export function useAgentCommand(page: string) {
       suggestions: [],
     }));
   }, []);
-
-  // History is loaded via lazy initializer (page-level re-mount will re-init).
-  // Preserved ref to keep hook interface stable.
-  void page;
 
   return {
     state,

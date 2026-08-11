@@ -5,7 +5,7 @@ import { fuzzyResolveSection, fuzzyResolveField, buildTranslationKey } from "./p
 interface Rule {
   id: string;
   pattern: RegExp;
-  extract: (match: RegExpMatchArray) => Intent | null;
+  extract: (match: RegExpMatchArray, page?: string) => Intent | null;
 }
 
 const LANG_MAP: Record<string, SupportedLanguage> = {
@@ -166,26 +166,26 @@ const RULES: Rule[] = [
     id: "update_image.zh",
     pattern:
       /(?:把|将)\s*(?:首页\s*)?([\w一-龥]+)\s*(图片|背景图|封面图|配图|主图|照片|图)\s*(?:换成|改为|修改为|更改为|替换为)\s*(.+?)\s*$/i,
-    extract: (m) => {
+    extract: (m, page = "home") => {
       const sectionPart = m[1].trim();
       const sec = fuzzyResolveSection(sectionPart);
       if (sec) {
         return {
           type: "update_image",
-          target: `/pages/home/sections/${sec}/image`,
+          target: `/pages/${page}/sections/${sec}/image`,
           newSrc: m[3].trim(),
         };
       }
       if (isHeroAlias(sectionPart)) {
         return {
           type: "update_image",
-          target: "/pages/home/sections/hero/image",
+          target: `/pages/${page}/sections/hero/image`,
           newSrc: m[3].trim(),
         };
       }
       return {
         type: "update_image",
-        target: sectionPart.includes("/") ? sectionPart : `/pages/home/sections/${sectionPart}/image`,
+        target: sectionPart.includes("/") ? sectionPart : `/pages/${page}/sections/${sectionPart}/image`,
         newSrc: m[3].trim(),
       };
     },
@@ -194,9 +194,9 @@ const RULES: Rule[] = [
     id: "update_image",
     pattern:
       /(?:把|将)\s*(hero\s*)?(?:首页\s*)?(图片|背景图|封面图|image)\s*(?:换成|改为|修改为|更改为)\s*(.+?)\s*$/i,
-    extract: (m) => ({
+    extract: (m, page = "home") => ({
       type: "update_image",
-      target: m[1] ? "/pages/home/sections/hero/image" : m[2],
+      target: m[1] ? `/pages/${page}/sections/hero/image` : m[2],
       newSrc: m[3].trim(),
     }),
   },
@@ -329,12 +329,12 @@ const RULES: Rule[] = [
   },
 ];
 
-export function matchRule(command: string): Intent | null {
+export function matchRule(command: string, page: string = "home"): Intent | null {
   const trimmed = command.trim();
   for (const rule of RULES) {
     const m = trimmed.match(rule.pattern);
     if (m) {
-      const intent = rule.extract(m);
+      const intent = rule.extract(m, page);
       if (intent) return intent;
     }
   }

@@ -48,10 +48,20 @@ export async function generatePlan(
 function planUpdateText(
   intent: Extract<Intent, { type: "update_text" }>
 ): JsonPatchOperation[] {
+  const page = intent.page ?? "home";
   if (intent.lang) {
-    const resolved = resolveTarget(intent.target, intent.lang);
+    const resolved = resolveTarget(intent.target, intent.lang, page);
     if (!resolved) {
       throw new Error(`Cannot resolve target: ${intent.target}`);
+    }
+    return [{ op: "replace", path: resolved.pointer, value: intent.value }];
+  }
+  if (page !== "home") {
+    // Non-home pages use self-contained pageSection data, not shared
+    // translation keys. Resolve the target against this page and emit one op.
+    const resolved = resolveTarget(intent.target, "en", page);
+    if (!resolved) {
+      throw new Error(`Cannot resolve target: ${intent.target} on page ${page}`);
     }
     return [{ op: "replace", path: resolved.pointer, value: intent.value }];
   }
@@ -280,7 +290,7 @@ function planUpdateImage(
 function planUpdateLink(
   intent: Extract<Intent, { type: "update_link" }>
 ): JsonPatchOperation[] {
-  const resolved = resolveTarget(intent.target, "en");
+  const resolved = resolveTarget(intent.target, "en", intent.page ?? "home");
   if (!resolved) {
     throw new Error(`Cannot resolve link target: ${intent.target}`);
   }

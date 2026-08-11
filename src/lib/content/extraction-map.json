@@ -309,8 +309,8 @@
         "hero": {
           "type": "pageSection",
           "kind": "hero",
-          "title": "Medical Projects",
-          "body": "Explore China's leading medical programs across oncology, regenerative medicine, and integrative care.",
+          "title": "Medical Programs in China",
+          "body": "Explore China's leading medical programs across oncology, regenerative medicine, and integrative care — delivered by world-class hospitals and specialists.",
           "image": "",
           "linkHref": "",
           "linkLabel": ""
@@ -319,7 +319,7 @@
           "type": "pageSection",
           "kind": "content",
           "title": "Featured Programs",
-          "body": "Detailed program descriptions and hospital partnerships will be edited here.",
+          "body": "From heavy-ion and proton therapy to CAR-T cell therapy, stem-cell treatments, and TCM-integrated specialties, our curated programs connect you with China's most advanced clinical capabilities.",
           "image": "",
           "linkHref": "",
           "linkLabel": ""
@@ -328,7 +328,7 @@
           "type": "pageSection",
           "kind": "cta",
           "title": "Start Your Assessment",
-          "body": "Tell us about your medical needs and we will match the right hospital and specialist.",
+          "body": "Tell us about your medical needs and we will match the right hospital and specialist for your case.",
           "image": "",
           "linkHref": "/contact",
           "linkLabel": "Contact Us"
@@ -345,8 +345,8 @@
         "hero": {
           "type": "pageSection",
           "kind": "hero",
-          "title": "Our Services",
-          "body": "Cross-border medical coordination: records, translation, hospital matching, and follow-up.",
+          "title": "Cross-Border Medical Coordination",
+          "body": "End-to-end support for international patients — from medical records and translation to hospital matching, travel, and follow-up care.",
           "image": "",
           "linkHref": "",
           "linkLabel": ""
@@ -355,7 +355,7 @@
           "type": "pageSection",
           "kind": "content",
           "title": "Service Packages",
-          "body": "Light, standard, advanced, and VIP packages are described here.",
+          "body": "Choose the level of support that fits your journey: light, standard, advanced, or full VIP coordination — each backed by transparent pricing and our refund guarantee.",
           "image": "",
           "linkHref": "",
           "linkLabel": ""
@@ -364,7 +364,7 @@
           "type": "pageSection",
           "kind": "cta",
           "title": "Talk to a Coordinator",
-          "body": "Our team helps you prepare records and plan your China medical journey.",
+          "body": "Our team helps you prepare records and plan your China medical journey with confidence.",
           "image": "",
           "linkHref": "/contact",
           "linkLabel": "Contact Us"
@@ -382,7 +382,7 @@
           "type": "pageSection",
           "kind": "hero",
           "title": "Partner Hospitals",
-          "body": "A trusted network of renowned Chinese hospitals and specialist institutions.",
+          "body": "A trusted network of renowned Chinese hospitals and specialist institutions, selected for clinical excellence and international patient experience.",
           "image": "",
           "linkHref": "",
           "linkLabel": ""
@@ -391,7 +391,7 @@
           "type": "pageSection",
           "kind": "content",
           "title": "Hospital Network",
-          "body": "Partner profiles, specialties, and accreditation details are edited here.",
+          "body": "We partner with top-tier institutions across Beijing, Shanghai, Guangzhou, and Hainan — including proton & heavy-ion centers, comprehensive cancer hospitals, and TCM leaders.",
           "image": "",
           "linkHref": "",
           "linkLabel": ""
@@ -400,7 +400,7 @@
           "type": "pageSection",
           "kind": "cta",
           "title": "Request a Match",
-          "body": "We match your condition to the most suitable hospital and specialist.",
+          "body": "We match your condition to the most suitable hospital and specialist based on your medical profile.",
           "image": "",
           "linkHref": "/contact",
           "linkLabel": "Contact Us"
@@ -418,7 +418,7 @@
           "type": "pageSection",
           "kind": "hero",
           "title": "Patient Stories",
-          "body": "Real outcomes from international patients who came to China for care.",
+          "body": "Real outcomes from international patients who came to China for care — in their own words.",
           "image": "",
           "linkHref": "",
           "linkLabel": ""
@@ -427,7 +427,7 @@
           "type": "pageSection",
           "kind": "content",
           "title": "Outcomes & Testimonials",
-          "body": "Patient stories, with consent, are presented here.",
+          "body": "From complex oncology cases to regenerative therapies, these stories show what careful coordination and world-class medicine can achieve together.",
           "image": "",
           "linkHref": "",
           "linkLabel": ""
@@ -436,7 +436,7 @@
           "type": "pageSection",
           "kind": "cta",
           "title": "Share Your Story",
-          "body": "If you have completed treatment, we would love to hear from you.",
+          "body": "If you have completed treatment with us, we would love to hear how your journey went.",
           "image": "",
           "linkHref": "/contact",
           "linkLabel": "Contact Us"
@@ -454,7 +454,7 @@
           "type": "pageSection",
           "kind": "hero",
           "title": "About MedKungfu",
-          "body": "We connect international patients with China's best medical resources.",
+          "body": "We connect international patients with China's best medical resources — with empathy, transparency, and end-to-end coordination.",
           "image": "",
           "linkHref": "",
           "linkLabel": ""
@@ -463,7 +463,7 @@
           "type": "pageSection",
           "kind": "content",
           "title": "Who We Are",
-          "body": "Mission, team, and history are edited here.",
+          "body": "MedKungfu is a specialized international medical placement service. We organize the full cross-border care process — matching hospitals, managing records, translation, visas, accommodation, escort, and follow-up.",
           "image": "",
           "linkHref": "",
           "linkLabel": ""
@@ -472,7 +472,7 @@
           "type": "pageSection",
           "kind": "cta",
           "title": "Work With Us",
-          "body": "Hospitals and partners are welcome to collaborate.",
+          "body": "Hospitals and partners are welcome to collaborate with us to serve global patients.",
           "image": "",
           "linkHref": "/contact",
           "linkLabel": "Contact Us"
@@ -490,7 +490,7 @@
           "type": "pageSection",
           "kind": "hero",
           "title": "Frequently Asked Questions",
-          "body": "Answers to the questions international patients ask before traveling to China.",
+          "body": "Answers to the questions international patients ask before traveling to China for medical care.",
           "image": "",
           "linkHref": "",
           "linkLabel": ""
@@ -499,7 +499,7 @@
           "type": "pageSection",
           "kind": "content",
           "title": "Common Questions",
-          "body": "The full FAQ library is managed here.",
+          "body": "Learn about costs, timelines, preparation, and what to expect at each stage of your medical journey with MedKungfu.",
           "image": "",
           "linkHref": "",
           "linkLabel": ""
@@ -508,7 +508,7 @@
           "type": "pageSection",
           "kind": "cta",
           "title": "Browse All FAQs",
-          "body": "Find detailed guidance on costs, timelines, and preparation.",
+          "body": "Find detailed guidance on eligibility, documents, and post-treatment follow-up.",
           "image": "",
           "linkHref": "/faq",
           "linkLabel": "Read More"
@@ -526,7 +526,7 @@
           "type": "pageSection",
           "kind": "hero",
           "title": "Contact Us",
-          "body": "Reach our coordination team for an initial assessment.",
+          "body": "Reach our coordination team for an initial assessment — we respond within one business day.",
           "image": "",
           "linkHref": "",
           "linkLabel": ""
@@ -535,7 +535,7 @@
           "type": "pageSection",
           "kind": "content",
           "title": "Get in Touch",
-          "body": "Phone, email, and office details are edited here.",
+          "body": "Email us at contact@medkungfu.com or reach us on WhatsApp. Our multilingual team is ready to help you take the first step.",
           "image": "",
           "linkHref": "",
           "linkLabel": ""
@@ -544,7 +544,7 @@
           "type": "pageSection",
           "kind": "cta",
           "title": "Submit an Inquiry",
-          "body": "Send your medical needs and we will respond within one business day.",
+          "body": "Send your medical needs and we will respond with a personalized assessment.",
           "image": "",
           "linkHref": "/contact",
           "linkLabel": "Contact Us"
@@ -562,7 +562,7 @@
           "type": "pageSection",
           "kind": "hero",
           "title": "Why China Medical",
-          "body": "World-class care, advanced technology, and cost-effective treatment.",
+          "body": "World-class care, advanced technology, and cost-effective treatment — making China a leading destination for international patients.",
           "image": "",
           "linkHref": "",
           "linkLabel": ""
@@ -571,7 +571,7 @@
           "type": "pageSection",
           "kind": "content",
           "title": "The China Advantage",
-          "body": "Quality, access, and value are explained here.",
+          "body": "From proton therapy centers and CAR-T clinical leadership to TCM integration and medical-tourism-friendly access, China offers a unique combination of quality, speed, and value.",
           "image": "",
           "linkHref": "",
           "linkLabel": ""
@@ -580,7 +580,7 @@
           "type": "pageSection",
           "kind": "cta",
           "title": "Compare Your Options",
-          "body": "See how China medical care compares for your condition.",
+          "body": "See how China medical care compares for your condition and why patients choose it.",
           "image": "",
           "linkHref": "/contact",
           "linkLabel": "Contact Us"

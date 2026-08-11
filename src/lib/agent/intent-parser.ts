@@ -4,9 +4,10 @@ import type { Intent, ParsedIntent } from "./types";
 
 export async function parseIntent(
   command: string,
-  context?: ParseContext
+  context?: ParseContext,
+  page?: string
 ): Promise<ParsedIntent> {
-  const ruleResult = matchRule(command);
+  const ruleResult = matchRule(command, page ?? "home");
   if (ruleResult) {
     return { intent: ruleResult, source: "rule", rawCommand: command };
   }

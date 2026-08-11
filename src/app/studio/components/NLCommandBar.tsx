@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useAgentCommand } from "../hooks/useAgentCommand";
 
 interface NLCommandBarProps {
+  page: string;
   onPreview: (preview: {
     intent: any;
     operations: any[];
@@ -15,8 +16,8 @@ interface NLCommandBarProps {
   onResult?: (result: any) => void;
 }
 
-export function NLCommandBar({ onPreview, onResult }: NLCommandBarProps) {
-  const { state, dryRun, apply, dismiss } = useAgentCommand("home");
+export function NLCommandBar({ page, onPreview, onResult }: NLCommandBarProps) {
+  const { state, dryRun, apply, dismiss } = useAgentCommand(page);
   // Hook surface kept stable for external callers; apply routed via IntentPreview card.
   void apply; void dismiss;
   const [inputValue, setInputValue] = useState("");

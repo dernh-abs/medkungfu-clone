@@ -17,6 +17,7 @@ export const runtime = "nodejs";
 interface AgentOptions {
   dryRun?: boolean;
   lang?: "en" | "zh" | "ru";
+  page?: string;
 }
 
 interface AgentRequestBody {
@@ -51,6 +52,7 @@ export async function POST(request: NextRequest) {
   }
 
   const { command, options = {} } = body;
+  const page = options.page || "home";
   if (!command || typeof command !== "string") {
     return NextResponse.json(
       { success: false, stage: "parse", error: "Missing or invalid 'command' field" },
@@ -60,7 +62,7 @@ export async function POST(request: NextRequest) {
 
   let parsed;
   try {
-    parsed = await parseIntent(command);
+    parsed = await parseIntent(command, undefined, page);
   } catch (err) {
     if (err instanceof LLMDisabledError) {
       return NextResponse.json(
@@ -93,6 +95,21 @@ export async function POST(request: NextRequest) {
   }
 
   const { intent } = parsed;
+
+  // NL commands act on the page currently open in the Studio. Override the
+  // page context for any intent that is page-scoped (structure ops already
+  // carry page; text/image/link now carry optional page).
+  if (
+    intent.type === "update_text" ||
+    intent.type === "update_image" ||
+    intent.type === "update_link" ||
+    intent.type === "reorder_sections" ||
+    intent.type === "add_section" ||
+    intent.type === "duplicate_section" ||
+    intent.type === "remove_section"
+  ) {
+    (intent as { page?: string }).page = page;
+  }
 
   let currentDoc: UnifiedContentDocument;
   try {
@@ -127,7 +144,7 @@ export async function POST(request: NextRequest) {
   }
 
   if (intent.type === "query") {
-    const pageData = currentDoc.pages?.home as unknown as
+    const pageData = currentDoc.pages?.[page] as unknown as
       | { order?: string[]; sections?: Record<string, unknown> }
       | undefined;
     const order = pageData?.order ?? [];
@@ -139,9 +156,9 @@ export async function POST(request: NextRequest) {
           "我能帮你做以下操作：\n- 修改文本、图片、链接\n- 新增/删除/复制/移动区段\n- 撤销与重做\n- 查询当前区段结构与版本。\n\n输入 帮助 查看指令示例。";
         templates = getRuleSuggestionTemplates();
         break;
-      case "structure":
-        answer = `首页当前区段顺序：${order.join(", ") || "(empty)"}。`;
-        break;
+        case "structure":
+          answer = `${page} 页当前区段顺序：${order.join(", ") || "(empty)"}。`;
+          break;
       case "version":
         answer = `当前文档版本 v${currentDoc.meta.version}，最后修改：${currentDoc.meta.lastModified}`;
         break;

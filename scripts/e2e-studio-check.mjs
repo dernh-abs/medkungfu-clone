@@ -114,6 +114,34 @@ try {
     result.pageErrors.push("Public /projects did not render pageSection content via PublicPage");
   await page.screenshot({ path: `${OUT_DIR}/04-public-projects.png` });
 
+  // ── per-page NL command: a projects-page edit must target /pages/projects/ ──
+  // Phase 4 proof: the same natural-language instruction resolves to the page
+  // currently open in the Studio instead of always hitting home.
+  log("nl-per-page-dryrun", { url: `${BASE}/api/agent/command` });
+  let nlPath = "";
+  let nlSuccess = false;
+  try {
+    const nlRes = await page.request.post(`${BASE}/api/agent/command`, {
+      headers: { "Content-Type": "application/json" },
+      data: {
+        command: "把 hero 标题改成 PerPageTest",
+        options: { dryRun: true, page: "projects" },
+      },
+    });
+    const nlJson = await nlRes.json();
+    nlSuccess = nlJson.success === true;
+    nlPath = (nlJson.operations && nlJson.operations[0] && nlJson.operations[0].path) || "";
+    log("nl-per-page-dryrun", { success: nlSuccess, firstPath: nlPath });
+    if (!nlSuccess || !nlPath.includes("/pages/projects/")) {
+      result.pageErrors.push(
+        `Per-page NL command did not target /pages/projects/ (success=${nlSuccess}, path="${nlPath}")`
+      );
+    }
+  } catch (err) {
+    result.pageErrors.push("NL per-page dryRun request failed: " + String(err));
+  }
+  await page.screenshot({ path: `${OUT_DIR}/05-nl-per-page.png` });
+
   const a = result.details.assertions;
   a.cardCount = cardCount;
   a.hasProjects = hasProjects === 1;
@@ -123,6 +151,7 @@ try {
   a.homeHeaderResolved = homeHeaderResolved;
   a.homeShowsHeroKey = showsHeroKey;
   a.publicProjectsRenders = pubOk;
+  a.nlPerPageTargetsProjects = nlSuccess && nlPath.includes("/pages/projects/");
 
   result.success = result.pageErrors.length === 0;
 } catch (err) {
