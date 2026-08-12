@@ -8,6 +8,11 @@ export const metadata: Metadata = {
     "A practical FAQ for international patients evaluating cross-border medical care in China — care coordination, costs, timelines, risks, and selected treatment directions.",
 };
 
-export default function FaqPage() {
-  return <PublicPage slug="faq" />;
+export default async function FaqPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ lang?: string }>;
+}) {
+  const { lang } = await searchParams;
+  return <PublicPage slug="faq" lang={lang === "zh" ? "zh" : "en"} />;
 }

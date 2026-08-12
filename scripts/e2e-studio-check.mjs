@@ -128,6 +128,17 @@ try {
     result.pageErrors.push("Public /hospitals did not render stat data-bar via PublicPage");
   await page.screenshot({ path: `${OUT_DIR}/04b-public-hospitals.png` });
 
+  // ── public /projects?lang=zh: Chinese render via i18n parallel fields (Phase 3) ──
+  log("goto-public-projects-zh", { url: `${BASE}/projects?lang=zh` });
+  await page.goto(`${BASE}/projects?lang=zh`, { waitUntil: "domcontentloaded", timeout: 60000 });
+  await page.waitForTimeout(500);
+  const zhText = await page.evaluate(() => document.body.innerText);
+  const zhOk = zhText.includes("中国医疗项目") && zhText.includes("重点项目");
+  log("public-projects-zh", { rendersChinese: zhOk });
+  if (!zhOk)
+    result.pageErrors.push("Public /projects?lang=zh did not render Chinese title via i18n");
+  await page.screenshot({ path: `${OUT_DIR}/04c-public-projects-zh.png` });
+
   // ── per-page NL command: a projects-page edit must target /pages/projects/ ──
   // Phase 4 proof: the same natural-language instruction resolves to the page
   // currently open in the Studio instead of always hitting home.
@@ -167,6 +178,7 @@ try {
   a.publicProjectsRenders = pubOk;
   a.publicProjectsRendersFeatureGrid = pubFeaturesOk;
   a.publicHospitalsRendersStats = hosStatsOk;
+  a.publicProjectsZh = zhOk;
   a.nlPerPageTargetsProjects = nlSuccess && nlPath.includes("/pages/projects/");
 
   result.success = result.pageErrors.length === 0;

@@ -255,6 +255,21 @@ export const PLACEHOLDER_PAGE_SLUGS = [
   "why-china",
 ] as const;
 
+type PlaceholderFeature = {
+  title: string;
+  body: string;
+  // Phase 3 — parallel zh translation (optional)
+  titleZh?: string;
+  bodyZh?: string;
+};
+
+type PlaceholderStat = {
+  value: string;
+  label: string;
+  // Phase 3 — parallel zh translation (optional)
+  labelZh?: string;
+};
+
 type PlaceholderSection = {
   type: "pageSection";
   kind: "hero" | "content" | "cta";
@@ -263,16 +278,30 @@ type PlaceholderSection = {
   image: string;
   linkHref: string;
   linkLabel: string;
+  // Phase 3 — parallel zh translations (optional)
+  titleZh?: string;
+  bodyZh?: string;
+  linkLabelZh?: string;
   // Phase 2 — layout richness (all optional)
   columns?: 1 | 2;
   imageSide?: "left" | "right";
-  features?: { title: string; body: string }[];
-  stats?: { value: string; label: string }[];
+  features?: PlaceholderFeature[];
+  stats?: PlaceholderStat[];
 };
 
 export type PlaceholderPage = {
   order: string[];
   sections: Record<string, PlaceholderSection>;
+};
+
+type PlaceholderZh = {
+  heroTitle?: string;
+  heroBody?: string;
+  contentTitle?: string;
+  contentBody?: string;
+  ctaTitle?: string;
+  ctaBody?: string;
+  ctaLabel?: string;
 };
 
 function ph(
@@ -289,7 +318,8 @@ function ph(
       PlaceholderSection,
       "columns" | "imageSide" | "features" | "stats"
     >
-  >
+  >,
+  zh?: PlaceholderZh
 ): PlaceholderPage {
   return {
     order: ["hero", "content", "cta"],
@@ -302,6 +332,8 @@ function ph(
         image: "",
         linkHref: "",
         linkLabel: "",
+        titleZh: zh?.heroTitle ?? "",
+        bodyZh: zh?.heroBody ?? "",
       },
       content: {
         type: "pageSection",
@@ -311,6 +343,8 @@ function ph(
         image: "",
         linkHref: "",
         linkLabel: "",
+        titleZh: zh?.contentTitle ?? "",
+        bodyZh: zh?.contentBody ?? "",
         ...(contentExtras ?? {}),
       },
       cta: {
@@ -321,6 +355,9 @@ function ph(
         image: "",
         linkHref: ctaHref,
         linkLabel: ctaLabel,
+        titleZh: zh?.ctaTitle ?? "",
+        bodyZh: zh?.ctaBody ?? "",
+        linkLabelZh: zh?.ctaLabel ?? "",
       },
     },
   };
@@ -340,21 +377,40 @@ export const PLACEHOLDER_PAGES: Record<string, PlaceholderPage> = {
       features: [
         {
           title: "Heavy-Ion & Proton Therapy",
+          titleZh: "重离子与质子治疗",
           body: "Precision radiotherapy for tumors with minimal damage to surrounding healthy tissue.",
+          bodyZh: "针对肿瘤的精准放射治疗，对周围健康组织的损伤降至最低。",
         },
         {
           title: "CAR-T Cell Therapy",
+          titleZh: "CAR-T 细胞疗法",
           body: "Next-generation immunotherapy that retrains your own cells to fight cancer.",
+          bodyZh: "重新训练自体细胞以对抗癌症的新一代免疫疗法。",
         },
         {
           title: "Stem-Cell & Regenerative",
+          titleZh: "干细胞与再生医学",
           body: "Advanced regenerative treatments for orthopedic and degenerative conditions.",
+          bodyZh: "针对骨科及退行性疾病的先进再生治疗。",
         },
         {
           title: "TCM-Integrated Care",
+          titleZh: "中西医整合治疗",
           body: "Evidence-based traditional Chinese medicine combined with modern clinical protocols.",
+          bodyZh: "循证中医与现代临床方案相结合。",
         },
       ],
+    },
+    {
+      heroTitle: "中国医疗项目",
+      heroBody:
+        "探索中国在肿瘤、再生医学与整合医疗领域的领先项目，由世界级医院与专家团队提供。",
+      contentTitle: "重点项目",
+      contentBody:
+        "从重离子与质子治疗到 CAR-T 细胞疗法、干细胞治疗，以及结合中医的特色专科，我们甄选的项目助您对接中国最前沿的临床能力。",
+      ctaTitle: "开始您的评估",
+      ctaBody: "告诉我们您的医疗需求，我们将为您匹配最合适的医院与专家。",
+      ctaLabel: "联系我们",
     }
   ),
   services: ph(
@@ -365,7 +421,19 @@ export const PLACEHOLDER_PAGES: Record<string, PlaceholderPage> = {
     "Talk to a Coordinator",
     "Our team helps you prepare records and plan your China medical journey with confidence.",
     "/contact",
-    "Contact Us"
+    "Contact Us",
+    undefined,
+    {
+      heroTitle: "跨境医疗协调",
+      heroBody:
+        "为国际患者提供从病历整理、翻译到医院匹配、行程安排与后续随访的全程支持。",
+      contentTitle: "服务套餐",
+      contentBody:
+        "选择契合您旅程的支持级别：轻量、标准、进阶或全程 VIP 协调——每一项均价格透明，并享我们的退款保障。",
+      ctaTitle: "与协调员沟通",
+      ctaBody: "我们的团队协助您准备病历，从容规划赴华就医之旅。",
+      ctaLabel: "联系我们",
+    }
   ),
   hospitals: ph(
     "Partner Hospitals",
@@ -378,11 +446,22 @@ export const PLACEHOLDER_PAGES: Record<string, PlaceholderPage> = {
     "Contact Us",
     {
       stats: [
-        { value: "30+", label: "Partner Hospitals" },
-        { value: "4", label: "Major Cities" },
-        { value: "12", label: "Specialty Centers" },
-        { value: "98%", label: "Case Match Rate" },
+        { value: "30+", label: "Partner Hospitals", labelZh: "合作医院" },
+        { value: "4", label: "Major Cities", labelZh: "主要城市" },
+        { value: "12", label: "Specialty Centers", labelZh: "专科中心" },
+        { value: "98%", label: "Case Match Rate", labelZh: "匹配成功率" },
       ],
+    },
+    {
+      heroTitle: "合作医院",
+      heroBody:
+        "值得信赖的中国知名医院与专科机构网络，以卓越的临床实力与国际患者服务经验甄选而成。",
+      contentTitle: "医院网络",
+      contentBody:
+        "我们与北京、上海、广州、海南的顶级机构合作——包括质子重离子中心、综合性肿瘤医院与中医领航机构。",
+      ctaTitle: "申请匹配",
+      ctaBody: "我们将根据您的病历资料，为您匹配最合适的医院与专家。",
+      ctaLabel: "联系我们",
     }
   ),
   stories: ph(
@@ -393,7 +472,18 @@ export const PLACEHOLDER_PAGES: Record<string, PlaceholderPage> = {
     "Share Your Story",
     "If you have completed treatment with us, we would love to hear how your journey went.",
     "/contact",
-    "Contact Us"
+    "Contact Us",
+    undefined,
+    {
+      heroTitle: "患者故事",
+      heroBody: "真实国际患者的治疗结局——以他们自己的话说。",
+      contentTitle: "疗效与见证",
+      contentBody:
+        "从复杂肿瘤病例到再生疗法，这些故事展现了精心协调与世界级医学协作所能达成的成果。",
+      ctaTitle: "分享您的故事",
+      ctaBody: "若您已在我们这里完成治疗，我们很想了解您的旅程。",
+      ctaLabel: "联系我们",
+    }
   ),
   about: ph(
     "About MedKungfu",
@@ -403,7 +493,18 @@ export const PLACEHOLDER_PAGES: Record<string, PlaceholderPage> = {
     "Work With Us",
     "Hospitals and partners are welcome to collaborate with us to serve global patients.",
     "/contact",
-    "Contact Us"
+    "Contact Us",
+    undefined,
+    {
+      heroTitle: "关于康福来",
+      heroBody: "我们以同理心、透明与全程协调，连接国际患者与中国最优质的医疗资源。",
+      contentTitle: "我们是谁",
+      contentBody:
+        "康福来是专注于国际医疗对接的服务机构。我们统筹完整的跨境就医流程——医院匹配、病历管理、翻译、签证、住宿、陪诊与随访。",
+      ctaTitle: "与我们合作",
+      ctaBody: "欢迎医院与合作伙伴携手，共同服务全球患者。",
+      ctaLabel: "联系我们",
+    }
   ),
   faq: ph(
     "Frequently Asked Questions",
@@ -413,7 +514,17 @@ export const PLACEHOLDER_PAGES: Record<string, PlaceholderPage> = {
     "Browse All FAQs",
     "Find detailed guidance on eligibility, documents, and post-treatment follow-up.",
     "/faq",
-    "Read More"
+    "Read More",
+    undefined,
+    {
+      heroTitle: "常见问题",
+      heroBody: "赴华就医前国际患者最常提出的疑问解答。",
+      contentTitle: "常见问题",
+      contentBody: "了解费用、时间线、准备事项，以及康福来就医旅程各阶段的预期。",
+      ctaTitle: "浏览全部问答",
+      ctaBody: "获取关于资格、材料与治疗后随访的详细指引。",
+      ctaLabel: "了解更多",
+    }
   ),
   contact: ph(
     "Contact Us",
@@ -423,7 +534,18 @@ export const PLACEHOLDER_PAGES: Record<string, PlaceholderPage> = {
     "Submit an Inquiry",
     "Send your medical needs and we will respond with a personalized assessment.",
     "/contact",
-    "Contact Us"
+    "Contact Us",
+    undefined,
+    {
+      heroTitle: "联系我们",
+      heroBody: "联系我们的协调团队进行初步评估——我们将在一个工作日内回复。",
+      contentTitle: "取得联系",
+      contentBody:
+        "欢迎通过 contact@medkungfu.com 或 WhatsApp 联系我们。我们的多语言团队随时助您迈出第一步。",
+      ctaTitle: "提交咨询",
+      ctaBody: "发送您的医疗需求，我们将回复个性化评估。",
+      ctaLabel: "联系我们",
+    }
   ),
   "why-china": ph(
     "Why China Medical",
@@ -438,21 +560,39 @@ export const PLACEHOLDER_PAGES: Record<string, PlaceholderPage> = {
       features: [
         {
           title: "World-Class Facilities",
+          titleZh: "世界级设施",
           body: "Hospitals equipped with the latest imaging, radiotherapy, and surgical technology.",
+          bodyZh: "配备最新影像、放疗与外科技术的医院。",
         },
         {
           title: "Cost-Effective Care",
+          titleZh: "高性价比诊疗",
           body: "Comparable outcomes at a fraction of the cost of treatments in the US or Europe.",
+          bodyZh: "疗效可比，费用仅为欧美的一小部分。",
         },
         {
           title: "Integrated Coordination",
+          titleZh: "一体化协调",
           body: "One team manages records, translation, visas, accommodation, and follow-up.",
+          bodyZh: "由一支团队统筹病历、翻译、签证、住宿与随访。",
         },
         {
           title: "Fast Access",
+          titleZh: "快速就诊",
           body: "Short waiting times from consultation to the start of treatment.",
+          bodyZh: "从会诊到开始治疗等待时间短。",
         },
       ],
+    },
+    {
+      heroTitle: "为什么选择中国医疗",
+      heroBody: "世界级诊疗、先进技术、高性价比——使中国成为国际患者的首选目的地。",
+      contentTitle: "中国优势",
+      contentBody:
+        "从重离子治疗中心、CAR-T 临床领先，到中医整合与友好的医疗旅游通道，中国兼具质量、速度与价值。",
+      ctaTitle: "对比您的选择",
+      ctaBody: "了解中国医疗在您的病症上与同类方案的对比，以及患者选择它的原因。",
+      ctaLabel: "联系我们",
     }
   ),
 };

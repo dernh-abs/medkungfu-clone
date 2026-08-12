@@ -8,6 +8,11 @@ export const metadata: Metadata = {
     "Real patient experiences with MedKungFu — from heavy ion therapy for prostate cancer to CAR-T cell therapy for lymphoma, and the care pathways that made them possible.",
 };
 
-export default function StoriesPage() {
-  return <PublicPage slug="stories" />;
+export default async function StoriesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ lang?: string }>;
+}) {
+  const { lang } = await searchParams;
+  return <PublicPage slug="stories" lang={lang === "zh" ? "zh" : "en"} />;
 }

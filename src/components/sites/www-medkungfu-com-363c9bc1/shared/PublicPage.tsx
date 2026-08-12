@@ -18,9 +18,10 @@ import { SiteFooter } from "./SiteFooter";
 
 interface PublicPageProps {
   slug: string;
+  lang?: "en" | "zh";
 }
 
-export default async function PublicPage({ slug }: PublicPageProps) {
+export default async function PublicPage({ slug, lang = "en" }: PublicPageProps) {
   const doc = await loadFullDocument();
   const pageData = doc?.pages?.[slug as keyof typeof doc.pages];
   if (!pageData) {
@@ -49,6 +50,7 @@ export default async function PublicPage({ slug }: PublicPageProps) {
               sections.map((item) => (
                 <PageSection
                   key={(item.props as { id?: string }).id ?? item.type}
+                  lang={lang}
                   {...(item.props as Record<string, unknown>)}
                 />
               ))

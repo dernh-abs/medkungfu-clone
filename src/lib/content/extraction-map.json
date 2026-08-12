@@ -313,7 +313,9 @@
           "body": "Explore China's leading medical programs across oncology, regenerative medicine, and integrative care — delivered by world-class hospitals and specialists.",
           "image": "",
           "linkHref": "",
-          "linkLabel": ""
+          "linkLabel": "",
+          "titleZh": "中国医疗项目",
+          "bodyZh": "探索中国在肿瘤、再生医学与整合医疗领域的领先项目，由世界级医院与专家团队提供。"
         },
         "content": {
           "type": "pageSection",
@@ -323,22 +325,32 @@
           "image": "",
           "linkHref": "",
           "linkLabel": "",
+          "titleZh": "重点项目",
+          "bodyZh": "从重离子与质子治疗到 CAR-T 细胞疗法、干细胞治疗，以及结合中医的特色专科，我们甄选的项目助您对接中国最前沿的临床能力。",
           "features": [
             {
               "title": "Heavy-Ion & Proton Therapy",
-              "body": "Precision radiotherapy for tumors with minimal damage to surrounding healthy tissue."
+              "titleZh": "重离子与质子治疗",
+              "body": "Precision radiotherapy for tumors with minimal damage to surrounding healthy tissue.",
+              "bodyZh": "针对肿瘤的精准放射治疗，对周围健康组织的损伤降至最低。"
             },
             {
               "title": "CAR-T Cell Therapy",
-              "body": "Next-generation immunotherapy that retrains your own cells to fight cancer."
+              "titleZh": "CAR-T 细胞疗法",
+              "body": "Next-generation immunotherapy that retrains your own cells to fight cancer.",
+              "bodyZh": "重新训练自体细胞以对抗癌症的新一代免疫疗法。"
             },
             {
               "title": "Stem-Cell & Regenerative",
-              "body": "Advanced regenerative treatments for orthopedic and degenerative conditions."
+              "titleZh": "干细胞与再生医学",
+              "body": "Advanced regenerative treatments for orthopedic and degenerative conditions.",
+              "bodyZh": "针对骨科及退行性疾病的先进再生治疗。"
             },
             {
               "title": "TCM-Integrated Care",
-              "body": "Evidence-based traditional Chinese medicine combined with modern clinical protocols."
+              "titleZh": "中西医整合治疗",
+              "body": "Evidence-based traditional Chinese medicine combined with modern clinical protocols.",
+              "bodyZh": "循证中医与现代临床方案相结合。"
             }
           ]
         },
@@ -349,7 +361,10 @@
           "body": "Tell us about your medical needs and we will match the right hospital and specialist for your case.",
           "image": "",
           "linkHref": "/contact",
-          "linkLabel": "Contact Us"
+          "linkLabel": "Contact Us",
+          "titleZh": "开始您的评估",
+          "bodyZh": "告诉我们您的医疗需求，我们将为您匹配最合适的医院与专家。",
+          "linkLabelZh": "联系我们"
         }
       }
     },
@@ -367,7 +382,9 @@
           "body": "End-to-end support for international patients — from medical records and translation to hospital matching, travel, and follow-up care.",
           "image": "",
           "linkHref": "",
-          "linkLabel": ""
+          "linkLabel": "",
+          "titleZh": "跨境医疗协调",
+          "bodyZh": "为国际患者提供从病历整理、翻译到医院匹配、行程安排与后续随访的全程支持。"
         },
         "content": {
           "type": "pageSection",
@@ -376,7 +393,9 @@
           "body": "Choose the level of support that fits your journey: light, standard, advanced, or full VIP coordination — each backed by transparent pricing and our refund guarantee.",
           "image": "",
           "linkHref": "",
-          "linkLabel": ""
+          "linkLabel": "",
+          "titleZh": "服务套餐",
+          "bodyZh": "选择契合您旅程的支持级别：轻量、标准、进阶或全程 VIP 协调——每一项均价格透明，并享我们的退款保障。"
         },
         "cta": {
           "type": "pageSection",
@@ -385,7 +404,10 @@
           "body": "Our team helps you prepare records and plan your China medical journey with confidence.",
           "image": "",
           "linkHref": "/contact",
-          "linkLabel": "Contact Us"
+          "linkLabel": "Contact Us",
+          "titleZh": "与协调员沟通",
+          "bodyZh": "我们的团队协助您准备病历，从容规划赴华就医之旅。",
+          "linkLabelZh": "联系我们"
         }
       }
     },
@@ -403,7 +425,9 @@
           "body": "A trusted network of renowned Chinese hospitals and specialist institutions, selected for clinical excellence and international patient experience.",
           "image": "",
           "linkHref": "",
-          "linkLabel": ""
+          "linkLabel": "",
+          "titleZh": "合作医院",
+          "bodyZh": "值得信赖的中国知名医院与专科机构网络，以卓越的临床实力与国际患者服务经验甄选而成。"
         },
         "content": {
           "type": "pageSection",
@@ -413,22 +437,28 @@
           "image": "",
           "linkHref": "",
           "linkLabel": "",
+          "titleZh": "医院网络",
+          "bodyZh": "我们与北京、上海、广州、海南的顶级机构合作——包括质子重离子中心、综合性肿瘤医院与中医领航机构。",
           "stats": [
             {
               "value": "30+",
-              "label": "Partner Hospitals"
+              "label": "Partner Hospitals",
+              "labelZh": "合作医院"
             },
             {
               "value": "4",
-              "label": "Major Cities"
+              "label": "Major Cities",
+              "labelZh": "主要城市"
             },
             {
               "value": "12",
-              "label": "Specialty Centers"
+              "label": "Specialty Centers",
+              "labelZh": "专科中心"
             },
             {
               "value": "98%",
-              "label": "Case Match Rate"
+              "label": "Case Match Rate",
+              "labelZh": "匹配成功率"
             }
           ]
         },
@@ -439,7 +469,10 @@
           "body": "We match your condition to the most suitable hospital and specialist based on your medical profile.",
           "image": "",
           "linkHref": "/contact",
-          "linkLabel": "Contact Us"
+          "linkLabel": "Contact Us",
+          "titleZh": "申请匹配",
+          "bodyZh": "我们将根据您的病历资料，为您匹配最合适的医院与专家。",
+          "linkLabelZh": "联系我们"
         }
       }
     },
@@ -457,7 +490,9 @@
           "body": "Real outcomes from international patients who came to China for care — in their own words.",
           "image": "",
           "linkHref": "",
-          "linkLabel": ""
+          "linkLabel": "",
+          "titleZh": "患者故事",
+          "bodyZh": "真实国际患者的治疗结局——以他们自己的话说。"
         },
         "content": {
           "type": "pageSection",
@@ -466,7 +501,9 @@
           "body": "From complex oncology cases to regenerative therapies, these stories show what careful coordination and world-class medicine can achieve together.",
           "image": "",
           "linkHref": "",
-          "linkLabel": ""
+          "linkLabel": "",
+          "titleZh": "疗效与见证",
+          "bodyZh": "从复杂肿瘤病例到再生疗法，这些故事展现了精心协调与世界级医学协作所能达成的成果。"
         },
         "cta": {
           "type": "pageSection",
@@ -475,7 +512,10 @@
           "body": "If you have completed treatment with us, we would love to hear how your journey went.",
           "image": "",
           "linkHref": "/contact",
-          "linkLabel": "Contact Us"
+          "linkLabel": "Contact Us",
+          "titleZh": "分享您的故事",
+          "bodyZh": "若您已在我们这里完成治疗，我们很想了解您的旅程。",
+          "linkLabelZh": "联系我们"
         }
       }
     },
@@ -493,7 +533,9 @@
           "body": "We connect international patients with China's best medical resources — with empathy, transparency, and end-to-end coordination.",
           "image": "",
           "linkHref": "",
-          "linkLabel": ""
+          "linkLabel": "",
+          "titleZh": "关于康福来",
+          "bodyZh": "我们以同理心、透明与全程协调，连接国际患者与中国最优质的医疗资源。"
         },
         "content": {
           "type": "pageSection",
@@ -502,7 +544,9 @@
           "body": "MedKungfu is a specialized international medical placement service. We organize the full cross-border care process — matching hospitals, managing records, translation, visas, accommodation, escort, and follow-up.",
           "image": "",
           "linkHref": "",
-          "linkLabel": ""
+          "linkLabel": "",
+          "titleZh": "我们是谁",
+          "bodyZh": "康福来是专注于国际医疗对接的服务机构。我们统筹完整的跨境就医流程——医院匹配、病历管理、翻译、签证、住宿、陪诊与随访。"
         },
         "cta": {
           "type": "pageSection",
@@ -511,7 +555,10 @@
           "body": "Hospitals and partners are welcome to collaborate with us to serve global patients.",
           "image": "",
           "linkHref": "/contact",
-          "linkLabel": "Contact Us"
+          "linkLabel": "Contact Us",
+          "titleZh": "与我们合作",
+          "bodyZh": "欢迎医院与合作伙伴携手，共同服务全球患者。",
+          "linkLabelZh": "联系我们"
         }
       }
     },
@@ -529,7 +576,9 @@
           "body": "Answers to the questions international patients ask before traveling to China for medical care.",
           "image": "",
           "linkHref": "",
-          "linkLabel": ""
+          "linkLabel": "",
+          "titleZh": "常见问题",
+          "bodyZh": "赴华就医前国际患者最常提出的疑问解答。"
         },
         "content": {
           "type": "pageSection",
@@ -538,7 +587,9 @@
           "body": "Learn about costs, timelines, preparation, and what to expect at each stage of your medical journey with MedKungfu.",
           "image": "",
           "linkHref": "",
-          "linkLabel": ""
+          "linkLabel": "",
+          "titleZh": "常见问题",
+          "bodyZh": "了解费用、时间线、准备事项，以及康福来就医旅程各阶段的预期。"
         },
         "cta": {
           "type": "pageSection",
@@ -547,7 +598,10 @@
           "body": "Find detailed guidance on eligibility, documents, and post-treatment follow-up.",
           "image": "",
           "linkHref": "/faq",
-          "linkLabel": "Read More"
+          "linkLabel": "Read More",
+          "titleZh": "浏览全部问答",
+          "bodyZh": "获取关于资格、材料与治疗后随访的详细指引。",
+          "linkLabelZh": "了解更多"
         }
       }
     },
@@ -565,7 +619,9 @@
           "body": "Reach our coordination team for an initial assessment — we respond within one business day.",
           "image": "",
           "linkHref": "",
-          "linkLabel": ""
+          "linkLabel": "",
+          "titleZh": "联系我们",
+          "bodyZh": "联系我们的协调团队进行初步评估——我们将在一个工作日内回复。"
         },
         "content": {
           "type": "pageSection",
@@ -574,7 +630,9 @@
           "body": "Email us at contact@medkungfu.com or reach us on WhatsApp. Our multilingual team is ready to help you take the first step.",
           "image": "",
           "linkHref": "",
-          "linkLabel": ""
+          "linkLabel": "",
+          "titleZh": "取得联系",
+          "bodyZh": "欢迎通过 contact@medkungfu.com 或 WhatsApp 联系我们。我们的多语言团队随时助您迈出第一步。"
         },
         "cta": {
           "type": "pageSection",
@@ -583,7 +641,10 @@
           "body": "Send your medical needs and we will respond with a personalized assessment.",
           "image": "",
           "linkHref": "/contact",
-          "linkLabel": "Contact Us"
+          "linkLabel": "Contact Us",
+          "titleZh": "提交咨询",
+          "bodyZh": "发送您的医疗需求，我们将回复个性化评估。",
+          "linkLabelZh": "联系我们"
         }
       }
     },
@@ -601,7 +662,9 @@
           "body": "World-class care, advanced technology, and cost-effective treatment — making China a leading destination for international patients.",
           "image": "",
           "linkHref": "",
-          "linkLabel": ""
+          "linkLabel": "",
+          "titleZh": "为什么选择中国医疗",
+          "bodyZh": "世界级诊疗、先进技术、高性价比——使中国成为国际患者的首选目的地。"
         },
         "content": {
           "type": "pageSection",
@@ -611,22 +674,32 @@
           "image": "",
           "linkHref": "",
           "linkLabel": "",
+          "titleZh": "中国优势",
+          "bodyZh": "从重离子治疗中心、CAR-T 临床领先，到中医整合与友好的医疗旅游通道，中国兼具质量、速度与价值。",
           "features": [
             {
               "title": "World-Class Facilities",
-              "body": "Hospitals equipped with the latest imaging, radiotherapy, and surgical technology."
+              "titleZh": "世界级设施",
+              "body": "Hospitals equipped with the latest imaging, radiotherapy, and surgical technology.",
+              "bodyZh": "配备最新影像、放疗与外科技术的医院。"
             },
             {
               "title": "Cost-Effective Care",
-              "body": "Comparable outcomes at a fraction of the cost of treatments in the US or Europe."
+              "titleZh": "高性价比诊疗",
+              "body": "Comparable outcomes at a fraction of the cost of treatments in the US or Europe.",
+              "bodyZh": "疗效可比，费用仅为欧美的一小部分。"
             },
             {
               "title": "Integrated Coordination",
-              "body": "One team manages records, translation, visas, accommodation, and follow-up."
+              "titleZh": "一体化协调",
+              "body": "One team manages records, translation, visas, accommodation, and follow-up.",
+              "bodyZh": "由一支团队统筹病历、翻译、签证、住宿与随访。"
             },
             {
               "title": "Fast Access",
-              "body": "Short waiting times from consultation to the start of treatment."
+              "titleZh": "快速就诊",
+              "body": "Short waiting times from consultation to the start of treatment.",
+              "bodyZh": "从会诊到开始治疗等待时间短。"
             }
           ]
         },
@@ -637,7 +710,10 @@
           "body": "See how China medical care compares for your condition and why patients choose it.",
           "image": "",
           "linkHref": "/contact",
-          "linkLabel": "Contact Us"
+          "linkLabel": "Contact Us",
+          "titleZh": "对比您的选择",
+          "bodyZh": "了解中国医疗在您的病症上与同类方案的对比，以及患者选择它的原因。",
+          "linkLabelZh": "联系我们"
         }
       }
     }

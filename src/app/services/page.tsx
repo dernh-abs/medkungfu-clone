@@ -8,6 +8,11 @@ export const metadata: Metadata = {
     "MedKungFu's comprehensive medical tourism services: expert video consultation, full-process coordination, visa & travel assistance, translation & escort, and rehabilitation follow-up.",
 };
 
-export default function ServicesPage() {
-  return <PublicPage slug="services" />;
+export default async function ServicesPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ lang?: string }>;
+}) {
+  const { lang } = await searchParams;
+  return <PublicPage slug="services" lang={lang === "zh" ? "zh" : "en"} />;
 }

@@ -8,6 +8,11 @@ export const metadata: Metadata = {
     "Explore MedKungFu's advantageous medical projects: heavy ion/proton therapy, CAR-T, BNCT, stem cell therapy, arthritis treatments, TCM specialties and health checkups at China's top hospitals.",
 };
 
-export default function ProjectsPage() {
-  return <PublicPage slug="projects" />;
+export default async function ProjectsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ lang?: string }>;
+}) {
+  const { lang } = await searchParams;
+  return <PublicPage slug="projects" lang={lang === "zh" ? "zh" : "en"} />;
 }

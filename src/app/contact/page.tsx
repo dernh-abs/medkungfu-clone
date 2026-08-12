@@ -8,6 +8,11 @@ export const metadata: Metadata = {
     "Contact MedKungfu for a free consultation. Reach us by email, WhatsApp, or through our inquiry form — our team responds within one business day.",
 };
 
-export default function ContactPage() {
-  return <PublicPage slug="contact" />;
+export default async function ContactPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ lang?: string }>;
+}) {
+  const { lang } = await searchParams;
+  return <PublicPage slug="contact" lang={lang === "zh" ? "zh" : "en"} />;
 }

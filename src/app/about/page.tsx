@@ -8,6 +8,11 @@ export const metadata: Metadata = {
     "MedKungFu China is a specialized international medical placement service connecting global patients with China's world-class healthcare system.",
 };
 
-export default function AboutPage() {
-  return <PublicPage slug="about" />;
+export default async function AboutPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ lang?: string }>;
+}) {
+  const { lang } = await searchParams;
+  return <PublicPage slug="about" lang={lang === "zh" ? "zh" : "en"} />;
 }

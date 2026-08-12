@@ -8,6 +8,11 @@ export const metadata: Metadata = {
     "MedKungFu partners with China's most prestigious hospitals — Shanghai Proton & Heavy Ion Center, Ruijin Hospital Hainan, Longhua Hospital, and more across Beijing, Shanghai, Guangzhou and Hainan.",
 };
 
-export default function HospitalsPage() {
-  return <PublicPage slug="hospitals" />;
+export default async function HospitalsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ lang?: string }>;
+}) {
+  const { lang } = await searchParams;
+  return <PublicPage slug="hospitals" lang={lang === "zh" ? "zh" : "en"} />;
 }

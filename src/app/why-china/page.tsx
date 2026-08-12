@@ -8,6 +8,11 @@ export const metadata: Metadata = {
     "Why choose China for medical treatment: world-class technology, exceptional efficiency, comprehensive care, cutting-edge innovation, and medical-tourism-friendly access.",
 };
 
-export default function WhyChinaPage() {
-  return <PublicPage slug="why-china" />;
+export default async function WhyChinaPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ lang?: string }>;
+}) {
+  const { lang } = await searchParams;
+  return <PublicPage slug="why-china" lang={lang === "zh" ? "zh" : "en"} />;
 }
