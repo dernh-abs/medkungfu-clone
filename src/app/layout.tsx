@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Open_Sans, Montserrat } from "next/font/google";
 
 import { LanguageProvider } from "@/lib/i18n/LanguageProvider";
+import { ContentBootstrap } from "@/components/ContentBootstrap";
 import { StudioFab } from "@/components/StudioFab";
 
 import "./globals.css";
@@ -39,6 +40,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-[#F5F7FA] text-[#1A1A2E] font-sans">
         <LanguageProvider>
+          <ContentBootstrap />
           {children}
           <StudioFab />
         </LanguageProvider>

@@ -194,6 +194,23 @@ async function main(): Promise<void> {
     return;
   }
 
+  // First-run only: if .content/ already exists, skip regeneration so that
+  // edits made in /studio (which persist into .content/translations.json and
+  // .content/pages/*.json) survive `npm run dev` restarts and `npm run build`
+  // deploys. The faithful medkungfu.com baseline is created on the very first
+  // seed; to reset back to it, delete the .content/ directory and re-run seed.
+  if (fsSync.existsSync(path.join(CONTENT_DIR, "translations.json"))) {
+    console.log(
+      "[seed-ucd] .content/ already exists — skipping regeneration to preserve Studio edits."
+    );
+    console.log(
+      "[seed-ucd] (Delete .content/ to regenerate from source and reset to the faithful baseline.)"
+    );
+    await validateExtractionMap();
+    console.log("[seed-ucd] Done (no-op).");
+    return;
+  }
+
   console.log("[seed-ucd] Generating .content/ ...");
   const translations = await buildTranslations();
   const meta = await buildMeta();

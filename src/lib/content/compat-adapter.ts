@@ -33,23 +33,32 @@ export function resolve(translation: Record<string, unknown>, p: string): string
  * `t()`: en/zh resolve dotted keys against the nested dict; ru resolves the
  * English text first then looks it up in the flat RU map. Falls back to the
  * English value, then to the raw key.
+ *
+ * Merge policy: the hardcoded TRANSLATIONS/RU modules are the faithful
+ * medkungfu.com baseline and always act as the base dictionary. When a UCD is
+ * present (Studio has edited content), its values OVERRIDE the module on a
+ * per-key basis. This guarantees that a partial UCD (or a key the UCD does not
+ * cover) can never break rendering — the module fills every gap. It also means
+ * the public site stays 100% faithful to the clone until Studio actually edits
+ * a key.
  */
 export function compatTranslate(
   lang: SupportedLanguage,
   translations: Translations | null,
   key: string
 ): string {
-  // Prefer UCD translations when available.
-  const enDict = translations?.en ?? (TRANSLATIONS.en?.translation as Record<string, unknown>);
+  const moduleEn = (TRANSLATIONS.en?.translation as Record<string, unknown>) ?? {};
+  const enDict = translations?.en ? { ...moduleEn, ...translations.en } : moduleEn;
   const enText = lookup(enDict, key) ?? resolve(enDict, key) ?? key;
 
   if (lang === "ru") {
-    const ruMap = translations?.ru ?? RU;
+    const ruMap = translations?.ru ? { ...RU, ...translations.ru } : RU;
     const v = ruMap[enText];
     return typeof v === "string" ? v : enText;
   }
 
-  const dict = translations?.[lang] ?? (TRANSLATIONS[lang]?.translation as Record<string, unknown>);
+  const moduleLang = (TRANSLATIONS[lang]?.translation as Record<string, unknown>) ?? {};
+  const dict = translations?.[lang] ? { ...moduleLang, ...translations[lang] } : moduleLang;
   if (dict) {
     const direct = lookup(dict, key);
     if (direct !== undefined) return direct;
