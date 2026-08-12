@@ -4,6 +4,7 @@
 // Bilingual: renders Chinese content when the site language is zh.
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
@@ -444,10 +445,13 @@ export function SunYatSenMemorialPage() {
     >
       {/* HERO */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950">
-        <img
+        <Image
           src="/sites/www-medkungfu-com-363c9bc1/shared/images/hospital-sun-yatsen.jpg"
           alt={isZh ? "中山大学孙逸仙纪念医院外观" : "Sun Yat-sen Memorial Hospital exterior"}
-          className="absolute inset-0 h-full w-full object-cover"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-red-950/85 via-rose-950/70 to-red-950/80"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white py-32">
