@@ -146,3 +146,25 @@
 2. **1-A** 占位页确认无真人编辑、可直接重 seed？
 3. **2-A** pageSection 丰富度边界（两栏/网格/数据条三种）？
 4. **3-A** i18n 用并行字段还是正式翻译键？
+
+---
+
+## 进度状态（2026-08-12 收尾更新）
+
+所有决策点均按原推荐项执行，五个阶段全部落地并本地验证通过。
+
+| Phase | 内容 | 状态 | 本地 commit | e2e |
+|-------|------|------|-------------|-----|
+| 5 | 线上公开渲染链路（PublicPage 读 `.content`） | ✅ 完成 | `06dea1b`（已 push） | 通过 |
+| 1 | 8 个占位页真实英文文案 | ✅ 完成 | `18ac0ba`（已 push） | 通过 |
+| 4 | NL 指令按页作用（page 透传 + /pages/<page>/ 解析） | ✅ 完成 | `51391a4`（已 push） | 通过（nlPerPageTargetsProjects） |
+| 2 | pageSection 丰富化（两栏/网格/数据条） | ✅ 完成 | 本地 `ahead+1` 待 push | 通过（feature grid / stats bar） |
+| 3 | pageSection i18n 并行字段 + ?lang=zh | ✅ 完成 | 本地 `ahead+2` 待 push | 通过（publicProjectsZh） |
+
+**验证手段**：`npm run typecheck` 全绿；`node scripts/e2e-studio-check.mjs` 11/11 断言通过（studio 列表 9 卡、projects 大纲 3 项、标题解析、home 翻译键、公开页渲染+特性网格+数据条、中文渲染、per-page NL path）。
+
+**已知限制 / 后续**：
+- 非 home 页纯「把标题改成…」不带区块名时无法唯一定位（需指令带区块名，如「把 hero 标题改成…」）；NL 的 zh 字段编辑（titleZh 等）暂未接入，后续可在 rule/plan 层扩展。
+- 语言切换目前为 `?lang=zh` 查询参数；站点级语言切换器（cookie/持久化）留待后续。
+- 4 个本地 commit（Phase 2、3 + 计划书状态）需在能连通 GitHub 的环境 push。
+
