@@ -17,6 +17,20 @@ const eslintConfig = defineConfig([
     // Builder worktrees (build artifacts inside them) are not source.
     ".claude/**",
   ]),
+  // Honor the leading-underscore "intentionally unused" convention:
+  // `_var` params/destructure-omit keys are not lint errors.
+  {
+    rules: {
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        {
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          ignoreRestSiblings: true,
+        },
+      ],
+    },
+  },
 ]);
 
 export default eslintConfig;
