@@ -155,7 +155,7 @@ export function useAgentCommand(page: string) {
         return { success: false, error: message };
       }
     },
-    []
+    [page]
   );
 
   const apply = useCallback(async (): Promise<{
@@ -221,7 +221,7 @@ export function useAgentCommand(page: string) {
       }));
       return { success: false };
     }
-  }, [pushHistory]);
+  }, [pushHistory, page]);
 
   const dismiss = useCallback(() => {
     setState((prev) => ({

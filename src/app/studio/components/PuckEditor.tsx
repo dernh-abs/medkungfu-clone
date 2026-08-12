@@ -467,7 +467,7 @@ export function PuckEditor({ page }: PuckEditorProps) {
     } finally {
       setApplyingAgent(false);
     }
-  }, [pendingPreview, refreshDocument]);
+  }, [pendingPreview, refreshDocument, page]);
 
   const handleAgentCancel = useCallback(() => {
     setPendingPreview(null);
