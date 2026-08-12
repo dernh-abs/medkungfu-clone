@@ -4,7 +4,6 @@
 // Bilingual: renders Chinese content when the site language is zh.
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
@@ -424,13 +423,10 @@ export function GuanghuaPage() {
     >
       {/* HERO */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-950">
-        <Image
+        <img
           src="/sites/www-medkungfu-com-363c9bc1/shared/images/hospital-guanghua.jpg"
           alt={isZh ? "上海光华医院外观" : "Guanghua Hospital exterior"}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
+          className="absolute inset-0 h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-br from-teal-950/85 via-green-950/70 to-teal-950/80"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white py-32">

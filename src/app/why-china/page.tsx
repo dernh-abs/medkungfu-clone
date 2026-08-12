@@ -1,6 +1,13 @@
 import type { Metadata } from "next";
 
-import PublicPage from "@/components/sites/www-medkungfu-com-363c9bc1/shared/PublicPage";
+import { SiteHeader } from "@/components/sites/www-medkungfu-com-363c9bc1/shared/SiteHeader";
+import { SiteFooter } from "@/components/sites/www-medkungfu-com-363c9bc1/shared/SiteFooter";
+import {
+  WhyChinaHero,
+  CoreAdvantagesSection,
+  DistinctiveFeaturesSection,
+  WhyChinaCtaSection,
+} from "@/components/sites/www-medkungfu-com-363c9bc1/why-china-beb2e389/WhyChinaSections";
 
 export const metadata: Metadata = {
   title: "Why Consider Medical Care in China | MedKungFu",
@@ -8,11 +15,25 @@ export const metadata: Metadata = {
     "Why choose China for medical treatment: world-class technology, exceptional efficiency, comprehensive care, cutting-edge innovation, and medical-tourism-friendly access.",
 };
 
-export default async function WhyChinaPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ lang?: string }>;
-}) {
-  const { lang } = await searchParams;
-  return <PublicPage slug="why-china" lang={lang === "zh" ? "zh" : "en"} />;
+export default function WhyChinaPage() {
+  return (
+    <>
+      <SiteHeader />
+      <main className="flex-grow pt-[72px]">
+        <main
+          role="main"
+          aria-label="Why Choose China for Medical Treatment"
+          className="min-h-screen bg-[#F5F7FA] pt-10 pb-20"
+        >
+          <div className="container-custom">
+            <WhyChinaHero />
+            <CoreAdvantagesSection />
+            <DistinctiveFeaturesSection />
+            <WhyChinaCtaSection />
+          </div>
+        </main>
+      </main>
+      <SiteFooter />
+    </>
+  );
 }

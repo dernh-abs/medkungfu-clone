@@ -7,7 +7,6 @@
 // `zhConfig` prop); otherwise renders the English `data` unchanged.
 "use client";
 import Link from "next/link";
-import Image from "next/image";
 
 import { useLanguage } from "@/lib/i18n/LanguageProvider";
 
@@ -108,12 +107,10 @@ function IntroSection({ intro }: { intro: IntroData }) {
             </div>
           </Reveal>
           <Reveal x={30} className="relative">
-            <Image
+            <img
               src={intro.image}
               alt={intro.imageAlt}
-              width={800}
-              height={533}
-              className="rounded-2xl shadow-2xl w-full h-auto"
+              className="rounded-2xl shadow-2xl w-full"
             />
           </Reveal>
         </div>
@@ -185,15 +182,11 @@ function IndicationCard({
       y={20}
       className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow border border-gray-100"
     >
-      <div className="relative w-full h-48">
-        <Image
-          src={item.image}
-          alt={item.imageAlt}
-          fill
-          sizes="(max-width: 768px) 100vw, 33vw"
-          className="object-cover"
-        />
-      </div>
+      <img
+        src={item.image}
+        alt={item.imageAlt}
+        className="w-full h-48 object-cover"
+      />
       <div className="p-6">
         <h3 className="text-lg font-bold text-[#1A1A2E] mb-1">{item.title}</h3>
         <p className={`${accentClass} text-sm mb-4`}>{item.subtitle}</p>
@@ -749,15 +742,7 @@ function CaseCard({
 }) {
   return (
     <Reveal y={20} className="bg-white rounded-2xl overflow-hidden shadow-sm">
-      <div className={`relative w-full ${imgClass}`}>
-        <Image
-          src={item.image}
-          alt={item.imageAlt}
-          fill
-          sizes="(max-width: 768px) 100vw, 33vw"
-          className="object-cover"
-        />
-      </div>
+      <img src={item.image} alt={item.imageAlt} className={`w-full ${imgClass} object-cover`} />
       <div className="p-6">
         <h3 className="text-xl font-bold text-[#1A1A2E] mb-1">{item.title}</h3>
         <p className={`${accentClass} text-sm mb-4`}>{item.subtitle}</p>
