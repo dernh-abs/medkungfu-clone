@@ -322,7 +322,25 @@
           "body": "From heavy-ion and proton therapy to CAR-T cell therapy, stem-cell treatments, and TCM-integrated specialties, our curated programs connect you with China's most advanced clinical capabilities.",
           "image": "",
           "linkHref": "",
-          "linkLabel": ""
+          "linkLabel": "",
+          "features": [
+            {
+              "title": "Heavy-Ion & Proton Therapy",
+              "body": "Precision radiotherapy for tumors with minimal damage to surrounding healthy tissue."
+            },
+            {
+              "title": "CAR-T Cell Therapy",
+              "body": "Next-generation immunotherapy that retrains your own cells to fight cancer."
+            },
+            {
+              "title": "Stem-Cell & Regenerative",
+              "body": "Advanced regenerative treatments for orthopedic and degenerative conditions."
+            },
+            {
+              "title": "TCM-Integrated Care",
+              "body": "Evidence-based traditional Chinese medicine combined with modern clinical protocols."
+            }
+          ]
         },
         "cta": {
           "type": "pageSection",
@@ -394,7 +412,25 @@
           "body": "We partner with top-tier institutions across Beijing, Shanghai, Guangzhou, and Hainan — including proton & heavy-ion centers, comprehensive cancer hospitals, and TCM leaders.",
           "image": "",
           "linkHref": "",
-          "linkLabel": ""
+          "linkLabel": "",
+          "stats": [
+            {
+              "value": "30+",
+              "label": "Partner Hospitals"
+            },
+            {
+              "value": "4",
+              "label": "Major Cities"
+            },
+            {
+              "value": "12",
+              "label": "Specialty Centers"
+            },
+            {
+              "value": "98%",
+              "label": "Case Match Rate"
+            }
+          ]
         },
         "cta": {
           "type": "pageSection",
@@ -574,7 +610,25 @@
           "body": "From proton therapy centers and CAR-T clinical leadership to TCM integration and medical-tourism-friendly access, China offers a unique combination of quality, speed, and value.",
           "image": "",
           "linkHref": "",
-          "linkLabel": ""
+          "linkLabel": "",
+          "features": [
+            {
+              "title": "World-Class Facilities",
+              "body": "Hospitals equipped with the latest imaging, radiotherapy, and surgical technology."
+            },
+            {
+              "title": "Cost-Effective Care",
+              "body": "Comparable outcomes at a fraction of the cost of treatments in the US or Europe."
+            },
+            {
+              "title": "Integrated Coordination",
+              "body": "One team manages records, translation, visas, accommodation, and follow-up."
+            },
+            {
+              "title": "Fast Access",
+              "body": "Short waiting times from consultation to the start of treatment."
+            }
+          ]
         },
         "cta": {
           "type": "pageSection",

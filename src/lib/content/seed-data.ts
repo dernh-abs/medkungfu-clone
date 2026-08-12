@@ -263,6 +263,11 @@ type PlaceholderSection = {
   image: string;
   linkHref: string;
   linkLabel: string;
+  // Phase 2 — layout richness (all optional)
+  columns?: 1 | 2;
+  imageSide?: "left" | "right";
+  features?: { title: string; body: string }[];
+  stats?: { value: string; label: string }[];
 };
 
 export type PlaceholderPage = {
@@ -278,7 +283,13 @@ function ph(
   ctaTitle: string,
   ctaBody: string,
   ctaHref: string,
-  ctaLabel: string
+  ctaLabel: string,
+  contentExtras?: Partial<
+    Pick<
+      PlaceholderSection,
+      "columns" | "imageSide" | "features" | "stats"
+    >
+  >
 ): PlaceholderPage {
   return {
     order: ["hero", "content", "cta"],
@@ -300,6 +311,7 @@ function ph(
         image: "",
         linkHref: "",
         linkLabel: "",
+        ...(contentExtras ?? {}),
       },
       cta: {
         type: "pageSection",
@@ -323,7 +335,27 @@ export const PLACEHOLDER_PAGES: Record<string, PlaceholderPage> = {
     "Start Your Assessment",
     "Tell us about your medical needs and we will match the right hospital and specialist for your case.",
     "/contact",
-    "Contact Us"
+    "Contact Us",
+    {
+      features: [
+        {
+          title: "Heavy-Ion & Proton Therapy",
+          body: "Precision radiotherapy for tumors with minimal damage to surrounding healthy tissue.",
+        },
+        {
+          title: "CAR-T Cell Therapy",
+          body: "Next-generation immunotherapy that retrains your own cells to fight cancer.",
+        },
+        {
+          title: "Stem-Cell & Regenerative",
+          body: "Advanced regenerative treatments for orthopedic and degenerative conditions.",
+        },
+        {
+          title: "TCM-Integrated Care",
+          body: "Evidence-based traditional Chinese medicine combined with modern clinical protocols.",
+        },
+      ],
+    }
   ),
   services: ph(
     "Cross-Border Medical Coordination",
@@ -343,7 +375,15 @@ export const PLACEHOLDER_PAGES: Record<string, PlaceholderPage> = {
     "Request a Match",
     "We match your condition to the most suitable hospital and specialist based on your medical profile.",
     "/contact",
-    "Contact Us"
+    "Contact Us",
+    {
+      stats: [
+        { value: "30+", label: "Partner Hospitals" },
+        { value: "4", label: "Major Cities" },
+        { value: "12", label: "Specialty Centers" },
+        { value: "98%", label: "Case Match Rate" },
+      ],
+    }
   ),
   stories: ph(
     "Patient Stories",
@@ -393,7 +433,27 @@ export const PLACEHOLDER_PAGES: Record<string, PlaceholderPage> = {
     "Compare Your Options",
     "See how China medical care compares for your condition and why patients choose it.",
     "/contact",
-    "Contact Us"
+    "Contact Us",
+    {
+      features: [
+        {
+          title: "World-Class Facilities",
+          body: "Hospitals equipped with the latest imaging, radiotherapy, and surgical technology.",
+        },
+        {
+          title: "Cost-Effective Care",
+          body: "Comparable outcomes at a fraction of the cost of treatments in the US or Europe.",
+        },
+        {
+          title: "Integrated Coordination",
+          body: "One team manages records, translation, visas, accommodation, and follow-up.",
+        },
+        {
+          title: "Fast Access",
+          body: "Short waiting times from consultation to the start of treatment.",
+        },
+      ],
+    }
   ),
 };
 

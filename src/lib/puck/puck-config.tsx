@@ -326,6 +326,41 @@ const rawConfig: any = {
         image: { type: "image" as any, label: "图片", metadata: {} as ImageFieldMetadata },
         linkHref: { type: "text", label: "链接地址" },
         linkLabel: { type: "text", label: "链接文字" },
+        // Phase 2 — layout richness
+        columns: {
+          type: "select",
+          label: "布局列数",
+          options: [
+            { label: "单栏（默认）", value: 1 },
+            { label: "两栏图文", value: 2 },
+          ],
+        },
+        imageSide: {
+          type: "select",
+          label: "图片位置（两栏时）",
+          options: [
+            { label: "左", value: "left" },
+            { label: "右", value: "right" },
+          ],
+        },
+        features: {
+          type: "array",
+          label: "特性网格（标题+正文）",
+          arrayFields: {
+            title: { type: "text", label: "标题" },
+            body: { type: "textarea", label: "正文" },
+          },
+          defaultItemProps: { title: "", body: "" },
+        },
+        stats: {
+          type: "array",
+          label: "数据条（数值+标签）",
+          arrayFields: {
+            value: { type: "text", label: "数值" },
+            label: { type: "text", label: "标签" },
+          },
+          defaultItemProps: { value: "", label: "" },
+        },
       },
       defaultProps: {
         kind: "content",
@@ -334,6 +369,10 @@ const rawConfig: any = {
         image: "",
         linkHref: "",
         linkLabel: "",
+        columns: 1,
+        imageSide: "left",
+        features: [],
+        stats: [],
       } satisfies PageSectionProps,
       render: (props: any) => studioWrap(<PageSection {...(props as PageSectionProps)} />),
     },

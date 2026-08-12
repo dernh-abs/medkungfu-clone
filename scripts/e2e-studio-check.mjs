@@ -101,18 +101,32 @@ try {
   await page.waitForTimeout(500);
   const pubText = await page.evaluate(() => document.body.innerText);
   const pubHtml = await page.content();
+  const pubFeaturesOk = pubText.includes("Heavy-Ion & Proton Therapy");
   const pubOk =
     pubText.includes("Medical Programs in China") &&
     pubText.includes("Start Your Assessment") &&
-    pubHtml.includes("bg-[#1B4D3E]");
+    pubHtml.includes("bg-[#1B4D3E]") &&
+    pubFeaturesOk;
   log("public-projects", {
     includesTitle: pubText.includes("Medical Programs in China"),
     includesCta: pubText.includes("Start Your Assessment"),
     includesHeroBg: pubHtml.includes("bg-[#1B4D3E]"),
+    includesFeatureGrid: pubFeaturesOk,
   });
   if (!pubOk)
-    result.pageErrors.push("Public /projects did not render pageSection content via PublicPage");
+    result.pageErrors.push("Public /projects did not render pageSection content (title/cta/hero/feature-grid) via PublicPage");
   await page.screenshot({ path: `${OUT_DIR}/04-public-projects.png` });
+
+  // ── public /hospitals: data-bar (stats) render via PublicPage ──
+  log("goto-public-hospitals", { url: `${BASE}/hospitals` });
+  await page.goto(`${BASE}/hospitals`, { waitUntil: "domcontentloaded", timeout: 60000 });
+  await page.waitForTimeout(500);
+  const hosText = await page.evaluate(() => document.body.innerText);
+  const hosStatsOk = hosText.includes("30+") && hosText.includes("Partner Hospitals");
+  log("public-hospitals", { includesStats: hosStatsOk });
+  if (!hosStatsOk)
+    result.pageErrors.push("Public /hospitals did not render stat data-bar via PublicPage");
+  await page.screenshot({ path: `${OUT_DIR}/04b-public-hospitals.png` });
 
   // ── per-page NL command: a projects-page edit must target /pages/projects/ ──
   // Phase 4 proof: the same natural-language instruction resolves to the page
@@ -151,6 +165,8 @@ try {
   a.homeHeaderResolved = homeHeaderResolved;
   a.homeShowsHeroKey = showsHeroKey;
   a.publicProjectsRenders = pubOk;
+  a.publicProjectsRendersFeatureGrid = pubFeaturesOk;
+  a.publicHospitalsRendersStats = hosStatsOk;
   a.nlPerPageTargetsProjects = nlSuccess && nlPath.includes("/pages/projects/");
 
   result.success = result.pageErrors.length === 0;
